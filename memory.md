@@ -99,8 +99,8 @@
 | **ITER-03** | M2 Data Audit | 103-trial multi-task metadata manifest builder (Suturing, Knot, Needle) | Completed |
 | **ITER-04** | M2 Data Audit | Kinematics parser & 76D integrity validator | Completed |
 | **ITER-05** | M2 Data Audit | Transcription parser & gesture label vocabulary mapper | Completed |
-| **ITER-06** | M2 Data Audit | Video metadata inspector & frame-kinematics alignment auditor | Ready to start |
-| **ITER-07** | M2 Data Audit | Official LOUO split loader & leakage assertion | Not Started |
+| **ITER-06** | M2 Data Audit | Video metadata inspector & frame-kinematics alignment auditor | Completed |
+| **ITER-07** | M2 Data Audit | Official LOUO split loader & leakage assertion | Ready to start |
 | **ITER-08** | M3 Pipeline | Windowed sequence generator with training-only normalization | Not Started |
 | **ITER-09** | M3 Pipeline | End-to-end dataset pipeline smoke test & sanity cache | Not Started |
 | **ITER-10** | M4 Evaluation | Metric calculation engine (Macro-F1, Balanced Acc, Acc, CM) | Not Started |
