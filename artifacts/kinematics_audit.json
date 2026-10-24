@@ -1,0 +1,32 @@
+{
+  "total_trials": 103,
+  "total_kinematic_samples": 284310,
+  "min_samples_per_trial": 920,
+  "max_samples_per_trial": 9012,
+  "mean_samples_per_trial": 2760.2912621359224,
+  "median_samples_per_trial": 2650.0,
+  "all_trials_finite": true,
+  "per_task_summary": {
+    "Suturing": {
+      "n_trials": 39,
+      "total_samples": 131378,
+      "min_samples": 1779,
+      "max_samples": 9012,
+      "mean_samples": 3368.6666666666665
+    },
+    "Knot_Tying": {
+      "n_trials": 36,
+      "total_samples": 62084,
+      "min_samples": 920,
+      "max_samples": 3853,
+      "mean_samples": 1724.5555555555557
+    },
+    "Needle_Passing": {
+      "n_trials": 28,
+      "total_samples": 90848,
+      "min_samples": 1787,
+      "max_samples": 4761,
+      "mean_samples": 3244.5714285714284
+    }
+  }
+}
