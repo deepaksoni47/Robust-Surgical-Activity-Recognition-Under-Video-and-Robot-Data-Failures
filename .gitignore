@@ -1,0 +1,41 @@
+# Dataset & large data
+dataset/
+data/raw/
+data/cache/
+*.avi
+*.mp4
+
+# Python virtual environments & bytecode
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Checkpoints & Model weights
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# LaTeX build artifacts
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+paper/*.fdb_latexmk
+paper/*.fls
+
+# OS & IDE artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
