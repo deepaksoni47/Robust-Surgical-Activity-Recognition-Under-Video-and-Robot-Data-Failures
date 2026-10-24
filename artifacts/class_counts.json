@@ -1,0 +1,129 @@
+{
+  "total_trials": 103,
+  "total_annotated_segments": 1703,
+  "unique_gestures_found": [
+    "G1",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
+    "G15",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G8",
+    "G9"
+  ],
+  "segment_counts_by_task": {
+    "Suturing": {
+      "G1": 29,
+      "G5": 37,
+      "G8": 48,
+      "G2": 166,
+      "G3": 164,
+      "G6": 163,
+      "G4": 119,
+      "G11": 39,
+      "G9": 24,
+      "G10": 4
+    },
+    "Knot_Tying": {
+      "G12": 70,
+      "G13": 75,
+      "G14": 98,
+      "G15": 73,
+      "G11": 36,
+      "G1": 19
+    },
+    "Needle_Passing": {
+      "G1": 30,
+      "G2": 117,
+      "G3": 111,
+      "G6": 112,
+      "G4": 83,
+      "G11": 25,
+      "G5": 31,
+      "G8": 28,
+      "G9": 1,
+      "G10": 1
+    }
+  },
+  "per_task_vocabulary_coverage": {
+    "Suturing": {
+      "expected_gestures": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G8",
+        "G9",
+        "G10",
+        "G11"
+      ],
+      "observed_gestures": [
+        "G1",
+        "G10",
+        "G11",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G8",
+        "G9"
+      ],
+      "all_expected_observed": true
+    },
+    "Knot_Tying": {
+      "expected_gestures": [
+        "G1",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15"
+      ],
+      "observed_gestures": [
+        "G1",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15"
+      ],
+      "all_expected_observed": true
+    },
+    "Needle_Passing": {
+      "expected_gestures": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G8",
+        "G9",
+        "G10",
+        "G11"
+      ],
+      "observed_gestures": [
+        "G1",
+        "G10",
+        "G11",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G8",
+        "G9"
+      ],
+      "all_expected_observed": true
+    }
+  }
+}

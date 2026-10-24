@@ -11,8 +11,8 @@ dataset:
       gestures: ["G1", "G11", "G12", "G13", "G14", "G15"]
     - name: "Needle_Passing"
       n_trials: 28
-      n_gestures: 8
-      gestures: ["G1", "G2", "G3", "G4", "G5", "G6", "G8", "G11"]
+      n_gestures: 10
+      gestures: ["G1", "G2", "G3", "G4", "G5", "G6", "G8", "G9", "G10", "G11"]
   total_trials: 103
   split_protocol: "UserOut" # 8-fold Leave-One-User-Out
   splits_dir: "dataset/Experimental_setup"
