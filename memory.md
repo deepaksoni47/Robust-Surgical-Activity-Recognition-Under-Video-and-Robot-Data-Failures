@@ -96,8 +96,8 @@
 |---|---|---|---|
 | **ITER-01** | M1 Skeleton | Git init, .gitignore, virtual environment & base requirements | Completed |
 | **ITER-02** | M1 Skeleton | Directory skeleton & reproducibility module with tests | Completed |
-| **ITER-03** | M2 Data Audit | 103-trial multi-task metadata manifest builder (Suturing, Knot, Needle) | Ready to start |
-| **ITER-04** | M2 Data Audit | Kinematics parser & 76D integrity validator | Not Started |
+| **ITER-03** | M2 Data Audit | 103-trial multi-task metadata manifest builder (Suturing, Knot, Needle) | Completed |
+| **ITER-04** | M2 Data Audit | Kinematics parser & 76D integrity validator | Ready to start |
 | **ITER-05** | M2 Data Audit | Transcription parser & gesture label vocabulary mapper | Not Started |
 | **ITER-06** | M2 Data Audit | Video metadata inspector & frame-kinematics alignment auditor | Not Started |
 | **ITER-07** | M2 Data Audit | Official LOUO split loader & leakage assertion | Not Started |
