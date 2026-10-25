@@ -230,7 +230,12 @@ Table~\ref{tab:main_results} illustrates key empirical observations across all 1
 \end{enumerate}
 
 \subsection{Robustness under Synthetic Corruptions (Endo-C6)}
-We formulate a systematic test-time corruption suite inspired by Endo-C6~\cite{rashid2025robustendoclip} to evaluate model resilience under six degradation conditions: Gaussian noise, motion blur, defocus, cautery smoke, packet loss, and kinematic dropout.
+We formulate a systematic test-time corruption suite inspired by Endo-C6~\cite{rashid2025robustendoclip} to evaluate model resilience under clinical degradation conditions. Crucially, our architecture establishes a strict two-tier taxonomy:
+\begin{enumerate}
+    \item \textbf{Pre-Encoder Frame-Level Optical Corruptions:} Operating directly on raw RGB image arrays $I \in \mathbb{R}^{H \times W \times 3}$ before visual feature extraction: optical defocus blur ($\sigma \in [0.8, 3.5]$), directional linear motion blur ($L \in [3, 21]$), photon shot noise via Poisson sampling ($\lambda \in [8, 120]$), cautery smoke/fog plume attenuation ($\alpha \in [0.15, 0.75]$), and digital video transmission packet loss (block dropout $B \in [8, 32]$).
+    \item \textbf{Post-Encoder Latent Feature Perturbations:} Operating on cached sequence representations $\mathbf{x} \in \mathbb{R}^{W \times D_v}$: additive Gaussian channel jitter ($\sigma \in [0.05, 0.50] \times \text{std}(\mathbf{x})$), channel dropout ($p \in [0.05, 0.50]$), temporal frame dropout ($p \in [0.05, 0.40]$), and systematic scale drift ($\gamma \in [0.95, 1.05] \dots [0.5, 1.5]$). These are strictly categorized as latent perturbations rather than optical artifacts.
+\end{enumerate}
+All operators satisfy exact clean input identity at severity $s=0$, bitwise determinism for fixed seeds, and non-destructive immutability. Standard Endo-C6 benchmark aggregates report Clean performance, average corrupted performance ($\text{Mean-C}$), worst-case degradation ($\text{Worst-C}$), and relative performance drop ($\Delta_{\text{Drop}} = (\text{Clean} - \text{Mean-C}) / \text{Clean}$).
 
 \begin{table*}[t]
 \centering

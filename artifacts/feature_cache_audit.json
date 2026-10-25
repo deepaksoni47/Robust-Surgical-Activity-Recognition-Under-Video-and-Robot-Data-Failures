@@ -1,154 +1,249 @@
 {
-  "timestamp": "2026-10-25T18:29:58Z",
-  "task": "Needle_Passing",
+  "timestamp": "2026-10-25T19:54:28Z",
+  "task": "Suturing",
   "encoder_name": "ResNet18",
   "output_dim": 512,
-  "trials_processed": 28,
+  "trials_processed": 39,
   "extracted_count": 0,
   "skipped_count": 0,
-  "valid_count": 0,
+  "valid_count": 1,
   "total_frames_extracted": 0,
-  "total_elapsed_sec": 0.02,
+  "total_elapsed_sec": 0.2,
   "results": [
     {
-      "trial_id": "Needle_Passing_B001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_B001_capture1.npz"
+      "trial_id": "Suturing_B001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_B001_capture1.npz",
+      "num_frames": 5640,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        5639
+      ],
+      "file_size_bytes": 10377458,
+      "metadata": {
+        "trial_id": "Suturing_B001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_B001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 5640,
+        "total_video_frames": 5640,
+        "n_kinematics_samples": 5635,
+        "n_transcription_frames": 5635,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 150.91,
+        "extraction_fps": 37.37,
+        "created_at": "2026-10-25T11:40:41.826696+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
-      "trial_id": "Needle_Passing_B002",
+      "trial_id": "Suturing_B002",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_B002_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B002_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_B003",
+      "trial_id": "Suturing_B003",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_B003_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B003_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_B004",
+      "trial_id": "Suturing_B004",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_B004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B004_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_C001",
+      "trial_id": "Suturing_B005",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_C001_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B005_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_C002",
+      "trial_id": "Suturing_C001",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_C002_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C001_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_C003",
+      "trial_id": "Suturing_C002",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_C003_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C002_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_C004",
+      "trial_id": "Suturing_C003",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_C004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C003_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_C005",
+      "trial_id": "Suturing_C004",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_C005_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C004_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_D001",
+      "trial_id": "Suturing_C005",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_D001_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C005_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_D002",
+      "trial_id": "Suturing_D001",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_D002_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D001_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_D003",
+      "trial_id": "Suturing_D002",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_D003_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D002_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_D004",
+      "trial_id": "Suturing_D003",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_D004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D003_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_D005",
+      "trial_id": "Suturing_D004",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_D005_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D004_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_E001",
+      "trial_id": "Suturing_D005",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_E001_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D005_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_E003",
+      "trial_id": "Suturing_E001",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_E003_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E001_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_E004",
+      "trial_id": "Suturing_E002",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_E004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E002_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_E005",
+      "trial_id": "Suturing_E003",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_E005_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E003_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_F001",
+      "trial_id": "Suturing_E004",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_F001_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E004_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_F003",
+      "trial_id": "Suturing_E005",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_F003_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E005_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_F004",
+      "trial_id": "Suturing_F001",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_F004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F001_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_H002",
+      "trial_id": "Suturing_F002",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_H002_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F002_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_H004",
+      "trial_id": "Suturing_F003",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_H004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F003_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_H005",
+      "trial_id": "Suturing_F004",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_H005_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F004_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_I002",
+      "trial_id": "Suturing_F005",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_I002_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F005_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_I003",
+      "trial_id": "Suturing_G001",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_I003_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G001_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_I004",
+      "trial_id": "Suturing_G002",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_I004_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G002_capture1.npz"
     },
     {
-      "trial_id": "Needle_Passing_I005",
+      "trial_id": "Suturing_G003",
       "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Needle_Passing_I005_capture1.npz"
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G003_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_G004",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G004_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_G005",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G005_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_H001",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H001_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_H003",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H003_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_H004",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H004_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_H005",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H005_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_I001",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I001_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_I002",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I002_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_I003",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I003_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_I004",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I004_capture1.npz"
+    },
+    {
+      "trial_id": "Suturing_I005",
+      "status": "INVALID",
+      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I005_capture1.npz"
     }
   ]
 }

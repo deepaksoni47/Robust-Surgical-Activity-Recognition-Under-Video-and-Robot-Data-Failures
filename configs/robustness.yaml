@@ -1,0 +1,71 @@
+# configs/robustness.yaml
+# Configuration for visual corruption stress testing and robustness benchmarking (ITER-22)
+
+protocol:
+  name: "Endo-C6-Inspired-Robustness"
+  split_type: "UserOut" # Official 8-fold Leave-One-User-Out
+  seed: 42
+  eval_severities: [1, 3, 5] # Mild (1), Moderate (3), Severe (5 - Endo-C6 standard)
+  primary_severity: 5
+  window_size: 16
+  eval_stride: 8
+
+tasks:
+  - "Suturing"
+  - "Knot_Tying"
+  - "Needle_Passing"
+
+corruptions:
+  frame_level:
+    - name: "defocus_blur"
+      category: "optical"
+      description: "Gaussian/defocus blur from out-of-focus camera optics"
+    - name: "motion_blur"
+      category: "motion"
+      description: "Directional motion blur from rapid scope repositioning"
+    - name: "shot_noise"
+      category: "sensor"
+      description: "Poisson-distributed photon shot noise in low-light cavity"
+    - name: "cautery_smoke"
+      category: "occlusion"
+      description: "Surgical diathermy cautery smoke and lens fogging"
+    - name: "packet_loss"
+      category: "transmission"
+      description: "Digital streaming packet loss macroblock dropouts"
+
+  feature_level:
+    - name: "feature_gaussian_noise"
+      category: "latent_noise"
+      description: "Zero-mean additive Gaussian jitter scaled by feature std"
+    - name: "feature_dropout"
+      category: "latent_dropout"
+      description: "Channel-level dropout simulating dead sensor channels"
+    - name: "temporal_frame_dropout"
+      category: "latent_temporal"
+      description: "Dropping entire temporal frame vectors in sliding windows"
+    - name: "feature_scale_drift"
+      category: "latent_drift"
+      description: "Systematic multiplicative gain and additive channel shift"
+
+models:
+  - name: "video_gru"
+    checkpoint_pattern: "checkpoints/video_videogru_{task}_fold{fold}.pt"
+  - name: "kinematics_gru"
+    checkpoint_pattern: "checkpoints/kinematics_gru_{task}_fold{fold}.pt"
+  - name: "fixed_late_fusion"
+    checkpoint_pattern: "checkpoints/fixed_late_fusion_{task}_fold{fold}.pt"
+  - name: "concat_fusion"
+    checkpoint_pattern: "checkpoints/concat_fusion_{task}_fold{fold}.pt"
+  - name: "adaptive_fusion"
+    checkpoint_pattern: "checkpoints/adaptive_fusion_{task}_fold{fold}.pt"
+
+metrics:
+  - "accuracy"
+  - "balanced_accuracy"
+  - "macro_f1"
+  - "clean_to_corrupted_drop"
+  - "mean_c"
+  - "worst_c"
+
+output:
+  artifacts_dir: "artifacts/robustness"
