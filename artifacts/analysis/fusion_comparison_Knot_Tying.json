@@ -1,0 +1,60 @@
+{
+  "task": "Knot_Tying",
+  "n_folds": 8,
+  "evaluated_folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "strongest_unimodal_baseline": {
+    "accuracy": 61.559402975701325,
+    "balanced_accuracy": 58.59927526818143,
+    "macro_f1": 53.968988475097966,
+    "edit_score": 36.61571426622723
+  },
+  "records": [
+    {
+      "model_id": "kinematics_mlp",
+      "model_name": "KinematicsMLP",
+      "modality": "Kinematics",
+      "accuracy": 61.49941330281062,
+      "std_accuracy": 8.758909412263025,
+      "balanced_accuracy": 58.59927526818143,
+      "std_balanced_accuracy": 8.999515236904475,
+      "macro_f1": 53.19518299382604,
+      "std_macro_f1": 9.852813612856178,
+      "edit_score": 8.877581393944672,
+      "std_edit_score": 2.7985672251873965,
+      "n_folds": 8,
+      "per_class_f1": {},
+      "delta_accuracy": 0.0,
+      "delta_balanced_accuracy": 0.0,
+      "delta_macro_f1": 0.0,
+      "delta_edit_score": 0.0
+    },
+    {
+      "model_id": "kinematics_gru",
+      "model_name": "KinematicsGRU",
+      "modality": "Kinematics",
+      "accuracy": 61.559402975701325,
+      "std_accuracy": 12.811911281322118,
+      "balanced_accuracy": 56.97811597692761,
+      "std_balanced_accuracy": 13.671744233938016,
+      "macro_f1": 53.968988475097966,
+      "std_macro_f1": 16.487358011721348,
+      "edit_score": 36.61571426622723,
+      "std_edit_score": 12.44131006003814,
+      "n_folds": 8,
+      "per_class_f1": {},
+      "delta_accuracy": 0.0,
+      "delta_balanced_accuracy": 0.0,
+      "delta_macro_f1": 0.0,
+      "delta_edit_score": 0.0
+    }
+  ]
+}

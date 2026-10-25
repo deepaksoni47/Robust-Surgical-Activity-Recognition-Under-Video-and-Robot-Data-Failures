@@ -1,0 +1,3 @@
+model_id,model_name,modality,accuracy,std_accuracy,balanced_accuracy,std_balanced_accuracy,macro_f1,std_macro_f1,edit_score,std_edit_score,n_folds,delta_accuracy,delta_balanced_accuracy,delta_macro_f1,delta_edit_score
+kinematics_mlp,KinematicsMLP,Kinematics,66.83549698010279,9.070887959444434,55.877433626408596,12.15549940155589,45.425592714097654,9.48836120808771,10.154194974050872,2.2233394210984057,8,0.0,0.0,0.0,0.0
+kinematics_gru,KinematicsGRU,Kinematics,66.82583004651582,10.9283600663166,56.17928226457199,7.653600400880215,44.447491311208424,8.98353419552454,34.39258156149306,9.497096576691229,8,0.0,0.0,0.0,0.0

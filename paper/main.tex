@@ -182,35 +182,45 @@ When $a_t^{\text{vis}} = 0$, $\alpha_t^{\text{vis}} \to 0$ and $\alpha_t^{\text{
 \cmidrule(lr){3-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11}
 & & Mean & Min & Max & Mean & Min & Max & Mean & Min & Max \\
 \midrule
-\multirow{6}{*}{\textbf{Suturing}} 
+\multirow{7}{*}{\textbf{Suturing}} 
 & Majority Class Baseline & 33.43 & 30.69 & 37.08 & 10.30 & 9.09 & 11.11 & 4.55 & 4.27 & 4.92 \\
 & Kinematics-Only (MLP) & 66.84 & 49.77 & 76.66 & 55.88 & 29.74 & 73.34 & 45.43 & 24.61 & 53.29 \\
 & Kinematics-Only (GRU) & 66.83 & 46.63 & 79.16 & 56.18 & 38.86 & 64.90 & 44.45 & 24.55 & 55.21 \\
 & Video-Only (Visual Encoder + Head) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+& Feature Concatenation Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & \textbf{Reliability Gating (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
 \midrule
-\multirow{6}{*}{\textbf{Knot Tying}} 
+\multirow{7}{*}{\textbf{Knot Tying}} 
 & Majority Class Baseline & 27.35 & 18.04 & 41.91 & 14.88 & 14.29 & 16.67 & 6.07 & 4.37 & 8.44 \\
 & Kinematics-Only (MLP) & 61.50 & 50.83 & 74.38 & 58.60 & 47.51 & 74.46 & 53.20 & 42.43 & 67.62 \\
 & Kinematics-Only (GRU) & 61.56 & 46.55 & 81.51 & 56.98 & 33.03 & 82.54 & 53.97 & 24.42 & 80.17 \\
 & Video-Only (Visual Encoder) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+& Feature Concatenation Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & \textbf{Reliability Gating (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
 \midrule
-\multirow{6}{*}{\textbf{Needle Passing}} 
+\multirow{7}{*}{\textbf{Needle Passing}} 
 & Majority Class Baseline & 40.55 & 33.55 & 58.64 & 11.25 & 10.00 & 14.29 & 5.20 & 4.57 & 6.72 \\
 & Kinematics-Only (MLP) & 44.16 & 33.59 & 60.14 & 38.83 & 29.36 & 47.87 & 27.69 & 12.05 & 36.30 \\
 & Kinematics-Only (GRU) & 48.77 & 31.38 & 63.36 & 43.01 & 26.95 & 54.90 & 30.32 & 11.89 & 40.74 \\
 & Video-Only (Visual Encoder) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+& Feature Concatenation Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & \textbf{Reliability Gating (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
-\footnotesize{\textit{Note:} Evaluation for Suturing and Knot Tying spans all 8 official LOUO folds. Needle Passing evaluates 7 active folds (1--5, 7, 8); Fold 6 (User G) is inactive because Subject G performed no trials for Needle Passing in JIGSAWS. Empirical metrics are macro-averaged across active folds.}
+\footnotesize{\textit{Note:} Evaluation for Suturing and Knot Tying spans all 8 official LOUO folds. Needle Passing evaluates 7 active folds (1--5, 7, 8); Fold 6 (User G) is inactive because Subject G performed no trials for Needle Passing in JIGSAWS. Empirical metrics are macro-averaged across active folds. Unexecuted visual, fusion, and adaptive conditions remain strictly marked with ``--'' until remote GPU feature caching completes.}
 \end{flushleft}
 \end{table*}
+
+\subsection{Comparative Benchmark Protocol \& Readiness Audit}
+To rigorously assess Hypotheses \textbf{H1}--\textbf{H4}, our evaluation framework establishes an apples-to-apples comparative benchmark matching exact LOUO test folds, feature normalizers, and evaluation metrics:
+\begin{equation}
+\Delta \text{Metric} = \text{Metric}_{\text{fusion}} - \max\left(\text{Metric}_{\text{kinematics}}, \text{Metric}_{\text{video}}\right)
+\end{equation}
+A formal readiness audit conducted across all 103 trials verified 76D kinematic integrity (284,310 timesteps, 100\% finite), transcription interval mapping (1,703 segments), and 30~Hz nominal video--kinematic synchronization (mean tail delta $\Delta = 12.37$ frames $\approx 0.41$\,s, with no trial exceeding the 500-frame boundary limit). While the frozen visual encoder interface and feature caching pipelines are verified with an ImageNet-pretrained ResNet-18 fallback ($D_v=512$), full-scale visual feature caching across all trials requires high-throughput remote GPU execution. Consequently, multimodal fusion evaluations are formally cataloged as pending feature cache completion, strictly avoiding simulated or extrapolated values.
 
 \subsection{Empirical Analysis of Kinematic Baselines}
 Table~\ref{tab:main_results} illustrates key empirical observations across all 103 trials:

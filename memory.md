@@ -91,6 +91,7 @@
 | **Video Temporal Classifier (VideoGRU & VideoMLP)** | Built lightweight recurrent sequence classifier (`VideoGRU`) and frame-independent comparison (`VideoMLP`) over cached frozen visual features (512-D), paired with `VideoFeatureNormalizer` (training-only z-score scaling), strict encoder compatibility assertions, and official LOUO split evaluation. |
 | **Fixed Late-Logit Fusion & Alpha Grid Search** | Implemented convex combination logit fusion $\mathbf{y}^{\text{fused}} = \alpha \mathbf{y}^{\text{vis}} + (1-\alpha) \mathbf{y}^{\text{kin}}$ with strict validation-only grid search for $\alpha \in [0, 1]$ (preventing any test leakage), verified class vocabulary matching, and synchronized multimodal windowing with tail-clipping convention. |
 | **Feature Concatenation Fusion (ConcatFusionGRU & MLP)** | Implemented joint multimodal representation learning concatenating frozen visual features (512-D) and robot kinematics (76-D) into 588-D fused vectors at each timestep, projected through a shared LayerNorm+GELU trunk ($d=128$) into a 2-layer GRU temporal sequence classifier and causal classification head. |
+| **Comparative Benchmark & Readiness Auditor** | Built unified multi-modality readiness auditor across all 103 trials checking LOUO split integrity, 76D kinematics, transcriptions, video feature caches, nominal 30 Hz sync (tail delta $\le 500$ frames), and model checkpoints. Standardized matched comparative evaluation with fold coverage assertions, delta calculation vs strongest unimodal baseline, and clean Markdown/CSV export. Real benchmark marked as BLOCKED pending remote GPU visual feature caching. |
 
 ---
 
@@ -116,8 +117,8 @@
 | **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Completed |
 | **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Completed |
 | **ITER-18** | M7 Fusion | Feature concatenation fusion model | Completed |
-| **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Ready to start |
-| **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Not Started |
+| **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Completed (Readiness audit committed; real fusion benchmark BLOCKED pending full remote GPU visual caching) |
+| **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Ready to start |
 | **ITER-21** | M8 Adaptive | Clean training and single-modality fallback verification | Not Started |
 | **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Not Started |
 | **ITER-23** | M9 Robustness | Kinematics corruption & dropout operators | Not Started |

@@ -1,0 +1,59 @@
+{
+  "task": "Needle_Passing",
+  "n_folds": 7,
+  "evaluated_folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8
+  ],
+  "strongest_unimodal_baseline": {
+    "accuracy": 48.77415419648663,
+    "balanced_accuracy": 43.01021507241332,
+    "macro_f1": 30.319326687217053,
+    "edit_score": 31.05084177275495
+  },
+  "records": [
+    {
+      "model_id": "kinematics_mlp",
+      "model_name": "KinematicsMLP",
+      "modality": "Kinematics",
+      "accuracy": 44.15508169153784,
+      "std_accuracy": 9.60923654191654,
+      "balanced_accuracy": 38.830554436917396,
+      "std_balanced_accuracy": 7.738555736016055,
+      "macro_f1": 27.687001073335775,
+      "std_macro_f1": 7.640316570464524,
+      "edit_score": 7.135963422633219,
+      "std_edit_score": 2.2246873794712205,
+      "n_folds": 7,
+      "per_class_f1": {},
+      "delta_accuracy": 0.0,
+      "delta_balanced_accuracy": 0.0,
+      "delta_macro_f1": 0.0,
+      "delta_edit_score": 0.0
+    },
+    {
+      "model_id": "kinematics_gru",
+      "model_name": "KinematicsGRU",
+      "modality": "Kinematics",
+      "accuracy": 48.77415419648663,
+      "std_accuracy": 10.17006743342594,
+      "balanced_accuracy": 43.01021507241332,
+      "std_balanced_accuracy": 10.130953174172324,
+      "macro_f1": 30.319326687217053,
+      "std_macro_f1": 8.805286401059679,
+      "edit_score": 31.05084177275495,
+      "std_edit_score": 4.537765265582085,
+      "n_folds": 7,
+      "per_class_f1": {},
+      "delta_accuracy": 0.0,
+      "delta_balanced_accuracy": 0.0,
+      "delta_macro_f1": 0.0,
+      "delta_edit_score": 0.0
+    }
+  ]
+}
