@@ -18,6 +18,14 @@ from src.models.fusion import (
     validate_class_mappings,
 )
 from src.models.concat_fusion import ConcatFusionGRU, ConcatFusionMLP
+from src.models.reliability_gate import (
+    AdaptiveReliabilityFusion,
+    BothModalitiesUnavailableError,
+    ReliabilityGate,
+    compute_masked_normalized_weights,
+    fuse_logits_with_availability,
+    validate_availability_mask,
+)
 
 __all__ = [
     "MajorityClassClassifier",
@@ -36,6 +44,12 @@ __all__ = [
     "validate_class_mappings",
     "ConcatFusionGRU",
     "ConcatFusionMLP",
+    "ReliabilityGate",
+    "AdaptiveReliabilityFusion",
+    "BothModalitiesUnavailableError",
+    "compute_masked_normalized_weights",
+    "fuse_logits_with_availability",
+    "validate_availability_mask",
 ]
 
 

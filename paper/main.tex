@@ -165,7 +165,7 @@ The fused classification logit is then computed as:
 \begin{equation}
 \hat{\mathbf{y}}_t = \alpha_t^{\text{vis}} \mathbf{y}_t^{\text{vis}} + \alpha_t^{\text{kin}} \mathbf{y}_t^{\text{kin}}
 \end{equation}
-When $a_t^{\text{vis}} = 0$, $\alpha_t^{\text{vis}} \to 0$ and $\alpha_t^{\text{kin}} \to 1$, ensuring seamless single-modality fallback.
+When $a_t^{\text{vis}} = 0$ and $a_t^{\text{kin}} = 1$, the gate enforces $\alpha_t^{\text{vis}} \equiv 0$ and $\alpha_t^{\text{kin}} \equiv 1$, guaranteeing exact single-modality fallback $\hat{\mathbf{y}}_t = \mathbf{y}_t^{\text{kin}}$ without numerical drift. Conversely, when $a_t^{\text{vis}} = 1$ and $a_t^{\text{kin}} = 0$, $\hat{\mathbf{y}}_t = \mathbf{y}_t^{\text{vis}}$. When both modalities are unobserved ($\mathbf{a}_t = [0, 0]^\top$), the architecture raises an explicit missingness exception unless an uninformative prior is specified.
 
 \section{Experimental Results}
 \textit{Note: The following tables report fully verified empirical baselines across all 103 trials. Unexecuted visual, multimodal fusion, and adaptive gating conditions are marked with ``--'' to maintain absolute scientific integrity.}
