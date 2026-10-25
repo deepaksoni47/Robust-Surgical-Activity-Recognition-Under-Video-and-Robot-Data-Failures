@@ -106,8 +106,8 @@
 | **ITER-10** | M4 Evaluation | Metric calculation engine (Macro-F1, Balanced Acc, Acc, CM) | Completed |
 | **ITER-11** | M5 Baselines | Majority-class trivial baseline implementation & benchmark | Completed |
 | **ITER-12** | M5 Baselines | Kinematics MLP classifier (independent timestep) | Completed |
-| **ITER-13** | M5 Baselines | Kinematics GRU/TCN temporal sequence classifier | Ready to start |
-| **ITER-14** | M6 Visual | Lightweight frozen visual encoder interface | Not Started |
+| **ITER-13** | M5 Baselines | Kinematics GRU/TCN temporal sequence classifier | Completed |
+| **ITER-14** | M6 Visual | Lightweight frozen visual encoder interface | Ready to start |
 | **ITER-15** | M6 Visual | Visual feature caching engine for Suturing trials | Not Started |
 | **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Not Started |
 | **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Not Started |
