@@ -9,6 +9,7 @@ from src.models.visual_encoder import (
     SurgMotionVisualEncoder,
     build_visual_encoder,
 )
+from src.models.video_head import VideoGRU, VideoMLP
 
 __all__ = [
     "MajorityClassClassifier",
@@ -18,4 +19,7 @@ __all__ = [
     "ResNet18VisualEncoder",
     "SurgMotionVisualEncoder",
     "build_visual_encoder",
+    "VideoGRU",
+    "VideoMLP",
 ]
+

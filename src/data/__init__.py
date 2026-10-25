@@ -10,6 +10,12 @@ from src.data.transcriptions import (
 from src.data.video import get_video_metadata, read_frame_at_index
 from src.data.splits import get_louo_splits, assert_no_leakage
 from src.data.dataset import KinematicsNormalizer, JIGSAWSWindowDataset, get_fold_datasets, get_fold_dataloaders
+from src.data.video_dataset import (
+    VideoFeatureNormalizer,
+    JIGSAWSVideoWindowDataset,
+    get_video_fold_datasets,
+    get_video_fold_dataloaders,
+)
 from src.data.feature_cache import (
     get_cache_path,
     save_feature_cache,
@@ -34,6 +40,10 @@ __all__ = [
     "JIGSAWSWindowDataset",
     "get_fold_datasets",
     "get_fold_dataloaders",
+    "VideoFeatureNormalizer",
+    "JIGSAWSVideoWindowDataset",
+    "get_video_fold_datasets",
+    "get_video_fold_dataloaders",
     "get_cache_path",
     "save_feature_cache",
     "load_feature_cache",
@@ -41,3 +51,4 @@ __all__ = [
     "extract_frames_in_batches",
     "extract_and_cache_trial",
 ]
+

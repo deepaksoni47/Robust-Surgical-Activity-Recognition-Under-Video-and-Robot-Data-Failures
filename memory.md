@@ -88,6 +88,7 @@
 | **Independent Timestep vs GRU/TCN** | Explicitly verifies Hypothesis H5 (whether temporal sequence modeling adds value). |
 | **Late Fusion + Reliability-Aware Gate** | Directly answers Hypotheses H3 & H4 under clean and degraded conditions. |
 | **Endo-C6 test-time corruption protocol** | Standardized, non-cherry-picked evaluation of robustness drops (Mean-C, Worst-C). |
+| **Video Temporal Classifier (VideoGRU & VideoMLP)** | Built lightweight recurrent sequence classifier (`VideoGRU`) and frame-independent comparison (`VideoMLP`) over cached frozen visual features (512-D), paired with `VideoFeatureNormalizer` (training-only z-score scaling), strict encoder compatibility assertions, and official LOUO split evaluation. |
 
 ---
 
@@ -110,8 +111,8 @@
 | **ITER-13** | M5 Baselines | Kinematics GRU/TCN temporal sequence classifier | Completed |
 | **ITER-14** | M6 Visual | Lightweight frozen visual encoder interface | Completed |
 | **ITER-15** | M6 Visual | Visual feature caching engine for Suturing trials | Completed |
-| **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Ready to start |
-| **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Not Started |
+| **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Completed |
+| **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Ready to start |
 | **ITER-18** | M7 Fusion | Feature concatenation fusion model | Not Started |
 | **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Not Started |
 | **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Not Started |

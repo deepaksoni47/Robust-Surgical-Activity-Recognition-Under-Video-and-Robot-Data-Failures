@@ -1,0 +1,28 @@
+model:
+  name: "VideoGRU"
+  input_dim: 512
+  proj_dim: 128
+  hidden_dim: 128
+  num_layers: 2
+  dropout: 0.2
+  bidirectional: false
+
+training:
+  epochs: 15
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  use_class_weights: true
+  patience: 4
+  seed: 42
+
+data:
+  dataset_dir: "dataset"
+  cache_dir: "data/cache/features"
+  encoder_name: "ResNet18"
+  camera: "capture1"
+  expected_dim: 512
+  window_size: 16
+  train_stride: 8
+  eval_stride: 8
+  normalize: true

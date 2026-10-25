@@ -128,12 +128,14 @@ Given an endoscopic video clip $\mathbf{V}_t = \{I_{t-\tau}, \dots, I_t\}$, we e
 \end{equation}
 Features are deterministically extracted and cached to avoid redundant computation during temporal optimization.
 
-\subsection{Temporal Sequence Modeling (GRU / TCN)}
-To model temporal dynamics over a context window of length $T$, normalized kinematic sequences $\mathbf{K}_{1:T} = (\hat{\mathbf{k}}_1, \dots, \hat{\mathbf{k}}_T)$ and visual sequences $\mathbf{Z}_{1:T}^{\text{vis}} = (\mathbf{z}_1^{\text{vis}}, \dots, \mathbf{z}_T^{\text{vis}})$ are processed through modality-specific sequence encoders:
+\subsection{Temporal Sequence Modeling (GRU)}
+To model temporal dynamics over a context window of length $W$, normalized kinematic sequences $\mathbf{K}_{1:W} = (\hat{\mathbf{k}}_1, \dots, \hat{\mathbf{k}}_W)$ and visual feature sequences $\mathbf{Z}_{1:W}^{\text{vis}} = (\hat{\mathbf{z}}_1^{\text{vis}}, \dots, \hat{\mathbf{z}}_W^{\text{vis}})$ are processed through modality-specific sequence encoders:
 \begin{align}
-\mathbf{h}_t^{\text{kin}} &= \text{GRU}_{\text{kin}}(\hat{\mathbf{k}}_t, \mathbf{h}_{t-1}^{\text{kin}}) \\
-\mathbf{h}_t^{\text{vis}} &= \text{GRU}_{\text{vis}}(\mathbf{z}_t^{\text{vis}}, \mathbf{h}_{t-1}^{\text{vis}})
+\mathbf{h}_t^{\text{kin}} &= \text{GRU}_{\text{kin}}(\text{Proj}_{\text{kin}}(\hat{\mathbf{k}}_t), \mathbf{h}_{t-1}^{\text{kin}}) \\
+\mathbf{h}_t^{\text{vis}} &= \text{GRU}_{\text{vis}}(\text{Proj}_{\text{vis}}(\hat{\mathbf{z}}_t^{\text{vis}}), \mathbf{h}_{t-1}^{\text{vis}})
 \end{align}
+where $\text{Proj}_{\text{vis}}$ projects $D_v$-dimensional frozen visual features ($D_v=512$ for ResNet-18) to an intermediate dimension $d=128$ with LayerNorm, GELU, and Dropout ($p=0.2$). Visual features are normalized via fold-specific $z$-score statistics fitted strictly on training trials. A causal classification head maps the final hidden state $\mathbf{h}_W^{\text{vis}}$ to gesture logits $\hat{\mathbf{y}}_W^{\text{vis}} \in \mathbb{R}^C$.
+
 
 \subsection{Fixed Multimodal Fusion Baselines}
 \textbf{Late-Logit Fusion:} Modality-specific classifiers produce independent logits $\mathbf{y}_t^{\text{vis}}, \mathbf{y}_t^{\text{kin}} \in \mathbb{R}^C$. Fixed fusion combines these via:
