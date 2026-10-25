@@ -1,0 +1,33 @@
+{
+  "benchmark": "PreEncoderFrameLevelOpticalCorruptions",
+  "task": "Suturing",
+  "fold": 1,
+  "test_trials": [
+    "Suturing_B001",
+    "Suturing_B002"
+  ],
+  "severity": 5,
+  "seed": 42,
+  "corruptions": {
+    "defocus_blur": {
+      "mean_feature_cosine_similarity": 0.7435767650604248,
+      "feature_distortion": 0.2564232349395752
+    },
+    "motion_blur": {
+      "mean_feature_cosine_similarity": 0.710986852645874,
+      "feature_distortion": 0.289013147354126
+    },
+    "shot_noise": {
+      "mean_feature_cosine_similarity": 0.6957648694515228,
+      "feature_distortion": 0.3042351305484772
+    },
+    "cautery_smoke": {
+      "mean_feature_cosine_similarity": 0.8327749371528625,
+      "feature_distortion": 0.16722506284713745
+    },
+    "packet_loss": {
+      "mean_feature_cosine_similarity": 0.7758145034313202,
+      "feature_distortion": 0.2241854965686798
+    }
+  }
+}

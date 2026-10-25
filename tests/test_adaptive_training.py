@@ -88,30 +88,45 @@ class SpySubmodel(nn.Module):
 # 1. Audit Current Training Readiness Tests
 # ---------------------------------------------------------------------------
 
-def test_check_adaptive_fusion_readiness_all_tasks() -> None:
-    """Test that check_adaptive_fusion_readiness accurately audits all 3 tasks and 8 folds."""
+def test_check_adaptive_fusion_readiness_all_tasks(tmp_path: Path) -> None:
+    """Test that check_adaptive_fusion_readiness accurately audits tasks and detects missing caches."""
     cfg = load_config("configs/adaptive_fusion.yaml")
 
     for task in ["Suturing", "Knot_Tying", "Needle_Passing"]:
-        audit = check_adaptive_fusion_readiness(task, cfg)
+        # When cache directory is missing
+        mock_cfg = {
+            "data": {
+                "cache_dir": str(tmp_path / "empty_cache"),
+                "dataset_dir": "dataset",
+                "encoder_name": "ResNet18",
+                "camera": "capture1",
+            }
+        }
+        audit = check_adaptive_fusion_readiness(task, mock_cfg)
         assert audit["task"] == task
         assert audit["total_folds"] == 8
         assert len(audit["fold_status"]) == 8
-        assert not audit["all_ready"], f"Task {task} should be BLOCKED since feature extraction is incomplete."
+        assert not audit["all_ready"], f"Task {task} should be BLOCKED when cache is empty."
         assert len(audit["ready_folds"]) == 0
 
-        # Verify missing cache counts match real file system
         for f_num, f_info in audit["fold_status"].items():
             assert not f_info["ready"]
             assert f_info["missing_cache_count"] > 0
             assert f_info["missing_kinematics_count"] == 0  # 76D kinematics exist for all trials
 
 
-def test_benchmark_runner_blocked_status() -> None:
+def test_benchmark_runner_blocked_status(tmp_path: Path) -> None:
     """Test that run_adaptive_fusion_benchmark cleanly reports BLOCKED when caches are incomplete."""
+    mock_cfg_path = tmp_path / "mock_adaptive.yaml"
+    import yaml
+    cfg = load_config("configs/adaptive_fusion.yaml")
+    cfg["data"]["cache_dir"] = str(tmp_path / "empty_cache")
+    with open(mock_cfg_path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(cfg, f)
+
     res = run_adaptive_fusion_benchmark(
         task="Suturing",
-        config_path="configs/adaptive_fusion.yaml",
+        config_path=str(mock_cfg_path),
         dry_run=False,
     )
     assert res["status"] == "BLOCKED"

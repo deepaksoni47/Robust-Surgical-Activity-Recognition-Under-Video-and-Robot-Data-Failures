@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-10-25T19:54:28Z",
-  "task": "Suturing",
+  "timestamp": "2026-10-25T22:32:45Z",
+  "task": "all",
   "encoder_name": "ResNet18",
   "output_dim": 512,
-  "trials_processed": 39,
+  "trials_processed": 103,
   "extracted_count": 0,
   "skipped_count": 0,
-  "valid_count": 1,
+  "valid_count": 103,
   "total_frames_extracted": 0,
-  "total_elapsed_sec": 0.2,
+  "total_elapsed_sec": 4.84,
   "results": [
     {
       "trial_id": "Suturing_B001",
@@ -57,193 +57,4593 @@
     },
     {
       "trial_id": "Suturing_B002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_B002_capture1.npz",
+      "num_frames": 3462,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3461
+      ],
+      "file_size_bytes": 6323447,
+      "metadata": {
+        "trial_id": "Suturing_B002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_B002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3462,
+        "total_video_frames": 3462,
+        "n_kinematics_samples": 3445,
+        "n_transcription_frames": 3424,
+        "delta_vid_kin_frames": 17,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 64.9,
+        "extraction_fps": 53.34,
+        "created_at": "2026-10-25T14:38:16.762039+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_B003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_B003_capture1.npz",
+      "num_frames": 3437,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3436
+      ],
+      "file_size_bytes": 6099962,
+      "metadata": {
+        "trial_id": "Suturing_B003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_B003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3437,
+        "total_video_frames": 3437,
+        "n_kinematics_samples": 3432,
+        "n_transcription_frames": 3274,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 61.32,
+        "extraction_fps": 56.05,
+        "created_at": "2026-10-25T15:38:45.006449+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_B004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_B004_capture1.npz",
+      "num_frames": 3274,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3273
+      ],
+      "file_size_bytes": 6025010,
+      "metadata": {
+        "trial_id": "Suturing_B004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_B004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3274,
+        "total_video_frames": 3274,
+        "n_kinematics_samples": 3257,
+        "n_transcription_frames": 3257,
+        "delta_vid_kin_frames": 17,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 77.42,
+        "extraction_fps": 42.29,
+        "created_at": "2026-10-25T15:39:47.113916+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_B005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_B005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_B005_capture1.npz",
+      "num_frames": 2863,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2862
+      ],
+      "file_size_bytes": 5256341,
+      "metadata": {
+        "trial_id": "Suturing_B005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_B005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2863,
+        "total_video_frames": 2863,
+        "n_kinematics_samples": 2848,
+        "n_transcription_frames": 2848,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 52.18,
+        "extraction_fps": 54.86,
+        "created_at": "2026-10-25T15:41:05.752071+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_C001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_C001_capture1.npz",
+      "num_frames": 3185,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3184
+      ],
+      "file_size_bytes": 5879639,
+      "metadata": {
+        "trial_id": "Suturing_C001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_C001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3185,
+        "total_video_frames": 3185,
+        "n_kinematics_samples": 3180,
+        "n_transcription_frames": 3180,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 55.86,
+        "extraction_fps": 57.02,
+        "created_at": "2026-10-25T15:41:58.605426+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_C002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_C002_capture1.npz",
+      "num_frames": 3282,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3281
+      ],
+      "file_size_bytes": 6054753,
+      "metadata": {
+        "trial_id": "Suturing_C002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_C002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3282,
+        "total_video_frames": 3282,
+        "n_kinematics_samples": 3267,
+        "n_transcription_frames": 3267,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 57.04,
+        "extraction_fps": 57.53,
+        "created_at": "2026-10-25T15:42:55.144340+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_C003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_C003_capture1.npz",
+      "num_frames": 3166,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3165
+      ],
+      "file_size_bytes": 5791861,
+      "metadata": {
+        "trial_id": "Suturing_C003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_C003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3166,
+        "total_video_frames": 3166,
+        "n_kinematics_samples": 3161,
+        "n_transcription_frames": 3060,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 55.55,
+        "extraction_fps": 56.99,
+        "created_at": "2026-10-25T15:43:52.939474+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_C004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_C004_capture1.npz",
+      "num_frames": 2493,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2492
+      ],
+      "file_size_bytes": 4596141,
+      "metadata": {
+        "trial_id": "Suturing_C004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_C004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2493,
+        "total_video_frames": 2493,
+        "n_kinematics_samples": 2479,
+        "n_transcription_frames": 2450,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 93.19,
+        "extraction_fps": 26.75,
+        "created_at": "2026-10-25T15:44:49.164797+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_C005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_C005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_C005_capture1.npz",
+      "num_frames": 2581,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2580
+      ],
+      "file_size_bytes": 4745541,
+      "metadata": {
+        "trial_id": "Suturing_C005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_C005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2581,
+        "total_video_frames": 2581,
+        "n_kinematics_samples": 2577,
+        "n_transcription_frames": 2550,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 44.3,
+        "extraction_fps": 58.27,
+        "created_at": "2026-10-25T15:46:22.894968+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_D001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_D001_capture1.npz",
+      "num_frames": 2816,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2815
+      ],
+      "file_size_bytes": 5186344,
+      "metadata": {
+        "trial_id": "Suturing_D001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_D001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2816,
+        "total_video_frames": 2816,
+        "n_kinematics_samples": 2800,
+        "n_transcription_frames": 2770,
+        "delta_vid_kin_frames": 16,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 48.45,
+        "extraction_fps": 58.13,
+        "created_at": "2026-10-25T15:47:07.739122+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_D002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_D002_capture1.npz",
+      "num_frames": 2219,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2218
+      ],
+      "file_size_bytes": 4031519,
+      "metadata": {
+        "trial_id": "Suturing_D002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_D002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2219,
+        "total_video_frames": 2219,
+        "n_kinematics_samples": 2214,
+        "n_transcription_frames": 2032,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 38.26,
+        "extraction_fps": 58.0,
+        "created_at": "2026-10-25T15:47:56.819738+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_D003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_D003_capture1.npz",
+      "num_frames": 2322,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2321
+      ],
+      "file_size_bytes": 4283012,
+      "metadata": {
+        "trial_id": "Suturing_D003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_D003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2322,
+        "total_video_frames": 2322,
+        "n_kinematics_samples": 2317,
+        "n_transcription_frames": 2317,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 41.43,
+        "extraction_fps": 56.04,
+        "created_at": "2026-10-25T15:48:35.577031+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_D004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_D004_capture1.npz",
+      "num_frames": 2747,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2746
+      ],
+      "file_size_bytes": 5065719,
+      "metadata": {
+        "trial_id": "Suturing_D004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_D004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2747,
+        "total_video_frames": 2747,
+        "n_kinematics_samples": 2742,
+        "n_transcription_frames": 2682,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 49.24,
+        "extraction_fps": 55.79,
+        "created_at": "2026-10-25T15:49:17.539936+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_D005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_D005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_D005_capture1.npz",
+      "num_frames": 1794,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1793
+      ],
+      "file_size_bytes": 3306915,
+      "metadata": {
+        "trial_id": "Suturing_D005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_D005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1794,
+        "total_video_frames": 1794,
+        "n_kinematics_samples": 1779,
+        "n_transcription_frames": 1779,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 32.04,
+        "extraction_fps": 55.99,
+        "created_at": "2026-10-25T15:50:07.372889+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_E001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_E001_capture1.npz",
+      "num_frames": 3607,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3606
+      ],
+      "file_size_bytes": 6658659,
+      "metadata": {
+        "trial_id": "Suturing_E001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_E001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3607,
+        "total_video_frames": 3607,
+        "n_kinematics_samples": 3593,
+        "n_transcription_frames": 3593,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 60.02,
+        "extraction_fps": 60.09,
+        "created_at": "2026-10-25T15:50:39.852727+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_E002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_E002_capture1.npz",
+      "num_frames": 2953,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2952
+      ],
+      "file_size_bytes": 5449937,
+      "metadata": {
+        "trial_id": "Suturing_E002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_E002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2953,
+        "total_video_frames": 2953,
+        "n_kinematics_samples": 2948,
+        "n_transcription_frames": 2948,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 48.43,
+        "extraction_fps": 60.98,
+        "created_at": "2026-10-25T15:51:40.639600+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_E003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_E003_capture1.npz",
+      "num_frames": 2609,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2608
+      ],
+      "file_size_bytes": 4815011,
+      "metadata": {
+        "trial_id": "Suturing_E003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_E003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2609,
+        "total_video_frames": 2609,
+        "n_kinematics_samples": 2605,
+        "n_transcription_frames": 2575,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 44.66,
+        "extraction_fps": 58.42,
+        "created_at": "2026-10-25T15:52:29.672779+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_E004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_E004_capture1.npz",
+      "num_frames": 2931,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2930
+      ],
+      "file_size_bytes": 5408190,
+      "metadata": {
+        "trial_id": "Suturing_E004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_E004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2931,
+        "total_video_frames": 2931,
+        "n_kinematics_samples": 2926,
+        "n_transcription_frames": 2926,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 52.85,
+        "extraction_fps": 55.45,
+        "created_at": "2026-10-25T15:53:14.876459+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_E005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_E005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_E005_capture1.npz",
+      "num_frames": 2488,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2487
+      ],
+      "file_size_bytes": 4590964,
+      "metadata": {
+        "trial_id": "Suturing_E005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_E005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2488,
+        "total_video_frames": 2488,
+        "n_kinematics_samples": 2483,
+        "n_transcription_frames": 2483,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 132.3,
+        "extraction_fps": 18.81,
+        "created_at": "2026-10-25T15:54:08.344637+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_F001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_F001_capture1.npz",
+      "num_frames": 2844,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2843
+      ],
+      "file_size_bytes": 5244079,
+      "metadata": {
+        "trial_id": "Suturing_F001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_F001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2844,
+        "total_video_frames": 2844,
+        "n_kinematics_samples": 2838,
+        "n_transcription_frames": 2838,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 52.09,
+        "extraction_fps": 54.6,
+        "created_at": "2026-10-25T15:56:21.213275+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_F002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_F002_capture1.npz",
+      "num_frames": 2380,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2379
+      ],
+      "file_size_bytes": 4394436,
+      "metadata": {
+        "trial_id": "Suturing_F002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_F002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2380,
+        "total_video_frames": 2380,
+        "n_kinematics_samples": 2375,
+        "n_transcription_frames": 2375,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 39.73,
+        "extraction_fps": 59.9,
+        "created_at": "2026-10-25T15:57:13.939059+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_F003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_F003_capture1.npz",
+      "num_frames": 2279,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2278
+      ],
+      "file_size_bytes": 4095389,
+      "metadata": {
+        "trial_id": "Suturing_F003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_F003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2279,
+        "total_video_frames": 2279,
+        "n_kinematics_samples": 2265,
+        "n_transcription_frames": 2235,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 37.66,
+        "extraction_fps": 60.51,
+        "created_at": "2026-10-25T15:57:54.212832+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_F004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_F004_capture1.npz",
+      "num_frames": 2378,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2377
+      ],
+      "file_size_bytes": 4389911,
+      "metadata": {
+        "trial_id": "Suturing_F004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_F004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2378,
+        "total_video_frames": 2378,
+        "n_kinematics_samples": 2373,
+        "n_transcription_frames": 2373,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 38.3,
+        "extraction_fps": 62.09,
+        "created_at": "2026-10-25T15:58:32.394888+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_F005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_F005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_F005_capture1.npz",
+      "num_frames": 2046,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2045
+      ],
+      "file_size_bytes": 3772630,
+      "metadata": {
+        "trial_id": "Suturing_F005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_F005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2046,
+        "total_video_frames": 2046,
+        "n_kinematics_samples": 2039,
+        "n_transcription_frames": 2039,
+        "delta_vid_kin_frames": 7,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 33.27,
+        "extraction_fps": 61.49,
+        "created_at": "2026-10-25T15:59:11.215563+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_G001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_G001_capture1.npz",
+      "num_frames": 9026,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        9025
+      ],
+      "file_size_bytes": 16631809,
+      "metadata": {
+        "trial_id": "Suturing_G001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_G001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 9026,
+        "total_video_frames": 9026,
+        "n_kinematics_samples": 9012,
+        "n_transcription_frames": 9012,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 141.52,
+        "extraction_fps": 63.78,
+        "created_at": "2026-10-25T15:59:45.045987+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_G002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_G002_capture1.npz",
+      "num_frames": 3385,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3384
+      ],
+      "file_size_bytes": 6241759,
+      "metadata": {
+        "trial_id": "Suturing_G002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_G002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3385,
+        "total_video_frames": 3385,
+        "n_kinematics_samples": 3379,
+        "n_transcription_frames": 3379,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 54.92,
+        "extraction_fps": 61.63,
+        "created_at": "2026-10-25T16:02:08.157698+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_G003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_G003_capture1.npz",
+      "num_frames": 5215,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        5214
+      ],
+      "file_size_bytes": 9620243,
+      "metadata": {
+        "trial_id": "Suturing_G003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_G003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 5215,
+        "total_video_frames": 5215,
+        "n_kinematics_samples": 5211,
+        "n_transcription_frames": 5160,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 107.35,
+        "extraction_fps": 48.58,
+        "created_at": "2026-10-25T16:03:03.765225+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_G004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_G004_capture1.npz",
+      "num_frames": 2655,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2654
+      ],
+      "file_size_bytes": 4896327,
+      "metadata": {
+        "trial_id": "Suturing_G004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_G004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2655,
+        "total_video_frames": 2655,
+        "n_kinematics_samples": 2650,
+        "n_transcription_frames": 2620,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 43.91,
+        "extraction_fps": 60.47,
+        "created_at": "2026-10-25T16:04:52.068350+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_G005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_G005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_G005_capture1.npz",
+      "num_frames": 2469,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2468
+      ],
+      "file_size_bytes": 4558605,
+      "metadata": {
+        "trial_id": "Suturing_G005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_G005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2469,
+        "total_video_frames": 2469,
+        "n_kinematics_samples": 2454,
+        "n_transcription_frames": 2454,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 62.94,
+        "extraction_fps": 39.23,
+        "created_at": "2026-10-25T16:05:36.518134+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_H001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_H001_capture1.npz",
+      "num_frames": 5658,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        5657
+      ],
+      "file_size_bytes": 10430193,
+      "metadata": {
+        "trial_id": "Suturing_H001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_H001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 5658,
+        "total_video_frames": 5658,
+        "n_kinematics_samples": 5654,
+        "n_transcription_frames": 5363,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 113.9,
+        "extraction_fps": 49.67,
+        "created_at": "2026-10-25T16:06:40.002550+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_H003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_H003_capture1.npz",
+      "num_frames": 3409,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3408
+      ],
+      "file_size_bytes": 6208764,
+      "metadata": {
+        "trial_id": "Suturing_H003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_H003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3409,
+        "total_video_frames": 3409,
+        "n_kinematics_samples": 3395,
+        "n_transcription_frames": 3320,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 49.66,
+        "extraction_fps": 68.64,
+        "created_at": "2026-10-25T16:08:35.070518+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_H004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_H004_capture1.npz",
+      "num_frames": 4100,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4099
+      ],
+      "file_size_bytes": 7484684,
+      "metadata": {
+        "trial_id": "Suturing_H004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_H004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4100,
+        "total_video_frames": 4100,
+        "n_kinematics_samples": 4094,
+        "n_transcription_frames": 4020,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 54.08,
+        "extraction_fps": 75.81,
+        "created_at": "2026-10-25T16:09:25.261110+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_H005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_H005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_H005_capture1.npz",
+      "num_frames": 3441,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3440
+      ],
+      "file_size_bytes": 6190259,
+      "metadata": {
+        "trial_id": "Suturing_H005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_H005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3441,
+        "total_video_frames": 3441,
+        "n_kinematics_samples": 3436,
+        "n_transcription_frames": 3279,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 45.21,
+        "extraction_fps": 76.11,
+        "created_at": "2026-10-25T16:10:19.948806+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_I001",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I001_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_I001_capture1.npz",
+      "num_frames": 4318,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4317
+      ],
+      "file_size_bytes": 7972871,
+      "metadata": {
+        "trial_id": "Suturing_I001",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_I001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4318,
+        "total_video_frames": 4318,
+        "n_kinematics_samples": 4316,
+        "n_transcription_frames": 4310,
+        "delta_vid_kin_frames": 2,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 55.81,
+        "extraction_fps": 77.37,
+        "created_at": "2026-10-25T16:11:05.700662+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_I002",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I002_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_I002_capture1.npz",
+      "num_frames": 4417,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4416
+      ],
+      "file_size_bytes": 8143612,
+      "metadata": {
+        "trial_id": "Suturing_I002",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_I002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4417,
+        "total_video_frames": 4417,
+        "n_kinematics_samples": 4412,
+        "n_transcription_frames": 4412,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 56.63,
+        "extraction_fps": 78.0,
+        "created_at": "2026-10-25T16:12:02.181045+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_I003",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I003_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_I003_capture1.npz",
+      "num_frames": 4289,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4288
+      ],
+      "file_size_bytes": 7910124,
+      "metadata": {
+        "trial_id": "Suturing_I003",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_I003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4289,
+        "total_video_frames": 4289,
+        "n_kinematics_samples": 4284,
+        "n_transcription_frames": 4284,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 54.03,
+        "extraction_fps": 79.38,
+        "created_at": "2026-10-25T16:12:59.436541+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_I004",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I004_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_I004_capture1.npz",
+      "num_frames": 3745,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3744
+      ],
+      "file_size_bytes": 6890348,
+      "metadata": {
+        "trial_id": "Suturing_I004",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_I004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3745,
+        "total_video_frames": 3745,
+        "n_kinematics_samples": 3730,
+        "n_transcription_frames": 3730,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 47.09,
+        "extraction_fps": 79.53,
+        "created_at": "2026-10-25T16:13:54.082527+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     },
     {
       "trial_id": "Suturing_I005",
-      "status": "INVALID",
-      "error": "Cache file not found: D:\\miniproject-5thsem\\data\\cache\\features\\ResNet18\\Suturing_I005_capture1.npz"
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Suturing_I005_capture1.npz",
+      "num_frames": 3778,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3777
+      ],
+      "file_size_bytes": 6962072,
+      "metadata": {
+        "trial_id": "Suturing_I005",
+        "task": "Suturing",
+        "camera": "capture1",
+        "video_path": "dataset/Suturing/video/Suturing_I005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3778,
+        "total_video_frames": 3778,
+        "n_kinematics_samples": 3773,
+        "n_transcription_frames": 3773,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 58.74,
+        "extraction_fps": 64.31,
+        "created_at": "2026-10-25T16:14:41.726729+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_B001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_B001_capture1.npz",
+      "num_frames": 1749,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1748
+      ],
+      "file_size_bytes": 3229638,
+      "metadata": {
+        "trial_id": "Knot_Tying_B001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_B001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1749,
+        "total_video_frames": 1749,
+        "n_kinematics_samples": 1735,
+        "n_transcription_frames": 1735,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 25.18,
+        "extraction_fps": 69.47,
+        "created_at": "2026-10-25T16:16:19.501813+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_B002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_B002_capture1.npz",
+      "num_frames": 1485,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1484
+      ],
+      "file_size_bytes": 2707160,
+      "metadata": {
+        "trial_id": "Knot_Tying_B002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_B002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1485,
+        "total_video_frames": 1485,
+        "n_kinematics_samples": 1480,
+        "n_transcription_frames": 1260,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 35.3,
+        "extraction_fps": 42.07,
+        "created_at": "2026-10-25T16:16:44.952958+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_B003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_B003_capture1.npz",
+      "num_frames": 1614,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1613
+      ],
+      "file_size_bytes": 2836650,
+      "metadata": {
+        "trial_id": "Knot_Tying_B003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_B003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1614,
+        "total_video_frames": 1614,
+        "n_kinematics_samples": 1612,
+        "n_transcription_frames": 1355,
+        "delta_vid_kin_frames": 2,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 25.48,
+        "extraction_fps": 63.35,
+        "created_at": "2026-10-25T16:17:20.490967+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_B004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_B004_capture1.npz",
+      "num_frames": 1825,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1824
+      ],
+      "file_size_bytes": 3364442,
+      "metadata": {
+        "trial_id": "Knot_Tying_B004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_B004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1825,
+        "total_video_frames": 1825,
+        "n_kinematics_samples": 1820,
+        "n_transcription_frames": 1820,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 30.31,
+        "extraction_fps": 60.21,
+        "created_at": "2026-10-25T16:17:46.261932+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_C001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_C001_capture1.npz",
+      "num_frames": 1233,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1232
+      ],
+      "file_size_bytes": 2270739,
+      "metadata": {
+        "trial_id": "Knot_Tying_C001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_C001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1233,
+        "total_video_frames": 1233,
+        "n_kinematics_samples": 1227,
+        "n_transcription_frames": 1227,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 20.1,
+        "extraction_fps": 61.34,
+        "created_at": "2026-10-25T16:18:16.899347+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_C002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_C002_capture1.npz",
+      "num_frames": 1073,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1072
+      ],
+      "file_size_bytes": 1976421,
+      "metadata": {
+        "trial_id": "Knot_Tying_C002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_C002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1073,
+        "total_video_frames": 1073,
+        "n_kinematics_samples": 1068,
+        "n_transcription_frames": 1000,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 17.81,
+        "extraction_fps": 60.25,
+        "created_at": "2026-10-25T16:18:37.251307+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_C003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_C003_capture1.npz",
+      "num_frames": 1078,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1077
+      ],
+      "file_size_bytes": 1986890,
+      "metadata": {
+        "trial_id": "Knot_Tying_C003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_C003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1078,
+        "total_video_frames": 1078,
+        "n_kinematics_samples": 1073,
+        "n_transcription_frames": 1045,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 19.11,
+        "extraction_fps": 56.4,
+        "created_at": "2026-10-25T16:18:55.535129+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_C004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_C004_capture1.npz",
+      "num_frames": 1397,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1396
+      ],
+      "file_size_bytes": 2538266,
+      "metadata": {
+        "trial_id": "Knot_Tying_C004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_C004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1397,
+        "total_video_frames": 1397,
+        "n_kinematics_samples": 1383,
+        "n_transcription_frames": 1300,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 23.38,
+        "extraction_fps": 59.76,
+        "created_at": "2026-10-25T16:19:14.849881+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_C005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_C005_capture1.npz",
+      "num_frames": 1155,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1154
+      ],
+      "file_size_bytes": 2072008,
+      "metadata": {
+        "trial_id": "Knot_Tying_C005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_C005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1155,
+        "total_video_frames": 1155,
+        "n_kinematics_samples": 1150,
+        "n_transcription_frames": 1037,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 20.67,
+        "extraction_fps": 55.88,
+        "created_at": "2026-10-25T16:19:38.522311+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_D001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_D001_capture1.npz",
+      "num_frames": 1403,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1402
+      ],
+      "file_size_bytes": 2591202,
+      "metadata": {
+        "trial_id": "Knot_Tying_D001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_D001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1403,
+        "total_video_frames": 1403,
+        "n_kinematics_samples": 1399,
+        "n_transcription_frames": 1348,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 24.48,
+        "extraction_fps": 57.32,
+        "created_at": "2026-10-25T16:19:59.392516+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_D002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_D002_capture1.npz",
+      "num_frames": 1246,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1245
+      ],
+      "file_size_bytes": 2293674,
+      "metadata": {
+        "trial_id": "Knot_Tying_D002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_D002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1246,
+        "total_video_frames": 1246,
+        "n_kinematics_samples": 1241,
+        "n_transcription_frames": 1227,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 21.81,
+        "extraction_fps": 57.14,
+        "created_at": "2026-10-25T16:20:24.133246+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_D003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_D003_capture1.npz",
+      "num_frames": 1407,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1406
+      ],
+      "file_size_bytes": 2486079,
+      "metadata": {
+        "trial_id": "Knot_Tying_D003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_D003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1407,
+        "total_video_frames": 1407,
+        "n_kinematics_samples": 1402,
+        "n_transcription_frames": 1220,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 30.55,
+        "extraction_fps": 46.05,
+        "created_at": "2026-10-25T16:20:46.156711+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_D004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_D004_capture1.npz",
+      "num_frames": 1054,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1053
+      ],
+      "file_size_bytes": 1937017,
+      "metadata": {
+        "trial_id": "Knot_Tying_D004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_D004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1054,
+        "total_video_frames": 1054,
+        "n_kinematics_samples": 1049,
+        "n_transcription_frames": 936,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 19.79,
+        "extraction_fps": 53.25,
+        "created_at": "2026-10-25T16:21:17.256279+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_D005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_D005_capture1.npz",
+      "num_frames": 1271,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1270
+      ],
+      "file_size_bytes": 2266446,
+      "metadata": {
+        "trial_id": "Knot_Tying_D005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_D005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1271,
+        "total_video_frames": 1271,
+        "n_kinematics_samples": 1256,
+        "n_transcription_frames": 1117,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 21.03,
+        "extraction_fps": 60.45,
+        "created_at": "2026-10-25T16:21:37.244362+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_E001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_E001_capture1.npz",
+      "num_frames": 1597,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1596
+      ],
+      "file_size_bytes": 2948169,
+      "metadata": {
+        "trial_id": "Knot_Tying_E001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_E001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1597,
+        "total_video_frames": 1597,
+        "n_kinematics_samples": 1592,
+        "n_transcription_frames": 1550,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 27.52,
+        "extraction_fps": 58.03,
+        "created_at": "2026-10-25T16:21:58.581835+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_E002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_E002_capture1.npz",
+      "num_frames": 1302,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1301
+      ],
+      "file_size_bytes": 2405699,
+      "metadata": {
+        "trial_id": "Knot_Tying_E002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_E002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1302,
+        "total_video_frames": 1302,
+        "n_kinematics_samples": 1297,
+        "n_transcription_frames": 1257,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 22.36,
+        "extraction_fps": 58.23,
+        "created_at": "2026-10-25T16:22:26.377532+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_E003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_E003_capture1.npz",
+      "num_frames": 1419,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1418
+      ],
+      "file_size_bytes": 2620991,
+      "metadata": {
+        "trial_id": "Knot_Tying_E003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_E003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1419,
+        "total_video_frames": 1419,
+        "n_kinematics_samples": 1413,
+        "n_transcription_frames": 1360,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 24.45,
+        "extraction_fps": 58.04,
+        "created_at": "2026-10-25T16:22:48.977212+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_E004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_E004_capture1.npz",
+      "num_frames": 1386,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1385
+      ],
+      "file_size_bytes": 2564636,
+      "metadata": {
+        "trial_id": "Knot_Tying_E004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_E004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1386,
+        "total_video_frames": 1386,
+        "n_kinematics_samples": 1371,
+        "n_transcription_frames": 1363,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 22.57,
+        "extraction_fps": 61.4,
+        "created_at": "2026-10-25T16:23:13.648995+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_E005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_E005_capture1.npz",
+      "num_frames": 1262,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1261
+      ],
+      "file_size_bytes": 2331748,
+      "metadata": {
+        "trial_id": "Knot_Tying_E005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_E005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1262,
+        "total_video_frames": 1262,
+        "n_kinematics_samples": 1257,
+        "n_transcription_frames": 1170,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 21.35,
+        "extraction_fps": 59.11,
+        "created_at": "2026-10-25T16:23:36.494329+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_F001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_F001_capture1.npz",
+      "num_frames": 925,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        924
+      ],
+      "file_size_bytes": 1708614,
+      "metadata": {
+        "trial_id": "Knot_Tying_F001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_F001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 925,
+        "total_video_frames": 925,
+        "n_kinematics_samples": 920,
+        "n_transcription_frames": 896,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 16.06,
+        "extraction_fps": 57.58,
+        "created_at": "2026-10-25T16:23:58.091679+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_F002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_F002_capture1.npz",
+      "num_frames": 1017,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1016
+      ],
+      "file_size_bytes": 1878039,
+      "metadata": {
+        "trial_id": "Knot_Tying_F002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_F002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1017,
+        "total_video_frames": 1017,
+        "n_kinematics_samples": 1012,
+        "n_transcription_frames": 984,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 17.93,
+        "extraction_fps": 56.72,
+        "created_at": "2026-10-25T16:24:14.343144+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_F003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_F003_capture1.npz",
+      "num_frames": 2727,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2726
+      ],
+      "file_size_bytes": 4919233,
+      "metadata": {
+        "trial_id": "Knot_Tying_F003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_F003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2727,
+        "total_video_frames": 2727,
+        "n_kinematics_samples": 2722,
+        "n_transcription_frames": 2600,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 46.42,
+        "extraction_fps": 58.75,
+        "created_at": "2026-10-25T16:24:32.491240+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_F004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_F004_capture1.npz",
+      "num_frames": 1835,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1834
+      ],
+      "file_size_bytes": 3386881,
+      "metadata": {
+        "trial_id": "Knot_Tying_F004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_F004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1835,
+        "total_video_frames": 1835,
+        "n_kinematics_samples": 1830,
+        "n_transcription_frames": 1792,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 30.52,
+        "extraction_fps": 60.11,
+        "created_at": "2026-10-25T16:25:19.375237+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_F005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_F005_capture1.npz",
+      "num_frames": 1379,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1378
+      ],
+      "file_size_bytes": 2545382,
+      "metadata": {
+        "trial_id": "Knot_Tying_F005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_F005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1379,
+        "total_video_frames": 1379,
+        "n_kinematics_samples": 1849,
+        "n_transcription_frames": 1300,
+        "delta_vid_kin_frames": 470,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 23.0,
+        "extraction_fps": 59.95,
+        "created_at": "2026-10-25T16:25:50.225419+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_G001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_G001_capture1.npz",
+      "num_frames": 2373,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2372
+      ],
+      "file_size_bytes": 4382404,
+      "metadata": {
+        "trial_id": "Knot_Tying_G001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_G001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2373,
+        "total_video_frames": 2373,
+        "n_kinematics_samples": 2369,
+        "n_transcription_frames": 2310,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 40.04,
+        "extraction_fps": 59.26,
+        "created_at": "2026-10-25T16:26:13.498556+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_G002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_G002_capture1.npz",
+      "num_frames": 2286,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2285
+      ],
+      "file_size_bytes": 4220395,
+      "metadata": {
+        "trial_id": "Knot_Tying_G002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_G002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2286,
+        "total_video_frames": 2286,
+        "n_kinematics_samples": 2282,
+        "n_transcription_frames": 2197,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 38.82,
+        "extraction_fps": 58.88,
+        "created_at": "2026-10-25T16:26:53.915144+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_G003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_G003_capture1.npz",
+      "num_frames": 2428,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2427
+      ],
+      "file_size_bytes": 4478796,
+      "metadata": {
+        "trial_id": "Knot_Tying_G003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_G003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2428,
+        "total_video_frames": 2428,
+        "n_kinematics_samples": 2415,
+        "n_transcription_frames": 2361,
+        "delta_vid_kin_frames": 13,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 40.78,
+        "extraction_fps": 59.54,
+        "created_at": "2026-10-25T16:27:33.120591+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_G004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_G004_capture1.npz",
+      "num_frames": 3866,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3865
+      ],
+      "file_size_bytes": 7129007,
+      "metadata": {
+        "trial_id": "Knot_Tying_G004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_G004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3866,
+        "total_video_frames": 3866,
+        "n_kinematics_samples": 3853,
+        "n_transcription_frames": 3853,
+        "delta_vid_kin_frames": 13,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 64.09,
+        "extraction_fps": 60.32,
+        "created_at": "2026-10-25T16:28:14.310340+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_G005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_G005_capture1.npz",
+      "num_frames": 1700,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1699
+      ],
+      "file_size_bytes": 3140029,
+      "metadata": {
+        "trial_id": "Knot_Tying_G005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_G005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1700,
+        "total_video_frames": 1700,
+        "n_kinematics_samples": 1696,
+        "n_transcription_frames": 1636,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 28.34,
+        "extraction_fps": 59.98,
+        "created_at": "2026-10-25T16:29:18.973403+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_H003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_H003_capture1.npz",
+      "num_frames": 1640,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1639
+      ],
+      "file_size_bytes": 3017851,
+      "metadata": {
+        "trial_id": "Knot_Tying_H003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_H003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1640,
+        "total_video_frames": 1640,
+        "n_kinematics_samples": 1635,
+        "n_transcription_frames": 1570,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 28.05,
+        "extraction_fps": 58.46,
+        "created_at": "2026-10-25T16:29:47.626338+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_H004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_H004_capture1.npz",
+      "num_frames": 2255,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2254
+      ],
+      "file_size_bytes": 3103282,
+      "metadata": {
+        "trial_id": "Knot_Tying_H004",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_H004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2255,
+        "total_video_frames": 2255,
+        "n_kinematics_samples": 2251,
+        "n_transcription_frames": 1300,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 38.59,
+        "extraction_fps": 58.43,
+        "created_at": "2026-10-25T16:30:15.978327+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_H005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_H005_capture1.npz",
+      "num_frames": 1957,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1956
+      ],
+      "file_size_bytes": 3527251,
+      "metadata": {
+        "trial_id": "Knot_Tying_H005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_H005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1957,
+        "total_video_frames": 1957,
+        "n_kinematics_samples": 1952,
+        "n_transcription_frames": 1460,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 33.9,
+        "extraction_fps": 57.74,
+        "created_at": "2026-10-25T16:30:54.858291+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_I001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_I001_capture1.npz",
+      "num_frames": 2334,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2333
+      ],
+      "file_size_bytes": 4294655,
+      "metadata": {
+        "trial_id": "Knot_Tying_I001",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_I001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2334,
+        "total_video_frames": 2334,
+        "n_kinematics_samples": 2329,
+        "n_transcription_frames": 2245,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 40.73,
+        "extraction_fps": 57.31,
+        "created_at": "2026-10-25T16:31:29.098229+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_I002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_I002_capture1.npz",
+      "num_frames": 2432,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2431
+      ],
+      "file_size_bytes": 4488344,
+      "metadata": {
+        "trial_id": "Knot_Tying_I002",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_I002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2432,
+        "total_video_frames": 2432,
+        "n_kinematics_samples": 2426,
+        "n_transcription_frames": 2350,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 42.95,
+        "extraction_fps": 56.62,
+        "created_at": "2026-10-25T16:32:10.217702+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_I003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_I003_capture1.npz",
+      "num_frames": 2069,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2068
+      ],
+      "file_size_bytes": 3817237,
+      "metadata": {
+        "trial_id": "Knot_Tying_I003",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_I003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2069,
+        "total_video_frames": 2069,
+        "n_kinematics_samples": 2063,
+        "n_transcription_frames": 1975,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 36.11,
+        "extraction_fps": 57.3,
+        "created_at": "2026-10-25T16:32:53.573871+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Knot_Tying_I005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Knot_Tying_I005_capture1.npz",
+      "num_frames": 2660,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2659
+      ],
+      "file_size_bytes": 4906914,
+      "metadata": {
+        "trial_id": "Knot_Tying_I005",
+        "task": "Knot_Tying",
+        "camera": "capture1",
+        "video_path": "dataset/Knot_Tying/video/Knot_Tying_I005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2660,
+        "total_video_frames": 2660,
+        "n_kinematics_samples": 2655,
+        "n_transcription_frames": 2612,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 45.74,
+        "extraction_fps": 58.15,
+        "created_at": "2026-10-25T16:33:30.025829+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_B001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_B001_capture1.npz",
+      "num_frames": 3452,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3451
+      ],
+      "file_size_bytes": 6324713,
+      "metadata": {
+        "trial_id": "Needle_Passing_B001",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_B001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3452,
+        "total_video_frames": 3452,
+        "n_kinematics_samples": 3438,
+        "n_transcription_frames": 3330,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 61.71,
+        "extraction_fps": 55.94,
+        "created_at": "2026-10-25T16:34:45.656640+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_B002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_B002_capture1.npz",
+      "num_frames": 3182,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3181
+      ],
+      "file_size_bytes": 5854076,
+      "metadata": {
+        "trial_id": "Needle_Passing_B002",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_B002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3182,
+        "total_video_frames": 3182,
+        "n_kinematics_samples": 3177,
+        "n_transcription_frames": 3080,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 55.57,
+        "extraction_fps": 57.26,
+        "created_at": "2026-10-25T16:35:47.956906+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_B003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_B003_capture1.npz",
+      "num_frames": 3243,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3242
+      ],
+      "file_size_bytes": 5920651,
+      "metadata": {
+        "trial_id": "Needle_Passing_B003",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_B003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3243,
+        "total_video_frames": 3243,
+        "n_kinematics_samples": 3238,
+        "n_transcription_frames": 3238,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.0,
+        "extraction_fps": 51.48,
+        "created_at": "2026-10-25T16:36:44.068353+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_B004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_B004_capture1.npz",
+      "num_frames": 2893,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2892
+      ],
+      "file_size_bytes": 5268701,
+      "metadata": {
+        "trial_id": "Needle_Passing_B004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_B004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2893,
+        "total_video_frames": 2893,
+        "n_kinematics_samples": 2888,
+        "n_transcription_frames": 2780,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.63,
+        "extraction_fps": 45.46,
+        "created_at": "2026-10-25T16:37:48.119398+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_C001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_C001_capture1.npz",
+      "num_frames": 4327,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4326
+      ],
+      "file_size_bytes": 7969950,
+      "metadata": {
+        "trial_id": "Needle_Passing_C001",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_C001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4327,
+        "total_video_frames": 4327,
+        "n_kinematics_samples": 4313,
+        "n_transcription_frames": 4313,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 75.68,
+        "extraction_fps": 57.18,
+        "created_at": "2026-10-25T16:38:52.410613+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_C002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_C002_capture1.npz",
+      "num_frames": 3628,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3627
+      ],
+      "file_size_bytes": 6676772,
+      "metadata": {
+        "trial_id": "Needle_Passing_C002",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_C002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3628,
+        "total_video_frames": 3628,
+        "n_kinematics_samples": 3613,
+        "n_transcription_frames": 3613,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.91,
+        "extraction_fps": 56.76,
+        "created_at": "2026-10-25T16:40:08.771418+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_C003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_C003_capture1.npz",
+      "num_frames": 3577,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3576
+      ],
+      "file_size_bytes": 6587493,
+      "metadata": {
+        "trial_id": "Needle_Passing_C003",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_C003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3577,
+        "total_video_frames": 3577,
+        "n_kinematics_samples": 3572,
+        "n_transcription_frames": 3572,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.53,
+        "extraction_fps": 56.3,
+        "created_at": "2026-10-25T16:41:13.271998+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_C004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_C004_capture1.npz",
+      "num_frames": 2447,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2446
+      ],
+      "file_size_bytes": 4501657,
+      "metadata": {
+        "trial_id": "Needle_Passing_C004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_C004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2447,
+        "total_video_frames": 2447,
+        "n_kinematics_samples": 2431,
+        "n_transcription_frames": 2400,
+        "delta_vid_kin_frames": 16,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 43.71,
+        "extraction_fps": 55.98,
+        "created_at": "2026-10-25T16:42:17.388449+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_C005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_C005_capture1.npz",
+      "num_frames": 2562,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2561
+      ],
+      "file_size_bytes": 4719581,
+      "metadata": {
+        "trial_id": "Needle_Passing_C005",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_C005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2562,
+        "total_video_frames": 2562,
+        "n_kinematics_samples": 2557,
+        "n_transcription_frames": 2557,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 43.9,
+        "extraction_fps": 58.36,
+        "created_at": "2026-10-25T16:43:01.482654+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_D001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_D001_capture1.npz",
+      "num_frames": 4656,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4655
+      ],
+      "file_size_bytes": 8579259,
+      "metadata": {
+        "trial_id": "Needle_Passing_D001",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_D001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4656,
+        "total_video_frames": 4656,
+        "n_kinematics_samples": 4651,
+        "n_transcription_frames": 4651,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 81.98,
+        "extraction_fps": 56.8,
+        "created_at": "2026-10-25T16:43:45.859397+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_D002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_D002_capture1.npz",
+      "num_frames": 3290,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3289
+      ],
+      "file_size_bytes": 5977522,
+      "metadata": {
+        "trial_id": "Needle_Passing_D002",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_D002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3290,
+        "total_video_frames": 3290,
+        "n_kinematics_samples": 3285,
+        "n_transcription_frames": 3187,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 60.79,
+        "extraction_fps": 54.12,
+        "created_at": "2026-10-25T16:45:08.711683+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_D003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_D003_capture1.npz",
+      "num_frames": 3250,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3249
+      ],
+      "file_size_bytes": 5983541,
+      "metadata": {
+        "trial_id": "Needle_Passing_D003",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_D003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3250,
+        "total_video_frames": 3250,
+        "n_kinematics_samples": 3234,
+        "n_transcription_frames": 2983,
+        "delta_vid_kin_frames": 16,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 54.56,
+        "extraction_fps": 59.56,
+        "created_at": "2026-10-25T16:46:10.053564+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_D004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_D004_capture1.npz",
+      "num_frames": 2715,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2714
+      ],
+      "file_size_bytes": 4999186,
+      "metadata": {
+        "trial_id": "Needle_Passing_D004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_D004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2715,
+        "total_video_frames": 2715,
+        "n_kinematics_samples": 2710,
+        "n_transcription_frames": 2685,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 47.71,
+        "extraction_fps": 56.91,
+        "created_at": "2026-10-25T16:47:05.099416+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_D005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_D005_capture1.npz",
+      "num_frames": 2130,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2129
+      ],
+      "file_size_bytes": 3916229,
+      "metadata": {
+        "trial_id": "Needle_Passing_D005",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_D005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2130,
+        "total_video_frames": 2130,
+        "n_kinematics_samples": 2124,
+        "n_transcription_frames": 1962,
+        "delta_vid_kin_frames": 6,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 34.35,
+        "extraction_fps": 62.01,
+        "created_at": "2026-10-25T16:47:53.270979+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_E001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_E001_capture1.npz",
+      "num_frames": 3269,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3268
+      ],
+      "file_size_bytes": 6009350,
+      "metadata": {
+        "trial_id": "Needle_Passing_E001",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_E001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3269,
+        "total_video_frames": 3269,
+        "n_kinematics_samples": 3256,
+        "n_transcription_frames": 3230,
+        "delta_vid_kin_frames": 13,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 56.82,
+        "extraction_fps": 57.54,
+        "created_at": "2026-10-25T16:48:28.057610+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_E003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_E003_capture1.npz",
+      "num_frames": 3429,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3428
+      ],
+      "file_size_bytes": 6297960,
+      "metadata": {
+        "trial_id": "Needle_Passing_E003",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_E003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3429,
+        "total_video_frames": 3429,
+        "n_kinematics_samples": 3414,
+        "n_transcription_frames": 3414,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 61.74,
+        "extraction_fps": 55.53,
+        "created_at": "2026-10-25T16:49:25.444305+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_E004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_E004_capture1.npz",
+      "num_frames": 3381,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3380
+      ],
+      "file_size_bytes": 6212077,
+      "metadata": {
+        "trial_id": "Needle_Passing_E004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_E004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3381,
+        "total_video_frames": 3381,
+        "n_kinematics_samples": 3376,
+        "n_transcription_frames": 3318,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 68.4,
+        "extraction_fps": 49.43,
+        "created_at": "2026-10-25T16:50:27.770674+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_E005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_E005_capture1.npz",
+      "num_frames": 3331,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3330
+      ],
+      "file_size_bytes": 6120045,
+      "metadata": {
+        "trial_id": "Needle_Passing_E005",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_E005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3331,
+        "total_video_frames": 3331,
+        "n_kinematics_samples": 3326,
+        "n_transcription_frames": 3326,
+        "delta_vid_kin_frames": 5,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 75.12,
+        "extraction_fps": 44.34,
+        "created_at": "2026-10-25T16:51:37.372822+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_F001",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_F001_capture1.npz",
+      "num_frames": 1875,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1874
+      ],
+      "file_size_bytes": 3449273,
+      "metadata": {
+        "trial_id": "Needle_Passing_F001",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_F001_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1875,
+        "total_video_frames": 1875,
+        "n_kinematics_samples": 1871,
+        "n_transcription_frames": 1871,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 31.78,
+        "extraction_fps": 59.01,
+        "created_at": "2026-10-25T16:52:52.956813+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_F003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_F003_capture1.npz",
+      "num_frames": 2326,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        2325
+      ],
+      "file_size_bytes": 4280931,
+      "metadata": {
+        "trial_id": "Needle_Passing_F003",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_F003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 2326,
+        "total_video_frames": 2326,
+        "n_kinematics_samples": 2322,
+        "n_transcription_frames": 2267,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 39.5,
+        "extraction_fps": 58.89,
+        "created_at": "2026-10-25T16:53:25.046864+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_F004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_F004_capture1.npz",
+      "num_frames": 1791,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        1790
+      ],
+      "file_size_bytes": 3295001,
+      "metadata": {
+        "trial_id": "Needle_Passing_F004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_F004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 1791,
+        "total_video_frames": 1791,
+        "n_kinematics_samples": 1787,
+        "n_transcription_frames": 1787,
+        "delta_vid_kin_frames": 4,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 31.04,
+        "extraction_fps": 57.7,
+        "created_at": "2026-10-25T16:54:04.952087+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_H002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_H002_capture1.npz",
+      "num_frames": 3714,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3713
+      ],
+      "file_size_bytes": 6834432,
+      "metadata": {
+        "trial_id": "Needle_Passing_H002",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_H002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3714,
+        "total_video_frames": 3714,
+        "n_kinematics_samples": 3701,
+        "n_transcription_frames": 3687,
+        "delta_vid_kin_frames": 13,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.48,
+        "extraction_fps": 58.51,
+        "created_at": "2026-10-25T16:54:36.308557+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_H004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_H004_capture1.npz",
+      "num_frames": 3666,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3665
+      ],
+      "file_size_bytes": 6740763,
+      "metadata": {
+        "trial_id": "Needle_Passing_H004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_H004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3666,
+        "total_video_frames": 3666,
+        "n_kinematics_samples": 3653,
+        "n_transcription_frames": 3480,
+        "delta_vid_kin_frames": 13,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 60.19,
+        "extraction_fps": 60.91,
+        "created_at": "2026-10-25T16:55:40.368536+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_H005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_H005_capture1.npz",
+      "num_frames": 3330,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3329
+      ],
+      "file_size_bytes": 6119734,
+      "metadata": {
+        "trial_id": "Needle_Passing_H005",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_H005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3330,
+        "total_video_frames": 3330,
+        "n_kinematics_samples": 3316,
+        "n_transcription_frames": 3249,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 56.13,
+        "extraction_fps": 59.33,
+        "created_at": "2026-10-25T16:56:41.165148+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_I002",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_I002_capture1.npz",
+      "num_frames": 3445,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3444
+      ],
+      "file_size_bytes": 6344585,
+      "metadata": {
+        "trial_id": "Needle_Passing_I002",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_I002_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3445,
+        "total_video_frames": 3445,
+        "n_kinematics_samples": 3443,
+        "n_transcription_frames": 3443,
+        "delta_vid_kin_frames": 2,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.16,
+        "extraction_fps": 54.54,
+        "created_at": "2026-10-25T16:57:37.861845+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_I003",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_I003_capture1.npz",
+      "num_frames": 4776,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        4775
+      ],
+      "file_size_bytes": 8786148,
+      "metadata": {
+        "trial_id": "Needle_Passing_I003",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_I003_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 4776,
+        "total_video_frames": 4776,
+        "n_kinematics_samples": 4761,
+        "n_transcription_frames": 4761,
+        "delta_vid_kin_frames": 15,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 86.05,
+        "extraction_fps": 55.5,
+        "created_at": "2026-10-25T16:58:41.618204+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_I004",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_I004_capture1.npz",
+      "num_frames": 3992,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3991
+      ],
+      "file_size_bytes": 7343957,
+      "metadata": {
+        "trial_id": "Needle_Passing_I004",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_I004_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3992,
+        "total_video_frames": 3992,
+        "n_kinematics_samples": 3978,
+        "n_transcription_frames": 3978,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 73.13,
+        "extraction_fps": 54.58,
+        "created_at": "2026-10-25T17:00:08.524047+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
+    },
+    {
+      "trial_id": "Needle_Passing_I005",
+      "status": "VALID",
+      "valid": true,
+      "cache_path": "data/cache/features/ResNet18/Needle_Passing_I005_capture1.npz",
+      "num_frames": 3427,
+      "feature_dim": 512,
+      "frame_indices_range": [
+        0,
+        3426
+      ],
+      "file_size_bytes": 6307095,
+      "metadata": {
+        "trial_id": "Needle_Passing_I005",
+        "task": "Needle_Passing",
+        "camera": "capture1",
+        "video_path": "dataset/Needle_Passing/video/Needle_Passing_I005_capture1.avi",
+        "encoder_name": "ResNet18",
+        "output_dim": 512,
+        "num_frames": 3427,
+        "total_video_frames": 3427,
+        "n_kinematics_samples": 3413,
+        "n_transcription_frames": 3413,
+        "delta_vid_kin_frames": 14,
+        "fps": 30.0,
+        "target_size": [
+          224,
+          224
+        ],
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "extraction_duration_sec": 63.3,
+        "extraction_fps": 54.14,
+        "created_at": "2026-10-25T17:01:22.273070+00:00",
+        "index_convention": "0-indexed contiguous video frame indices matching 30 Hz nominal sampling"
+      }
     }
   ]
 }

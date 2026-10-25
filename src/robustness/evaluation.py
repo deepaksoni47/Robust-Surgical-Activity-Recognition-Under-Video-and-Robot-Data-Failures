@@ -44,7 +44,8 @@ def audit_robustness_readiness(
     cache_path = Path(cache_dir)
     data_path = Path(dataset_dir)
 
-    splits = get_louo_splits(task, create_val_split=True)
+    raw_splits = get_louo_splits(task, create_val_split=True)
+    splits = {k: v for k, v in raw_splits.items() if len(v["test_trials"]) > 0}
     models_cfg = cfg.get("models", [])
     model_names = [m["name"] for m in models_cfg] if models_cfg else [
         "kinematics_gru", "video_gru", "fixed_late_fusion", "concat_fusion", "adaptive_fusion"

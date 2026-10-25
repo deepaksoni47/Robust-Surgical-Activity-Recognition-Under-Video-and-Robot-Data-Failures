@@ -216,19 +216,42 @@ def train_and_eval_fold(
         torch.save(best_state, save_checkpoint_path)
 
     # 5. Final Test Evaluation
-    test_metrics, _, _ = evaluate_model(model, test_loader, num_classes, inv_vocab, device)
+    test_metrics, y_true, y_pred = evaluate_model(model, test_loader, num_classes, inv_vocab, device)
     edit_score = compute_trial_edit_scores(model, loaders["datasets"]["test"], device)
 
     test_metrics["edit_score"] = edit_score
     test_metrics["fold"] = fold_num
     test_metrics["test_user"] = fold_info["test_user"]
+    test_metrics["n_test_samples"] = len(y_true)
+    test_metrics["n_test_trials"] = len(loaders["datasets"]["test"].trial_records)
+    test_metrics["test_trial_ids"] = [r["trial_id"] for r in loaders["datasets"]["test"].trial_records]
+    test_metrics["predictions"] = y_pred.tolist()
+    test_metrics["ground_truth"] = y_true.tolist()
+
+    # Reproducibility check: reload checkpoint into fresh model instance
+    if save_checkpoint_path is not None and save_checkpoint_path.is_file():
+        fresh_model = KinematicsGRU(
+            input_dim=model_cfg.get("input_dim", 76),
+            proj_dim=model_cfg.get("proj_dim", 128),
+            hidden_dim=model_cfg.get("hidden_dim", 128),
+            num_classes=num_classes,
+            num_layers=model_cfg.get("num_layers", 2),
+            dropout=model_cfg.get("dropout", 0.2),
+            bidirectional=model_cfg.get("bidirectional", False),
+        ).to(device)
+        fresh_state = torch.load(save_checkpoint_path, map_location=device)
+        fresh_model.load_state_dict(fresh_state)
+        fresh_metrics, _, fresh_preds = evaluate_model(fresh_model, test_loader, num_classes, inv_vocab, device)
+        assert np.array_equal(y_pred, fresh_preds), f"Checkpoint reload failed reproducibility on fold {fold_num}"
+        test_metrics["reproducibility_verified"] = True
 
     print(
         f"Fold {fold_num} (User {fold_info['test_user']}): "
         f"Acc={test_metrics['accuracy']*100:.2f}%, "
         f"BalAcc={test_metrics['balanced_accuracy']*100:.2f}%, "
         f"Macro-F1={test_metrics['macro_f1']:.4f}, "
-        f"Edit={edit_score:.2f}%"
+        f"Edit={edit_score:.2f}% "
+        f"({test_metrics['n_test_trials']} trials, {test_metrics['n_test_samples']} samples)"
     )
 
     return test_metrics
@@ -249,13 +272,16 @@ def run_kinematics_gru_benchmark(
     splits = get_louo_splits(task, create_val_split=True)
     fold_results: List[Dict[str, Any]] = []
 
+    pred_dir = Path(output_dir) / "predictions"
+    pred_dir.mkdir(parents=True, exist_ok=True)
+
     print(f"\n==========================================")
     print(f"Benchmarking KinematicsGRU on Task: {task}")
     print(f"Device: {device}")
     print(f"==========================================")
 
     for fold_num in sorted(splits.keys()):
-        ckpt_path = Path(checkpoints_dir) / f"kinematics_gru_{task}_fold{fold_num}.pt" if fold_num == 1 else None
+        ckpt_path = Path(checkpoints_dir) / f"kinematics_gru_{task}_fold{fold_num}.pt"
         res = train_and_eval_fold(
             task=task,
             fold_num=fold_num,
@@ -264,6 +290,24 @@ def run_kinematics_gru_benchmark(
             save_checkpoint_path=ckpt_path,
         )
         if res:
+            # Save fold-level predictions artifact
+            pred_file = pred_dir / f"kinematics_gru_{task}_fold{fold_num}.json"
+            save_json({
+                "model": "KinematicsGRU",
+                "task": task,
+                "fold": fold_num,
+                "test_user": res["test_user"],
+                "n_test_trials": res["n_test_trials"],
+                "n_test_samples": res["n_test_samples"],
+                "test_trial_ids": res["test_trial_ids"],
+                "accuracy": res["accuracy"],
+                "balanced_accuracy": res["balanced_accuracy"],
+                "macro_f1": res["macro_f1"],
+                "edit_score": res["edit_score"],
+                "predictions": res["predictions"],
+                "ground_truth": res["ground_truth"],
+                "reproducibility_verified": res.get("reproducibility_verified", False),
+            }, pred_file)
             fold_results.append(res)
 
     # Aggregate metrics

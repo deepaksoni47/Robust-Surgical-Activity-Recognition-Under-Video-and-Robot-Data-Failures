@@ -51,6 +51,7 @@ def run_feature_extraction(
     batch_size: Optional[int] = None,
     camera: str = "capture1",
     device: Optional[str] = None,
+    encoder_name: Optional[str] = None,
     force: bool = False,
     verify_only: bool = False,
     output_audit: str = "artifacts/feature_cache_audit.json",
@@ -58,6 +59,15 @@ def run_feature_extraction(
     """Execute feature extraction across selected trials and write an audit report."""
     set_seed(42)
     cfg = load_config(config_path)
+
+    if encoder_name:
+        enc_clean = encoder_name.lower().replace("-", "")
+        if enc_clean in ("resnet18", "resnet"):
+            cfg["encoder_type"] = "resnet18"
+        elif "surgmotion" in enc_clean:
+            cfg["encoder_type"] = "surgmotion_vitl"
+        else:
+            cfg["encoder_type"] = encoder_name
 
     cache_dir = Path(cfg.get("extraction", {}).get("cache_dir", "data/cache/features"))
     bs = batch_size or cfg.get("extraction", {}).get("batch_size", 32)
@@ -169,6 +179,7 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=None, help="Batch size for frame extraction")
     parser.add_argument("--camera", type=str, default="capture1", help="Camera name (capture1 or capture2)")
     parser.add_argument("--device", type=str, default=None, help="Device (cpu or cuda)")
+    parser.add_argument("--encoder", type=str, default=None, help="Encoder name override ('ResNet18' or 'SurgMotion')")
     parser.add_argument("--force", action="store_true", help="Force re-extraction of existing caches")
     parser.add_argument("--verify-only", action="store_true", help="Only verify existing caches without extracting")
     parser.add_argument("--output-audit", type=str, default="artifacts/feature_cache_audit.json", help="Path to audit JSON")
@@ -183,6 +194,7 @@ def main() -> None:
         batch_size=args.batch_size,
         camera=args.camera,
         device=args.device,
+        encoder_name=args.encoder,
         force=args.force,
         verify_only=args.verify_only,
         output_audit=args.output_audit,

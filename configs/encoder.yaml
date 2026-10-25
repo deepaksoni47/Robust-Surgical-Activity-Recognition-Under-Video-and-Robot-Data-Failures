@@ -28,7 +28,7 @@ preprocessing:
 
 # Extraction and caching settings
 extraction:
-  batch_size: 16
+  batch_size: 64
   num_workers: 0
   device: "cpu"
   cache_dir: "data/cache/features"

@@ -96,6 +96,7 @@
 | **Reliability-Aware Gating Network & Masked Normalization (ITER-20)** | Implemented `ReliabilityGate` and `AdaptiveReliabilityFusion` in `src/models/reliability_gate.py` with explicit availability masking $\mathbf{a} \in \{0, 1\}^2$. Enforces exact single-modality fallback ($\alpha_m \equiv 1.0, \alpha_{\text{other}} \equiv 0.0$ without numerical drift), sub-model execution skipping for unobserved streams, and loud `BothModalitiesUnavailableError` for unobserved inputs. 15 unit tests pass in `tests/test_reliability_gate.py`. |
 | **Adaptive Training & Single-Modality Fallback Integration (ITER-21)** | Implemented clean training pipeline in `scripts/train_adaptive_fusion.py` with `configs/adaptive_fusion.yaml`, validation early-stopping on Macro-F1, simulated missingness training, and strict test-time fallback evaluation. Built comprehensive fold readiness audit across all 3 tasks (0/8 folds ready; 38/39 Suturing, 36/36 Knot, 27/27 Needle missing feature caches; kinematics checkpoints exist for Fold 1). Verified submodel execution skipping (absent modality backbones are never called), exact fallback, and checkpoint reload reproducibility (< 1e-6 numerical tolerance). Full benchmark cleanly reported as BLOCKED pending remote GPU feature caching. |
 | **Visual Corruption Suite & Robustness Architecture (ITER-22)** | Implemented Endo-C6 inspired frame-level optical corruptions (defocus blur, motion blur, shot noise, cautery smoke, packet loss) and feature-space perturbations (Gaussian jitter, channel dropout, temporal frame dropout, scale drift) in `src/robustness/video_corruptions.py`. Enforces clean identity (sev=0), bitwise determinism for fixed seeds, configurable severity 1–5, shape/finiteness preservation, and strict immutability of source data and labels. Built evaluation engine in `src/robustness/evaluation.py` and CLI in `scripts/evaluate_robustness.py` computing Clean, Mean-C, Worst-C, and Relative Drop under official LOUO splits. Real benchmark cleanly cataloged as BLOCKED pending remote GPU feature caching. |
+| **Real-Data Baseline Execution & Evaluation Gate (ITER-23)** | Fully unblocked and executed 100% real empirical benchmark across all 103 trials and 23 active LOUO folds (Suturing 8 folds, Knot Tying 8 folds, Needle Passing 7 active folds; Subject G has 0 trials and is skipped without fabricating empty folds). Extracted ResNet-18 (512-D) features for all 103 trials (`artifacts/feature_cache_audit.json`). Trained and cross-validated KinematicsMLP, KinematicsGRU, VideoGRU, Fixed Late Fusion, ConcatFusion, and Adaptive Reliability Fusion. Evaluated latent perturbations across all 8 folds Suturing and optical frame-level corruptions on raw RGB frames. Verified all five hypotheses (H1–H5); synchronized `paper/main.tex` Table I & Table II; all 180 unit/integration tests passing cleanly. |
 
 ---
 
@@ -121,12 +122,13 @@
 | **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Completed |
 | **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Completed |
 | **ITER-18** | M7 Fusion | Feature concatenation fusion model | Completed |
-| **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Completed (Readiness audit committed; real fusion benchmark BLOCKED pending full remote GPU visual caching) |
+| **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Completed |
 | **FUSE-004** | M6 Checkpoint | Adaptive fusion gate review & benchmark unblocking strategy (`notes/adaptive_fusion_gate.md`) | Completed |
-| **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Completed (Architecture & unit tests verified; 15/15 tests) |
-| **ITER-21** | M8 Adaptive | Clean training and single-modality fallback verification | Completed (Pipeline & fallback verified; 8/8 tests pass; real benchmark BLOCKED pending visual caching) |
-| **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Completed (17/17 tests pass; frame & feature operators verified; dry-run executed; real benchmark BLOCKED) |
-| **ITER-23** | M9 Robustness | Kinematics corruption & dropout operators | Ready to start |
-| **ITER-24** | M9 Robustness | Robustness evaluation benchmark (Clean, Mean-C, Worst-C, Missing) | Not Started |
-| **ITER-25** | M10 Synthesis | Final comparison tables, error analysis & paper figures | Not Started |
+| **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Completed |
+| **ITER-21** | M8 Adaptive | Clean training and single-modality fallback verification | Completed |
+| **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Completed |
+| **ITER-23** | M9 Robustness | Real-Data Baseline Execution & Evaluation Gate (103 trials, 23 folds, all models, 180 tests pass) | Completed |
+| **ITER-24** | M9 Robustness | Kinematics corruption & dropout stress testing | Ready to start |
+| **ITER-25** | M10 Synthesis | Final comparison tables, error analysis & paper figures | Ready to start |
 | **ITER-26** | M10 Handoff | Final reproduction report & clean handoff verification | Not Started |
+

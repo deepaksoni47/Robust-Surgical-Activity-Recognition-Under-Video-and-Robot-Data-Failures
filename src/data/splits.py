@@ -129,11 +129,23 @@ def get_louo_splits(
 
         if create_val_split:
             # Deterministically designate the next user in rotation as validation user
-            # e.g., for test user B (fold 1), val user is C; for test user I (fold 8), val user is B.
             val_fold = (fold_num % 8) + 1
             val_user = FOLD_USERS[val_fold]
-
             val_trials = [t for t in raw_train_trials if f"_{val_user}" in t]
+
+            # If the selected validation user has no trials (e.g., User G on Needle Passing),
+            # advance to the next user in rotation to guarantee a non-empty validation split.
+            if len(val_trials) == 0 and len(raw_train_trials) > 0:
+                for offset in range(2, 8):
+                    alt_val_fold = ((fold_num + offset - 1) % 8) + 1
+                    alt_val_user = FOLD_USERS[alt_val_fold]
+                    alt_val_trials = [t for t in raw_train_trials if f"_{alt_val_user}" in t]
+                    if len(alt_val_trials) > 0:
+                        val_fold = alt_val_fold
+                        val_user = alt_val_user
+                        val_trials = alt_val_trials
+                        break
+
             train_trials = [t for t in raw_train_trials if f"_{val_user}" not in t]
         else:
             val_trials = []
@@ -142,6 +154,8 @@ def get_louo_splits(
 
         # Assert zero leakage
         assert_no_leakage(train_trials, test_trials, val_trials)
+
+        is_active = len(test_trials) > 0
 
         folds[fold_num] = {
             "fold": fold_num,
@@ -155,6 +169,7 @@ def get_louo_splits(
             "n_val": len(val_trials),
             "n_test": len(test_trials),
             "total_trials": len(train_trials) + len(val_trials) + len(test_trials),
+            "is_active": is_active,
         }
 
     return folds

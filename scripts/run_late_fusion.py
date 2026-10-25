@@ -332,6 +332,11 @@ def evaluate_late_fusion_fold(
         "test_user": fold_info["test_user"],
         "alpha": chosen_alpha,
         "search_info": search_info,
+        "n_test_samples": len(test_targets),
+        "n_test_trials": len(loaders["datasets"]["test"].trial_records),
+        "test_trial_ids": [r["trial_id"] for r in loaders["datasets"]["test"].trial_records],
+        "predictions": fused_preds.tolist(),
+        "ground_truth": test_targets.tolist(),
         "fusion_metrics": fusion_metrics,
         "kinematics_metrics": kin_metrics,
         "video_metrics": vid_metrics,
@@ -396,6 +401,9 @@ def run_late_fusion_benchmark(
 
     # 2. Run ready folds
     fold_results: List[Dict[str, Any]] = []
+    pred_dir = Path(output_dir) / "predictions"
+    pred_dir.mkdir(parents=True, exist_ok=True)
+
     for f_num in ready_target_folds:
         res = evaluate_late_fusion_fold(
             task=task,
@@ -404,7 +412,25 @@ def run_late_fusion_benchmark(
             device=device,
             fixed_alpha=fixed_alpha,
         )
-        fold_results.append(res)
+        if res:
+            pred_file = pred_dir / f"late_fusion_{task}_fold{f_num}.json"
+            save_json({
+                "method": "FixedLateLogitFusion",
+                "task": task,
+                "fold": f_num,
+                "test_user": res["test_user"],
+                "alpha": res["alpha"],
+                "n_test_trials": res["n_test_trials"],
+                "n_test_samples": res["n_test_samples"],
+                "test_trial_ids": res["test_trial_ids"],
+                "accuracy": res["fusion_metrics"]["accuracy"],
+                "balanced_accuracy": res["fusion_metrics"]["balanced_accuracy"],
+                "macro_f1": res["fusion_metrics"]["macro_f1"],
+                "edit_score": res["fusion_metrics"]["edit_score"],
+                "predictions": res["predictions"],
+                "ground_truth": res["ground_truth"],
+            }, pred_file)
+            fold_results.append(res)
 
     # 3. Aggregate metrics across folds
     f_accs = [r["fusion_metrics"]["accuracy"] * 100 for r in fold_results]

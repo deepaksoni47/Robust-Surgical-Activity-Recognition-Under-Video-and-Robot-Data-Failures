@@ -298,7 +298,7 @@ def train_and_eval_fold(
         torch.save(best_state, save_checkpoint_path)
 
     # 5. Final Test Evaluation
-    test_metrics, _, _ = evaluate_model(model, test_loader, num_classes, inv_vocab, device)
+    test_metrics, y_true, y_pred = evaluate_model(model, test_loader, num_classes, inv_vocab, device)
     edit_score = compute_multimodal_trial_edit_scores(model, loaders["datasets"]["test"], device)
 
     test_metrics["edit_score"] = edit_score
@@ -307,6 +307,38 @@ def train_and_eval_fold(
     test_metrics["encoder"] = encoder_name
     test_metrics["video_dim"] = model_cfg.get("video_dim", 512)
     test_metrics["kinematics_dim"] = model_cfg.get("kinematics_dim", 76)
+    test_metrics["n_test_samples"] = len(y_true)
+    test_metrics["n_test_trials"] = len(loaders["datasets"]["test"].trial_records)
+    test_metrics["test_trial_ids"] = [r["trial_id"] for r in loaders["datasets"]["test"].trial_records]
+    test_metrics["predictions"] = y_pred.tolist()
+    test_metrics["ground_truth"] = y_true.tolist()
+
+    # Reproducibility check: reload checkpoint into fresh model instance
+    if save_checkpoint_path is not None and save_checkpoint_path.is_file():
+        if model_name == "ConcatFusionMLP":
+            fresh_model = ConcatFusionMLP(
+                video_dim=model_cfg.get("video_dim", 512),
+                kinematics_dim=model_cfg.get("kinematics_dim", 76),
+                hidden_dim=model_cfg.get("hidden_dim", 128),
+                num_classes=num_classes,
+                dropout=model_cfg.get("dropout", 0.2),
+            ).to(device)
+        else:
+            fresh_model = ConcatFusionGRU(
+                video_dim=model_cfg.get("video_dim", 512),
+                kinematics_dim=model_cfg.get("kinematics_dim", 76),
+                proj_dim=model_cfg.get("proj_dim", 128),
+                hidden_dim=model_cfg.get("hidden_dim", 128),
+                num_classes=num_classes,
+                num_layers=model_cfg.get("num_layers", 2),
+                dropout=model_cfg.get("dropout", 0.2),
+                bidirectional=model_cfg.get("bidirectional", False),
+            ).to(device)
+        fresh_state = torch.load(save_checkpoint_path, map_location=device)
+        fresh_model.load_state_dict(fresh_state)
+        fresh_metrics, _, fresh_preds = evaluate_model(fresh_model, test_loader, num_classes, inv_vocab, device)
+        assert np.array_equal(y_pred, fresh_preds), f"Checkpoint reload failed reproducibility on fold {fold_num}"
+        test_metrics["reproducibility_verified"] = True
 
     print(
         f"Fold {fold_num} (User {fold_info['test_user']}): "
@@ -381,12 +413,11 @@ def run_concat_fusion_benchmark(
     # 2. Run benchmark on available folds
     fold_results: List[Dict[str, Any]] = []
 
+    pred_dir = Path(output_dir) / "predictions"
+    pred_dir.mkdir(parents=True, exist_ok=True)
+
     for fold_num in ready_target_folds:
-        ckpt_path = (
-            Path(checkpoints_dir) / f"concat_fusion_{task}_fold{fold_num}.pt"
-            if fold_num == 1
-            else None
-        )
+        ckpt_path = Path(checkpoints_dir) / f"concat_fusion_{task}_fold{fold_num}.pt"
         res = train_and_eval_fold(
             task=task,
             fold_num=fold_num,
@@ -395,6 +426,25 @@ def run_concat_fusion_benchmark(
             save_checkpoint_path=ckpt_path,
         )
         if res:
+            pred_file = pred_dir / f"concat_fusion_{task}_fold{fold_num}.json"
+            save_json({
+                "model": model_name,
+                "method": "FeatureConcatenation",
+                "encoder": encoder_name,
+                "task": task,
+                "fold": fold_num,
+                "test_user": res["test_user"],
+                "n_test_trials": res["n_test_trials"],
+                "n_test_samples": res["n_test_samples"],
+                "test_trial_ids": res["test_trial_ids"],
+                "accuracy": res["accuracy"],
+                "balanced_accuracy": res["balanced_accuracy"],
+                "macro_f1": res["macro_f1"],
+                "edit_score": res["edit_score"],
+                "predictions": res["predictions"],
+                "ground_truth": res["ground_truth"],
+                "reproducibility_verified": res.get("reproducibility_verified", False),
+            }, pred_file)
             fold_results.append(res)
 
     # 3. Aggregate metrics

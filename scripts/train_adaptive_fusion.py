@@ -362,7 +362,7 @@ def train_and_eval_adaptive_fold(
 
     loaders = get_multimodal_fold_dataloaders(
         task=task,
-        fold=fold_num,
+        fold_num=fold_num,
         batch_size=batch_size,
         window_size=window_size,
         train_stride=train_stride,
@@ -371,12 +371,15 @@ def train_and_eval_adaptive_fold(
         encoder_name=encoder_name,
         camera=camera,
         normalize=normalize,
-        use_class_weights=train_cfg.get("use_class_weights", True),
     )
 
-    train_loader = loaders["dataloaders"]["train"]
-    val_loader = loaders["dataloaders"]["val"]
-    test_loader = loaders["dataloaders"]["test"]
+    if len(loaders["datasets"]["test"]) == 0:
+        logger.info(f"Skipping fold {fold_num}: 0 test trials.")
+        return {}
+
+    train_loader = loaders["train_loader"]
+    val_loader = loaders["val_loader"]
+    test_loader = loaders["test_loader"]
 
     model = build_adaptive_model(cfg, num_classes=num_classes, device=device)
 
@@ -447,6 +450,11 @@ def train_and_eval_adaptive_fold(
 
     clean_metrics["fold"] = fold_num
     clean_metrics["test_user"] = fold_info["test_user"]
+    clean_metrics["n_test_samples"] = len(y_true)
+    clean_metrics["n_test_trials"] = len(loaders["datasets"]["test"].trial_records)
+    clean_metrics["test_trial_ids"] = [r["trial_id"] for r in loaders["datasets"]["test"].trial_records]
+    clean_metrics["predictions"] = y_pred.tolist()
+    clean_metrics["ground_truth"] = y_true.tolist()
     clean_metrics["video_only_fallback"] = {
         "accuracy": v_metrics["accuracy"],
         "macro_f1": v_metrics["macro_f1"],
@@ -511,6 +519,8 @@ def run_adaptive_fusion_benchmark(
     # 2. Training loop across available folds
     fold_results: List[Dict[str, Any]] = []
     ckpt_dir = Path(checkpoints_dir)
+    pred_dir = Path(output_dir) / "predictions"
+    pred_dir.mkdir(parents=True, exist_ok=True)
 
     for f_num in target_folds:
         if not audit["fold_status"][f_num]["ready"] and not dry_run:
@@ -524,7 +534,26 @@ def run_adaptive_fusion_benchmark(
             device=device,
             save_checkpoint_path=ckpt_file,
         )
-        fold_results.append(f_res)
+        if f_res:
+            pred_file = pred_dir / f"adaptive_fusion_{task}_fold{f_num}.json"
+            save_json({
+                "model": "AdaptiveReliabilityFusion",
+                "task": task,
+                "fold": f_num,
+                "test_user": f_res["test_user"],
+                "n_test_trials": f_res["n_test_trials"],
+                "n_test_samples": f_res["n_test_samples"],
+                "test_trial_ids": f_res["test_trial_ids"],
+                "accuracy": f_res["accuracy"],
+                "balanced_accuracy": f_res["balanced_accuracy"],
+                "macro_f1": f_res["macro_f1"],
+                "video_only_fallback": f_res["video_only_fallback"],
+                "kinematics_only_fallback": f_res["kinematics_only_fallback"],
+                "mean_gating_weights": f_res["mean_gating_weights"],
+                "predictions": f_res["predictions"],
+                "ground_truth": f_res["ground_truth"],
+            }, pred_file)
+            fold_results.append(f_res)
 
         if dry_run:
             logger.info("Dry-run requested: stopped after first fold.")

@@ -325,13 +325,21 @@ def test_compute_robustness_aggregates_calculation() -> None:
     assert pytest.approx(aggs["relative_drop"], abs=1e-5) == 0.25
 
 
-def test_audit_robustness_readiness_detects_blocked_status() -> None:
-    """Verify that audit_robustness_readiness cleanly flags all tasks as BLOCKED."""
+def test_audit_robustness_readiness_detects_blocked_status(tmp_path: Path) -> None:
+    """Verify that audit_robustness_readiness cleanly flags missing resources as BLOCKED."""
     cfg = load_config("configs/robustness.yaml")
 
     for task in ["Suturing", "Knot_Tying", "Needle_Passing"]:
-        audit = audit_robustness_readiness(task=task, cfg=cfg)
+        # When checkpoints and cache are missing
+        empty_dir = str(tmp_path / "empty")
+        audit = audit_robustness_readiness(
+            task=task,
+            cfg=cfg,
+            checkpoints_dir=empty_dir,
+            cache_dir=empty_dir,
+        )
         assert audit["task"] == task
-        assert audit["total_folds"] == 8
+        expected_folds = 7 if task == "Needle_Passing" else 8
+        assert audit["total_folds"] == expected_folds
         assert audit["status"] == "BLOCKED"
         assert len(audit["ready_folds"]) == 0
