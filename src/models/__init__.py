@@ -17,6 +17,7 @@ from src.models.fusion import (
     search_optimal_alpha,
     validate_class_mappings,
 )
+from src.models.concat_fusion import ConcatFusionGRU, ConcatFusionMLP
 
 __all__ = [
     "MajorityClassClassifier",
@@ -33,6 +34,9 @@ __all__ = [
     "fuse_logits",
     "search_optimal_alpha",
     "validate_class_mappings",
+    "ConcatFusionGRU",
+    "ConcatFusionMLP",
 ]
+
 
 

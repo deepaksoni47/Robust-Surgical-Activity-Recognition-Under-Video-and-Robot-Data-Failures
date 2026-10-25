@@ -90,6 +90,7 @@
 | **Endo-C6 test-time corruption protocol** | Standardized, non-cherry-picked evaluation of robustness drops (Mean-C, Worst-C). |
 | **Video Temporal Classifier (VideoGRU & VideoMLP)** | Built lightweight recurrent sequence classifier (`VideoGRU`) and frame-independent comparison (`VideoMLP`) over cached frozen visual features (512-D), paired with `VideoFeatureNormalizer` (training-only z-score scaling), strict encoder compatibility assertions, and official LOUO split evaluation. |
 | **Fixed Late-Logit Fusion & Alpha Grid Search** | Implemented convex combination logit fusion $\mathbf{y}^{\text{fused}} = \alpha \mathbf{y}^{\text{vis}} + (1-\alpha) \mathbf{y}^{\text{kin}}$ with strict validation-only grid search for $\alpha \in [0, 1]$ (preventing any test leakage), verified class vocabulary matching, and synchronized multimodal windowing with tail-clipping convention. |
+| **Feature Concatenation Fusion (ConcatFusionGRU & MLP)** | Implemented joint multimodal representation learning concatenating frozen visual features (512-D) and robot kinematics (76-D) into 588-D fused vectors at each timestep, projected through a shared LayerNorm+GELU trunk ($d=128$) into a 2-layer GRU temporal sequence classifier and causal classification head. |
 
 ---
 
@@ -114,8 +115,8 @@
 | **ITER-15** | M6 Visual | Visual feature caching engine for Suturing trials | Completed |
 | **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Completed |
 | **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Completed |
-| **ITER-18** | M7 Fusion | Feature concatenation fusion model | Ready to start |
-| **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Not Started |
+| **ITER-18** | M7 Fusion | Feature concatenation fusion model | Completed |
+| **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Ready to start |
 | **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Not Started |
 | **ITER-21** | M8 Adaptive | Clean training and single-modality fallback verification | Not Started |
 | **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Not Started |

@@ -145,7 +145,12 @@ where $\text{Proj}_{\text{vis}}$ projects $D_v$-dimensional frozen visual featur
 where $\alpha$ is determined via grid search over candidate weights $\alpha \in \{0.0, 0.1, \dots, 1.0\}$ exclusively on training validation splits, strictly isolating unseen test users.
 
 
-\textbf{Feature Concatenation:} Modality representations are concatenated $\mathbf{h}_t^{\text{cat}} = [\mathbf{h}_t^{\text{vis}}; \mathbf{h}_t^{\text{kin}}]$ and mapped through a multi-layer perceptron head.
+\textbf{Feature Concatenation Fusion:} Synchronized visual feature vectors $\hat{\mathbf{z}}_t^{\text{vis}} \in \mathbb{R}^{D_v}$ ($D_v=512$) and kinematics vectors $\hat{\mathbf{k}}_t \in \mathbb{R}^{D_k}$ ($D_k=76$) are concatenated along the feature dimension at each timestep $t$:
+\begin{equation}
+\mathbf{x}_t^{\text{cat}} = [\hat{\mathbf{z}}_t^{\text{vis}}; \hat{\mathbf{k}}_t] \in \mathbb{R}^{D_v + D_k}
+\end{equation}
+The concatenated representations are projected through a joint projection trunk $\text{Proj}_{\text{cat}}(\mathbf{x}_t^{\text{cat}}) = \text{Dropout}(\text{GELU}(\text{LayerNorm}(\mathbf{W}_p \mathbf{x}_t^{\text{cat}} + \mathbf{b}_p)))$ into dimension $d=128$, modeled via a 2-layer GRU sequence encoder $\mathbf{h}_t^{\text{cat}} = \text{GRU}_{\text{cat}}(\text{Proj}_{\text{cat}}(\mathbf{x}_t^{\text{cat}}), \mathbf{h}_{t-1}^{\text{cat}})$, and mapped to gesture class logits via a causal linear classification head $\hat{\mathbf{y}}_W^{\text{cat}} \in \mathbb{R}^C$ at the terminal timestep of each window.
+
 
 \subsection{Reliability-Aware Dynamic Gating}
 Under clinical operation, visual or kinematic streams may become uninformative or completely severed. We introduce a gating network $G(\cdot)$ that receives projected features alongside explicit binary availability signals $\mathbf{a}_t = [a_t^{\text{vis}}, a_t^{\text{kin}}]^\top \in \{0, 1\}^2$:
