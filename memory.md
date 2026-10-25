@@ -101,8 +101,8 @@
 | **ITER-05** | M2 Data Audit | Transcription parser & gesture label vocabulary mapper | Completed |
 | **ITER-06** | M2 Data Audit | Video metadata inspector & frame-kinematics alignment auditor | Completed |
 | **ITER-07** | M2 Data Audit | Official LOUO split loader & leakage assertion | Completed |
-| **ITER-08** | M3 Pipeline | Windowed sequence generator with training-only normalization | Ready to start |
-| **ITER-09** | M3 Pipeline | End-to-end dataset pipeline smoke test & sanity cache | Not Started |
+| **ITER-08** | M3 Pipeline | Windowed sequence generator with training-only normalization | Completed |
+| **ITER-09** | M3 Pipeline | End-to-end dataset pipeline smoke test & sanity cache | Ready to start |
 | **ITER-10** | M4 Evaluation | Metric calculation engine (Macro-F1, Balanced Acc, Acc, CM) | Not Started |
 | **ITER-11** | M5 Baselines | Majority-class trivial baseline implementation & benchmark | Not Started |
 | **ITER-12** | M5 Baselines | Kinematics MLP classifier (independent timestep) | Not Started |
