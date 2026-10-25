@@ -105,8 +105,8 @@
 | **ITER-09** | M3 Pipeline | End-to-end dataset pipeline smoke test & sanity cache | Completed |
 | **ITER-10** | M4 Evaluation | Metric calculation engine (Macro-F1, Balanced Acc, Acc, CM) | Completed |
 | **ITER-11** | M5 Baselines | Majority-class trivial baseline implementation & benchmark | Completed |
-| **ITER-12** | M5 Baselines | Kinematics MLP classifier (independent timestep) | Ready to start |
-| **ITER-13** | M5 Baselines | Kinematics GRU/TCN temporal sequence classifier | Not Started |
+| **ITER-12** | M5 Baselines | Kinematics MLP classifier (independent timestep) | Completed |
+| **ITER-13** | M5 Baselines | Kinematics GRU/TCN temporal sequence classifier | Ready to start |
 | **ITER-14** | M6 Visual | Lightweight frozen visual encoder interface | Not Started |
 | **ITER-15** | M6 Visual | Visual feature caching engine for Suturing trials | Not Started |
 | **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Not Started |
