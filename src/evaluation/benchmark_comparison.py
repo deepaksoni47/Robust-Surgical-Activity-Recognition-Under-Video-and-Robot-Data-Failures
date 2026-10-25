@@ -7,10 +7,6 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import numpy as np
 import pandas as pd
 
-from src.data.feature_cache import get_cache_path, validate_feature_cache
-from src.data.kinematics import load_kinematics
-from src.data.splits import assert_no_leakage, get_louo_splits
-from src.data.transcriptions import get_gesture_vocabulary, parse_transcription
 from src.utils.reproducibility import save_json
 
 
@@ -34,6 +30,10 @@ def audit_task_multimodal_readiness(
         6. Checkpoint availability across model families (Kinematics MLP/GRU, Video GRU, Fusion).
         7. SurgMotion access status vs ResNet-18 fallback.
     """
+    from src.data.feature_cache import get_cache_path, validate_feature_cache
+    from src.data.kinematics import load_kinematics
+    from src.data.splits import assert_no_leakage, get_louo_splits
+    from src.data.transcriptions import get_gesture_vocabulary, parse_transcription
     dataset_path = Path(dataset_dir)
     cache_path = Path(cache_dir)
     ckpt_path = Path(checkpoints_dir)
