@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-25T17:13:47Z",
+  "task": "Suturing",
+  "encoder_name": "ResNet18",
+  "output_dim": 512,
+  "trials_processed": 1,
+  "extracted_count": 0,
+  "skipped_count": 1,
+  "valid_count": 1,
+  "total_frames_extracted": 0,
+  "total_elapsed_sec": 0.08,
+  "results": [
+    {
+      "status": "SKIPPED",
+      "trial_id": "Suturing_B001",
+      "cache_path": "data/cache/features/ResNet18/Suturing_B001_capture1.npz",
+      "num_frames": 5640,
+      "reason": "Valid cache already exists (use force=True to re-extract)"
+    }
+  ]
+}

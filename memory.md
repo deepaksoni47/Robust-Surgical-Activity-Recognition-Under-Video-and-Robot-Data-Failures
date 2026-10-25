@@ -82,6 +82,7 @@
 | **All 3 JIGSAWS Tasks in Parallel** | Covers all 103 trials across Suturing, Knot Tying, and Needle Passing from the start for comprehensive benchmark evaluation. |
 | **Leave-One-User-Out (LOUO) split** | Rigorous evaluation of surgeon-invariant generalization, completely preventing frame/trial leakage across all 3 tasks. |
 | **Strictly Target SurgMotion Encoder** | V-JEPA motion-guided surgical video foundation model. Build Google Colab / remote GPU extraction pipeline with deterministic local caching. |
+| **Visual Foundation Model + Frozen Fallback** | Audited SurgMotion (Wu et al., 2026); model weights are manually gated ('gated: manual') on Hugging Face and 300M/1B ViT requires high-VRAM CUDA GPU. Implemented unified BaseVisualEncoder interface with ResNet-18 frozen fallback (512-D) and strict SurgMotion checkpoint validation to guarantee reproducible local execution without misrepresenting experimental claims. |
 | **Virtual Environment (.venv)** | Clean, isolated workspace environment with pinned dependencies across both machines. |
 | **Live LaTeX Research Paper (`paper/main.tex`)** | Continuously updated LaTeX paper blueprint to track methodology, equations, experimental tables, and findings from day 1. |
 | **Independent Timestep vs GRU/TCN** | Explicitly verifies Hypothesis H5 (whether temporal sequence modeling adds value). |
@@ -107,9 +108,9 @@
 | **ITER-11** | M5 Baselines | Majority-class trivial baseline implementation & benchmark | Completed |
 | **ITER-12** | M5 Baselines | Kinematics MLP classifier (independent timestep) | Completed |
 | **ITER-13** | M5 Baselines | Kinematics GRU/TCN temporal sequence classifier | Completed |
-| **ITER-14** | M6 Visual | Lightweight frozen visual encoder interface | Ready to start |
-| **ITER-15** | M6 Visual | Visual feature caching engine for Suturing trials | Not Started |
-| **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Not Started |
+| **ITER-14** | M6 Visual | Lightweight frozen visual encoder interface | Completed |
+| **ITER-15** | M6 Visual | Visual feature caching engine for Suturing trials | Completed |
+| **ITER-16** | M6 Visual | Video-only temporal classifier on cached representations | Ready to start |
 | **ITER-17** | M7 Fusion | Fixed late-logit fusion with validation weight search | Not Started |
 | **ITER-18** | M7 Fusion | Feature concatenation fusion model | Not Started |
 | **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Not Started |

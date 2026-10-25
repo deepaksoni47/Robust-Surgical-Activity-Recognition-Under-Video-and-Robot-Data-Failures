@@ -1,0 +1,35 @@
+# configs/encoder.yaml - Visual Feature Extraction Configuration
+
+# Visual encoder selection: 'resnet18' (verified frozen fallback) or 'surgmotion_vitl'
+encoder_type: "resnet18"
+
+# ResNet-18 Fallback configuration
+resnet18:
+  weights: "IMAGENET1K_V1"
+  output_dim: 512
+  freeze_weights: true
+
+# SurgMotion Foundation Model configuration (Wu et al., 2026)
+surgmotion:
+  model_name: "SurgMotion-vitl"
+  checkpoint_path: "checkpoints/SurgMotion-vitl.pt"
+  repo_id: "CAIR-HKISI/SurgMotion"
+  clip_length: 64
+  output_dim: 1024
+  freeze_weights: true
+
+# Video and frame preprocessing
+preprocessing:
+  target_height: 224
+  target_width: 224
+  channels: 3
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+# Extraction and caching settings
+extraction:
+  batch_size: 16
+  num_workers: 0
+  device: "cpu"
+  cache_dir: "data/cache/features"
+  feature_format: "npz"

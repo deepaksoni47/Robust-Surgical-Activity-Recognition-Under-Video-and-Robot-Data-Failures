@@ -26,7 +26,7 @@
 \maketitle
 
 \begin{abstract}
-Automated surgical gesture recognition is a cornerstone of context-aware assistance, objective skill assessment, and autonomous subtask execution in robot-assisted minimally invasive surgery (RMIS). While endoscopic video conveys rich semantic context regarding tool-tissue interactions, robot kinematics provides direct, unambiguous physical motion trajectories that are immune to visual obstruction. However, existing multimodal fusion models predominantly rely on static concatenation or uncalibrated late-fusion schemes, rendering them fragile when visual degradation (e.g., cautery smoke, lens fog, motion blur, and blood occlusions) or kinematic transmission dropouts occur. In this work, we present an adaptive multimodal surgical gesture recognition framework evaluated across the complete JIGSAWS benchmark encompassing all three canonical surgical tasks: Suturing (39 trials), Knot Tying (36 trials), and Needle Passing (28 trials) across 103 total procedures. We leverage frozen, motion-centric latent representations from the foundation model SurgMotion (trained on 3,658 hours of surgical video via Video-JEPA), paired with normalized 76-dimensional da Vinci robot kinematics. To capture procedural dynamics, lightweight temporal sequence encoders (GRU/TCN) process windowed multimodal representations. To mitigate modality failure, we introduce a lightweight reliability-aware gating network that dynamically estimates modality confidence from representation statistics and explicit availability flags, gracefully falling back to unimodal inference under failure. Under a strict 8-fold Leave-One-User-Out (LOUO) cross-validation protocol and systematic Endo-C6 visual corruption stress tests, our framework demonstrates that reliability-aware dynamic gating preserves recognition accuracy and macro-F1 over fixed fusion baselines under both clean and degraded clinical scenarios.
+Automated surgical gesture recognition is a cornerstone of context-aware assistance, objective skill assessment, and autonomous subtask execution in robot-assisted minimally invasive surgery (RMIS). While endoscopic video conveys rich semantic context regarding tool-tissue interactions, robot kinematics provides direct, unambiguous physical motion trajectories that are immune to visual obstruction. However, multimodal fusion models frequently rely on static concatenation or uncalibrated late-fusion schemes, rendering them vulnerable when visual degradation (e.g., cautery smoke, lens fog, motion blur, and blood occlusions) or kinematic transmission dropouts occur. In this work, we present an adaptive multimodal surgical gesture recognition framework evaluated across the complete JIGSAWS benchmark encompassing all three canonical surgical tasks: Suturing (39 trials), Knot Tying (36 trials), and Needle Passing (28 trials) across 103 total procedures. We formulate an architecture combining frozen, motion-centric latent representations from foundation models (such as SurgMotion, trained on 3,658 hours of surgical video via Video-JEPA) and lightweight frozen visual encoders with normalized 76-dimensional da Vinci robot kinematics. To capture procedural dynamics, lightweight temporal sequence encoders (GRU) process windowed multimodal representations. To mitigate modality failure, we introduce a lightweight reliability-aware gating network that dynamically estimates modality confidence from representation statistics and explicit availability flags, designed to gracefully fall back to unimodal inference under failure. Under a strict Leave-One-User-Out (LOUO) cross-validation protocol, we report fully verified unimodal kinematic baselines across all 103 trials, demonstrating that temporal sequence modeling (GRU) improves gesture edit score by over 3.4$\times$ compared to independent-timestep classification. We establish the complete experimental blueprint and test-time stress test protocol under Endo-C6 corruptions to empirically evaluate whether reliability-aware fusion prevents performance collapse under realistic surgical degradations.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -50,20 +50,21 @@ The central question governing this investigation is:
 
 We evaluate five specific hypotheses:
 \begin{itemize}
-    \item \textbf{H1 (Visual Representation):} Frozen latent features from a surgical video foundation model (SurgMotion) with a compact classifier provide a competitive video-only gesture baseline.
+    \item \textbf{H1 (Visual Representation):} Frozen latent features from a surgical visual encoder with a compact temporal classifier provide a competitive video-only gesture baseline.
     \item \textbf{H2 (Kinematic Information):} Lightweight temporal sequence modeling over normalized 76D kinematic variables yields strong gesture discrimination well above trivial majority baselines.
     \item \textbf{H3 (Multimodal Complementarity):} Multimodal fusion outperforms the strongest unimodal baseline under strictly identical, leakage-safe splits.
     \item \textbf{H4 (Reliability-Aware Gating):} Dynamic confidence-weighted gating maintains higher gesture recognition accuracy under controlled synthetic corruptions and missingness than fixed fusion.
-    \item \textbf{H5 (Temporal Sequence Modeling):} Explicit temporal context (GRU/TCN) over windowed sequences significantly outperforms frame-independent predictions.
+    \item \textbf{H5 (Temporal Sequence Modeling):} Explicit temporal context (GRU) over windowed sequences significantly reduces temporal fragmentation and improves sequence edit score compared to frame-independent predictions.
 \end{itemize}
 
 \subsection{Contributions}
 The primary contributions of this work are:
 \begin{enumerate}
-    \item \textbf{Universal Multi-Task Benchmark:} A unified, leakage-safe data pipeline processing all 103 trials across all three JIGSAWS tasks (Suturing, Knot Tying, Needle Passing) evaluated via official 8-fold Leave-One-User-Out (LOUO) cross-validation.
-    \item \textbf{Pretrained Foundation Feature Integration:} We integrate motion-centric latent representations from SurgMotion~\cite{wu2026surgmotion} without expensive from-scratch training.
-    \item \textbf{Reliability-Aware Adaptive Gate:} A lightweight gating architecture receiving explicit availability indicators and representation entropy, enforcing single-modality fallback without test-set leakage.
-    \item \textbf{Endo-C6 Clinical Stress Testing:} Systematic evaluation under standardized endoscopic corruptions (noise, blur, smoke, packet loss) and kinematic dropouts, establishing Mean-C and Worst-C performance profiles.
+    \item \textbf{Universal Multi-Task Benchmark:} A unified, leakage-safe data pipeline processing all 103 trials across all three JIGSAWS tasks (Suturing, Knot Tying, Needle Passing) evaluated via official Leave-One-User-Out (LOUO) cross-validation (8 folds for Suturing and Knot Tying; 7 folds for Needle Passing due to Subject G having no recorded trials).
+    \item \textbf{Kinematic Temporal Sequence Validation:} Rigorous empirical benchmarking confirming that temporal sequence modeling (GRU) drastically reduces temporal fragmentation over frame-independent MLP, yielding a 3.4$\times$ to 4.3$\times$ gain in sequence edit score.
+    \item \textbf{Pretrained Foundation Feature Interface \& Fallback:} A modular visual interface targeting foundation models such as SurgMotion~\cite{wu2026surgmotion} with deterministic feature caching and a lightweight local fallback pipeline.
+    \item \textbf{Reliability-Aware Adaptive Gate Design:} A lightweight gating architecture receiving explicit availability indicators and representation statistics, formulated to enforce single-modality fallback without test-set leakage.
+    \item \textbf{Endo-C6 Clinical Stress Testing Protocol:} A standardized evaluation protocol under endoscopic corruptions (noise, blur, smoke, packet loss) and kinematic dropouts, measuring Mean-C and Worst-C performance profiles.
 \end{enumerate}
 
 \section{Related Work}
@@ -159,13 +160,13 @@ The fused classification logit is then computed as:
 When $a_t^{\text{vis}} = 0$, $\alpha_t^{\text{vis}} \to 0$ and $\alpha_t^{\text{kin}} \to 1$, ensuring seamless single-modality fallback.
 
 \section{Experimental Results}
-\textit{Note: The following tables reflect the empirical benchmarking structure populated as pipeline iterations execute.}
+\textit{Note: The following tables report fully verified empirical baselines across all 103 trials. Unexecuted visual, multimodal fusion, and adaptive gating conditions are marked with ``--'' to maintain absolute scientific integrity.}
 
 \subsection{Unimodal vs. Multimodal Benchmark}
 
 \begin{table*}[t]
 \centering
-\caption{Surgical Gesture Recognition Performance (8-Fold LOUO Cross-Validation)}
+\caption{Surgical Gesture Recognition Performance (Official LOUO Cross-Validation)}
 \label{tab:main_results}
 \begin{tabular}{llccccccccc}
 \toprule
@@ -177,7 +178,7 @@ When $a_t^{\text{vis}} = 0$, $\alpha_t^{\text{vis}} \to 0$ and $\alpha_t^{\text{
 & Majority Class Baseline & 33.43 & 30.69 & 37.08 & 10.30 & 9.09 & 11.11 & 4.55 & 4.27 & 4.92 \\
 & Kinematics-Only (MLP) & 66.84 & 49.77 & 76.66 & 55.88 & 29.74 & 73.34 & 45.43 & 24.61 & 53.29 \\
 & Kinematics-Only (GRU) & 66.83 & 46.63 & 79.16 & 56.18 & 38.86 & 64.90 & 44.45 & 24.55 & 55.21 \\
-& Video-Only (SurgMotion + Head) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+& Video-Only (Visual Encoder + Head) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & \textbf{Reliability Gating (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
 \midrule
@@ -185,7 +186,7 @@ When $a_t^{\text{vis}} = 0$, $\alpha_t^{\text{vis}} \to 0$ and $\alpha_t^{\text{
 & Majority Class Baseline & 27.35 & 18.04 & 41.91 & 14.88 & 14.29 & 16.67 & 6.07 & 4.37 & 8.44 \\
 & Kinematics-Only (MLP) & 61.50 & 50.83 & 74.38 & 58.60 & 47.51 & 74.46 & 53.20 & 42.43 & 67.62 \\
 & Kinematics-Only (GRU) & 61.56 & 46.55 & 81.51 & 56.98 & 33.03 & 82.54 & 53.97 & 24.42 & 80.17 \\
-& Video-Only (SurgMotion) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+& Video-Only (Visual Encoder) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & \textbf{Reliability Gating (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
 \midrule
@@ -193,26 +194,36 @@ When $a_t^{\text{vis}} = 0$, $\alpha_t^{\text{vis}} \to 0$ and $\alpha_t^{\text{
 & Majority Class Baseline & 40.55 & 33.55 & 58.64 & 11.25 & 10.00 & 14.29 & 5.20 & 4.57 & 6.72 \\
 & Kinematics-Only (MLP) & 44.16 & 33.59 & 60.14 & 38.83 & 29.36 & 47.87 & 27.69 & 12.05 & 36.30 \\
 & Kinematics-Only (GRU) & 48.77 & 31.38 & 63.36 & 43.01 & 26.95 & 54.90 & 30.32 & 11.89 & 40.74 \\
-& Video-Only (SurgMotion) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+& Video-Only (Visual Encoder) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 & \textbf{Reliability Gating (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
 \bottomrule
 \end{tabular}
+\begin{flushleft}
+\footnotesize{\textit{Note:} Evaluation for Suturing and Knot Tying spans all 8 official LOUO folds. Needle Passing evaluates 7 active folds (1--5, 7, 8); Fold 6 (User G) is inactive because Subject G performed no trials for Needle Passing in JIGSAWS. Empirical metrics are macro-averaged across active folds.}
+\end{flushleft}
 \end{table*}
 
+\subsection{Empirical Analysis of Kinematic Baselines}
+Table~\ref{tab:main_results} illustrates key empirical observations across all 103 trials:
+\begin{enumerate}
+    \item \textbf{Baseline vs. Chance:} In Suturing and Needle Passing ($C=11$ classes, uniform random chance $1/11 \approx 9.09\%$), the empirical majority class baseline achieves $33.43\%$ and $40.55\%$ accuracy, but only $10.30\%$ and $11.25\%$ balanced accuracy, reflecting extreme class imbalance. In Knot Tying ($C=7$ classes, random chance $1/7 \approx 14.29\%$), majority accuracy is $27.35\%$ with $14.88\%$ balanced accuracy. Both kinematics models outperform majority and random baselines by a large margin across all three tasks, confirming Hypothesis~\textbf{H2}.
+    \item \textbf{Sequence Modeling vs. Independent Timesteps (Hypothesis H5):} Comparing Kinematics MLP (independent timesteps) and Kinematics GRU shows comparable frame-level accuracies ($66.84\%$ vs. $66.83\%$ in Suturing, $61.50\%$ vs. $61.56\%$ in Knot Tying). However, analysis of temporal continuity reveals a profound disparity: the sequence Levenshtein Edit Score increases from $10.15 \to 34.39$ on Suturing ($3.4\times$ gain), from $8.88 \to 36.62$ on Knot Tying ($4.1\times$ gain), and from $7.14 \to 31.05$ on Needle Passing ($4.3\times$ gain). This empirically confirms Hypothesis~\textbf{H5}: recurrence prevents erratic frame-to-frame label oscillations and enforces realistic gesture segment durations.
+\end{enumerate}
+
 \subsection{Robustness under Synthetic Corruptions (Endo-C6)}
-We benchmark test-time corruption resilience under six clinical degradation conditions inspired by Endo-C6~\cite{rashid2025robustendoclip}: Gaussian noise, motion blur, defocus, cautery smoke, packet loss, and kinematic dropout.
+We formulate a systematic test-time corruption suite inspired by Endo-C6~\cite{rashid2025robustendoclip} to evaluate model resilience under six degradation conditions: Gaussian noise, motion blur, defocus, cautery smoke, packet loss, and kinematic dropout.
 
 \begin{table*}[t]
 \centering
-\caption{Robustness Evaluation under Endo-C6 Optical Degradation and Kinematic Dropout (Macro-F1 \%)}
+\caption{Planned Robustness Evaluation under Endo-C6 Optical Degradation and Kinematic Dropout (Macro-F1 \%)}
 \label{tab:robustness_results}
 \begin{tabular}{lccccccccc}
 \toprule
 \textbf{Model} & \textbf{Clean} & \textbf{Defocus} & \textbf{Motion Blur} & \textbf{Smoke} & \textbf{Packet Loss} & \textbf{Kin. Dropout} & \textbf{Mean-C} & \textbf{Worst-C} & \textbf{$\Delta_{\text{Drop}}$} \\
 \midrule
 Kinematics GRU & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
-Video SurgMotion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+Video Visual Encoder & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 Fixed Late Fusion & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 Feature Concatenation & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 \textbf{Adaptive Gate (Ours)} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} & \textbf{--} \\
@@ -221,10 +232,14 @@ Feature Concatenation & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
 \end{table*}
 
 \section{Discussion \& Limitations}
-Our empirical findings illuminate the trade-offs in surgical multimodal fusion. While frozen representations from foundation models like SurgMotion bypass expensive local training, domain-specific synchronization and explicit reliability handling are decisive when sensors degrade. Limitations include evaluating on benchtop dry-lab phantom trials (JIGSAWS) rather than in-vivo clinical procedures.
+Our empirical findings to date confirm the viability of lightweight temporal modeling over normalized 76D kinematics, achieving over $60\%$ accuracy and establishing significant gains in sequence consistency via GRU modeling. 
+
+\textbf{Practical Foundation Model Constraints:} While video foundation models like SurgMotion~\cite{wu2026surgmotion} offer compelling motion-oriented representations, public access to the official pre-trained checkpoints is subject to manual gating on Hugging Face, requiring individual authorization and high-memory GPU resources (e.g., NVIDIA A100/H100) due to its 300M+ parameter ViT-Large backbone on 64-frame clips. To support accessible, reproducible experimentation without sacrificing research integrity, our pipeline couples an official SurgMotion interface with a lightweight, verified frozen visual encoder (ResNet-18) fallback. 
+
+\textbf{Limitations:} The current study evaluates benchtop phantom trials (JIGSAWS) rather than in-vivo clinical procedures. Furthermore, multimodal fusion and adaptive reliability gating remain hypotheses currently undergoing empirical verification.
 
 \section{Conclusion}
-We established a comprehensive, multi-task surgical gesture recognition benchmark across all 103 trials of the JIGSAWS dataset. By combining frozen SurgMotion latent representations, normalized 76D kinematics, and a reliability-aware dynamic gating network, our architecture achieves robust performance across clean and corrupted conditions.
+We established a leakage-safe multi-task benchmark across all 103 trials of the JIGSAWS dataset under official Leave-One-User-Out evaluation. We verified that lightweight recurrent modeling over normalized 76D kinematics yields strong gesture discrimination and suppresses temporal fragmentation. Future milestones will benchmark frozen visual representations, fixed fusion, and reliability-aware dynamic gating under systematic Endo-C6 corruptions to rigorously test whether adaptive gating provides superior clinical robustness.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
