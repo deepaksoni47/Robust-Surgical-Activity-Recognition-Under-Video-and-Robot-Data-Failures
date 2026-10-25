@@ -1,0 +1,40 @@
+fusion:
+  method: "late_logit"
+  alpha_search: true
+  metric: "macro_f1"
+  default_alpha: 0.5
+  alpha_candidates: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+
+models:
+  video:
+    name: "VideoGRU"
+    input_dim: 512
+    proj_dim: 128
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.2
+    checkpoint_pattern: "checkpoints/video_videogru_{task}_fold{fold}.pt"
+  kinematics:
+    name: "KinematicsGRU"
+    input_dim: 76
+    proj_dim: 128
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.2
+    checkpoint_pattern: "checkpoints/kinematics_gru_{task}_fold{fold}.pt"
+
+data:
+  dataset_dir: "dataset"
+  cache_dir: "data/cache/features"
+  encoder_name: "ResNet18"
+  camera: "capture1"
+  expected_dim: 512
+  window_size: 16
+  train_stride: 8
+  eval_stride: 8
+  max_allowed_delta: 500
+  normalize: true
+
+evaluation:
+  batch_size: 32
+  seed: 42

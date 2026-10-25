@@ -16,6 +16,11 @@ from src.data.video_dataset import (
     get_video_fold_datasets,
     get_video_fold_dataloaders,
 )
+from src.data.multimodal_dataset import (
+    JIGSAWSMultimodalWindowDataset,
+    get_multimodal_fold_datasets,
+    get_multimodal_fold_dataloaders,
+)
 from src.data.feature_cache import (
     get_cache_path,
     save_feature_cache,
@@ -44,6 +49,9 @@ __all__ = [
     "JIGSAWSVideoWindowDataset",
     "get_video_fold_datasets",
     "get_video_fold_dataloaders",
+    "JIGSAWSMultimodalWindowDataset",
+    "get_multimodal_fold_datasets",
+    "get_multimodal_fold_dataloaders",
     "get_cache_path",
     "save_feature_cache",
     "load_feature_cache",
@@ -51,4 +59,5 @@ __all__ = [
     "extract_frames_in_batches",
     "extract_and_cache_trial",
 ]
+
 

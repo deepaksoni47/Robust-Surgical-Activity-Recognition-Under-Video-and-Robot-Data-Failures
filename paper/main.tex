@@ -138,11 +138,12 @@ where $\text{Proj}_{\text{vis}}$ projects $D_v$-dimensional frozen visual featur
 
 
 \subsection{Fixed Multimodal Fusion Baselines}
-\textbf{Late-Logit Fusion:} Modality-specific classifiers produce independent logits $\mathbf{y}_t^{\text{vis}}, \mathbf{y}_t^{\text{kin}} \in \mathbb{R}^C$. Fixed fusion combines these via:
+\textbf{Late-Logit Fusion:} Modality-specific classifiers produce independent logits $\mathbf{y}_t^{\text{vis}}, \mathbf{y}_t^{\text{kin}} \in \mathbb{R}^C$. Fixed fusion combines these via a convex combination:
 \begin{equation}
-\mathbf{y}_t^{\text{late}} = w \cdot \mathbf{y}_t^{\text{vis}} + (1 - w) \cdot \mathbf{y}_t^{\text{kin}}, \quad w \in [0, 1]
+\mathbf{y}_t^{\text{late}} = \alpha \cdot \mathbf{y}_t^{\text{vis}} + (1 - \alpha) \cdot \mathbf{y}_t^{\text{kin}}, \quad \alpha \in [0, 1]
 \end{equation}
-where $w$ is determined via grid search exclusively on training validation splits.
+where $\alpha$ is determined via grid search over candidate weights $\alpha \in \{0.0, 0.1, \dots, 1.0\}$ exclusively on training validation splits, strictly isolating unseen test users.
+
 
 \textbf{Feature Concatenation:} Modality representations are concatenated $\mathbf{h}_t^{\text{cat}} = [\mathbf{h}_t^{\text{vis}}; \mathbf{h}_t^{\text{kin}}]$ and mapped through a multi-layer perceptron head.
 

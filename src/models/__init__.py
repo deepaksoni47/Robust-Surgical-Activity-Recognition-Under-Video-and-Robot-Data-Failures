@@ -10,6 +10,13 @@ from src.models.visual_encoder import (
     build_visual_encoder,
 )
 from src.models.video_head import VideoGRU, VideoMLP
+from src.models.fusion import (
+    FixedLateFusion,
+    FixedLateFusionClassifier,
+    fuse_logits,
+    search_optimal_alpha,
+    validate_class_mappings,
+)
 
 __all__ = [
     "MajorityClassClassifier",
@@ -21,5 +28,11 @@ __all__ = [
     "build_visual_encoder",
     "VideoGRU",
     "VideoMLP",
+    "FixedLateFusion",
+    "FixedLateFusionClassifier",
+    "fuse_logits",
+    "search_optimal_alpha",
+    "validate_class_mappings",
 ]
+
 
