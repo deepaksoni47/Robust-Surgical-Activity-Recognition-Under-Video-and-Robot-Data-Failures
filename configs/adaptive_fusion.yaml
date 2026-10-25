@@ -1,0 +1,52 @@
+model:
+  name: "AdaptiveReliabilityFusion"
+  video_dim: 128
+  kinematics_dim: 128
+  hidden_dim: 32
+  use_linear_direct: true
+  dropout: 0.1
+
+submodels:
+  video:
+    name: "VideoGRU"
+    input_dim: 512
+    proj_dim: 128
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.2
+    checkpoint_pattern: "checkpoints/video_videogru_{task}_fold{fold}.pt"
+  kinematics:
+    name: "KinematicsGRU"
+    input_dim: 76
+    proj_dim: 128
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.2
+    checkpoint_pattern: "checkpoints/kinematics_gru_{task}_fold{fold}.pt"
+
+training:
+  epochs: 15
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  use_class_weights: true
+  patience: 4
+  seed: 42
+  train_missing_prob: 0.2
+
+data:
+  dataset_dir: "dataset"
+  cache_dir: "data/cache/features"
+  encoder_name: "ResNet18"
+  camera: "capture1"
+  expected_dim: 512
+  window_size: 16
+  train_stride: 8
+  eval_stride: 8
+  max_allowed_delta: 500
+  normalize: true
+
+evaluation:
+  batch_size: 32
+  seed: 42
+  eval_fallbacks: true

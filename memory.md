@@ -94,6 +94,7 @@
 | **Comparative Benchmark & Readiness Auditor** | Built unified multi-modality readiness auditor across all 103 trials checking LOUO split integrity, 76D kinematics, transcriptions, video feature caches, nominal 30 Hz sync (tail delta $\le 500$ frames), and model checkpoints. Standardized matched comparative evaluation with fold coverage assertions, delta calculation vs strongest unimodal baseline, and clean Markdown/CSV export. Real benchmark marked as BLOCKED pending remote GPU visual feature caching. |
 | **Adaptive Fusion Gate Review & Staged Unblocking Strategy** | Completed M6 Checkpoint review in `notes/adaptive_fusion_gate.md`. Analyzed temporal alignment metrics (12.37-frame mean vs 5.0 median, single 470f Knot_Tying_F005 outlier; documented dataset start-time jitter limitation), confirmed cache budgets (~500 MB ResNet-18 vs ~1.0 GB SurgMotion across 284k frames), and audited model readiness vs evaluation status. Recommended Staged Remote GPU Extraction Strategy (Suturing first to unblock real multimodal fusion evaluation, followed by remaining tasks). Adaptive fusion architecture justified; ready for ITER-20. |
 | **Reliability-Aware Gating Network & Masked Normalization (ITER-20)** | Implemented `ReliabilityGate` and `AdaptiveReliabilityFusion` in `src/models/reliability_gate.py` with explicit availability masking $\mathbf{a} \in \{0, 1\}^2$. Enforces exact single-modality fallback ($\alpha_m \equiv 1.0, \alpha_{\text{other}} \equiv 0.0$ without numerical drift), sub-model execution skipping for unobserved streams, and loud `BothModalitiesUnavailableError` for unobserved inputs. 15 unit tests pass in `tests/test_reliability_gate.py`. |
+| **Adaptive Training & Single-Modality Fallback Integration (ITER-21)** | Implemented clean training pipeline in `scripts/train_adaptive_fusion.py` with `configs/adaptive_fusion.yaml`, validation early-stopping on Macro-F1, simulated missingness training, and strict test-time fallback evaluation. Built comprehensive fold readiness audit across all 3 tasks (0/8 folds ready; 38/39 Suturing, 36/36 Knot, 27/27 Needle missing feature caches; kinematics checkpoints exist for Fold 1). Verified submodel execution skipping (absent modality backbones are never called), exact fallback, and checkpoint reload reproducibility (< 1e-6 numerical tolerance). Full benchmark cleanly reported as BLOCKED pending remote GPU feature caching. |
 
 ---
 
@@ -122,8 +123,8 @@
 | **ITER-19** | M7 Fusion | Unimodal vs Fixed Fusion comparative evaluation | Completed (Readiness audit committed; real fusion benchmark BLOCKED pending full remote GPU visual caching) |
 | **FUSE-004** | M6 Checkpoint | Adaptive fusion gate review & benchmark unblocking strategy (`notes/adaptive_fusion_gate.md`) | Completed |
 | **ITER-20** | M8 Adaptive | Reliability & availability gating network architecture | Completed (Architecture & unit tests verified; 15/15 tests) |
-| **ITER-21** | M8 Adaptive | Clean training and single-modality fallback verification | Ready to start |
-| **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Not Started |
+| **ITER-21** | M8 Adaptive | Clean training and single-modality fallback verification | Completed (Pipeline & fallback verified; 8/8 tests pass; real benchmark BLOCKED pending visual caching) |
+| **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Ready to start |
 | **ITER-23** | M9 Robustness | Kinematics corruption & dropout operators | Not Started |
 | **ITER-24** | M9 Robustness | Robustness evaluation benchmark (Clean, Mean-C, Worst-C, Missing) | Not Started |
 | **ITER-25** | M10 Synthesis | Final comparison tables, error analysis & paper figures | Not Started |

@@ -363,11 +363,29 @@ class AdaptiveReliabilityFusion(nn.Module):
         
         Optimized execution: skips executing a sub-model if its modality is entirely missing in batch.
         """
-        b_size = video_x.shape[0] if video_x is not None else (kinematics_x.shape[0] if kinematics_x is not None else 1)
+        # Determine batch size robustly
+        if video_x is not None:
+            b_size = video_x.shape[0]
+        elif kinematics_x is not None:
+            b_size = kinematics_x.shape[0]
+        elif availability_mask is not None:
+            b_size = availability_mask.shape[0] if hasattr(availability_mask, "shape") and len(availability_mask.shape) >= 1 else 1
+        else:
+            b_size = 1
+
+        # Determine target device
+        param = next(self.parameters(), None)
+        target_device = param.device if param is not None else (
+            video_x.device if video_x is not None else (
+                kinematics_x.device if kinematics_x is not None else torch.device("cpu")
+            )
+        )
+
         if availability_mask is None:
-            mask = torch.ones((b_size, 2), dtype=torch.bool)
+            mask = torch.ones((b_size, 2), dtype=torch.bool, device=target_device)
         else:
             mask = validate_availability_mask(availability_mask, expected_batch_size=b_size)
+            mask = mask.to(device=target_device)
 
         v_any = mask[:, 0].any().item()
         k_any = mask[:, 1].any().item()
@@ -379,20 +397,23 @@ class AdaptiveReliabilityFusion(nn.Module):
         if v_any:
             if self.video_model is None:
                 raise RuntimeError("video_model is None but video stream is available.")
+            if video_x is None:
+                raise ValueError("Video modality is marked available in availability_mask, but video_x is None.")
             v_logits = self.video_model(video_x)
         else:
             # Placeholder zeros for missing modality; weight will be strictly 0.0
-            device = kinematics_x.device if kinematics_x is not None else torch.device("cpu")
-            v_logits = torch.zeros((b_size, self.num_classes), device=device)
+            v_logits = torch.zeros((b_size, self.num_classes), device=target_device)
 
         # Compute kinematics logits
         if k_any:
             if self.kinematics_model is None:
                 raise RuntimeError("kinematics_model is None but kinematics stream is available.")
+            if kinematics_x is None:
+                raise ValueError("Kinematics modality is marked available in availability_mask, but kinematics_x is None.")
             k_logits = self.kinematics_model(kinematics_x)
         else:
-            device = video_x.device if video_x is not None else torch.device("cpu")
-            k_logits = torch.zeros((b_size, self.num_classes), device=device)
+            # Placeholder zeros for missing modality; weight will be strictly 0.0
+            k_logits = torch.zeros((b_size, self.num_classes), device=target_device)
 
         return self.forward_logits(
             video_logits=v_logits,
