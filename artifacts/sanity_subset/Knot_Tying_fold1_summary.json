@@ -1,0 +1,94 @@
+{
+  "task": "Knot_Tying",
+  "fold_num": 1,
+  "test_user": "B",
+  "num_classes": 7,
+  "vocabulary": {
+    "G0": 0,
+    "G1": 1,
+    "G11": 2,
+    "G12": 3,
+    "G13": 4,
+    "G14": 5,
+    "G15": 6
+  },
+  "train_trials": [
+    "Knot_Tying_D001",
+    "Knot_Tying_D002",
+    "Knot_Tying_D003",
+    "Knot_Tying_D004",
+    "Knot_Tying_D005",
+    "Knot_Tying_E001",
+    "Knot_Tying_E002",
+    "Knot_Tying_E003",
+    "Knot_Tying_E004",
+    "Knot_Tying_E005",
+    "Knot_Tying_F001",
+    "Knot_Tying_F002",
+    "Knot_Tying_F003",
+    "Knot_Tying_F004",
+    "Knot_Tying_F005",
+    "Knot_Tying_G001",
+    "Knot_Tying_G002",
+    "Knot_Tying_G003",
+    "Knot_Tying_G004",
+    "Knot_Tying_G005",
+    "Knot_Tying_H003",
+    "Knot_Tying_H004",
+    "Knot_Tying_H005",
+    "Knot_Tying_I001",
+    "Knot_Tying_I002",
+    "Knot_Tying_I003",
+    "Knot_Tying_I005"
+  ],
+  "test_trials": [
+    "Knot_Tying_B001",
+    "Knot_Tying_B002",
+    "Knot_Tying_B003",
+    "Knot_Tying_B004"
+  ],
+  "num_train_windows": 6156,
+  "num_test_windows": 825,
+  "normalizer_mean_norm": 2.7180116176605225,
+  "normalizer_std_norm": 3.780116558074951,
+  "batch_shapes": {
+    "train_kinematics": [
+      16,
+      16,
+      76
+    ],
+    "train_labels": [
+      16,
+      16
+    ],
+    "train_target": [
+      16
+    ],
+    "test_kinematics": [
+      16,
+      16,
+      76
+    ],
+    "test_labels": [
+      16,
+      16
+    ],
+    "test_target": [
+      16
+    ]
+  },
+  "sample_trials": {
+    "train_sample": [
+      "Knot_Tying_F002",
+      "Knot_Tying_G003",
+      "Knot_Tying_I005",
+      "Knot_Tying_D003"
+    ],
+    "test_sample": [
+      "Knot_Tying_B001",
+      "Knot_Tying_B001",
+      "Knot_Tying_B001",
+      "Knot_Tying_B001"
+    ]
+  }
+}

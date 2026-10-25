@@ -1,0 +1,101 @@
+{
+  "task": "Suturing",
+  "fold_num": 1,
+  "test_user": "B",
+  "num_classes": 11,
+  "vocabulary": {
+    "G0": 0,
+    "G1": 1,
+    "G2": 2,
+    "G3": 3,
+    "G4": 4,
+    "G5": 5,
+    "G6": 6,
+    "G8": 7,
+    "G9": 8,
+    "G10": 9,
+    "G11": 10
+  },
+  "train_trials": [
+    "Suturing_D001",
+    "Suturing_D002",
+    "Suturing_D003",
+    "Suturing_D004",
+    "Suturing_D005",
+    "Suturing_E001",
+    "Suturing_E002",
+    "Suturing_E003",
+    "Suturing_E004",
+    "Suturing_E005",
+    "Suturing_F001",
+    "Suturing_F002",
+    "Suturing_F003",
+    "Suturing_F004",
+    "Suturing_F005",
+    "Suturing_G001",
+    "Suturing_G002",
+    "Suturing_G003",
+    "Suturing_G004",
+    "Suturing_G005",
+    "Suturing_H001",
+    "Suturing_H003",
+    "Suturing_H004",
+    "Suturing_H005",
+    "Suturing_I001",
+    "Suturing_I002",
+    "Suturing_I003",
+    "Suturing_I004",
+    "Suturing_I005"
+  ],
+  "test_trials": [
+    "Suturing_B001",
+    "Suturing_B002",
+    "Suturing_B003",
+    "Suturing_B004",
+    "Suturing_B005"
+  ],
+  "num_train_windows": 12218,
+  "num_test_windows": 2321,
+  "normalizer_mean_norm": 2.4964680671691895,
+  "normalizer_std_norm": 3.8518831729888916,
+  "batch_shapes": {
+    "train_kinematics": [
+      16,
+      16,
+      76
+    ],
+    "train_labels": [
+      16,
+      16
+    ],
+    "train_target": [
+      16
+    ],
+    "test_kinematics": [
+      16,
+      16,
+      76
+    ],
+    "test_labels": [
+      16,
+      16
+    ],
+    "test_target": [
+      16
+    ]
+  },
+  "sample_trials": {
+    "train_sample": [
+      "Suturing_D001",
+      "Suturing_I001",
+      "Suturing_G001",
+      "Suturing_I003"
+    ],
+    "test_sample": [
+      "Suturing_B001",
+      "Suturing_B001",
+      "Suturing_B001",
+      "Suturing_B001"
+    ]
+  }
+}
