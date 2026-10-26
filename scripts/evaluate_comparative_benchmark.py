@@ -112,7 +112,22 @@ def parse_args() -> argparse.Namespace:
 def load_model_summary(summary_file: Path) -> Dict[str, Any]:
     """Load JSON baseline result file."""
     with open(summary_file, "r", encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+    if data.get("method") == "FixedLateLogitFusion" and "fusion" in data:
+        fus = data["fusion"]
+        return {
+            "model": "FixedLateFusion",
+            "folds": data.get("fold_results", []),
+            "mean_accuracy": fus.get("mean_accuracy", 0.0),
+            "std_accuracy": fus.get("std_accuracy", 0.0),
+            "mean_balanced_accuracy": fus.get("mean_balanced_accuracy", 0.0),
+            "std_balanced_accuracy": fus.get("std_balanced_accuracy", 0.0),
+            "mean_macro_f1": fus.get("mean_macro_f1", 0.0),
+            "std_macro_f1": fus.get("std_macro_f1", 0.0),
+            "mean_edit_score": fus.get("mean_edit_score", 0.0),
+            "std_edit_score": fus.get("std_edit_score", 0.0),
+        }
+    return data
 
 
 def evaluate_task(task: str, args: argparse.Namespace) -> Dict[str, Any]:
@@ -168,6 +183,9 @@ def evaluate_task(task: str, args: argparse.Namespace) -> Dict[str, Any]:
         ],
         "concat_fusion": [
             f"concat_fusion_{task}_results.json",
+        ],
+        "adaptive_fusion": [
+            f"adaptive_fusion_{task}_results.json",
         ],
     }
 

@@ -1805,7 +1805,8 @@
       "mean_gating_weights": {
         "video": 0.52230304479599,
         "kinematics": 0.4776969254016876
-      }
+      },
+      "edit_score": 21.696453701097667
     },
     {
       "accuracy": 0.7410958904109589,
@@ -3416,7 +3417,8 @@
       "mean_gating_weights": {
         "video": 0.4421447813510895,
         "kinematics": 0.5578552484512329
-      }
+      },
+      "edit_score": 40.711732711732715
     },
     {
       "accuracy": 0.5984752223634053,
@@ -5141,7 +5143,8 @@
       "mean_gating_weights": {
         "video": 0.5079727172851562,
         "kinematics": 0.49202728271484375
-      }
+      },
+      "edit_score": 35.79772284148181
     },
     {
       "accuracy": 0.8104651162790698,
@@ -7012,7 +7015,8 @@
       "mean_gating_weights": {
         "video": 0.4361684322357178,
         "kinematics": 0.5638315081596375
-      }
+      },
+      "edit_score": 56.214729130518606
     },
     {
       "accuracy": 0.6270491803278688,
@@ -9115,7 +9119,8 @@
       "mean_gating_weights": {
         "video": 0.5031323432922363,
         "kinematics": 0.4968675673007965
-      }
+      },
+      "edit_score": 22.8404360931738
     },
     {
       "accuracy": 0.5445859872611465,
@@ -12406,7 +12411,8 @@
       "mean_gating_weights": {
         "video": 0.5423728823661804,
         "kinematics": 0.45762717723846436
-      }
+      },
+      "edit_score": 20.763141048012542
     },
     {
       "accuracy": 0.7975206611570248,
@@ -14007,7 +14013,8 @@
       "mean_gating_weights": {
         "video": 0.4024530351161957,
         "kinematics": 0.5975469350814819
-      }
+      },
+      "edit_score": 40.3448275862069
     },
     {
       "accuracy": 0.6451612903225806,
@@ -16513,7 +16520,12 @@
       "mean_gating_weights": {
         "video": 0.3151310980319977,
         "kinematics": 0.6848689317703247
-      }
+      },
+      "edit_score": 32.933771209633285
     }
-  ]
+  ],
+  "mean_balanced_accuracy": 63.0469677681613,
+  "std_balanced_accuracy": 8.33398223111629,
+  "mean_edit_score": 33.91285179023217,
+  "std_edit_score": 11.370102402978805
 }

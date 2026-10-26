@@ -3437,7 +3437,8 @@
       "mean_gating_weights": {
         "video": 0.44095489382743835,
         "kinematics": 0.559045135974884
-      }
+      },
+      "edit_score": 35.377190377190374
     },
     {
       "accuracy": 0.674135411592791,
@@ -7802,7 +7803,8 @@
       "mean_gating_weights": {
         "video": 0.21551139652729034,
         "kinematics": 0.7844886183738708
-      }
+      },
+      "edit_score": 32.27759486474963
     },
     {
       "accuracy": 0.4435524335173106,
@@ -12047,7 +12049,8 @@
       "mean_gating_weights": {
         "video": 0.4157315492630005,
         "kinematics": 0.5842684507369995
-      }
+      },
+      "edit_score": 24.95545482450192
     },
     {
       "accuracy": 0.4057623049219688,
@@ -15637,7 +15640,8 @@
       "mean_gating_weights": {
         "video": 0.5014387369155884,
         "kinematics": 0.49856123328208923
-      }
+      },
+      "edit_score": 23.060096153846153
     },
     {
       "accuracy": 0.6083445491251682,
@@ -17380,7 +17384,8 @@
       "mean_gating_weights": {
         "video": 0.22657351195812225,
         "kinematics": 0.7734264731407166
-      }
+      },
+      "edit_score": 37.99111278268804
     },
     {
       "accuracy": 0.5172811059907834,
@@ -19372,7 +19377,8 @@
       "mean_gating_weights": {
         "video": 0.513931930065155,
         "kinematics": 0.48606812953948975
-      }
+      },
+      "edit_score": 28.87700534759358
     },
     {
       "accuracy": 0.5277777777777778,
@@ -23518,7 +23524,12 @@
       "mean_gating_weights": {
         "video": 0.41309183835983276,
         "kinematics": 0.5869081616401672
-      }
+      },
+      "edit_score": 21.6125
     }
-  ]
+  ],
+  "mean_balanced_accuracy": 43.058652659862354,
+  "std_balanced_accuracy": 7.500073011323366,
+  "mean_edit_score": 29.164422050081388,
+  "std_edit_score": 5.834541716783722
 }
