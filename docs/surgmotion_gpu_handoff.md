@@ -1,72 +1,108 @@
 # SurgMotion Mentor-GPU Execution & Handoff Protocol
 
-This guide documents how to execute SurgMotion visual feature extraction on the mentor's GPU machine and transfer cached representations back to our primary development workstation.
+> **Core Operating Principle:**  
+> Our local laptop is the primary development workstation. The mentor's machine is exclusively an execution compute node for heavy GPU forward passes.  
+> **Do not clone the repository, re-download models from Hugging Face, or restart development on the mentor's computer.** Execute only the pre-tested scripts and transfer results back immediately.
 
 ---
 
-## 1. Machine Profile & Resource Requirements
+## 1. Machine Division of Responsibilities
 
-| Specification | Primary Workstation (Acer) | Mentor's GPU Machine (Target) |
+| Responsibility | Primary Laptop (Local) | Mentor's GPU Machine (Remote) |
 |---|---|---|
-| **CPU** | Intel Core i5-12450H (8C/12T) | Intel / AMD Multi-Core Host |
-| **GPU / Accelerator** | Intel UHD Graphics (No CUDA) | NVIDIA CUDA GPU (RTX 3080/4080/4090, A100, V100, A6000) |
-| **VRAM Requirement** | N/A (CPU-only) | Minimum 8 GB VRAM (Recommended: 12+ GB) |
-| **RAM** | 16 GB (~5.9 GB free) | 16+ GB System RAM |
-| **1-Clip Inference Time** | 36.79s (Spatiotemporal) / 68.69s (Tubelet) | ~0.025s – 0.050s (Est. 700x–1000x acceleration) |
-| **Full Suturing Extraction** | ~24.5 hours (CPU, single-threaded) | ~5–10 minutes (GPU, batch_size=8, FP16) |
+| **Code Development & Debugging** | **100% on Laptop** | None (no source editing) |
+| **Unit & Integration Testing** | **100% on Laptop** (all 188 tests pass) | None |
+| **Model Architecture Verification** | **100% on Laptop** (strict 0-key mismatch verified) | None |
+| **Single-Clip Smoke Test** | Completed locally on CPU (51.7s / 68.7s) | 1-clip GPU sanity check (~0.03s) |
+| **Heavy Feature Extraction** | Infeasible on CPU (~24.5h Suturing, ~64h benchmark) | **Execute approved pilot trial only** |
+| **Cache Validation & Integrity Audit** | Auditor implemented and tested locally | Run validator script after extraction |
+| **Downstream Model Training & Pilot Eval** | **100% on Laptop** (VideoGRU, metrics, comparisons) | None |
+| **Analysis, Paper Writing, & Version Control** | **100% on Laptop** | None |
 
 ---
 
-## 2. Environment Setup on Mentor's GPU Machine
+## 2. Minimum Transfer Package Manifest
 
-### Step 1: Clone Repository or Copy Directory
-Clone the repository on the GPU machine:
-```bash
-git clone https://github.com/deepaksoni47/Robust-Surgical-Activity-Recognition-Under-Video-and-Robot-Data-Failures.git
-cd Robust-Surgical-Activity-Recognition-Under-Video-and-Robot-Data-Failures
+Transfer only the following pre-tested files from the laptop to the mentor's machine (via USB flash drive, local network share, or SCP). Total payload is ~1.16 GB, consisting almost entirely of the already-downloaded checkpoint and the 3.5 MB pilot video.
+
+```text
+surgmotion_gpu_package/
+├── models/
+│   └── SurgMotion-L/
+│       ├── SurgMotion-vitl.pt          (1,159.34 MB - Pretrained foundation weights)
+│       └── config.json                 (165 bytes - Model configuration)
+├── dataset/
+│   └── Suturing/
+│       └── video/
+│           └── Suturing_B001_capture1.avi (3.50 MB - Pilot trial video, 5,640 frames)
+├── artifacts/
+│   └── manifest.csv                    (31.66 KB - Trial metadata index)
+├── src/                                (Source code modules)
+│   ├── __init__.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── manifest.py
+│   │   └── video.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── visual_encoder.py
+│   │   └── surgmotion_encoder.py       (16.91 KB - ViT-Large backbone wrapper)
+│   └── utils/
+│       ├── __init__.py
+│       └── reproducibility.py
+├── scripts/
+│   ├── extract_surgmotion_features.py  (18.57 KB - Streaming extraction engine)
+│   └── validate_surgmotion_cache.py    (5.96 KB - Cache integrity auditor)
+└── requirements-surgmotion.txt         (347 bytes - Pinned dependency manifest)
 ```
 
-### Step 2: Copy Checkpoint & Target Videos
-Transfer the downloaded SurgMotion checkpoint to the GPU machine:
-- Place checkpoint at: `models/SurgMotion-L/SurgMotion-vitl.pt`
-- Place config at: `models/SurgMotion-L/config.json`
+**Files explicitly EXCLUDED from transfer:**
+- Entire remaining JIGSAWS video dataset (39 Suturing, 36 Knot, 28 Needle videos: ~8 GB - NOT needed for pilot).
+- `.git/` history and branches.
+- Virtual environment (`.venv/`).
+- Existing ResNet-18 feature caches (`data/cache/features/ResNet18/` - preserved on laptop).
+- Checkpoints and prediction runs from prior baseline experiments.
 
-For pilot evaluation, copy only the pilot trial video(s) to avoid copying the entire dataset:
-- `dataset/Suturing/video/Suturing_B001_capture1.avi` (and any other selected pilot trials)
+---
 
-### Step 3: Install Dependencies
-Create an isolated Python environment and install PyTorch matching the target machine's CUDA driver:
+## 3. Execution Protocol on the Mentor's Machine
 
-**On Linux / Windows (with CUDA 12.1):**
+On the mentor's computer, open a terminal in the transferred `surgmotion_gpu_package/` directory.
+
+### Step 1: Set Up Isolated Python Environment
+Install PyTorch matching the machine's installed NVIDIA driver and CUDA toolkit:
+
 ```bash
+# Create and activate an isolated environment
 python -m venv .venv
 
-# Activate environment:
-# Linux/macOS:
+# On Linux:
 source .venv/bin/activate
-# Windows PowerShell:
+# On Windows PowerShell:
 .venv\Scripts\Activate.ps1
 
-# Install CUDA-enabled PyTorch:
+# Install CUDA-enabled PyTorch (e.g., CUDA 12.1):
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 
-# Install required pipeline dependencies:
+# Install the minimal pipeline dependencies:
 pip install -r requirements-surgmotion.txt
 ```
 
----
+### Step 2: Query GPU Hardware & Driver
+Verify device visibility and driver support:
+```bash
+python -c "import torch; print(f'GPU: {torch.cuda.get_device_name(0)}, VRAM: {torch.cuda.get_device_properties(0).total_memory / (1024**3):.2f} GB, CUDA: {torch.version.cuda}')"
+```
+*Acceptance criteria:* Device is CUDA-compatible with $\ge 8\text{ GB}$ VRAM.
 
-## 3. Step-by-Step Execution Workflow
-
-### Step 1: Run 1-Clip Diagnostic Smoke Test
-Verify that CUDA, PyTorch, model loading, and SDPA attention backends operate correctly:
+### Step 3: Run Diagnostic 1-Clip GPU Smoke Test
+Verify model loading, PyTorch SDPA attention backends, and memory safety without processing any real files:
 ```bash
 python scripts/extract_surgmotion_features.py --smoke-test --device cuda --fp16
 ```
-
-**Expected Smoke Test Output:**
+*Expected terminal output:*
 ```text
-Target Device: cuda:0 (NVIDIA RTX ...)
+Target Device: cuda:0 (NVIDIA ...)
 PyTorch Version: 2.x.x+cu121 (CUDA available: True)
 Attention Backends: FlashAttention=True (or MemEfficient=True), Math=True
 Loading SurgMotion backbone from: models/SurgMotion-L/SurgMotion-vitl.pt ...
@@ -82,8 +118,8 @@ Elapsed inference time: ~0.035s
 Peak GPU VRAM allocated: ~3200 MB
 ```
 
-### Step 2: Run Pilot Feature Extraction (Single Trial)
-Extract features for the official pilot trial (`Suturing_B001`):
+### Step 4: Execute Approved Pilot Extraction (`Suturing_B001`)
+Extract features for the single pilot trial using sliding-window batching:
 ```bash
 python scripts/extract_surgmotion_features.py \
     --task Suturing \
@@ -94,52 +130,30 @@ python scripts/extract_surgmotion_features.py \
     --stride 16 \
     --output-dir data/cache/features_surgmotion
 ```
+*Expected duration:* ~10 to 18 seconds (vs ~4 hours on CPU).
 
-### Step 3: Verify Cache Integrity
-Validate that the resulting `.npz` archive has correct shapes, strictly monotonic frame indices, zero NaNs/Infs, and complete provenance metadata:
+### Step 5: Validate Cache Integrity
+Immediately audit the generated cache file on the mentor's computer:
 ```bash
 python scripts/validate_surgmotion_cache.py data/cache/features_surgmotion/Suturing_B001_capture1.npz
 ```
-
-**Expected Validation Output:**
-```text
-  [OK] Suturing_B001_capture1.npz: 349 clips, shape (349, 1024), 1.36 MB, frames 32-5600
-==================================================
-Audit Summary: 1/1 files VALID.
-All audited cache files passed integrity and finiteness checks.
-```
+*Acceptance criteria:* Exit code 0, status `VALID`, 349 clips, shape `(349, 1024)`, zero NaNs/Infs.
 
 ---
 
-## 4. Artifact Transfer Back to Primary Workstation
+## 4. Artifact Return & Resuming Work on Laptop
 
-Once extraction completes, transfer **only the generated feature cache archives** back to the primary computer:
-1. Copy the `.npz` files and JSON summaries from:
-   `<remote_gpu_path>/data/cache/features_surgmotion/`
-2. Place them into our local directory:
-   `D:\miniproject-5thsem\data\cache\features_surgmotion\`
-3. Run the local validator to confirm zero corruption during transfer:
+### What to Copy Back to the Laptop:
+Only copy the generated output folder:
+- `data/cache/features_surgmotion/Suturing_B001_capture1.npz` (~1.4 MB)
+- `data/cache/features_surgmotion/extraction_summary_Suturing.json` (~1 KB)
+
+Place these files directly into `D:\miniproject-5thsem\data\cache\features_surgmotion\` on the laptop.
+
+### Resuming Analysis on Laptop:
+1. Run local validation:
    ```powershell
-   .venv\Scripts\python.exe scripts/validate_surgmotion_cache.py --dir data/cache/features_surgmotion
+   .venv\Scripts\python.exe scripts/validate_surgmotion_cache.py data/cache/features_surgmotion/Suturing_B001_capture1.npz
    ```
-
----
-
-## 5. Temporal Alignment & Annotation Mapping Protocol
-
-### Coordinate Systems & Sampling Conventions
-- **Raw Video:** 30 FPS (`Suturing_B001_capture1.avi`, 5,640 frames).
-- **Robot Kinematics:** 30 Hz (5,640 timesteps, 76 features).
-- **Gesture Annotations:** 1-indexed intervals $[s, e, \text{gesture}]$ from `transcriptions/`.
-- **SurgMotion Windowing:**
-  - Clip length $L = 64$ frames (~2.13 seconds of physical time).
-  - Window stride $S = 16$ frames (~0.53 seconds step).
-  - For clip $k$ spanning frames $[s_k, e_k]$ where $e_k = s_k + 63$:
-    $$\text{center frame } c_k = \left\lfloor \frac{s_k + e_k}{2} \right\rfloor = s_k + 31$$
-  - The ground-truth gesture label $y_k$ is assigned strictly based on the center frame:
-    $$y_k = \text{GestureLabel}(c_k)$$
-  - Kinematics vector $x_k^{\text{kin}}$ is sampled at the identical center frame $c_k$:
-    $$x_k^{\text{kin}} = \text{Kinematics}(c_k)$$
-- **Zero-Leakage Assurance:**
-  - Normalization parameters are computed solely on training trials within each LOUO fold.
-  - Test set trials are never used to fit feature scalers or select temporal strides.
+2. Inspect measured extraction throughput, VRAM usage, and clip timings from `extraction_summary_Suturing.json`.
+3. Proceed to pilot sequence modeling and metric comparison on our laptop under JIGSAWS official Suturing Fold 1.

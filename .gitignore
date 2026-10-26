@@ -19,6 +19,8 @@ build/
 # Checkpoints & Model weights
 checkpoints/
 /models/
+surgmotion_gpu_package/
+*.zip
 *.pt
 *.pth
 *.ckpt
