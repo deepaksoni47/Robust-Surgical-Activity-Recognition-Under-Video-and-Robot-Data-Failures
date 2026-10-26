@@ -1,0 +1,12 @@
+# SurgMotion GPU Feature Extraction Dependencies
+# Note: Install PyTorch matching the target machine's CUDA version first:
+# e.g., pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+
+numpy>=1.24.0
+pandas>=2.0.0
+opencv-python>=4.8.0
+pyyaml>=6.0.0
+tqdm>=4.66.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+huggingface_hub>=0.20.0

@@ -18,6 +18,7 @@ build/
 
 # Checkpoints & Model weights
 checkpoints/
+/models/
 *.pt
 *.pth
 *.ckpt
