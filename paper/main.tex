@@ -16,17 +16,20 @@
 
 \title{Adaptive Multimodal Surgical Gesture Recognition via Pretrained Visual Representations and Reliability-Aware Dynamic Gating}
 
-\author{Student Researcher 1, Student Researcher 2%
+\author{Deepak~Soni,
+        Aparna~Banpela,
+        and~Dr.~Princy~Matlani%
+\thanks{Deepak Soni and Aparna Banpela are student researchers in the Department of Computer Science and Engineering. Dr. Princy Matlani is with the Department of Computer Science and Engineering (Faculty Mentor / Supervisor).}%
 \thanks{This research project investigates multimodal perception, temporal sequence modeling, and corruption-robust adaptive fusion for surgical robotics under the 5th-Semester Mini-Project curriculum.}%
 }
 
 \markboth{IEEE Transactions on Medical Robotics and Bionics / Research Preprint, October 2026}%
-{Researcher \MakeLowercase{\textit{et al.}}: Adaptive Multimodal Surgical Gesture Recognition}
+{Soni \MakeLowercase{\textit{et al.}}: Adaptive Multimodal Surgical Gesture Recognition}
 
 \maketitle
 
 \begin{abstract}
-Automated surgical gesture recognition is a cornerstone of context-aware assistance, objective skill assessment, and autonomous subtask execution in robot-assisted minimally invasive surgery (RMIS). While endoscopic video conveys rich semantic context regarding tool-tissue interactions, robot kinematics provides direct, unambiguous physical motion trajectories that are immune to visual obstruction. However, multimodal fusion models frequently rely on static concatenation or uncalibrated late-fusion schemes, rendering them vulnerable when visual degradation (e.g., cautery smoke, lens fog, motion blur, and packet loss) or kinematic telemetry failures occur. In this work, we present an empirical audit and benchmark of an adaptive multimodal surgical gesture recognition framework evaluated across the complete JIGSAWS benchmark encompassing all three canonical surgical tasks: Suturing (39 trials), Knot Tying (36 trials), and Needle Passing (28 trials) across 103 total procedures. We formulate an architecture combining frozen ImageNet-pretrained ResNet-18 representations (512-D) with normalized 76-dimensional da Vinci robot kinematics. Lightweight temporal sequence encoders (GRU) model windowed dynamics, and a reliability-aware dynamic gating network dynamically calibrates modality confidence from representation statistics and explicit availability flags to enforce exact single-modality fallback under failure. Under an official Leave-One-User-Out (LOUO) cross-validation protocol (8 folds for Suturing and Knot Tying; 7 active folds for Needle Passing due to an empty test set in the official distribution for Subject G), we report comprehensive empirical evaluations across all active folds: (i) Kinematics-only GRU achieves strong gesture discrimination ($66.64\%$ accuracy on Suturing, $61.09\%$ on Knot Tying, $48.69\%$ on Needle Passing) and boosts sequence edit score by $3.5\times$ to $3.8\times$ over frame-independent MLP; (ii) Multimodal fixed late fusion improves performance over unimodal baselines ($69.39\%$ on Suturing, $64.16\%$ on Knot Tying, $49.68\%$ on Needle Passing); (iii) Adaptive Reliability Gating achieves the highest accuracy across all tasks ($73.54\%$ accuracy / $52.62\%$ Macro-F1 on Suturing, $67.05\%$ accuracy / $58.77\%$ Macro-F1 on Knot Tying, and $51.14\%$ accuracy / $31.48\%$ Macro-F1 on Needle Passing); and (iv) Under severe Endo-C6 visual degradations, while concatenation fusion exhibits a smaller relative drop ($3.18\%$), adaptive gating retains the highest absolute Macro-F1 ($49.27\%$ Mean-C), surpassing the clean unimodal kinematics baseline ($45.09\%$) and clean concatenation fusion ($46.92\%$), while enforcing exact mathematical fallback under missing modalities.
+Automated surgical gesture recognition is a cornerstone of context-aware assistance, objective skill assessment, and autonomous execution in robot-assisted minimally invasive surgery (RMIS). While endoscopic video conveys rich semantic context of tool-tissue interactions, robot kinematics provides unambiguous motion trajectories immune to visual obstruction. However, multimodal models frequently rely on static concatenation or uncalibrated late fusion, leaving them vulnerable when visual degradations (cautery smoke, fog, blur, packet loss) or telemetry failures occur. In this work, we present an empirical benchmark of an adaptive multimodal framework evaluated across all 103 trials of the JIGSAWS benchmark: Suturing (39 trials), Knot Tying (36 trials), and Needle Passing (28 trials). We combine frozen ImageNet-pretrained ResNet-18 representations (512-D) with normalized 76D da Vinci kinematics. Lightweight temporal encoders (GRU) model windowed dynamics, while a reliability-aware dynamic gating network calibrates modality confidence from representation statistics and explicit availability flags to enforce exact single-modality fallback under failure. Under official Leave-One-User-Out (LOUO) cross-validation across all active folds (8 folds for Suturing and Knot Tying; 7 for Needle Passing due to an empty test set for Subject G in the official benchmark), empirical evaluations show: (i) Kinematics-only GRU achieves strong gesture discrimination ($66.64\%$ accuracy on Suturing, $61.09\%$ on Knot Tying, $48.69\%$ on Needle Passing) and boosts sequence edit score by $3.5\times$--$3.8\times$ over frame-independent MLP; (ii) Multimodal fixed late fusion outperforms unimodal baselines ($69.39\%$ on Suturing, $64.16\%$ on Knot Tying, $49.68\%$ on Needle Passing); (iii) Adaptive Reliability Gating achieves the highest accuracy across all tasks ($73.54\%$ accuracy / $52.62\%$ Macro-F1 on Suturing, $67.05\%$ / $58.77\%$ on Knot Tying, and $51.14\%$ / $31.48\%$ on Needle Passing); and (iv) Under severe Endo-C6 visual degradations, adaptive gating retains the highest absolute Macro-F1 ($49.27\%$ Mean-C), surpassing clean unimodal kinematics ($45.09\%$) and clean concatenation ($46.92\%$) while guaranteeing exact fallback under complete sensor failure.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -81,10 +84,11 @@ Foundation models have increasingly replaced ImageNet-pretrained backbones in me
 \section{Dataset \& Multi-Task Benchmark}
 We utilize the complete JIGSAWS benchmark dataset~\cite{gao2014jigsaws} collected on the da Vinci surgical system by eight surgical trainees and experts (Subjects B through I).
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \caption{JIGSAWS Benchmark Task and Gesture Distribution}
 \label{tab:dataset_stats}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Task} & \textbf{Trials} & \textbf{Subjects} & \textbf{Gestures} & \textbf{Gesture Vocabularies} \\
@@ -95,7 +99,8 @@ Needle Passing & 28 & 8 (B--I) & 8 & G1--G6, G8, G11 \\
 \midrule
 \textbf{Total} & \textbf{103} & \textbf{8} & \textbf{15 unique} & \textbf{G1--G15} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \subsection{76D Kinematic Feature Representation}
@@ -246,13 +251,14 @@ Feature Concatenation Fusion & 46.92 & 46.78 & 45.98 & 46.31 & 46.19 & 45.30 & 4
 \end{flushleft}
 \end{table*}
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \caption{Pre-Encoder Frame-Level Optical Degradation Distortion on ResNet-18 Embeddings (Endo-C6 Severity 5)}
 \label{tab:optical_corruptions}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcc}
 \toprule
-\textbf{Optical Corruption Operator} & \textbf{Cosine Similarity} & \textbf{Distortion Metric} \\
+\textbf{Optical Corruption Operator} & \textbf{Cosine Sim.} & \textbf{Distortion} \\
 \midrule
 Defocus Blur ($\sigma=3.5$) & 0.7436 & 0.2564 \\
 Linear Motion Blur ($L=21$) & 0.7110 & 0.2890 \\
@@ -260,7 +266,8 @@ Photon Shot Noise ($\lambda=120$) & 0.6958 & 0.3042 \\
 Cautery Smoke Attenuation ($\alpha=0.75$) & 0.8328 & 0.1672 \\
 Digital Packet Loss Blockout ($B=32$) & 0.7758 & 0.2242 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \begin{flushleft}
 \footnotesize{\textit{Note:} Evaluated on raw 30\,Hz RGB endoscopic video frames of Suturing before feature caching. Distortion is defined as $1 - \text{CosineSimilarity}(z_{\text{clean}}, z_{\text{corrupt}})$.}
 \end{flushleft}

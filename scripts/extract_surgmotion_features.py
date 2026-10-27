@@ -331,7 +331,7 @@ def run_extraction(args: argparse.Namespace) -> None:
     for idx, row in df.iterrows():
         trial_id = row["trial_id"]
         task = row["task"]
-        video_col = f"{args.camera}_video_path"
+        video_col = f"video_{args.camera}_path"
         rel_video = row.get(video_col, None)
         if not rel_video or not Path(rel_video).is_file():
             print(f"[{idx+1}/{len(df)}] Skipping {trial_id}: video not found at {rel_video}")
