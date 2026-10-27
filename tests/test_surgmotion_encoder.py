@@ -158,3 +158,19 @@ def test_validate_surgmotion_cache_valid_and_corrupt():
 
         with pytest.raises(ValueError, match="not strictly monotonically increasing"):
             validate_single_cache(nonmono_cache, expected_dim=1024)
+
+
+def test_overnight_orchestrator_preflight():
+    """Verify that overnight orchestrator imports and preflight checks function cleanly."""
+    from scripts.run_overnight_extraction import check_gpu_environment, verify_inputs
+    gpu_info = check_gpu_environment()
+    assert isinstance(gpu_info, dict)
+    assert "cuda_available" in gpu_info
+    assert "device_name" in gpu_info
+
+    manifest_path = Path("artifacts/manifest.csv")
+    if manifest_path.is_file():
+        df, missing, total_frames, total_clips = verify_inputs(manifest_path, camera="capture1")
+        assert len(df) == 103
+        assert total_clips > 0
+        assert total_frames > 0
