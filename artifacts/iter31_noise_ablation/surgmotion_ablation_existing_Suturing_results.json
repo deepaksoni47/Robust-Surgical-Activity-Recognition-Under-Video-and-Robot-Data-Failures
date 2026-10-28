@@ -1,0 +1,227 @@
+{
+  "task": "Suturing",
+  "condition": "existing",
+  "n_active_folds": 8,
+  "noise_range": [
+    0.0,
+    1.5
+  ],
+  "noise_prob": 0.5,
+  "clean_summary": {
+    "accuracy_mean": 70.82,
+    "accuracy_std": 10.91,
+    "balanced_accuracy_mean": 58.8,
+    "balanced_accuracy_std": 9.76,
+    "macro_f1_mean": 41.96,
+    "macro_f1_std": 7.13,
+    "edit_score_mean": 62.41,
+    "edit_score_std": 8.21
+  },
+  "robustness_summary": {
+    "clean": {
+      "accuracy_mean": 70.82,
+      "accuracy_std": 10.91,
+      "macro_f1_mean": 41.96,
+      "macro_f1_std": 7.13,
+      "edit_score_mean": 62.41,
+      "edit_score_std": 8.21,
+      "alpha_video_mean": 0.0897,
+      "delta_acc_from_clean": 0.0,
+      "delta_f1_from_clean": 0.0
+    },
+    "video_noise_0.2": {
+      "accuracy_mean": 70.85,
+      "accuracy_std": 10.88,
+      "macro_f1_mean": 41.97,
+      "macro_f1_std": 7.11,
+      "edit_score_mean": 62.31,
+      "edit_score_std": 8.17,
+      "alpha_video_mean": 0.0896,
+      "delta_acc_from_clean": 0.03,
+      "delta_f1_from_clean": 0.01
+    },
+    "video_noise_0.5": {
+      "accuracy_mean": 70.87,
+      "accuracy_std": 10.88,
+      "macro_f1_mean": 41.98,
+      "macro_f1_std": 7.16,
+      "edit_score_mean": 62.41,
+      "edit_score_std": 8.35,
+      "alpha_video_mean": 0.0891,
+      "delta_acc_from_clean": 0.04,
+      "delta_f1_from_clean": 0.01
+    },
+    "video_noise_1.0": {
+      "accuracy_mean": 70.98,
+      "accuracy_std": 10.61,
+      "macro_f1_mean": 41.87,
+      "macro_f1_std": 7.08,
+      "edit_score_mean": 62.14,
+      "edit_score_std": 8.51,
+      "alpha_video_mean": 0.0873,
+      "delta_acc_from_clean": 0.16,
+      "delta_f1_from_clean": -0.09
+    },
+    "video_noise_1.5": {
+      "accuracy_mean": 70.92,
+      "accuracy_std": 10.64,
+      "macro_f1_mean": 41.8,
+      "macro_f1_std": 7.01,
+      "edit_score_mean": 62.28,
+      "edit_score_std": 8.41,
+      "alpha_video_mean": 0.0849,
+      "delta_acc_from_clean": 0.09,
+      "delta_f1_from_clean": -0.17
+    },
+    "video_noise_2.0": {
+      "accuracy_mean": 70.97,
+      "accuracy_std": 10.43,
+      "macro_f1_mean": 41.75,
+      "macro_f1_std": 6.89,
+      "edit_score_mean": 62.83,
+      "edit_score_std": 8.21,
+      "alpha_video_mean": 0.082,
+      "delta_acc_from_clean": 0.15,
+      "delta_f1_from_clean": -0.22
+    },
+    "kinematics_corrupted": {
+      "accuracy_mean": 64.37,
+      "accuracy_std": 7.89,
+      "macro_f1_mean": 36.9,
+      "macro_f1_std": 3.92,
+      "edit_score_mean": 47.35,
+      "edit_score_std": 8.1,
+      "alpha_video_mean": 0.0842,
+      "delta_acc_from_clean": -6.45,
+      "delta_f1_from_clean": -5.07
+    },
+    "missing_video": {
+      "accuracy_mean": 70.42,
+      "accuracy_std": 10.2,
+      "macro_f1_mean": 41.23,
+      "macro_f1_std": 5.91,
+      "edit_score_mean": 61.77,
+      "edit_score_std": 8.23,
+      "alpha_video_mean": 0.0,
+      "delta_acc_from_clean": -0.41,
+      "delta_f1_from_clean": -0.73
+    },
+    "missing_kinematics": {
+      "accuracy_mean": 28.95,
+      "accuracy_std": 13.91,
+      "macro_f1_mean": 15.54,
+      "macro_f1_std": 6.63,
+      "edit_score_mean": 34.77,
+      "edit_score_std": 6.68,
+      "alpha_video_mean": 1.0,
+      "delta_acc_from_clean": -41.87,
+      "delta_f1_from_clean": -26.43
+    }
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "task": "Suturing",
+      "test_user": "B",
+      "best_epoch": 10,
+      "accuracy": 61.76,
+      "balanced_accuracy": 51.74,
+      "macro_f1": 35.19,
+      "edit_score": 58.7,
+      "mean_alpha_video": 0.0695,
+      "mean_alpha_kin": 0.9305,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 2,
+      "task": "Suturing",
+      "test_user": "C",
+      "best_epoch": 4,
+      "accuracy": 77.85,
+      "balanced_accuracy": 70.4,
+      "macro_f1": 47.07,
+      "edit_score": 73.45,
+      "mean_alpha_video": 0.0502,
+      "mean_alpha_kin": 0.9498,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 3,
+      "task": "Suturing",
+      "test_user": "D",
+      "best_epoch": 4,
+      "accuracy": 67.05,
+      "balanced_accuracy": 70.98,
+      "macro_f1": 46.71,
+      "edit_score": 56.77,
+      "mean_alpha_video": 0.0663,
+      "mean_alpha_kin": 0.9337,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 4,
+      "task": "Suturing",
+      "test_user": "E",
+      "best_epoch": 9,
+      "accuracy": 79.77,
+      "balanced_accuracy": 63.98,
+      "macro_f1": 44.76,
+      "edit_score": 63.9,
+      "mean_alpha_video": 0.0219,
+      "mean_alpha_kin": 0.9781,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 5,
+      "task": "Suturing",
+      "test_user": "F",
+      "best_epoch": 8,
+      "accuracy": 84.54,
+      "balanced_accuracy": 62.98,
+      "macro_f1": 41.81,
+      "edit_score": 70.89,
+      "mean_alpha_video": 0.0299,
+      "mean_alpha_kin": 0.9701,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 6,
+      "task": "Suturing",
+      "test_user": "G",
+      "best_epoch": 14,
+      "accuracy": 48.14,
+      "balanced_accuracy": 41.71,
+      "macro_f1": 27.99,
+      "edit_score": 46.21,
+      "mean_alpha_video": 0.2678,
+      "mean_alpha_kin": 0.7322,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 7,
+      "task": "Suturing",
+      "test_user": "H",
+      "best_epoch": 5,
+      "accuracy": 71.82,
+      "balanced_accuracy": 59.46,
+      "macro_f1": 52.21,
+      "edit_score": 61.18,
+      "mean_alpha_video": 0.1919,
+      "mean_alpha_kin": 0.8081,
+      "n_test_trials": 4
+    },
+    {
+      "fold": 8,
+      "task": "Suturing",
+      "test_user": "I",
+      "best_epoch": 1,
+      "accuracy": 75.67,
+      "balanced_accuracy": 49.18,
+      "macro_f1": 39.97,
+      "edit_score": 68.22,
+      "mean_alpha_video": 0.0198,
+      "mean_alpha_kin": 0.9802,
+      "n_test_trials": 5
+    }
+  ]
+}
