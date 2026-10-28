@@ -121,9 +121,28 @@ git pull origin main
 python scripts/train_surgmotion_noise_ablation.py --preflight-only
 ```
 
-### Full GPU Ablation Workload
-Execute the ablation across all three JIGSAWS tasks on GPU:
+### Single-Command Unified Overnight Execution (Recommended)
+To execute the entire ablation workflow without manual intervention:
+```bash
+# 1. Pull the approved commit
+git pull origin main
 
+# 2. Execute the single-command orchestrator
+python scripts/run_overnight_noise_ablation.py
+```
+
+This single command automatically:
+1. Prevents Windows sleep/hibernation via `SetThreadExecutionState`.
+2. Runs the preflight environment check (CUDA, GPU VRAM, 103 feature caches, dataset).
+3. Trains the primary ablation (`continuous_noise`) across Suturing, Knot Tying, and Needle Passing.
+4. Trains the control baseline (`existing`) across all 3 tasks.
+5. Runs all 9 test-time robustness evaluations and logs time-resolved gate weights.
+6. Generates gate response and temporal dynamics publication figures.
+7. Stages, commits, and pushes all result artifacts to GitHub.
+8. Restores the Windows sleep state upon completion.
+
+### Manual Individual Commands (Alternative)
+If you prefer running the phases separately:
 ```bash
 # 1. Primary Ablation: Continuous-Noise Trained Adaptive Fusion
 python scripts/train_surgmotion_noise_ablation.py \
