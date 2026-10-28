@@ -38,7 +38,6 @@ plt.rcParams.update({
     "axes.grid": True,
     "grid.alpha": 0.35,
     "grid.linestyle": "--",
-    "figure.autolayout": True,
 })
 
 COLORS = {
@@ -96,13 +95,13 @@ def plot_real_gate_noise_response() -> None:
             bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8, edgecolor="#ccc"),
         )
 
-    fig.suptitle(r"Empirical Gate Weight Response to Continuous Visual Feature Noise $\sigma_v \in [0.0, 2.0]$", y=1.02)
-    plt.tight_layout()
+    fig.suptitle(r"Empirical Gate Weight Response to Continuous Visual Feature Noise $\sigma_v \in [0.0, 2.0]$", y=0.98, fontsize=11, fontweight="bold")
+    plt.tight_layout(rect=[0, 0, 1, 0.94])
 
     pdf_out = FIGURES_DIR / "fig_iter32_real_gate_noise_response.pdf"
     png_out = FIGURES_DIR / "fig_iter32_real_gate_noise_response.png"
-    plt.savefig(pdf_out, dpi=300)
-    plt.savefig(png_out, dpi=300)
+    plt.savefig(pdf_out, dpi=300, bbox_inches="tight")
+    plt.savefig(png_out, dpi=300, bbox_inches="tight")
     plt.close()
     print(f"Saved {pdf_out} and {png_out}")
 
@@ -161,8 +160,8 @@ def plot_real_gate_temporal_dynamics() -> None:
     plt.tight_layout()
     pdf_out = FIGURES_DIR / "fig_iter32_real_gate_temporal_dynamics.pdf"
     png_out = FIGURES_DIR / "fig_iter32_real_gate_temporal_dynamics.png"
-    plt.savefig(pdf_out, dpi=300)
-    plt.savefig(png_out, dpi=300)
+    plt.savefig(pdf_out, dpi=300, bbox_inches="tight")
+    plt.savefig(png_out, dpi=300, bbox_inches="tight")
     plt.close()
     print(f"Saved {pdf_out} and {png_out}")
 
@@ -195,7 +194,7 @@ def plot_real_ablation_performance() -> None:
         ax.set_title(m_lbl)
         ax.set_xticks(x)
         ax.set_xticklabels(task_labels)
-        ax.set_ylim(0, 100)
+        ax.set_ylim(0, 105)
 
         # Annotate p-values
         for i, t in enumerate(tasks):
@@ -203,7 +202,7 @@ def plot_real_ablation_performance() -> None:
             diff = clean[t][m]["diff_mean"]
             sign = "+" if diff >= 0 else ""
             ax.text(
-                i, max(means_c[i] + stds_c[i], means_e[i] + stds_e[i]) + 3,
+                i, min(max(means_c[i] + stds_c[i], means_e[i] + stds_e[i]) + 3, 98),
                 f"{sign}{diff:.1f}\n$p$={p_val:.2f}",
                 ha="center", fontsize=8,
             )
@@ -212,13 +211,13 @@ def plot_real_ablation_performance() -> None:
             ax.set_ylabel("Score (%)")
             ax.legend(loc="lower right")
 
-    fig.suptitle("Clean Performance Comparison: Continuous-Noise Trained vs Existing Baseline (Paired t-test)", y=1.02)
-    plt.tight_layout()
+    fig.suptitle("Clean Performance Comparison: Continuous-Noise Trained vs Existing Baseline (Paired t-test)", y=0.98, fontsize=11, fontweight="bold")
+    plt.tight_layout(rect=[0, 0, 1, 0.94])
 
     pdf_out = FIGURES_DIR / "fig_iter32_real_ablation_performance.pdf"
     png_out = FIGURES_DIR / "fig_iter32_real_ablation_performance.png"
-    plt.savefig(pdf_out, dpi=300)
-    plt.savefig(png_out, dpi=300)
+    plt.savefig(pdf_out, dpi=300, bbox_inches="tight")
+    plt.savefig(png_out, dpi=300, bbox_inches="tight")
     plt.close()
     print(f"Saved {pdf_out} and {png_out}")
 

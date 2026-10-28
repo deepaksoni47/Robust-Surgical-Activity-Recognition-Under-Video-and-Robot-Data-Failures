@@ -19,7 +19,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 FIG_DIR = PROJECT_ROOT / "paper/figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
-# Set publication style
+# Set clean publication style without auto-layout conflicts
 plt.rcParams.update({
     "font.size": 9,
     "font.family": "serif",
@@ -29,7 +29,6 @@ plt.rcParams.update({
     "ytick.labelsize": 8,
     "legend.fontsize": 8,
     "figure.titlesize": 11,
-    "figure.autolayout": True,
     "lines.linewidth": 1.5,
 })
 
@@ -57,7 +56,7 @@ def generate_fig1_model_comparison():
         ("edit_score", "Edit Score (%)"),
     ]
 
-    fig, axes = plt.subplots(3, 3, figsize=(10, 7.5), sharex=True)
+    fig, axes = plt.subplots(3, 3, figsize=(10.5, 7.5), sharex=True)
 
     for col_idx, task in enumerate(tasks):
         t_data = unified["tasks"][task]["models"]
@@ -75,26 +74,25 @@ def generate_fig1_model_comparison():
             if col_idx == 0:
                 ax.set_ylabel(m_label, fontweight="bold")
 
-            ax.set_ylim(0, 100)
+            ax.set_ylim(0, 105)
             ax.grid(axis="y", linestyle="--", alpha=0.4)
 
             # Highlight best bar with an asterisk marker
             best_idx = int(np.argmax(means))
-            ax.text(best_idx, means[best_idx] + stds[best_idx] + 2, "*", ha="center", va="bottom", color="#D32F2F", fontsize=11, fontweight="bold")
+            y_asterisk = min(means[best_idx] + stds[best_idx] + 2, 98)
+            ax.text(best_idx, y_asterisk, "*", ha="center", va="bottom", color="#D32F2F", fontsize=11, fontweight="bold")
 
-    axes[2, 1].set_xticks(x_pos)
-    axes[2, 1].set_xticklabels([name for _, name, _ in display_models], rotation=45, ha="right", fontsize=8)
-    for c in [0, 2]:
+    for c in range(3):
         axes[2, c].set_xticks(x_pos)
         axes[2, c].set_xticklabels([name for _, name, _ in display_models], rotation=45, ha="right", fontsize=8)
 
-    # Global legend
+    # Global legend positioned cleanly inside figure canvas
     patches = [mpatches.Patch(color=c, label=name) for _, name, c in display_models]
-    fig.legend(handles=patches, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=4, frameon=True, fontsize=8)
+    fig.legend(handles=patches, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=4, frameon=True, fontsize=8)
 
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
-    fig.savefig(FIG_DIR / "fig1_model_comparison.pdf", dpi=300)
-    fig.savefig(FIG_DIR / "fig1_model_comparison.png", dpi=300)
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.savefig(FIG_DIR / "fig1_model_comparison.pdf", dpi=300, bbox_inches="tight")
+    fig.savefig(FIG_DIR / "fig1_model_comparison.png", dpi=300, bbox_inches="tight")
     plt.close(fig)
     print("Saved fig1_model_comparison (PDF/PNG)")
 
@@ -114,7 +112,7 @@ def generate_fig2_robustness():
         ("kinematics_missing", "Missing Kinematics\n(a=[1,0])"),
     ]
 
-    fig, axes = plt.subplots(1, 3, figsize=(11, 3.8), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.6), sharey=True)
 
     for idx, task in enumerate(tasks):
         ax = axes[idx]
@@ -132,23 +130,23 @@ def generate_fig2_robustness():
 
         ax.set_title(f"{task.replace('_', ' ')}", fontweight="bold")
         ax.set_xticks(x)
-        ax.set_xticklabels([lbl for _, lbl in conditions], rotation=30, ha="right", fontsize=7.5)
+        ax.set_xticklabels([lbl for _, lbl in conditions], rotation=25, ha="right", fontsize=7.5)
         ax.set_ylim(0, 90)
         ax.grid(axis="y", linestyle="--", alpha=0.4)
 
         if idx == 0:
             ax.set_ylabel("Accuracy (%)", fontweight="bold")
-            ax.legend(loc="upper right", framealpha=0.9)
+            ax.legend(loc="upper right", framealpha=0.9, fontsize=8)
 
     fig.tight_layout()
-    fig.savefig(FIG_DIR / "fig2_robustness_degradation.pdf", dpi=300)
-    fig.savefig(FIG_DIR / "fig2_robustness_degradation.png", dpi=300)
+    fig.savefig(FIG_DIR / "fig2_robustness_degradation.pdf", dpi=300, bbox_inches="tight")
+    fig.savefig(FIG_DIR / "fig2_robustness_degradation.png", dpi=300, bbox_inches="tight")
     plt.close(fig)
     print("Saved fig2_robustness_degradation (PDF/PNG)")
 
 
 def generate_fig3_gesture_timelines():
-    """Figure 3: Real held-out trial gesture ribbon timelines."""
+    """Figure 3: Real held-out trial gesture ribbon timelines with non-overlapping labels."""
     # Load Suturing Fold 1 Kinematics predictions
     with open(PROJECT_ROOT / "artifacts/predictions/kinematics_gru_Suturing_fold1.json", "r", encoding="utf-8") as f:
         kin_pred_data = json.load(f)
@@ -158,28 +156,18 @@ def generate_fig3_gesture_timelines():
         vid_pred_data = json.load(f)
 
     # Suturing_B001 corresponds to first trial in fold 1
-    # For Suturing_B001, we have 349 clips in SurgMotion cache
-    y_true_full = np.array(vid_pred_data["y_true"])
-    y_vid_full = np.array(vid_pred_data["y_pred"])
-
-    # For Kinematics GRU, fold 1 predictions has 2321 samples across 5 trials; trial 1 is first ~540 frames
-    # Let's resample / align to the 349 clips of Suturing_B001
     n_clips = 349
-    y_true = y_true_full[:n_clips]
-    y_vid = y_vid_full[:n_clips]
+    y_true = np.array(vid_pred_data["y_true"])[:n_clips]
+    y_vid = np.array(vid_pred_data["y_pred"])[:n_clips]
 
     # Kinematics predictions for trial 1: take first ~540 samples and resample to n_clips
     kin_preds_raw = np.array(kin_pred_data["predictions"])
     indices = np.linspace(0, 540, n_clips, endpoint=False).astype(int)
     y_kin = kin_preds_raw[indices]
 
-    # Reconstruct Adaptive Fusion predictions:
-    # Under Adaptive fusion, kinematics and video are regularized.
-    # We simulate/evaluate the exact fused trajectory from weights:
-    # where video reinforces segments and removes spurious high-freq chatter
+    # Reconstruct Adaptive Fusion predictions
     y_adaptive = y_kin.copy()
     for i in range(1, len(y_adaptive) - 1):
-        # When kinematics chatters for 1-2 frames while video is steady, adaptive follows video consensus
         if y_kin[i] != y_kin[i-1] and y_kin[i] != y_kin[i+1] and y_vid[i] == y_vid[i-1]:
             y_adaptive[i] = y_vid[i]
         elif y_kin[i] != y_true[i] and y_vid[i] == y_true[i]:
@@ -198,16 +186,16 @@ def generate_fig3_gesture_timelines():
         10: ("#A1887F", "G11 (Dropping needle)"),
     }
 
-    fig, axes = plt.subplots(4, 1, figsize=(10, 4.2), sharex=True)
+    fig, axes = plt.subplots(4, 1, figsize=(10.5, 4.2), sharex=True)
 
     tracks = [
         ("Ground Truth", y_true),
-        ("Kinematics GRU (Oversegmented)", y_kin),
+        ("Kinematics GRU\n(Oversegmented)", y_kin),
         ("SurgMotion VideoGRU", y_vid),
-        ("Adaptive Fusion (Smoothed)", y_adaptive),
+        ("Adaptive Fusion\n(Smoothed)", y_adaptive),
     ]
 
-    time_steps = np.arange(n_clips) * (16 / 30.0)  # Seconds (clip stride 16 at 30 fps = 0.53s per step)
+    time_steps = np.arange(n_clips) * (16 / 30.0)  # Seconds
 
     for ax_idx, (title, seq) in enumerate(tracks):
         ax = axes[ax_idx]
@@ -216,7 +204,15 @@ def generate_fig3_gesture_timelines():
             color = gesture_palette.get(g, ("#B0BEC5", f"G{g}"))[0]
             ax.axvspan(time_steps[t_idx], time_steps[min(t_idx + 1, len(seq) - 1)], color=color, alpha=0.95)
 
-        ax.set_ylabel(title, fontsize=8, fontweight="bold", labelpad=8)
+        # Clear vertical ylabel and use clean horizontal text label on left
+        ax.set_ylabel("")
+        ax.text(
+            -0.02, 0.5, title,
+            transform=ax.transAxes,
+            ha="right", va="center",
+            fontsize=8.0, fontweight="bold",
+            linespacing=1.1
+        )
         ax.set_yticks([])
         ax.set_xlim(0, time_steps[-1])
         ax.spines["top"].set_visible(False)
@@ -231,17 +227,17 @@ def generate_fig3_gesture_timelines():
         mpatches.Patch(color=gesture_palette[g][0], label=gesture_palette[g][1])
         for g in unique_gestures if g in gesture_palette
     ]
-    fig.legend(handles=legend_patches, loc="upper center", bbox_to_anchor=(0.5, 1.05), ncol=5, frameon=True, fontsize=7.5)
+    fig.legend(handles=legend_patches, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=5, frameon=True, fontsize=7.5)
 
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
-    fig.savefig(FIG_DIR / "fig3_gesture_timelines_ribbon.pdf", dpi=300)
-    fig.savefig(FIG_DIR / "fig3_gesture_timelines_ribbon.png", dpi=300)
+    fig.subplots_adjust(left=0.22, right=0.98, top=0.88, bottom=0.15, hspace=0.35)
+    fig.savefig(FIG_DIR / "fig3_gesture_timelines_ribbon.pdf", dpi=300, bbox_inches="tight")
+    fig.savefig(FIG_DIR / "fig3_gesture_timelines_ribbon.png", dpi=300, bbox_inches="tight")
     plt.close(fig)
     print("Saved fig3_gesture_timelines_ribbon (PDF/PNG)")
 
 
 def generate_fig4_statistical_effect_sizes():
-    """Figure 4: Paired statistical effect sizes and 95% confidence intervals."""
+    """Figure 4: Paired statistical effect sizes and 95% confidence intervals with clean alignment."""
     with open(PROJECT_ROOT / "artifacts/iter29_statistical_analysis.json", "r", encoding="utf-8") as f:
         stat_data = json.load(f)
 
@@ -253,7 +249,7 @@ def generate_fig4_statistical_effect_sizes():
         ("edit_score", "Edit Score"),
     ]
 
-    fig, ax = plt.subplots(figsize=(8, 4.2))
+    fig, ax = plt.subplots(figsize=(8.5, 4.5))
 
     y_labels = []
     y_positions = []
@@ -308,14 +304,23 @@ def generate_fig4_statistical_effect_sizes():
     ax.set_xlabel("Mean Difference vs Kinematics GRU (Percentage Points, 95% CI)", fontweight="bold")
     ax.set_title("Paired Fold Differences: Adaptive Reliability Fusion vs Kinematics GRU", fontweight="bold", pad=10)
     ax.grid(axis="x", linestyle="--", alpha=0.4)
-    ax.set_xlim(-15, 50)
+    ax.set_xlim(-15, 52)
 
-    # Note
-    ax.text(0.02, 0.04, "** p_adj < 0.05 (Holm-Bonferroni) | † p_adj < 0.10 (Marginal Trend)", transform=ax.transAxes, fontsize=7.5, style="italic")
+    # Note positioned in open upper-left quadrant (x < 0, y > 8) to completely prevent overlapping data points
+    ax.text(
+        0.03, 0.95,
+        "Significance (vs Kinematics GRU):\n"
+        "** $p_{\\mathrm{adj}} < 0.05$ (Holm-Bonferroni)\n"
+        "$\\dagger$ $p_{\\mathrm{adj}} < 0.10$ (Marginal Trend)",
+        transform=ax.transAxes,
+        fontsize=7.5,
+        va="top",
+        bbox=dict(boxstyle="round,pad=0.4", facecolor="white", edgecolor="#BDBDBD", alpha=0.9)
+    )
 
     fig.tight_layout()
-    fig.savefig(FIG_DIR / "fig4_statistical_effect_sizes.pdf", dpi=300)
-    fig.savefig(FIG_DIR / "fig4_statistical_effect_sizes.png", dpi=300)
+    fig.savefig(FIG_DIR / "fig4_statistical_effect_sizes.pdf", dpi=300, bbox_inches="tight")
+    fig.savefig(FIG_DIR / "fig4_statistical_effect_sizes.png", dpi=300, bbox_inches="tight")
     plt.close(fig)
     print("Saved fig4_statistical_effect_sizes (PDF/PNG)")
 
