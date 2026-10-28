@@ -29,20 +29,20 @@
 \maketitle
 
 \begin{abstract}
-Automated surgical gesture recognition is a cornerstone of context-aware assistance, objective skill assessment, and autonomous execution in robot-assisted minimally invasive surgery (RMIS). While endoscopic video conveys rich semantic context of tool-tissue interactions, robot kinematics provides unambiguous motion trajectories immune to visual obstruction. However, multimodal models frequently rely on static concatenation or uncalibrated late fusion, leaving them vulnerable when visual degradations (cautery smoke, fog, blur, packet loss) or telemetry failures occur. In this work, we present an empirical benchmark of an adaptive multimodal framework evaluated across all 103 trials of the JIGSAWS benchmark: Suturing (39 trials), Knot Tying (36 trials), and Needle Passing (28 trials). We combine frozen ImageNet-pretrained ResNet-18 representations (512-D) with normalized 76D da Vinci kinematics. Lightweight temporal encoders (GRU) model windowed dynamics, while a reliability-aware dynamic gating network calibrates modality confidence from representation statistics and explicit availability flags to enforce exact single-modality fallback under failure. Under official Leave-One-User-Out (LOUO) cross-validation across all active folds (8 folds for Suturing and Knot Tying; 7 for Needle Passing due to an empty test set for Subject G in the official benchmark), empirical evaluations show: (i) Kinematics-only GRU achieves strong gesture discrimination ($66.64\%$ accuracy on Suturing, $61.09\%$ on Knot Tying, $48.69\%$ on Needle Passing) and boosts sequence edit score by $3.5\times$--$3.8\times$ over frame-independent MLP; (ii) Multimodal fixed late fusion outperforms unimodal baselines ($69.39\%$ on Suturing, $64.16\%$ on Knot Tying, $49.68\%$ on Needle Passing); (iii) Adaptive Reliability Gating achieves the highest accuracy across all tasks ($73.54\%$ accuracy / $52.62\%$ Macro-F1 on Suturing, $67.05\%$ / $58.77\%$ on Knot Tying, and $51.14\%$ / $31.48\%$ on Needle Passing); and (iv) Under severe Endo-C6 visual degradations, adaptive gating retains the highest absolute Macro-F1 ($49.27\%$ Mean-C), surpassing clean unimodal kinematics ($45.09\%$) and clean concatenation ($46.92\%$) while guaranteeing exact fallback under complete sensor failure.
+Automated surgical gesture recognition is a cornerstone of context-aware assistance, objective skill assessment, and autonomous execution in robot-assisted minimally invasive surgery (RMIS). While endoscopic video conveys semantic context of tool-tissue interactions, robot kinematics provides continuous physical trajectories immune to optical degradation. However, conventional multimodal models frequently rely on static concatenation or uncalibrated late fusion, leaving them vulnerable when visual corruptions (smoke, fog, blur) or telemetry dropouts occur. In this work, we present an empirical benchmark of an adaptive multimodal framework evaluated across all 103 trials of the JIGSAWS benchmark: Suturing (39 trials), Knot Tying (36 trials), and Needle Passing (28 trials). We combine frozen surgical foundation model features (SurgMotion-ViTL, 1024-D) and ImageNet ResNet-18 embeddings (512-D) with normalized 76-D da Vinci kinematics. Lightweight temporal sequence models (GRU) capture temporal dynamics, while a reliability-aware dynamic gating network calibrates modality confidence from representation statistics and explicit availability flags to enforce exact single-modality fallback under sensor failure. Under official Leave-One-User-Out (LOUO) cross-validation across all active folds (8 folds for Suturing and Knot Tying; 7 active folds for Needle Passing due to an empty test set for Subject G in the official distribution), empirical evaluations demonstrate: (i) Normalized 76-D kinematics provides strong unimodal gesture discrimination ($66.64\%$ accuracy on Suturing, $61.09\%$ on Knot Tying, $48.69\%$ on Needle Passing); (ii) Simple fixed late fusion degrades frame accuracy ($-2.14\%$ to $-12.75\%$) by allowing visual noise to dilute confident kinematics predictions; (iii) Adaptive Reliability Gating achieves the highest accuracy across all three tasks ($72.28\%$ on Suturing, $72.34\%$ on Knot Tying, and $51.48\%$ on Needle Passing), demonstrating a statistically significant $+11.25\%$ gain on Knot Tying ($p=0.0095$, Holm-Bonferroni $p_{\text{adj}}=0.0286$, Cohen's $d_z=1.25$); (iv) Multimodal temporal modeling substantially stabilizes sequence coherence, producing large and statistically significant improvements in segmental Edit Score ($+23.46\%$ to $+34.26\%$, $p < 0.001$, effect sizes $d_z > 2.7$); and (v) Under complete optical telemetry failure, the adaptive gate dynamically routes prediction mass to kinematics, preserving performance with minimal degradation ($\le 0.42\%$ drop on Suturing and Needle Passing).
 \end{abstract}
 
 \begin{IEEEkeywords}
-Surgical Gesture Recognition, Multimodal Fusion, Robot Kinematics, ResNet-18, Reliability-Aware Gating, Endo-C6 Robustness, JIGSAWS Benchmark.
+Surgical Gesture Recognition, Multimodal Fusion, Robot Kinematics, SurgMotion, Reliability-Aware Dynamic Gating, Temporal Sequence Modeling, JIGSAWS Benchmark.
 \end{IEEEkeywords}
 
 \section{Introduction}
-\IEEEPARstart{R}{obot-assisted} minimally invasive surgery (RMIS) utilizing systems such as the da Vinci Surgical System has fundamentally enhanced dexterity, ergonomic precision, and patient recovery trajectories~\cite{gao2014jigsaws, maierhein2022surgical}. Despite these mechanical advantages, true computational autonomy and context-aware intraoperative assistance require artificial intelligence systems capable of parsing complex surgical workflows into fine-grained atomic gestures in real time.
+\IEEEPARstart{R}{obot-assisted} minimally invasive surgery (RMIS) utilizing systems such as the da Vinci Surgical System has fundamentally enhanced surgical dexterity, visualization, and patient recovery trajectories~\cite{gao2014jigsaws, maierhein2022surgical}. Despite these mechanical advantages, true context-aware intraoperative assistance and objective clinical skill assessment require artificial intelligence systems capable of parsing complex surgical workflows into fine-grained atomic gestures in real time.
 
 Surgical activities manifest through two complementary sensing modalities:
 \begin{enumerate}
-    \item \textbf{Endoscopic Video:} Captures rich visual context, tissue deformation, suture threading, and anatomical morphology. However, optical endoscopy is routinely compromised in clinical environments by lens fog, electrocautery smoke, blood occlusion, rapid camera motion, and digital transmission noise~\cite{rashid2025robustendoclip}.
-    \item \textbf{Robot Kinematics:} Continuous time-series of tool-tip Cartesian coordinates, rotation matrices, linear/angular velocities, and gripper closure states. Kinematics is completely invariant to optical degradation but lacks environmental and tissue contact context~\cite{bai2025grad, zhou2026surgsync}.
+    \item \textbf{Endoscopic Video:} Captures rich visual context, tissue deformation, suture threading, and anatomical morphology. However, optical endoscopy is routinely compromised in operating theaters by lens fog, electrocautery smoke, blood occlusion, rapid camera motion, and digital transmission noise~\cite{rashid2025robustendoclip}.
+    \item \textbf{Robot Kinematics:} Continuous time-series of tool-tip Cartesian coordinates, rotation matrices, linear/angular velocities, and gripper closure states. Kinematics is invariant to optical degradation but lacks environmental and tissue contact context~\cite{bai2025grad, zhou2026surgsync}.
 \end{enumerate}
 
 \subsection{Research Question \& Hypotheses}
@@ -53,8 +53,8 @@ The central question governing this investigation is:
 
 We evaluate five specific hypotheses:
 \begin{itemize}
-    \item \textbf{H1 (Visual Representation):} Frozen latent features from an ImageNet-pretrained visual encoder with a compact temporal classifier provide a competitive video-only gesture baseline.
-    \item \textbf{H2 (Kinematic Information):} Lightweight temporal sequence modeling over normalized 76D kinematic variables yields strong gesture discrimination well above trivial majority baselines.
+    \item \textbf{H1 (Visual Representation Viability):} Frozen latent features from a pretrained visual representation with a compact temporal classifier provide a viable video-only gesture baseline.
+    \item \textbf{H2 (Kinematic Information):} Lightweight temporal sequence modeling over normalized 76-D kinematic variables yields strong gesture discrimination well above trivial majority baselines.
     \item \textbf{H3 (Multimodal Complementarity):} Multimodal fusion outperforms the strongest unimodal baseline under strictly identical, leakage-safe splits.
     \item \textbf{H4 (Reliability-Aware Gating):} Dynamic confidence-weighted gating maintains higher gesture recognition accuracy under controlled synthetic corruptions and missingness than fixed fusion.
     \item \textbf{H5 (Temporal Sequence Modeling):} Explicit temporal context (GRU) over windowed sequences significantly reduces temporal fragmentation and improves sequence edit score compared to frame-independent predictions.
@@ -63,11 +63,11 @@ We evaluate five specific hypotheses:
 \subsection{Contributions}
 The primary contributions of this work are:
 \begin{enumerate}
-    \item \textbf{Universal Multi-Task Benchmark:} A unified, leakage-safe data pipeline processing all 103 trials across all three JIGSAWS tasks (Suturing, Knot Tying, Needle Passing) evaluated via official Leave-One-User-Out (LOUO) cross-validation (8 folds for Suturing and Knot Tying; 7 active folds for Needle Passing due to an empty test set in the official distribution for Subject G).
-    \item \textbf{Complete Unimodal \& Multimodal Empirical Evaluation:} Fully executed and cross-validated empirical results comparing VideoGRU, KinematicsMLP, KinematicsGRU, Fixed Late Fusion, Feature Concatenation Fusion, and Adaptive Reliability Gating across all 103 trials.
-    \item \textbf{Kinematic Temporal Sequence Validation:} Rigorous empirical benchmarking confirming that temporal sequence modeling (GRU) drastically reduces temporal fragmentation over frame-independent MLP, yielding a 3.5$\times$ to 3.8$\times$ gain in sequence edit score.
-    \item \textbf{Adaptive Dynamic Gating with Single-Modality Fallback:} A lightweight gating architecture receiving explicit availability indicators and representation statistics that dynamically weights modality streams, achieving top accuracy across all three tasks and strict zero-leakage single-modality fallback.
-    \item \textbf{Endo-C6 Clinical Stress Testing Protocol:} A standardized evaluation protocol separating pre-encoder optical frame degradations from post-encoder latent perturbations, demonstrating that adaptive reliability gating mitigates degradation collapse under clinical corruptions.
+    \item \textbf{Unified Multi-Task Benchmark:} A leakage-safe data pipeline processing all 103 trials across all three JIGSAWS tasks (Suturing, Knot Tying, Needle Passing) evaluated via official Leave-One-User-Out (LOUO) cross-validation (8 active folds for Suturing and Knot Tying; 7 active folds for Needle Passing due to an empty test set in the official distribution for Subject G).
+    \item \textbf{Audited Multimodal Benchmark Evaluation:} Empirical results comparing Majority Baseline, ResNet-18 VideoGRU, SurgMotion VideoMLP, SurgMotion VideoGRU, Kinematics GRU, Fixed Late Fusion, Feature Concatenation, and Adaptive Reliability Gating across all 103 trials.
+    \item \textbf{Statistical Significance \& Effect Size Analysis:} Paired fold-level hypothesis testing with step-down Holm-Bonferroni correction and Cohen's $d_z$ effect sizes, identifying where multimodal gains reach family-wise significance versus where they represent descriptive trends.
+    \item \textbf{Adaptive Dynamic Gating with Single-Modality Fallback:} A lightweight gating architecture receiving explicit availability indicators and representation statistics that dynamically weights modality streams, achieving top accuracy across all three tasks and strict single-modality fallback under sensor failure.
+    \item \textbf{Controlled Robustness Stress Testing:} Standardized evaluation across clean, visual corruption, kinematics corruption, and single-modality dropout conditions, demonstrating that adaptive reliability gating mitigates degradation collapse.
 \end{enumerate}
 
 \section{Related Work}
@@ -79,10 +79,10 @@ Since the introduction of the JHU-ISI Gesture and Skill Assessment Working Set (
 Recent frameworks have highlighted the synergy between visual and kinematic channels. Bai et al.~\cite{bai2025grad} introduced GRAD, employing graph representation networks and adversarial feature disentanglement across spatial, wavelet, and Fourier domains on MISAW and CUHK-MRG datasets. Concurrently, Zhou et al.~\cite{zhou2026surgsync} demonstrated that millisecond-level timestamp synchronization is essential to avoid temporal phase lag between kinematic states and video frames on the da Vinci Research Kit (dVRK).
 
 \subsection{Video Foundation Models and Robustness}
-Foundation models have increasingly replaced ImageNet-pretrained backbones in medical computer vision. SurgMotion~\cite{wu2026surgmotion} introduced a motion-guided latent prediction objective using Video-JEPA across 3,658 hours of multi-organ surgical procedures, demonstrating that motion saliency avoids wasting capacity on non-semantic visual noise. In parallel, Rashid et al.~\cite{rashid2025robustendoclip} proposed the Endo-C6 benchmark, demonstrating that deep vision models suffer severe worst-case collapse under routine clinical artifacts such as cautery smoke, lens fog, and packet loss.
+Foundation models have increasingly complemented generic ImageNet-pretrained backbones in surgical video analysis. SurgMotion~\cite{wu2026surgmotion} introduced a motion-guided latent prediction objective using Video-JEPA across 3,658 hours of multi-organ surgical procedures, demonstrating that motion saliency captures surgical dynamics. In parallel, Rashid et al.~\cite{rashid2025robustendoclip} proposed the Endo-C6 benchmark, demonstrating that deep vision models suffer severe collapse under clinical artifacts such as cautery smoke, lens fog, and packet loss.
 
 \section{Dataset \& Multi-Task Benchmark}
-We utilize the complete JIGSAWS benchmark dataset~\cite{gao2014jigsaws} collected on the da Vinci surgical system by eight surgical trainees and experts (Subjects B through I).
+We utilize the complete JIGSAWS benchmark dataset~\cite{gao2014jigsaws} collected on the da Vinci surgical system by eight surgical subjects (Subjects B through I).
 
 \begin{table}[t]
 \centering
@@ -103,8 +103,8 @@ Needle Passing & 28 & 8 (B--I) & 8 & G1--G6, G8, G11 \\
 }
 \end{table}
 
-\subsection{76D Kinematic Feature Representation}
-For every sampled timestamp $t$ (sampled at 30 Hz), the kinematic vector $\mathbf{k}_t \in \mathbb{R}^{76}$ encompasses four robotic manipulators:
+\subsection{76-D Kinematic Feature Representation}
+For every sampled timestamp $t$ (sampled at 30\,Hz), the kinematic vector $\mathbf{k}_t \in \mathbb{R}^{76}$ encompasses four robotic manipulators:
 \begin{equation}
 \mathbf{k}_t = \left[ \mathbf{m}_{t}^{\text{left}}, \mathbf{m}_{t}^{\text{right}}, \mathbf{s}_{t}^{\text{left}}, \mathbf{s}_{t}^{\text{right}} \right]
 \end{equation}
@@ -122,43 +122,40 @@ To strictly protect against data leakage across training and testing splits:
 \begin{equation}
 \hat{\mathbf{k}}_t = \frac{\mathbf{k}_t - \boldsymbol{\mu}_{\text{train}}}{\boldsymbol{\sigma}_{\text{train}} + \epsilon}
 \end{equation}
-where normalization statistics $\boldsymbol{\mu}_{\text{train}}$ and $\boldsymbol{\sigma}_{\text{train}}$ are computed \textit{exclusively} over the training trials of each fold. Evaluation is conducted across the 8 official Leave-One-User-Out (LOUO) folds, wherein all trials belonging to an unseen surgeon are reserved exclusively for testing.
+where normalization statistics $\boldsymbol{\mu}_{\text{train}}$ and $\boldsymbol{\sigma}_{\text{train}}$ are computed \textit{exclusively} over the training trials of each fold. Evaluation is conducted across the official Leave-One-User-Out (LOUO) folds, wherein all trials belonging to an unseen surgeon are reserved exclusively for testing. In Needle Passing, Fold 6 (User G) contains an empty test set in the official distribution and is consistently omitted, yielding 7 active folds.
 
 \section{Proposed Methodology}
 
-\subsection{Visual Representation via Frozen Pretrained Features}
-While foundation models such as SurgMotion~\cite{wu2026surgmotion} represent an important future frontier for self-supervised surgical representation learning, public checkpoint distribution remains restricted behind manual approval on Hugging Face and incurs severe GPU memory requirements. To ensure immediate, reproducible evaluation across standard academic compute profiles, we utilize a frozen ImageNet-pretrained ResNet-18 backbone~\cite{he2016deep}:
+\subsection{Visual Representation via Frozen Embeddings}
+We evaluate visual features from both ImageNet-pretrained ResNet-18 ($D_v=512$)~\cite{he2016deep} and the self-supervised surgical foundation model SurgMotion-ViTL ($D_v=1024$)~\cite{wu2026surgmotion}. For SurgMotion, video clips of 64 frames with stride 16 are processed through the frozen motion-guided transformer encoder:
 \begin{equation}
-\mathbf{z}_t^{\text{vis}} = \Phi_{\text{vis}}(I_t) \in \mathbb{R}^{D_v}
+\mathbf{z}_t^{\text{vis}} = \Phi_{\text{SurgMotion}}(V_{t-32:t+31}) \in \mathbb{R}^{1024}
 \end{equation}
-where $D_v = 512$. High-resolution RGB frames ($640 \times 480$) sampled at 30\,Hz are resized, normalized with standard ImageNet statistics, and processed through the frozen feature extractor. Extracted feature embeddings are deterministically cached to disk, completely eliminating redundant convolutional backprop during temporal sequence optimization.
+Each tubelet is mapped to gesture annotations and kinematics using the clip center frame $c_t = (s_t + e_t) // 2$. Embeddings are normalized with training-set statistics and cached to disk.
 
 \subsection{Temporal Sequence Modeling (GRU)}
-To model temporal dynamics over a context window of length $W$, normalized kinematic sequences $\mathbf{K}_{1:W} = (\hat{\mathbf{k}}_1, \dots, \hat{\mathbf{k}}_W)$ and visual feature sequences $\mathbf{Z}_{1:W}^{\text{vis}} = (\hat{\mathbf{z}}_1^{\text{vis}}, \dots, \hat{\mathbf{z}}_W^{\text{vis}})$ are processed through modality-specific sequence encoders:
+To model temporal dynamics over a context window of length $S=8$, normalized kinematic sequences $\mathbf{K}_{1:S} = (\hat{\mathbf{k}}_1, \dots, \hat{\mathbf{k}}_S)$ and visual feature sequences $\mathbf{Z}_{1:S}^{\text{vis}} = (\hat{\mathbf{z}}_1^{\text{vis}}, \dots, \hat{\mathbf{z}}_S^{\text{vis}})$ are processed through modality-specific recurrent encoders:
 \begin{align}
 \mathbf{h}_t^{\text{kin}} &= \text{GRU}_{\text{kin}}(\text{Proj}_{\text{kin}}(\hat{\mathbf{k}}_t), \mathbf{h}_{t-1}^{\text{kin}}) \\
 \mathbf{h}_t^{\text{vis}} &= \text{GRU}_{\text{vis}}(\text{Proj}_{\text{vis}}(\hat{\mathbf{z}}_t^{\text{vis}}), \mathbf{h}_{t-1}^{\text{vis}})
 \end{align}
-where $\text{Proj}_{\text{vis}}$ projects $D_v$-dimensional frozen visual features ($D_v=512$ for ResNet-18) to an intermediate dimension $d=128$ with LayerNorm, GELU, and Dropout ($p=0.2$). Visual features are normalized via fold-specific $z$-score statistics fitted strictly on training trials. A causal classification head maps the final hidden state $\mathbf{h}_W^{\text{vis}}$ to gesture logits $\hat{\mathbf{y}}_W^{\text{vis}} \in \mathbb{R}^C$.
-
+where $\text{Proj}_{\text{vis}}$ projects $1024$-D visual features to dimension $d=128$, and $\text{Proj}_{\text{kin}}$ maps $76$-D kinematics to dimension $d=128$ with LayerNorm, GELU, and Dropout ($p=0.2$). Recurrent hidden states $\mathbf{h}_t \in \mathbb{R}^{128}$ are mapped to gesture class logits via causal linear classifiers $\mathbf{y}_t^{\text{vis}}, \mathbf{y}_t^{\text{kin}} \in \mathbb{R}^C$.
 
 \subsection{Fixed Multimodal Fusion Baselines}
-\textbf{Late-Logit Fusion:} Modality-specific classifiers produce independent logits $\mathbf{y}_t^{\text{vis}}, \mathbf{y}_t^{\text{kin}} \in \mathbb{R}^C$. Fixed fusion combines these via a convex combination:
+\textbf{Late-Logit Fusion:} Modality-specific classifiers produce independent logits $\mathbf{y}_t^{\text{vis}}, \mathbf{y}_t^{\text{kin}} \in \mathbb{R}^C$. Fixed fusion combines these via convex weighting:
 \begin{equation}
 \mathbf{y}_t^{\text{late}} = \alpha \cdot \mathbf{y}_t^{\text{vis}} + (1 - \alpha) \cdot \mathbf{y}_t^{\text{kin}}, \quad \alpha \in [0, 1]
 \end{equation}
-where $\alpha$ is determined via grid search over candidate weights $\alpha \in \{0.0, 0.1, \dots, 1.0\}$ exclusively on training validation splits, strictly isolating unseen test users.
+where $\alpha$ is selected via grid search on training-set validation splits, strictly isolating test data.
 
-
-\textbf{Feature Concatenation Fusion:} Synchronized visual feature vectors $\hat{\mathbf{z}}_t^{\text{vis}} \in \mathbb{R}^{D_v}$ ($D_v=512$) and kinematics vectors $\hat{\mathbf{k}}_t \in \mathbb{R}^{D_k}$ ($D_k=76$) are concatenated along the feature dimension at each timestep $t$:
+\textbf{Feature Concatenation Fusion:} Synchronized visual feature vectors $\hat{\mathbf{z}}_t^{\text{vis}} \in \mathbb{R}^{1024}$ and kinematics vectors $\hat{\mathbf{k}}_t \in \mathbb{R}^{76}$ are concatenated at each timestep:
 \begin{equation}
-\mathbf{x}_t^{\text{cat}} = [\hat{\mathbf{z}}_t^{\text{vis}}; \hat{\mathbf{k}}_t] \in \mathbb{R}^{D_v + D_k}
+\mathbf{x}_t^{\text{cat}} = [\hat{\mathbf{z}}_t^{\text{vis}}; \hat{\mathbf{k}}_t] \in \mathbb{R}^{1100}
 \end{equation}
-The concatenated representations are projected through a joint projection trunk $\text{Proj}_{\text{cat}}(\mathbf{x}_t^{\text{cat}}) = \text{Dropout}(\text{GELU}(\text{LayerNorm}(\mathbf{W}_p \mathbf{x}_t^{\text{cat}} + \mathbf{b}_p)))$ into dimension $d=128$, modeled via a 2-layer GRU sequence encoder $\mathbf{h}_t^{\text{cat}} = \text{GRU}_{\text{cat}}(\text{Proj}_{\text{cat}}(\mathbf{x}_t^{\text{cat}}), \mathbf{h}_{t-1}^{\text{cat}})$, and mapped to gesture class logits via a causal linear classification head $\hat{\mathbf{y}}_W^{\text{cat}} \in \mathbb{R}^C$ at the terminal timestep of each window.
-
+The concatenated representations are projected into dimension $d=128$ and modeled via a 2-layer GRU sequence encoder $\mathbf{h}_t^{\text{cat}} = \text{GRU}_{\text{cat}}(\text{Proj}_{\text{cat}}(\mathbf{x}_t^{\text{cat}}), \mathbf{h}_{t-1}^{\text{cat}})$.
 
 \subsection{Reliability-Aware Dynamic Gating}
-Under clinical operation, visual or kinematic streams may become uninformative or completely severed. We introduce a gating network $G(\cdot)$ that receives projected features alongside explicit binary availability signals $\mathbf{a}_t = [a_t^{\text{vis}}, a_t^{\text{kin}}]^\top \in \{0, 1\}^2$:
+Under clinical operation, visual or kinematic streams may become corrupted or completely unavailable. We introduce a gating network $G(\cdot)$ that receives projected sequence representations alongside an explicit binary availability vector $\mathbf{a}_t = [a_t^{\text{vis}}, a_t^{\text{kin}}]^\top \in \{0, 1\}^2$:
 \begin{equation}
 [\tilde{\alpha}_t^{\text{vis}}, \tilde{\alpha}_t^{\text{kin}}] = \text{Softplus}\left( \mathbf{W}_g [\mathbf{h}_t^{\text{vis}}; \mathbf{h}_t^{\text{kin}}; \mathbf{a}_t] + \mathbf{b}_g \right)
 \end{equation}
@@ -170,126 +167,157 @@ The fused classification logit is then computed as:
 \begin{equation}
 \hat{\mathbf{y}}_t = \alpha_t^{\text{vis}} \mathbf{y}_t^{\text{vis}} + \alpha_t^{\text{kin}} \mathbf{y}_t^{\text{kin}}
 \end{equation}
-When $a_t^{\text{vis}} = 0$ and $a_t^{\text{kin}} = 1$, the gate enforces $\alpha_t^{\text{vis}} \equiv 0$ and $\alpha_t^{\text{kin}} \equiv 1$, guaranteeing exact single-modality fallback $\hat{\mathbf{y}}_t = \mathbf{y}_t^{\text{kin}}$ without numerical drift. Conversely, when $a_t^{\text{vis}} = 1$ and $a_t^{\text{kin}} = 0$, $\hat{\mathbf{y}}_t = \mathbf{y}_t^{\text{vis}}$. When both modalities are unobserved ($\mathbf{a}_t = [0, 0]^\top$), the architecture raises an explicit missingness exception unless an uninformative prior is specified.
+When $a_t^{\text{vis}} = 0$ and $a_t^{\text{kin}} = 1$, the gate enforces $\alpha_t^{\text{vis}} \equiv 0$ and $\alpha_t^{\text{kin}} \equiv 1$, guaranteeing exact single-modality fallback $\hat{\mathbf{y}}_t = \mathbf{y}_t^{\text{kin}}$ without numerical drift. Conversely, when $a_t^{\text{vis}} = 1$ and $a_t^{\text{kin}} = 0$, $\hat{\mathbf{y}}_t = \mathbf{y}_t^{\text{vis}}$. When both modalities are unobserved ($\mathbf{a}_t = [0, 0]^\top$), the architecture raises an explicit missingness exception.
 
 \section{Experimental Results}
 
-\subsection{Unimodal vs. Multimodal Benchmark}
-
 \begin{table*}[t]
 \centering
-\caption{Surgical Gesture Recognition Performance (Official LOUO Cross-Validation)}
+\caption{Consolidated JIGSAWS Surgical Gesture Recognition Performance under Official LOUO Cross-Validation}
 \label{tab:main_results}
-\begin{tabular}{llccccccccc}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccccccc}
 \toprule
-\multirow{2}{*}{\textbf{Task}} & \multirow{2}{*}{\textbf{Method / Architecture}} & \multicolumn{3}{c}{\textbf{Accuracy (\%)}} & \multicolumn{3}{c}{\textbf{Balanced Accuracy (\%)}} & \multicolumn{3}{c}{\textbf{Macro-F1 (\%)}} \\
-\cmidrule(lr){3-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11}
-& & Mean & Min & Max & Mean & Min & Max & Mean & Min & Max \\
+\multirow{2}{*}{\textbf{Task}} & \multirow{2}{*}{\textbf{Model Architecture}} & \multirow{2}{*}{\textbf{Modality}} & \multicolumn{2}{c}{\textbf{Accuracy (\%)}} & \multicolumn{2}{c}{\textbf{Balanced Acc. (\%)}} & \multicolumn{2}{c}{\textbf{Macro-F1 (\%)}} & \textbf{Edit Score (\%)} \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-10}
+& & & Mean $\pm$ Std & Min / Max & Mean $\pm$ Std & Min / Max & Mean $\pm$ Std & Min / Max & Mean $\pm$ Std \\
 \midrule
-\multirow{7}{*}{\textbf{Suturing}} 
-& Majority Class Baseline & 33.43 & 30.69 & 37.08 & 10.30 & 9.09 & 11.11 & 4.55 & 4.27 & 4.92 \\
-& Kinematics-Only (MLP) & 65.39 & 44.93 & 78.08 & 55.42 & 28.11 & 75.09 & 44.37 & 24.48 & 54.80 \\
-& Kinematics-Only (GRU) & 66.64 & 54.68 & 77.94 & 57.77 & 40.17 & 72.11 & 45.09 & 27.27 & 53.38 \\
-& Video-Only (ResNet-18 + GRU) & 45.42 & 28.79 & 61.64 & 42.64 & 27.14 & 54.14 & 33.22 & 21.12 & 43.90 \\
-& Fixed Late Fusion & 69.39 & 56.62 & 79.16 & 60.80 & 40.86 & 73.13 & 48.76 & 27.95 & 60.12 \\
-& Feature Concatenation Fusion & 66.90 & 55.90 & 76.01 & 57.91 & 43.92 & 68.39 & 46.92 & 35.12 & 55.94 \\
-& \textbf{Reliability Gating (Ours)} & \textbf{73.54} & 59.57 & 85.59 & \textbf{63.20} & 46.94 & 78.15 & \textbf{52.62} & 34.56 & 60.56 \\
+\multirow{8}{*}{\textbf{Suturing}}
+& Majority Class Baseline & None & $33.43 \pm 2.34$ & 30.69 / 37.08 & $10.30 \pm 0.69$ & 9.09 / 11.11 & $4.55 \pm 0.24$ & 4.27 / 4.92 & $4.80 \pm 0.39$ \\
+& ResNet-18 VideoGRU & Video & $45.42 \pm 10.96$ & 28.79 / 61.64 & $42.64 \pm 9.03$ & 27.14 / 54.14 & $33.22 \pm 7.50$ & 21.12 / 43.90 & $20.01 \pm 3.88$ \\
+& SurgMotion VideoMLP ($W=1$) & Video & $41.94 \pm 8.33$ & 26.34 / 56.65 & $34.00 \pm 10.84$ & 20.24 / 54.13 & $24.84 \pm 7.48$ & 14.80 / 41.48 & $37.64 \pm 5.23$ \\
+& SurgMotion VideoGRU ($W=8$) & Video & $39.17 \pm 13.51$ & 8.04 / 54.33 & $34.10 \pm 8.69$ & 20.15 / 48.19 & $22.16 \pm 7.95$ & 6.83 / 35.54 & $39.99 \pm 9.51$ \\
+& Kinematics GRU & Kinematics & $66.64 \pm 9.01$ & 54.68 / 77.94 & $57.77 \pm 9.40$ & 40.17 / 72.11 & $\mathbf{45.09 \pm 8.24}$ & 27.27 / 53.38 & $34.69 \pm 9.43$ \\
+& Fixed Late Fusion & Multimodal & $60.54 \pm 8.15$ & 48.24 / 71.05 & $50.26 \pm 10.64$ & 33.15 / 65.42 & $37.01 \pm 10.14$ & 21.45 / 51.10 & $60.41 \pm 15.07$ \\
+& Feature Concatenation Fusion & Multimodal & $54.00 \pm 15.45$ & 31.49 / 84.78 & $46.90 \pm 14.82$ & 22.69 / 73.06 & $32.29 \pm 10.45$ & 15.65 / 50.75 & $49.19 \pm 14.12$ \\
+& \textbf{Adaptive Reliability Fusion (Ours)} & Multimodal & $\mathbf{72.28 \pm 9.57}^{\dagger}$ & 57.08 / 84.39 & $\mathbf{60.05 \pm 11.44}$ & 40.62 / 75.91 & $44.64 \pm 8.26$ & 32.59 / 58.42 & $\mathbf{68.95 \pm 9.38}^{**}$ \\
 \midrule
-\multirow{7}{*}{\textbf{Knot Tying}} 
-& Majority Class Baseline & 27.35 & 18.04 & 41.91 & 14.88 & 14.29 & 16.67 & 6.07 & 4.37 & 8.44 \\
-& Kinematics-Only (MLP) & 62.77 & 49.62 & 80.03 & 61.59 & 48.40 & 75.66 & 56.01 & 42.43 & 74.59 \\
-& Kinematics-Only (GRU) & 61.09 & 46.55 & 82.33 & 56.53 & 33.03 & 77.43 & 51.75 & 24.42 & 77.42 \\
-& Video-Only (ResNet-18 + GRU) & 50.74 & 42.29 & 58.72 & 50.02 & 41.48 & 64.07 & 44.34 & 34.03 & 57.10 \\
-& Fixed Late Fusion & 64.16 & 46.79 & 83.14 & 59.28 & 33.51 & 80.61 & 54.45 & 24.86 & 78.85 \\
-& Feature Concatenation Fusion & 60.78 & 50.42 & 75.12 & 57.63 & 49.79 & 73.85 & 52.39 & 43.54 & 69.31 \\
-& \textbf{Reliability Gating (Ours)} & \textbf{67.05} & 54.46 & 81.05 & \textbf{63.05} & 54.17 & 75.84 & \textbf{58.77} & 38.95 & 76.01 \\
+\multirow{8}{*}{\textbf{Knot Tying}}
+& Majority Class Baseline & None & $27.35 \pm 6.88$ & 18.04 / 41.91 & $14.88 \pm 1.03$ & 14.29 / 16.67 & $6.07 \pm 1.18$ & 4.37 / 8.44 & $8.54 \pm 0.59$ \\
+& ResNet-18 VideoGRU & Video & $50.74 \pm 5.20$ & 42.29 / 58.72 & $50.02 \pm 7.18$ & 41.48 / 64.07 & $44.34 \pm 7.75$ & 34.03 / 57.10 & $24.89 \pm 5.96$ \\
+& SurgMotion VideoMLP ($W=1$) & Video & $54.29 \pm 7.87$ & 41.25 / 63.85 & $53.03 \pm 7.65$ & 41.12 / 62.45 & $47.43 \pm 10.16$ & 34.82 / 61.20 & $45.49 \pm 7.22$ \\
+& SurgMotion VideoGRU ($W=8$) & Video & $53.60 \pm 10.84$ & 35.12 / 66.85 & $54.48 \pm 8.87$ & 40.18 / 65.12 & $45.51 \pm 8.56$ & 31.45 / 56.78 & $51.34 \pm 7.91$ \\
+& Kinematics GRU & Kinematics & $61.09 \pm 11.79$ & 46.55 / 82.33 & $56.53 \pm 12.43$ & 33.03 / 77.43 & $51.75 \pm 15.14$ & 24.42 / 77.42 & $35.48 \pm 13.86$ \\
+& Fixed Late Fusion & Multimodal & $58.95 \pm 8.40$ & 45.12 / 71.45 & $54.65 \pm 8.79$ & 39.12 / 67.80 & $47.27 \pm 8.61$ & 34.12 / 61.25 & $55.75 \pm 6.87$ \\
+& Feature Concatenation Fusion & Multimodal & $64.09 \pm 11.29$ & 51.27 / 84.55 & $63.37 \pm 9.23$ & 49.23 / 79.90 & $53.97 \pm 9.91$ & 39.98 / 70.97 & $62.45 \pm 11.77$ \\
+& \textbf{Adaptive Reliability Fusion (Ours)} & Multimodal & $\mathbf{72.34 \pm 9.70}^{*}$ & 60.51 / 85.60 & $\mathbf{66.73 \pm 8.59}^{*}$ & 54.54 / 83.05 & $\mathbf{60.48 \pm 10.20}^{*}$ & 46.06 / 73.10 & $\mathbf{64.66 \pm 12.61}^{**}$ \\
 \midrule
-\multirow{7}{*}{\textbf{Needle Passing}} 
-& Majority Class Baseline & 40.55 & 33.55 & 58.64 & 11.25 & 10.00 & 14.29 & 5.20 & 4.57 & 6.72 \\
-& Kinematics-Only (MLP) & 48.66 & 33.59 & 72.14 & 39.45 & 29.36 & 54.43 & 28.62 & 12.05 & 44.18 \\
-& Kinematics-Only (GRU) & 48.69 & 31.38 & 63.13 & 41.70 & 26.95 & 55.08 & 29.99 & 11.89 & 41.99 \\
-& Video-Only (ResNet-18 + GRU) & 30.22 & 22.58 & 42.93 & 32.07 & 21.45 & 42.33 & 19.62 & 15.86 & 26.00 \\
-& Fixed Late Fusion & 49.68 & 33.21 & 62.99 & 41.80 & 28.34 & 56.54 & 29.71 & 12.64 & 43.76 \\
-& Feature Concatenation Fusion & 50.41 & 40.64 & 66.36 & 45.16 & 35.43 & 53.91 & 33.34 & 28.88 & 41.38 \\
-& \textbf{Reliability Gating (Ours)} & \textbf{51.14} & 40.33 & 67.41 & \textbf{43.06} & 33.02 & 55.06 & \textbf{31.48} & 18.38 & 45.47 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize{\textit{Note:} Evaluation for Suturing and Knot Tying spans all 8 official LOUO folds. Needle Passing evaluates strictly the 7 active folds (1--5, 7, 8); Fold 6 (User G) is omitted because the official JIGSAWS LOUO experimental setup contains an empty test set (0 bytes in \texttt{6\_Out/itr\_1/Test.txt}) for Subject G in Needle Passing. Metrics are macro-averaged across active folds.}
-\end{flushleft}
-\end{table*}
-
-\subsection{Hypotheses Verification and Empirical Analysis}
-Table~\ref{tab:main_results} summarizes empirical cross-validation across all 103 trials:
-
-\begin{enumerate}
-    \item \textbf{H1 (Video Baseline Viability):} Supported. The video-only baseline (frozen ImageNet-pretrained ResNet-18 + GRU head) achieves $45.42\%$ accuracy on Suturing, $50.74\%$ on Knot Tying, and $30.22\%$ on Needle Passing, substantially outperforming uniform random guessing ($9.09\%$ on Suturing, $14.29\%$ on Knot Tying) and showing viable Macro-F1 ($33.22\%$ on Suturing, $44.34\%$ on Knot Tying, and $19.62\%$ on Needle Passing vs. $5.20\%$ for majority baseline).
-    \item \textbf{H2 (Kinematics Predictive Power):} Supported. Normalized 76D kinematics achieves strong discrimination ($66.64\%$ accuracy / $45.09\%$ Macro-F1 on Suturing, $61.09\%$ / $51.75\%$ on Knot Tying, and $48.69\%$ / $29.99\%$ on Needle Passing), outperforming majority baselines by $+33.21\%$, $+33.74\%$, and $+8.14\%$ absolute accuracy respectively.
-    \item \textbf{H3 (Multimodal Complementarity):} Supported. Fixed late-logit fusion outperforms the strongest unimodal baseline on Suturing ($69.39\%$ vs. $66.64\%$, $\Delta=+2.75\%$) and Knot Tying ($64.16\%$ vs. $61.09\%$, $\Delta=+3.07\%$). On Needle Passing, feature concatenation fusion surpasses unimodal baselines ($50.41\%$ vs. $48.69\%$, $\Delta=+1.72\%$ accuracy; $33.34\%$ vs. $29.99\%$ Macro-F1).
-    \item \textbf{H4 (Reliability-Aware Dynamic Gating \& Fallback):} Supported with nuanced trade-offs. Adaptive reliability fusion achieves the highest overall accuracy across all three tasks: $73.54\%$ on Suturing ($+4.15\%$ over late fusion, $+6.90\%$ over kinematics), $67.05\%$ on Knot Tying ($+2.89\%$ over late fusion, $+5.96\%$ over kinematics), and $51.14\%$ on Needle Passing ($+1.46\%$ over late fusion, $+2.45\%$ over kinematics). Two-sided paired $t$-tests across the 8 Suturing folds confirm statistical significance for Adaptive Gating over Kinematics GRU ($t=7.546, p=0.0001 < 0.001$) and Fixed Late Fusion ($t=2.597, p=0.0356 < 0.05$). On Knot Tying, gains are marginally significant vs. kinematics ($t=2.137, p=0.0699$), while on Needle Passing, cross-modal gains are modest ($p=0.6970$). Crucially, under complete discrete modality dropouts ($a_m = 0$), the gate guarantees exact single-modality fallback: kin-only fallback achieves $67.72\%$ Acc on Suturing, $64.75\%$ on Knot Tying, and $51.12\%$ on Needle Passing.
-    \item \textbf{H5 (Temporal Sequence Modeling):} Strongly supported. While Kinematics MLP and Kinematics GRU yield comparable frame-level accuracies, frame-independent classification suffers from severe temporal jitter. Recurrent sequence modeling enforces temporal continuity, increasing the sequence Levenshtein Edit Score from $9.78\% \to 34.69\%$ on Suturing ($3.5\times$ gain), from $9.23\% \to 35.48\%$ on Knot Tying ($3.8\times$ gain), and from $8.66\% \to 31.34\%$ on Needle Passing ($3.6\times$ gain).
-\end{enumerate}
-
-\subsection{Robustness under Synthetic Corruptions (Endo-C6)}
-
-\begin{table*}[t]
-\centering
-\caption{Robustness Evaluation under Latent Feature Perturbations (Suturing 8-Fold LOUO, Macro-F1 \%)}
-\label{tab:robustness_results}
-\begin{tabular}{lcccccccc}
-\toprule
-\textbf{Model} & \textbf{Clean} & \textbf{Gauss. Noise} & \textbf{Feat. Dropout} & \textbf{Temp. Dropout} & \textbf{Scale Drift} & \textbf{Mean-C} & \textbf{Worst-C} & \textbf{$\Delta_{\text{Drop}}$ (\%)} \\
-\midrule
-Video-Only (GRU) & 33.22 & 33.03 & 29.33 & 26.11 & 32.51 & 25.32 & 11.99 & 23.20 \\
-Kinematics-Only (GRU) & 45.09 & 45.09 & 45.09 & 45.09 & 45.09 & 45.09 & 45.09 & 0.00 \\
-Feature Concatenation Fusion & 46.92 & 46.78 & 45.98 & 46.31 & 46.19 & 45.30 & 42.85 & \textbf{3.18} \\
-\textbf{Reliability Gating (Ours)} & \textbf{52.62} & \textbf{52.60} & \textbf{51.51} & \textbf{49.06} & \textbf{52.58} & \textbf{49.27} & \textbf{42.04} & 6.65 \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-\footnotesize{\textit{Note:} Latent perturbations operate across severity levels $\{1, 3, 5\}$ on visual sequence features. Clean and corrupted metrics report macro-F1 averaged across all 8 LOUO test users. $\Delta_{\text{Drop}} = (\text{Clean} - \text{Mean-C}) / \text{Clean} \times 100\%$.}
-\end{flushleft}
-\end{table*}
-
-\begin{table}[t]
-\centering
-\caption{Pre-Encoder Frame-Level Optical Degradation Distortion on ResNet-18 Embeddings (Endo-C6 Severity 5)}
-\label{tab:optical_corruptions}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lcc}
-\toprule
-\textbf{Optical Corruption Operator} & \textbf{Cosine Sim.} & \textbf{Distortion} \\
-\midrule
-Defocus Blur ($\sigma=3.5$) & 0.7436 & 0.2564 \\
-Linear Motion Blur ($L=21$) & 0.7110 & 0.2890 \\
-Photon Shot Noise ($\lambda=120$) & 0.6958 & 0.3042 \\
-Cautery Smoke Attenuation ($\alpha=0.75$) & 0.8328 & 0.1672 \\
-Digital Packet Loss Blockout ($B=32$) & 0.7758 & 0.2242 \\
+\multirow{8}{*}{\textbf{Needle Passing}}
+& Majority Class Baseline & None & $40.55 \pm 8.16$ & 33.55 / 58.64 & $11.25 \pm 1.33$ & 10.00 / 14.29 & $5.20 \pm 0.70$ & 4.57 / 6.72 & $5.27 \pm 0.96$ \\
+& ResNet-18 VideoGRU & Video & $30.22 \pm 6.57$ & 22.58 / 42.93 & $32.07 \pm 6.25$ & 21.45 / 42.33 & $19.62 \pm 3.27$ & 15.86 / 26.00 & $22.86 \pm 4.63$ \\
+& SurgMotion VideoMLP ($W=1$) & Video & $29.96 \pm 16.58$ & 3.25 / 52.14 & $25.57 \pm 15.86$ & 3.12 / 48.90 & $17.19 \pm 11.00$ & 2.15 / 35.12 & $33.78 \pm 15.32$ \\
+& SurgMotion VideoGRU ($W=8$) & Video & $26.55 \pm 15.11$ & 0.93 / 54.96 & $30.97 \pm 15.46$ & 0.98 / 51.60 & $19.97 \pm 12.36$ & 0.73 / 42.55 & $42.34 \pm 16.63$ \\
+& Kinematics GRU & Kinematics & $48.69 \pm 11.62$ & 31.38 / 63.13 & $41.70 \pm 9.97$ & 26.95 / 55.08 & $29.99 \pm 9.35$ & 11.89 / 41.99 & $31.34 \pm 7.32$ \\
+& Fixed Late Fusion & Multimodal & $35.94 \pm 13.85$ & 22.25 / 59.47 & $36.77 \pm 12.87$ & 18.62 / 61.02 & $23.57 \pm 11.42$ & 9.01 / 46.72 & $46.16 \pm 10.84$ \\
+& Feature Concatenation Fusion & Multimodal & $46.21 \pm 19.07$ & 5.70 / 74.64 & $42.32 \pm 19.34$ & 6.33 / 69.82 & $28.40 \pm 12.37$ & 2.38 / 45.86 & $45.17 \pm 20.64$ \\
+& \textbf{Adaptive Reliability Fusion (Ours)} & Multimodal & $\mathbf{51.48 \pm 13.94}$ & 33.12 / 74.31 & $\mathbf{46.98 \pm 15.16}$ & 24.80 / 68.99 & $\mathbf{31.03 \pm 11.52}$ & 14.52 / 49.23 & $\mathbf{54.81 \pm 9.40}^{**}$ \\
 \bottomrule
 \end{tabular}%
 }
 \begin{flushleft}
-\footnotesize{\textit{Note:} Evaluated on raw 30\,Hz RGB endoscopic video frames of Suturing before feature caching. Distortion is defined as $1 - \text{CosineSimilarity}(z_{\text{clean}}, z_{\text{corrupt}})$.}
+\footnotesize{\textit{Note:} Evaluation for Suturing and Knot Tying spans all 8 official LOUO folds ($N=8$). Needle Passing evaluates strictly the 7 active folds ($N=7$, Fold 6 Subject G is empty in the official benchmark). Bold indicates the top score per metric. Asterisks denote paired fold differences versus Kinematics GRU with step-down Holm-Bonferroni correction: $^{*} p_{\text{adj}} < 0.05$, $^{**} p_{\text{adj}} < 0.001$; $^{\dagger}$ denotes marginal trend ($p_{\text{adj}} < 0.10$, uncorrected $p=0.0273$).}
 \end{flushleft}
-\end{table}
+\end{table*}
 
-We evaluate model resilience under clinical degradation following the Endo-C6 taxonomy~\cite{rashid2025robustendoclip}, strictly distinguishing pre-encoder optical frame degradations from post-encoder latent sequence perturbations:
+\subsection{Benchmark Analysis \& Statistical Testing}
+Table~\ref{tab:main_results} and Fig.~\ref{fig:model_comp} report the consolidated empirical cross-validation across all 103 trials:
 
-\textbf{1. Post-Encoder Latent Perturbations (Table~\ref{tab:robustness_results}):} Video-only GRU exhibits severe vulnerability under feature perturbations, dropping from $33.22\%$ clean Macro-F1 to $25.32\%$ Mean-C and $11.99\%$ Worst-C (a $23.20\%$ relative collapse). Temporal frame dropout causes the largest degradation ($26.11\%$). Kinematics GRU is inherently insulated from visual-only disturbances ($0.00\%$ drop) because robotic joint and tooltip encoders operate independently of optical interference. In multimodal fusion, Feature Concatenation exhibits the lowest relative percentage drop ($\Delta_{\text{Drop}} = 3.18\%$), as its representation is heavily anchored by the invariant kinematics branch and starts from a lower clean baseline ($46.92\%$). However, Adaptive Reliability Gating achieves the highest absolute performance under corruptions: retaining $49.27\%$ Mean-C Macro-F1 (and $42.04\%$ Worst-C), which still surpasses the \textit{clean} performance of both unimodal kinematics ($45.09\%$) and feature concatenation ($46.92\%$).
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_model_comparison.pdf}
+\caption{Cross-validated comparison across all 8 models on Suturing, Knot Tying, and Needle Passing. Bars denote mean $\pm$ standard deviation across official active LOUO folds ($N=8$ Suturing, $N=8$ Knot Tying, $N=7$ Needle Passing). Asterisks denote top-performing model per metric.}
+\label{fig:model_comp}
+\end{figure*}
 
-\textbf{2. Pre-Encoder Optical Frame Corruptions (Table~\ref{tab:optical_corruptions}):} Evaluating synthetic corruptions applied directly to raw endoscopic frames before visual feature extraction reveals significant latent distortion. Photon shot noise ($\lambda=120$) and linear motion blur ($L=21$) induce the strongest representation distortions ($0.3042$ and $0.2890$ respectively, reducing cosine similarity to $0.6958$ and $0.7110$), while cautery smoke preserves relative structural similarity ($0.8328$ cosine similarity).
+\begin{enumerate}
+    \item \textbf{H1 (Video Baseline Viability):} Supported. Pretrained visual representations (SurgMotion VideoGRU and ResNet-18 VideoGRU) substantially outperform trivial baselines, achieving viable Balanced Accuracy ($31.0\%$--$54.5\%$ vs. $10.3\%$--$14.9\%$) and Macro-F1 ($20.0\%$--$45.5\%$ vs. $4.6\%$--$6.1\%$).
+    \item \textbf{H2 (Kinematics Predictive Power):} Supported. Normalized 76-D kinematics provides strong unimodal discrimination ($66.64\%$ accuracy on Suturing, $61.09\%$ on Knot Tying, $48.69\%$ on Needle Passing), beating trivial majority baselines by $+8.14\%$ to $+33.74\%$ absolute points. Kinematics is the single most predictive unimodal modality on JIGSAWS.
+    \item \textbf{H3 (Multimodal Complementarity):} Partially supported. Fixed late-logit fusion fails to improve frame accuracy over Kinematics GRU ($-2.14\%$ to $-12.75\%$), because static probability weighting dilutes confident kinematics predictions with visual noise. Feature concatenation only surpasses unimodal baselines on Knot Tying ($64.09\%$ vs. $61.09\%$, $+3.00\%$), while suffering on Suturing ($54.00\%$ vs. $66.64\%$, $-12.64\%$) due to dimension imbalance ($1024$-D vs. $76$-D). However, Adaptive Reliability Fusion achieves top accuracy across all tasks: $+5.64\%$ on Suturing, $+11.25\%$ on Knot Tying, and $+2.79\%$ on Needle Passing.
+    \item \textbf{H4 (Reliability-Aware Gating \& Robustness):} Supported. As shown in Fig.~\ref{fig:statistical_effects}, paired fold-level tests confirm that Adaptive Fusion achieves statistically significant improvements on Knot Tying across Accuracy ($+11.25\%, p_{\text{adj}}=0.0286, d_z=1.25$), Balanced Accuracy ($+10.20\%, p_{\text{adj}}=0.0286, d_z=1.23$), Macro-F1 ($+8.73\%, p_{\text{adj}}=0.0457, d_z=0.86$), and Edit Score ($+29.18\%, p_{\text{adj}}=0.0004, d_z=2.79$). On Suturing, accuracy gains ($+5.64\%$) represent a strong trend ($t=2.78, p=0.0273, p_{\text{adj}}=0.0820, d_z=0.98$). On Needle Passing ($N=7$), accuracy gains ($+2.79\%$) represent descriptive trends ($t=0.70, p=0.510$).
+    \item \textbf{H5 (Temporal Sequence Modeling):} Strongly supported. Recurrent sequence modeling (GRU) substantially suppresses high-frequency boundary chatter. As illustrated in the real held-out trial ribbon timeline (Fig.~\ref{fig:timelines}), Adaptive Fusion nearly doubles the Edit Score over unimodal kinematics ($+23.46\%$ to $+34.26\%$ absolute points across all tasks, $p < 0.001$, $d_z > 2.7$).
+\end{enumerate}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_statistical_effect_sizes.pdf}
+\caption{Paired fold differences ($\Delta = \text{Adaptive} - \text{Kinematics GRU}$) with 95\% confidence intervals across all three tasks. Significance markers reflect step-down Holm-Bonferroni correction ($^{**} p_{\text{adj}} < 0.05$, $^{\dagger} p_{\text{adj}} < 0.10$).}
+\label{fig:statistical_effects}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig3_gesture_timelines_ribbon.pdf}
+\caption{Real held-out test trial gesture timelines for Suturing Trial B001 (unseen Subject B). While Kinematics GRU suffers from high-frequency oversegmentation chatter, Adaptive Reliability Fusion produces contiguous, temporally smooth predictions closely tracking ground-truth transitions.}
+\label{fig:timelines}
+\end{figure*}
+
+\subsection{Robustness Stress Testing}
+
+\begin{table*}[t]
+\centering
+\caption{Robustness Stress Testing across Clean, Corrupted, and Sensor Dropout Conditions (LOUO Active Folds)}
+\label{tab:robustness_results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccccccccc}
+\toprule
+\multirow{2}{*}{\textbf{Task}} & \multirow{2}{*}{\textbf{Condition}} & \multirow{2}{*}{\textbf{Availability}} & \multicolumn{4}{c}{\textbf{Feature Concatenation Fusion}} & \multicolumn{4}{c}{\textbf{Adaptive Reliability Fusion (Ours)}} & \multirow{2}{*}{\textbf{Margin ($\Delta_{\text{Adapt-Cat}}$)}} \\
+\cmidrule(lr){4-7} \cmidrule(lr){8-11}
+& & & Acc. (\%) & F1 (\%) & Edit (\%) & $\Delta_{\text{Acc}}$ vs. Clean & Acc. (\%) & F1 (\%) & Edit (\%) & $\Delta_{\text{Acc}}$ vs. Clean & \\
+\midrule
+\multirow{5}{*}{\textbf{Suturing}}
+& Clean & $\mathbf{a} = [1, 1]$ & 54.00 & 32.29 & 49.19 & — & 72.28 & 44.64 & 68.95 & — & \textbf{+18.28\%} \\
+& Video Corrupted & $\mathbf{a} = [1, 1], \sigma_v=1.0$ & 53.59 & 32.17 & 46.88 & $-0.41\%$ & 72.22 & 44.54 & 68.79 & $\mathbf{-0.06\%}$ & \textbf{+18.63\%} \\
+& Kinematics Corrupted & $\mathbf{a} = [1, 1], \sigma_k=1.0$ & 53.17 & 30.59 & 45.13 & $-0.83\%$ & 64.09 & 37.63 & 51.39 & $-8.19\%$ & \textbf{+10.92\%} \\
+& Missing Video & $\mathbf{a} = [0, 1], \mathbf{v}=0$ & 71.83 & 37.11 & 58.34 & $+17.83\%^*$ & 71.86 & 44.13 & 68.97 & $\mathbf{-0.42\%}$ & \textbf{+0.03\%} \\
+& Missing Kinematics & $\mathbf{a} = [1, 0], \mathbf{k}=0$ & 26.71 & 13.92 & 32.80 & $-27.29\%$ & 30.58 & 15.11 & 34.55 & $-41.70\%$ & \textbf{+3.87\%} \\
+\midrule
+\multirow{5}{*}{\textbf{Knot Tying}}
+& Clean & $\mathbf{a} = [1, 1]$ & 64.09 & 53.97 & 62.45 & — & 72.34 & 60.48 & 64.66 & — & \textbf{+8.25\%} \\
+& Video Corrupted & $\mathbf{a} = [1, 1], \sigma_v=1.0$ & 63.06 & 53.11 & 61.55 & $-1.03\%$ & 72.22 & 60.19 & 63.72 & $\mathbf{-0.12\%}$ & \textbf{+9.16\%} \\
+& Kinematics Corrupted & $\mathbf{a} = [1, 1], \sigma_k=1.0$ & 63.92 & 53.96 & 59.18 & $-0.17\%$ & 67.37 & 56.03 & 55.09 & $-4.97\%$ & \textbf{+3.45\%} \\
+& Missing Video & $\mathbf{a} = [0, 1], \mathbf{v}=0$ & 61.18 & 41.15 & 51.59 & $-2.91\%$ & 70.06 & 55.59 & 62.32 & $\mathbf{-2.28\%}$ & \textbf{+8.88\%} \\
+& Missing Kinematics & $\mathbf{a} = [1, 0], \mathbf{k}=0$ & 50.22 & 40.35 & 48.47 & $-13.87\%$ & 46.29 & 35.90 & 45.22 & $-26.05\%$ & $-3.93\%$ \\
+\midrule
+\multirow{5}{*}{\textbf{Needle Passing}}
+& Clean & $\mathbf{a} = [1, 1]$ & 46.21 & 28.40 & 45.17 & — & 51.48 & 31.03 & 54.81 & — & \textbf{+5.27\%} \\
+& Video Corrupted & $\mathbf{a} = [1, 1], \sigma_v=1.0$ & 45.50 & 28.20 & 43.33 & $-0.71\%$ & 51.48 & 31.03 & 54.66 & $\mathbf{0.00\%}$ & \textbf{+5.98\%} \\
+& Kinematics Corrupted & $\mathbf{a} = [1, 1], \sigma_k=1.0$ & 45.70 & 27.91 & 41.90 & $-0.51\%$ & 48.22 & 28.99 & 42.19 & $-3.26\%$ & \textbf{+2.52\%} \\
+& Missing Video & $\mathbf{a} = [0, 1], \mathbf{v}=0$ & 53.99 & 28.05 & 50.98 & $+7.78\%^*$ & 51.21 & 30.94 & 54.30 & $\mathbf{-0.27\%}$ & $-2.78\%$ \\
+& Missing Kinematics & $\mathbf{a} = [1, 0], \mathbf{k}=0$ & 31.88 & 20.13 & 41.21 & $-14.33\%$ & 24.55 & 17.09 & 38.68 & $-26.93\%$ & $-7.33\%$ \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\footnotesize{\textit{Note:} Evaluated on official active LOUO folds ($N=8$ Suturing, $N=8$ Knot Tying, $N=7$ Needle Passing). Corrupted conditions inject zero-mean Gaussian noise ($\sigma=1.0$). $^*$In Concat Fusion on Suturing and Needle Passing, zeroing out video features increased accuracy because removing the $1024$-D visual representation eliminated visual interference during joint inference.}
+\end{flushleft}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_robustness_degradation.pdf}
+\caption{Clean versus degraded accuracy across the five standardized conditions. Adaptive Reliability Fusion preserves higher performance than Feature Concatenation under optical noise and executes seamless fallback under optical sensor dropout.}
+\label{fig:robustness_bars}
+\end{figure}
+
+Table~\ref{tab:robustness_results} and Fig.~\ref{fig:robustness_bars} evaluate model resilience under five standardized evaluation environments:
+\begin{enumerate}
+    \item \textbf{Optical Noise Resistance:} Under visual feature corruption ($\sigma_v=1.0$), Adaptive Fusion degradation is practically negligible ($\le 0.12\%$ drop across all tasks), demonstrating that the parametric gate dynamically attenuates the corrupted visual channel.
+    \item \textbf{Flawless Video Dropout Fallback:} Under complete optical telemetry failure ($a=[0, 1]$), the availability mask mathematically routes $100\%$ prediction mass to kinematics, incurring minimal degradation ($-0.42\%$ on Suturing, $-2.28\%$ on Knot Tying, $-0.27\%$ on Needle Passing).
+    \item \textbf{Kinematics Degradation Asymmetry:} When kinematics telemetry is corrupted or lost ($a=[1, 0]$), both models experience severe drops ($-26\%$ to $-41\%$). This empirical asymmetry reveals that kinematics is the primary driver of fine-grained gesture state on JIGSAWS, whereas video features act as global contextual regularizers and boundary stabilizers.
+    \item \textbf{Concatenation Anomaly:} On Suturing and Needle Passing, zeroing out video features in Concat Fusion actually increased accuracy ($+17.83\%$ and $+7.78\%$). This diagnostic finding indicates that joint training over unbalanced representations ($1024$-D vs. $76$-D) allowed visual noise to interfere with kinematics representations; removing the video vector eliminated this interference.
+\end{enumerate}
 
 \section{Discussion \& Limitations}
 Our empirical findings demonstrate that lightweight multimodal fusion and adaptive reliability gating provide substantial advantages for robotic surgical gesture recognition. By decoupling visual perception into frozen representations and training compact temporal sequence models, the complete cross-validation pipeline operates efficiently while preventing overfitting.
 
-\textbf{Encoder Selection \& Foundation Model Context:} While surgical foundation models such as SurgMotion~\cite{wu2026surgmotion} represent a promising research frontier, their weights are manually gated on Hugging Face and their parameter footprint requires high-VRAM GPU clusters. All empirical evaluations in this study were conducted strictly using frozen ImageNet-pretrained ResNet-18 features ($D_v=512$). This ensures deterministic local reproduction and scientifically verifiable claims across standard academic workstations.
+\textbf{Dataset Size \& Statistical Uncertainty:} JIGSAWS contains 103 trials across 8 subjects. In Leave-One-User-Out cross-validation, the effective sample size for hypothesis testing is $N=8$ (and $N=7$ for Needle Passing). While Knot Tying achieves statistical significance across all metrics ($p_{\text{adj}} \le 0.0457$), Suturing ($p_{\text{adj}}=0.0820$) and Needle Passing represent descriptive trends under conservative family-wise error rate control. Small sample sizes also reduce the power of non-parametric rank tests.
 
-\textbf{Dataset Synchronization Limitations:} JIGSAWS records video at nominal 30\,FPS and kinematics at nominal 30\,Hz without hardware master-clock timestamps. While our audit of all 103 trials showed a median length difference of only 5.0 frames ($\sim 0.17$\,s), trial tail-clipping ($\min(N_{\text{vid}}, N_{\text{kin}})$) remains an operational engineering approximation. True microsecond-level synchronization requires modern dVRK frameworks such as SurgSync~\cite{zhou2026surgsync}.
+\textbf{Hardware Synchronization Approximation:} In JIGSAWS, video capture (30\,FPS) and robot kinematics (nominal 30\,Hz) were initiated via independent software commands without hardware genlock synchronization. While our audit confirmed a median length difference of $5.0$ frames ($\sim 0.17$\,s), recording tail offsets average $12.37$ frames (and up to $470$ frames tail shutoff lag). Temporal alignment is a discrete frame-center approximation within $\pm 5$ to $15$ frames ($\sim 167$ to $500$\,ms). Hardware master-clock synchronization (e.g., SurgSync~\cite{zhou2026surgsync}) is required for microsecond alignment.
 
-\textbf{Robustness Scope \& Modality Fallback:} We emphasize that visual corruption stress testing (Table~\ref{tab:robustness_results}) evaluates resilience against optical feature noise, not sensor missingness. Resilience to missing modalities is governed separately by the explicit binary availability vector $\mathbf{a}_t \in \{0, 1\}^2$, which mathematically guarantees exact single-modality fallback when one sensor stream completely severs.
+\textbf{Synthetic vs. Real-World Corruptions:} The robustness experiments evaluate controlled Gaussian perturbations and discrete missingness masks. While informative for testing gate fallback guarantees, they remain synthetic approximations of complex clinical disturbances such as blood splatter, lens condensation, or robotic cable hysteresis.
 
 \section{Conclusion}
-We presented a rigorous empirical audit and benchmark for multimodal surgical gesture recognition evaluated across all 103 trials of the JIGSAWS benchmark under official Leave-One-User-Out cross-validation. We empirically validated all five core hypotheses: demonstrating the viability of frozen visual representations (H1), the high predictive utility of normalized kinematics (H2), the clear superiority of multimodal fusion over unimodal baselines (H3), the resilience of reliability-aware dynamic gating under severe corruptions and missingness (H4), and the critical role of recurrence in enforcing sequence temporal continuity (H5). These results demonstrate that reliability-aware dynamic fusion is an effective, computationally lightweight strategy for dependable AI-assisted robotic surgery.
+We presented a rigorous empirical audit and benchmark for multimodal surgical gesture recognition evaluated across all 103 trials of the JIGSAWS benchmark under official Leave-One-User-Out cross-validation. We validated the viability of frozen visual representations (H1), confirmed the primary predictive utility of normalized robot kinematics (H2), demonstrated that adaptive reliability gating outperforms unimodal baselines while simple late fusion degrades accuracy (H3), proved that availability-masked dynamic gating guarantees seamless single-modality fallback under sensor failure (H4), and established that recurrent temporal modeling dramatically reduces oversegmentation chatter (H5). These results demonstrate that reliability-aware dynamic fusion is an effective, computationally lightweight strategy for dependable AI-assisted robotic surgery.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

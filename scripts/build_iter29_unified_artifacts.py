@@ -87,24 +87,37 @@ def extract_model_task_data(task: str, cfg: dict) -> dict:
     else:
         raise ValueError(f"Cannot parse folds from {fname}")
 
-    # Standardize fold metrics to [0, 100]%
+    # Standardize fold metrics to [0, 100]% scale based on model file format
     standardized_folds = []
     for f in raw_folds:
-        acc = f["accuracy"] * (100.0 if f["accuracy"] <= 1.0 else 1.0)
-        bal_acc = f.get("balanced_accuracy", 0.0)
-        bal_acc = bal_acc * (100.0 if bal_acc <= 1.0 else 1.0)
-        f1 = f["macro_f1"] * (100.0 if f["macro_f1"] <= 1.0 else 1.0)
-        edit = float(f.get("edit_score", 0.0))
+        if cfg["id"] == "majority_baseline":
+            acc = float(f["accuracy"]) * 100.0
+            bal_acc = float(f.get("balanced_accuracy", 0.0)) * 100.0
+            f1 = float(f["macro_f1"]) * 100.0
+            edit = float(f.get("edit_score", 0.0))
+        elif cfg["id"] in ("resnet18_videogru", "kinematics_gru"):
+            # Older PyTorch runners saved acc, bal, and f1 as fractions in [0, 1]
+            acc = float(f["accuracy"]) * 100.0
+            bal_acc = float(f.get("balanced_accuracy", 0.0)) * 100.0
+            f1 = float(f["macro_f1"]) * 100.0
+            edit = float(f.get("edit_score", 0.0))
+        else:
+            # SurgMotion baselines and fusion models are already formatted as percentages [0, 100]
+            acc = float(f["accuracy"])
+            bal_acc = float(f.get("balanced_accuracy", 0.0))
+            f1 = float(f["macro_f1"])
+            edit = float(f.get("edit_score", 0.0))
+
         user = f.get("test_user") or f.get("user")
         fold_num = f.get("fold", len(standardized_folds) + 1)
 
         standardized_folds.append({
             "fold": fold_num,
             "test_user": user,
-            "accuracy": round(float(acc), 2),
-            "balanced_accuracy": round(float(bal_acc), 2),
-            "macro_f1": round(float(f1), 2),
-            "edit_score": round(float(edit), 2),
+            "accuracy": round(acc, 2),
+            "balanced_accuracy": round(bal_acc, 2),
+            "macro_f1": round(f1, 2),
+            "edit_score": round(edit, 2),
         })
 
     acc_vals = [f["accuracy"] for f in standardized_folds]

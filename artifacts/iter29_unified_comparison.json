@@ -2177,22 +2177,22 @@
           "source_file": "artifacts/surgmotion_VideoGRU_Needle_Passing_results.json",
           "metrics": {
             "accuracy": {
-              "mean": 39.7,
-              "std": 24.34,
-              "min": 19.03,
-              "max": 93.0
+              "mean": 26.55,
+              "std": 15.11,
+              "min": 0.93,
+              "max": 54.96
             },
             "balanced_accuracy": {
-              "mean": 44.83,
-              "std": 23.67,
-              "min": 24.87,
-              "max": 98.0
+              "mean": 30.97,
+              "std": 15.46,
+              "min": 0.98,
+              "max": 51.6
             },
             "macro_f1": {
-              "mean": 30.3,
-              "std": 19.88,
-              "min": 13.64,
-              "max": 73.0
+              "mean": 19.97,
+              "std": 12.36,
+              "min": 0.73,
+              "max": 42.55
             },
             "edit_score": {
               "mean": 42.34,
@@ -2205,9 +2205,9 @@
             {
               "fold": 1,
               "test_user": "B",
-              "accuracy": 93.0,
-              "balanced_accuracy": 98.0,
-              "macro_f1": 73.0,
+              "accuracy": 0.93,
+              "balanced_accuracy": 0.98,
+              "macro_f1": 0.73,
               "edit_score": 5.49
             },
             {
@@ -2637,16 +2637,16 @@
           "std": 11.61
         },
         "balanced_accuracy": {
-          "model_id": "surgmotion_videogru",
-          "model_name": "SurgMotion VideoGRU (W=8)",
-          "mean": 44.83,
-          "std": 23.67
+          "model_id": "kinematics_gru",
+          "model_name": "Kinematics GRU",
+          "mean": 41.7,
+          "std": 9.98
         },
         "macro_f1": {
-          "model_id": "surgmotion_videogru",
-          "model_name": "SurgMotion VideoGRU (W=8)",
-          "mean": 30.3,
-          "std": 19.88
+          "model_id": "kinematics_gru",
+          "model_name": "Kinematics GRU",
+          "mean": 29.99,
+          "std": 9.35
         },
         "edit_score": {
           "model_id": "surgmotion_videogru",
@@ -2667,18 +2667,18 @@
           },
           "balanced_accuracy": {
             "fusion_mean": 36.77,
-            "baseline_mean": 44.83,
-            "strongest_baseline_name": "SurgMotion VideoGRU (W=8)",
-            "absolute_delta": -8.06,
-            "relative_percent_delta": -17.98,
+            "baseline_mean": 41.7,
+            "strongest_baseline_name": "Kinematics GRU",
+            "absolute_delta": -4.93,
+            "relative_percent_delta": -11.82,
             "beats_strongest_unimodal": false
           },
           "macro_f1": {
             "fusion_mean": 23.57,
-            "baseline_mean": 30.3,
-            "strongest_baseline_name": "SurgMotion VideoGRU (W=8)",
-            "absolute_delta": -6.73,
-            "relative_percent_delta": -22.21,
+            "baseline_mean": 29.99,
+            "strongest_baseline_name": "Kinematics GRU",
+            "absolute_delta": -6.42,
+            "relative_percent_delta": -21.41,
             "beats_strongest_unimodal": false
           },
           "edit_score": {
@@ -2701,18 +2701,18 @@
           },
           "balanced_accuracy": {
             "fusion_mean": 42.32,
-            "baseline_mean": 44.83,
-            "strongest_baseline_name": "SurgMotion VideoGRU (W=8)",
-            "absolute_delta": -2.51,
-            "relative_percent_delta": -5.6,
-            "beats_strongest_unimodal": false
+            "baseline_mean": 41.7,
+            "strongest_baseline_name": "Kinematics GRU",
+            "absolute_delta": 0.62,
+            "relative_percent_delta": 1.49,
+            "beats_strongest_unimodal": true
           },
           "macro_f1": {
             "fusion_mean": 28.4,
-            "baseline_mean": 30.3,
-            "strongest_baseline_name": "SurgMotion VideoGRU (W=8)",
-            "absolute_delta": -1.9,
-            "relative_percent_delta": -6.27,
+            "baseline_mean": 29.99,
+            "strongest_baseline_name": "Kinematics GRU",
+            "absolute_delta": -1.59,
+            "relative_percent_delta": -5.3,
             "beats_strongest_unimodal": false
           },
           "edit_score": {
@@ -2735,18 +2735,18 @@
           },
           "balanced_accuracy": {
             "fusion_mean": 46.98,
-            "baseline_mean": 44.83,
-            "strongest_baseline_name": "SurgMotion VideoGRU (W=8)",
-            "absolute_delta": 2.15,
-            "relative_percent_delta": 4.8,
+            "baseline_mean": 41.7,
+            "strongest_baseline_name": "Kinematics GRU",
+            "absolute_delta": 5.28,
+            "relative_percent_delta": 12.66,
             "beats_strongest_unimodal": true
           },
           "macro_f1": {
             "fusion_mean": 31.03,
-            "baseline_mean": 30.3,
-            "strongest_baseline_name": "SurgMotion VideoGRU (W=8)",
-            "absolute_delta": 0.73,
-            "relative_percent_delta": 2.41,
+            "baseline_mean": 29.99,
+            "strongest_baseline_name": "Kinematics GRU",
+            "absolute_delta": 1.04,
+            "relative_percent_delta": 3.47,
             "beats_strongest_unimodal": true
           },
           "edit_score": {

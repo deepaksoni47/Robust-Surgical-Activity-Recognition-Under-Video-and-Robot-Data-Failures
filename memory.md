@@ -131,7 +131,10 @@
 | **ITER-22** | M9 Robustness | Video corruption suite (Endo-C6 inspired blur, noise, occlusions) | Completed |
 | **ITER-23** | M9 Robustness | Real-Data Baseline Execution & Evaluation Gate (103 trials, 23 folds, all models, 180 tests pass) | Completed |
 | **ITER-24** | M9 Robustness | Final Empirical Audit, Claim Verification, and Paper Freeze | Completed |
-| **ITER-25** | M10 Visual Ext | SurgMotion Integration, Feasibility Pilot, and Compute-Aware Evaluation (Phase C & D) | Completed |
-| **ITER-26** | M10 Synthesis | Final comparison tables, error analysis & paper figures | Not Started |
+| **ITER-26** | M10 Extraction | Full JIGSAWS SurgMotion Feature Extraction on Mentor GPU | Completed |
+| **ITER-27** | M10 Baselines | SurgMotion Downstream Evaluation (VideoMLP & VideoGRU across all 103 trials) | Completed |
+| **ITER-28** | M11 Fusion | SurgMotion + Kinematics Multimodal Fusion (Late, Concat, Adaptive on Mentor GPU) | Completed |
+| **ITER-29** | M12 Audit & Stats | Multimodal Results Audit, Statistical Testing, and Hypothesis Evaluation | Completed |
+| **ITER-30** | M13 Validation | Final Scientific Validation, Publication Figures, Paper Update & Handoff | Completed |
 
 

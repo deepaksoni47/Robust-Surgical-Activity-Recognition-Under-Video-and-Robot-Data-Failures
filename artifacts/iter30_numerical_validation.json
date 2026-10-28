@@ -1,0 +1,1041 @@
+{
+  "status": "PASSED",
+  "tasks": {
+    "Suturing": {
+      "expected_folds": 8,
+      "unimodal_summary": {
+        "majority": {
+          "accuracy": {
+            "mean": 33.43,
+            "std": 2.34
+          },
+          "balanced_accuracy": {
+            "mean": 10.3,
+            "std": 0.69
+          },
+          "macro_f1": {
+            "mean": 4.55,
+            "std": 0.24
+          },
+          "edit_score": {
+            "mean": 4.8,
+            "std": 0.39
+          }
+        },
+        "resnet18_videogru": {
+          "accuracy": {
+            "mean": 45.42,
+            "std": 10.96
+          },
+          "balanced_accuracy": {
+            "mean": 42.64,
+            "std": 9.03
+          },
+          "macro_f1": {
+            "mean": 33.22,
+            "std": 7.5
+          },
+          "edit_score": {
+            "mean": 20.01,
+            "std": 3.88
+          }
+        },
+        "surgmotion_videomlp": {
+          "accuracy": {
+            "mean": 41.94,
+            "std": 8.33
+          },
+          "balanced_accuracy": {
+            "mean": 34.0,
+            "std": 10.84
+          },
+          "macro_f1": {
+            "mean": 24.84,
+            "std": 7.48
+          },
+          "edit_score": {
+            "mean": 37.64,
+            "std": 5.23
+          }
+        },
+        "surgmotion_videogru": {
+          "accuracy": {
+            "mean": 39.17,
+            "std": 13.51
+          },
+          "balanced_accuracy": {
+            "mean": 34.1,
+            "std": 8.69
+          },
+          "macro_f1": {
+            "mean": 22.16,
+            "std": 7.95
+          },
+          "edit_score": {
+            "mean": 39.99,
+            "std": 9.51
+          }
+        },
+        "kinematics_gru": {
+          "accuracy": {
+            "mean": 66.64,
+            "std": 9.01
+          },
+          "balanced_accuracy": {
+            "mean": 57.77,
+            "std": 9.4
+          },
+          "macro_f1": {
+            "mean": 45.09,
+            "std": 8.24
+          },
+          "edit_score": {
+            "mean": 34.69,
+            "std": 9.43
+          }
+        }
+      },
+      "fusion_summary": {
+        "late": {
+          "accuracy": {
+            "mean": 60.54,
+            "std": 8.15
+          },
+          "balanced_accuracy": {
+            "mean": 50.26,
+            "std": 10.64
+          },
+          "macro_f1": {
+            "mean": 37.01,
+            "std": 10.14
+          },
+          "edit_score": {
+            "mean": 60.41,
+            "std": 15.07
+          }
+        },
+        "concat": {
+          "accuracy": {
+            "mean": 54.0,
+            "std": 15.45
+          },
+          "balanced_accuracy": {
+            "mean": 46.9,
+            "std": 14.82
+          },
+          "macro_f1": {
+            "mean": 32.29,
+            "std": 10.45
+          },
+          "edit_score": {
+            "mean": 49.19,
+            "std": 14.12
+          }
+        },
+        "adaptive": {
+          "accuracy": {
+            "mean": 72.28,
+            "std": 9.57
+          },
+          "balanced_accuracy": {
+            "mean": 60.05,
+            "std": 11.44
+          },
+          "macro_f1": {
+            "mean": 44.64,
+            "std": 8.26
+          },
+          "edit_score": {
+            "mean": 68.95,
+            "std": 9.38
+          }
+        }
+      },
+      "strongest_unimodal": {
+        "accuracy": {
+          "model_id": "kinematics_gru",
+          "mean": 66.64,
+          "std": 9.01
+        },
+        "balanced_accuracy": {
+          "model_id": "kinematics_gru",
+          "mean": 57.77,
+          "std": 9.4
+        },
+        "macro_f1": {
+          "model_id": "kinematics_gru",
+          "mean": 45.09,
+          "std": 8.24
+        },
+        "edit_score": {
+          "model_id": "surgmotion_videogru",
+          "mean": 39.99,
+          "std": 9.51
+        }
+      },
+      "fusion_comparisons": {
+        "late": {
+          "accuracy": {
+            "fusion_mean": 60.54,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 66.64,
+            "percentage_point_delta": -6.1,
+            "relative_percent_improvement": -9.15,
+            "beats_baseline": false
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 50.26,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 57.77,
+            "percentage_point_delta": -7.51,
+            "relative_percent_improvement": -13.0,
+            "beats_baseline": false
+          },
+          "macro_f1": {
+            "fusion_mean": 37.01,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 45.09,
+            "percentage_point_delta": -8.08,
+            "relative_percent_improvement": -17.92,
+            "beats_baseline": false
+          },
+          "edit_score": {
+            "fusion_mean": 60.41,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 39.99,
+            "percentage_point_delta": 20.42,
+            "relative_percent_improvement": 51.06,
+            "beats_baseline": true
+          }
+        },
+        "concat": {
+          "accuracy": {
+            "fusion_mean": 54.0,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 66.64,
+            "percentage_point_delta": -12.64,
+            "relative_percent_improvement": -18.97,
+            "beats_baseline": false
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 46.9,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 57.77,
+            "percentage_point_delta": -10.87,
+            "relative_percent_improvement": -18.82,
+            "beats_baseline": false
+          },
+          "macro_f1": {
+            "fusion_mean": 32.29,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 45.09,
+            "percentage_point_delta": -12.8,
+            "relative_percent_improvement": -28.39,
+            "beats_baseline": false
+          },
+          "edit_score": {
+            "fusion_mean": 49.19,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 39.99,
+            "percentage_point_delta": 9.2,
+            "relative_percent_improvement": 23.01,
+            "beats_baseline": true
+          }
+        },
+        "adaptive": {
+          "accuracy": {
+            "fusion_mean": 72.28,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 66.64,
+            "percentage_point_delta": 5.64,
+            "relative_percent_improvement": 8.46,
+            "beats_baseline": true
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 60.05,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 57.77,
+            "percentage_point_delta": 2.28,
+            "relative_percent_improvement": 3.95,
+            "beats_baseline": true
+          },
+          "macro_f1": {
+            "fusion_mean": 44.64,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 45.09,
+            "percentage_point_delta": -0.45,
+            "relative_percent_improvement": -1.0,
+            "beats_baseline": false
+          },
+          "edit_score": {
+            "fusion_mean": 68.95,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 39.99,
+            "percentage_point_delta": 28.96,
+            "relative_percent_improvement": 72.42,
+            "beats_baseline": true
+          }
+        }
+      },
+      "statistical_tests": {
+        "adaptive_vs_kinematics_gru": {
+          "accuracy": {
+            "mean_diff_percentage_points": 5.64,
+            "std_diff": 5.74,
+            "se_diff": 2.03,
+            "ci_95": [
+              0.84,
+              10.44
+            ],
+            "paired_t_stat": 2.779,
+            "p_value_t_uncorrected": 0.0273,
+            "wilcoxon_stat": 3.0,
+            "p_value_wilcoxon": 0.0391,
+            "cohen_d_z": 0.982,
+            "p_value_holm_bonferroni": 0.082,
+            "significant_at_05": false
+          },
+          "balanced_accuracy": {
+            "mean_diff_percentage_points": 2.28,
+            "std_diff": 4.01,
+            "se_diff": 1.42,
+            "ci_95": [
+              -1.07,
+              5.63
+            ],
+            "paired_t_stat": 1.611,
+            "p_value_t_uncorrected": 0.1511,
+            "wilcoxon_stat": 9.0,
+            "p_value_wilcoxon": 0.25,
+            "cohen_d_z": 0.57,
+            "p_value_holm_bonferroni": 0.3023,
+            "significant_at_05": false
+          },
+          "macro_f1": {
+            "mean_diff_percentage_points": -0.45,
+            "std_diff": 5.07,
+            "se_diff": 1.79,
+            "ci_95": [
+              -4.69,
+              3.78
+            ],
+            "paired_t_stat": -0.254,
+            "p_value_t_uncorrected": 0.8071,
+            "wilcoxon_stat": 16.0,
+            "p_value_wilcoxon": 0.8438,
+            "cohen_d_z": -0.09,
+            "p_value_holm_bonferroni": 0.8071,
+            "significant_at_05": false
+          },
+          "edit_score": {
+            "mean_diff_percentage_points": 34.26,
+            "std_diff": 11.13,
+            "se_diff": 3.94,
+            "ci_95": [
+              24.96,
+              43.57
+            ],
+            "paired_t_stat": 8.707,
+            "p_value_t_uncorrected": 0.0001,
+            "wilcoxon_stat": 0.0,
+            "p_value_wilcoxon": 0.0078,
+            "cohen_d_z": 3.078,
+            "p_value_holm_bonferroni": 0.0002,
+            "significant_at_05": true
+          }
+        }
+      }
+    },
+    "Knot_Tying": {
+      "expected_folds": 8,
+      "unimodal_summary": {
+        "majority": {
+          "accuracy": {
+            "mean": 27.35,
+            "std": 6.88
+          },
+          "balanced_accuracy": {
+            "mean": 14.88,
+            "std": 1.03
+          },
+          "macro_f1": {
+            "mean": 6.07,
+            "std": 1.18
+          },
+          "edit_score": {
+            "mean": 8.54,
+            "std": 0.59
+          }
+        },
+        "resnet18_videogru": {
+          "accuracy": {
+            "mean": 50.74,
+            "std": 5.2
+          },
+          "balanced_accuracy": {
+            "mean": 50.02,
+            "std": 7.18
+          },
+          "macro_f1": {
+            "mean": 44.34,
+            "std": 7.75
+          },
+          "edit_score": {
+            "mean": 24.89,
+            "std": 5.96
+          }
+        },
+        "surgmotion_videomlp": {
+          "accuracy": {
+            "mean": 54.29,
+            "std": 7.87
+          },
+          "balanced_accuracy": {
+            "mean": 53.03,
+            "std": 7.65
+          },
+          "macro_f1": {
+            "mean": 47.43,
+            "std": 10.16
+          },
+          "edit_score": {
+            "mean": 45.49,
+            "std": 7.22
+          }
+        },
+        "surgmotion_videogru": {
+          "accuracy": {
+            "mean": 53.6,
+            "std": 10.84
+          },
+          "balanced_accuracy": {
+            "mean": 54.48,
+            "std": 8.87
+          },
+          "macro_f1": {
+            "mean": 45.51,
+            "std": 8.56
+          },
+          "edit_score": {
+            "mean": 51.34,
+            "std": 7.91
+          }
+        },
+        "kinematics_gru": {
+          "accuracy": {
+            "mean": 61.09,
+            "std": 11.79
+          },
+          "balanced_accuracy": {
+            "mean": 56.53,
+            "std": 12.43
+          },
+          "macro_f1": {
+            "mean": 51.75,
+            "std": 15.14
+          },
+          "edit_score": {
+            "mean": 35.48,
+            "std": 13.86
+          }
+        }
+      },
+      "fusion_summary": {
+        "late": {
+          "accuracy": {
+            "mean": 58.95,
+            "std": 8.4
+          },
+          "balanced_accuracy": {
+            "mean": 54.65,
+            "std": 8.79
+          },
+          "macro_f1": {
+            "mean": 47.27,
+            "std": 8.61
+          },
+          "edit_score": {
+            "mean": 55.75,
+            "std": 6.87
+          }
+        },
+        "concat": {
+          "accuracy": {
+            "mean": 64.09,
+            "std": 11.29
+          },
+          "balanced_accuracy": {
+            "mean": 63.37,
+            "std": 9.23
+          },
+          "macro_f1": {
+            "mean": 53.97,
+            "std": 9.91
+          },
+          "edit_score": {
+            "mean": 62.45,
+            "std": 11.77
+          }
+        },
+        "adaptive": {
+          "accuracy": {
+            "mean": 72.34,
+            "std": 9.7
+          },
+          "balanced_accuracy": {
+            "mean": 66.73,
+            "std": 8.59
+          },
+          "macro_f1": {
+            "mean": 60.48,
+            "std": 10.2
+          },
+          "edit_score": {
+            "mean": 64.66,
+            "std": 12.61
+          }
+        }
+      },
+      "strongest_unimodal": {
+        "accuracy": {
+          "model_id": "kinematics_gru",
+          "mean": 61.09,
+          "std": 11.79
+        },
+        "balanced_accuracy": {
+          "model_id": "kinematics_gru",
+          "mean": 56.53,
+          "std": 12.43
+        },
+        "macro_f1": {
+          "model_id": "kinematics_gru",
+          "mean": 51.75,
+          "std": 15.14
+        },
+        "edit_score": {
+          "model_id": "surgmotion_videogru",
+          "mean": 51.34,
+          "std": 7.91
+        }
+      },
+      "fusion_comparisons": {
+        "late": {
+          "accuracy": {
+            "fusion_mean": 58.95,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 61.09,
+            "percentage_point_delta": -2.14,
+            "relative_percent_improvement": -3.5,
+            "beats_baseline": false
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 54.65,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 56.53,
+            "percentage_point_delta": -1.88,
+            "relative_percent_improvement": -3.33,
+            "beats_baseline": false
+          },
+          "macro_f1": {
+            "fusion_mean": 47.27,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 51.75,
+            "percentage_point_delta": -4.48,
+            "relative_percent_improvement": -8.66,
+            "beats_baseline": false
+          },
+          "edit_score": {
+            "fusion_mean": 55.75,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 51.34,
+            "percentage_point_delta": 4.41,
+            "relative_percent_improvement": 8.59,
+            "beats_baseline": true
+          }
+        },
+        "concat": {
+          "accuracy": {
+            "fusion_mean": 64.09,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 61.09,
+            "percentage_point_delta": 3.0,
+            "relative_percent_improvement": 4.91,
+            "beats_baseline": true
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 63.37,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 56.53,
+            "percentage_point_delta": 6.84,
+            "relative_percent_improvement": 12.1,
+            "beats_baseline": true
+          },
+          "macro_f1": {
+            "fusion_mean": 53.97,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 51.75,
+            "percentage_point_delta": 2.22,
+            "relative_percent_improvement": 4.29,
+            "beats_baseline": true
+          },
+          "edit_score": {
+            "fusion_mean": 62.45,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 51.34,
+            "percentage_point_delta": 11.11,
+            "relative_percent_improvement": 21.64,
+            "beats_baseline": true
+          }
+        },
+        "adaptive": {
+          "accuracy": {
+            "fusion_mean": 72.34,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 61.09,
+            "percentage_point_delta": 11.25,
+            "relative_percent_improvement": 18.42,
+            "beats_baseline": true
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 66.73,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 56.53,
+            "percentage_point_delta": 10.2,
+            "relative_percent_improvement": 18.04,
+            "beats_baseline": true
+          },
+          "macro_f1": {
+            "fusion_mean": 60.48,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 51.75,
+            "percentage_point_delta": 8.73,
+            "relative_percent_improvement": 16.87,
+            "beats_baseline": true
+          },
+          "edit_score": {
+            "fusion_mean": 64.66,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 51.34,
+            "percentage_point_delta": 13.32,
+            "relative_percent_improvement": 25.94,
+            "beats_baseline": true
+          }
+        }
+      },
+      "statistical_tests": {
+        "adaptive_vs_kinematics_gru": {
+          "accuracy": {
+            "mean_diff_percentage_points": 11.25,
+            "std_diff": 9.0,
+            "se_diff": 3.18,
+            "ci_95": [
+              3.72,
+              18.78
+            ],
+            "paired_t_stat": 3.535,
+            "p_value_t_uncorrected": 0.0095,
+            "wilcoxon_stat": 1.0,
+            "p_value_wilcoxon": 0.0156,
+            "cohen_d_z": 1.25,
+            "p_value_holm_bonferroni": 0.0286,
+            "significant_at_05": true
+          },
+          "balanced_accuracy": {
+            "mean_diff_percentage_points": 10.2,
+            "std_diff": 8.27,
+            "se_diff": 2.92,
+            "ci_95": [
+              3.29,
+              17.12
+            ],
+            "paired_t_stat": 3.49,
+            "p_value_t_uncorrected": 0.0101,
+            "wilcoxon_stat": 1.0,
+            "p_value_wilcoxon": 0.0156,
+            "cohen_d_z": 1.234,
+            "p_value_holm_bonferroni": 0.0286,
+            "significant_at_05": true
+          },
+          "macro_f1": {
+            "mean_diff_percentage_points": 8.73,
+            "std_diff": 10.18,
+            "se_diff": 3.6,
+            "ci_95": [
+              0.22,
+              17.24
+            ],
+            "paired_t_stat": 2.426,
+            "p_value_t_uncorrected": 0.0457,
+            "wilcoxon_stat": 3.0,
+            "p_value_wilcoxon": 0.0391,
+            "cohen_d_z": 0.858,
+            "p_value_holm_bonferroni": 0.0457,
+            "significant_at_05": true
+          },
+          "edit_score": {
+            "mean_diff_percentage_points": 29.18,
+            "std_diff": 10.45,
+            "se_diff": 3.69,
+            "ci_95": [
+              20.44,
+              37.91
+            ],
+            "paired_t_stat": 7.897,
+            "p_value_t_uncorrected": 0.0001,
+            "wilcoxon_stat": 0.0,
+            "p_value_wilcoxon": 0.0078,
+            "cohen_d_z": 2.792,
+            "p_value_holm_bonferroni": 0.0004,
+            "significant_at_05": true
+          }
+        }
+      }
+    },
+    "Needle_Passing": {
+      "expected_folds": 7,
+      "unimodal_summary": {
+        "majority": {
+          "accuracy": {
+            "mean": 40.55,
+            "std": 8.16
+          },
+          "balanced_accuracy": {
+            "mean": 11.25,
+            "std": 1.33
+          },
+          "macro_f1": {
+            "mean": 5.2,
+            "std": 0.7
+          },
+          "edit_score": {
+            "mean": 5.27,
+            "std": 0.96
+          }
+        },
+        "resnet18_videogru": {
+          "accuracy": {
+            "mean": 30.22,
+            "std": 6.57
+          },
+          "balanced_accuracy": {
+            "mean": 32.07,
+            "std": 6.25
+          },
+          "macro_f1": {
+            "mean": 19.62,
+            "std": 3.27
+          },
+          "edit_score": {
+            "mean": 22.86,
+            "std": 4.63
+          }
+        },
+        "surgmotion_videomlp": {
+          "accuracy": {
+            "mean": 29.96,
+            "std": 16.58
+          },
+          "balanced_accuracy": {
+            "mean": 25.57,
+            "std": 15.86
+          },
+          "macro_f1": {
+            "mean": 17.19,
+            "std": 11.0
+          },
+          "edit_score": {
+            "mean": 33.78,
+            "std": 15.32
+          }
+        },
+        "surgmotion_videogru": {
+          "accuracy": {
+            "mean": 26.55,
+            "std": 15.11
+          },
+          "balanced_accuracy": {
+            "mean": 30.97,
+            "std": 15.46
+          },
+          "macro_f1": {
+            "mean": 19.97,
+            "std": 12.36
+          },
+          "edit_score": {
+            "mean": 42.34,
+            "std": 16.63
+          }
+        },
+        "kinematics_gru": {
+          "accuracy": {
+            "mean": 48.69,
+            "std": 11.62
+          },
+          "balanced_accuracy": {
+            "mean": 41.7,
+            "std": 9.97
+          },
+          "macro_f1": {
+            "mean": 29.99,
+            "std": 9.35
+          },
+          "edit_score": {
+            "mean": 31.34,
+            "std": 7.32
+          }
+        }
+      },
+      "fusion_summary": {
+        "late": {
+          "accuracy": {
+            "mean": 35.94,
+            "std": 13.85
+          },
+          "balanced_accuracy": {
+            "mean": 36.77,
+            "std": 12.87
+          },
+          "macro_f1": {
+            "mean": 23.57,
+            "std": 11.42
+          },
+          "edit_score": {
+            "mean": 46.16,
+            "std": 10.84
+          }
+        },
+        "concat": {
+          "accuracy": {
+            "mean": 46.21,
+            "std": 19.07
+          },
+          "balanced_accuracy": {
+            "mean": 42.32,
+            "std": 19.34
+          },
+          "macro_f1": {
+            "mean": 28.4,
+            "std": 12.37
+          },
+          "edit_score": {
+            "mean": 45.17,
+            "std": 20.64
+          }
+        },
+        "adaptive": {
+          "accuracy": {
+            "mean": 51.48,
+            "std": 13.94
+          },
+          "balanced_accuracy": {
+            "mean": 46.98,
+            "std": 15.16
+          },
+          "macro_f1": {
+            "mean": 31.03,
+            "std": 11.52
+          },
+          "edit_score": {
+            "mean": 54.81,
+            "std": 9.4
+          }
+        }
+      },
+      "strongest_unimodal": {
+        "accuracy": {
+          "model_id": "kinematics_gru",
+          "mean": 48.69,
+          "std": 11.62
+        },
+        "balanced_accuracy": {
+          "model_id": "kinematics_gru",
+          "mean": 41.7,
+          "std": 9.97
+        },
+        "macro_f1": {
+          "model_id": "kinematics_gru",
+          "mean": 29.99,
+          "std": 9.35
+        },
+        "edit_score": {
+          "model_id": "surgmotion_videogru",
+          "mean": 42.34,
+          "std": 16.63
+        }
+      },
+      "fusion_comparisons": {
+        "late": {
+          "accuracy": {
+            "fusion_mean": 35.94,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 48.69,
+            "percentage_point_delta": -12.75,
+            "relative_percent_improvement": -26.19,
+            "beats_baseline": false
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 36.77,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 41.7,
+            "percentage_point_delta": -4.93,
+            "relative_percent_improvement": -11.82,
+            "beats_baseline": false
+          },
+          "macro_f1": {
+            "fusion_mean": 23.57,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 29.99,
+            "percentage_point_delta": -6.42,
+            "relative_percent_improvement": -21.41,
+            "beats_baseline": false
+          },
+          "edit_score": {
+            "fusion_mean": 46.16,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 42.34,
+            "percentage_point_delta": 3.82,
+            "relative_percent_improvement": 9.02,
+            "beats_baseline": true
+          }
+        },
+        "concat": {
+          "accuracy": {
+            "fusion_mean": 46.21,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 48.69,
+            "percentage_point_delta": -2.48,
+            "relative_percent_improvement": -5.09,
+            "beats_baseline": false
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 42.32,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 41.7,
+            "percentage_point_delta": 0.62,
+            "relative_percent_improvement": 1.49,
+            "beats_baseline": true
+          },
+          "macro_f1": {
+            "fusion_mean": 28.4,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 29.99,
+            "percentage_point_delta": -1.59,
+            "relative_percent_improvement": -5.3,
+            "beats_baseline": false
+          },
+          "edit_score": {
+            "fusion_mean": 45.17,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 42.34,
+            "percentage_point_delta": 2.83,
+            "relative_percent_improvement": 6.68,
+            "beats_baseline": true
+          }
+        },
+        "adaptive": {
+          "accuracy": {
+            "fusion_mean": 51.48,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 48.69,
+            "percentage_point_delta": 2.79,
+            "relative_percent_improvement": 5.73,
+            "beats_baseline": true
+          },
+          "balanced_accuracy": {
+            "fusion_mean": 46.98,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 41.7,
+            "percentage_point_delta": 5.28,
+            "relative_percent_improvement": 12.66,
+            "beats_baseline": true
+          },
+          "macro_f1": {
+            "fusion_mean": 31.03,
+            "strongest_baseline_name": "kinematics_gru",
+            "baseline_mean": 29.99,
+            "percentage_point_delta": 1.04,
+            "relative_percent_improvement": 3.47,
+            "beats_baseline": true
+          },
+          "edit_score": {
+            "fusion_mean": 54.81,
+            "strongest_baseline_name": "surgmotion_videogru",
+            "baseline_mean": 42.34,
+            "percentage_point_delta": 12.47,
+            "relative_percent_improvement": 29.45,
+            "beats_baseline": true
+          }
+        }
+      },
+      "statistical_tests": {
+        "adaptive_vs_kinematics_gru": {
+          "accuracy": {
+            "mean_diff_percentage_points": 2.79,
+            "std_diff": 10.54,
+            "se_diff": 3.98,
+            "ci_95": [
+              -6.96,
+              12.53
+            ],
+            "paired_t_stat": 0.7,
+            "p_value_t_uncorrected": 0.5102,
+            "wilcoxon_stat": 14.0,
+            "p_value_wilcoxon": 1.0,
+            "cohen_d_z": 0.265,
+            "p_value_holm_bonferroni": 1.0,
+            "significant_at_05": false
+          },
+          "balanced_accuracy": {
+            "mean_diff_percentage_points": 5.28,
+            "std_diff": 12.2,
+            "se_diff": 4.61,
+            "ci_95": [
+              -6.0,
+              16.55
+            ],
+            "paired_t_stat": 1.145,
+            "p_value_t_uncorrected": 0.296,
+            "wilcoxon_stat": 9.0,
+            "p_value_wilcoxon": 0.4688,
+            "cohen_d_z": 0.433,
+            "p_value_holm_bonferroni": 0.888,
+            "significant_at_05": false
+          },
+          "macro_f1": {
+            "mean_diff_percentage_points": 1.04,
+            "std_diff": 9.51,
+            "se_diff": 3.6,
+            "ci_95": [
+              -7.76,
+              9.84
+            ],
+            "paired_t_stat": 0.29,
+            "p_value_t_uncorrected": 0.7813,
+            "wilcoxon_stat": 12.0,
+            "p_value_wilcoxon": 0.8125,
+            "cohen_d_z": 0.11,
+            "p_value_holm_bonferroni": 1.0,
+            "significant_at_05": false
+          },
+          "edit_score": {
+            "mean_diff_percentage_points": 23.46,
+            "std_diff": 7.45,
+            "se_diff": 2.81,
+            "ci_95": [
+              16.58,
+              30.35
+            ],
+            "paired_t_stat": 8.338,
+            "p_value_t_uncorrected": 0.0002,
+            "wilcoxon_stat": 0.0,
+            "p_value_wilcoxon": 0.0156,
+            "cohen_d_z": 3.151,
+            "p_value_holm_bonferroni": 0.0006,
+            "significant_at_05": true
+          }
+        }
+      }
+    }
+  },
+  "discrepancies": []
+}
