@@ -5,6 +5,7 @@
   "feature_dim": 1024,
   "sequence_length": 8,
   "active_folds": 8,
+<<<<<<< HEAD
   "total_elapsed_sec": 168.93,
   "metrics": {
     "accuracy": {
@@ -30,6 +31,33 @@
       "std": 7.91,
       "min": 40.24,
       "max": 64.33
+=======
+  "total_elapsed_sec": 282.37,
+  "metrics": {
+    "accuracy": {
+      "mean": 56.68,
+      "std": 10.25,
+      "min": 44.27,
+      "max": 75.75
+    },
+    "balanced_accuracy": {
+      "mean": 57.05,
+      "std": 10.07,
+      "min": 39.94,
+      "max": 77.37
+    },
+    "macro_f1": {
+      "mean": 47.5,
+      "std": 7.78,
+      "min": 33.33,
+      "max": 61.69
+    },
+    "edit_score": {
+      "mean": 57.82,
+      "std": 6.7,
+      "min": 46.72,
+      "max": 65.34
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
     }
   },
   "fold_results": [
@@ -38,11 +66,19 @@
       "task": "Knot_Tying",
       "test_user": "B",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 5,
       "accuracy": 40.8,
       "balanced_accuracy": 39.76,
       "macro_f1": 32.48,
       "edit_score": 55.64,
+=======
+      "best_epoch": 9,
+      "accuracy": 44.27,
+      "balanced_accuracy": 39.94,
+      "macro_f1": 33.33,
+      "edit_score": 46.72,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 27,
       "n_val_trials": 5,
       "n_test_trials": 4
@@ -52,11 +88,19 @@
       "task": "Knot_Tying",
       "test_user": "C",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 7,
       "accuracy": 44.38,
       "balanced_accuracy": 49.36,
       "macro_f1": 40.22,
       "edit_score": 43.82,
+=======
+      "best_epoch": 11,
+      "accuracy": 54.37,
+      "balanced_accuracy": 51.88,
+      "macro_f1": 46.13,
+      "edit_score": 60.8,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 26,
       "n_val_trials": 5,
       "n_test_trials": 5
@@ -66,11 +110,19 @@
       "task": "Knot_Tying",
       "test_user": "D",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 20,
       "accuracy": 42.03,
       "balanced_accuracy": 47.45,
       "macro_f1": 36.26,
       "edit_score": 43.17,
+=======
+      "best_epoch": 12,
+      "accuracy": 45.51,
+      "balanced_accuracy": 62.64,
+      "macro_f1": 45.0,
+      "edit_score": 63.44,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 26,
       "n_val_trials": 5,
       "n_test_trials": 5
@@ -80,11 +132,19 @@
       "task": "Knot_Tying",
       "test_user": "E",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 9,
       "accuracy": 71.73,
       "balanced_accuracy": 61.54,
       "macro_f1": 60.09,
       "edit_score": 64.33,
+=======
+      "best_epoch": 17,
+      "accuracy": 68.32,
+      "balanced_accuracy": 57.54,
+      "macro_f1": 55.05,
+      "edit_score": 61.79,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 26,
       "n_val_trials": 5,
       "n_test_trials": 5
@@ -94,11 +154,19 @@
       "task": "Knot_Tying",
       "test_user": "F",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 3,
       "accuracy": 54.32,
       "balanced_accuracy": 51.07,
       "macro_f1": 45.62,
       "edit_score": 57.75,
+=======
+      "best_epoch": 2,
+      "accuracy": 60.23,
+      "balanced_accuracy": 52.27,
+      "macro_f1": 48.95,
+      "edit_score": 58.39,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 26,
       "n_val_trials": 5,
       "n_test_trials": 5
@@ -108,11 +176,19 @@
       "task": "Knot_Tying",
       "test_user": "G",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 11,
       "accuracy": 57.86,
       "balanced_accuracy": 58.32,
       "macro_f1": 49.21,
       "edit_score": 40.24,
+=======
+      "best_epoch": 20,
+      "accuracy": 54.61,
+      "balanced_accuracy": 53.89,
+      "macro_f1": 45.92,
+      "edit_score": 46.83,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 28,
       "n_val_trials": 3,
       "n_test_trials": 5
@@ -122,11 +198,19 @@
       "task": "Knot_Tying",
       "test_user": "H",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 9,
       "accuracy": 67.66,
       "balanced_accuracy": 70.18,
       "macro_f1": 54.28,
       "edit_score": 49.62,
+=======
+      "best_epoch": 19,
+      "accuracy": 75.75,
+      "balanced_accuracy": 77.37,
+      "macro_f1": 61.69,
+      "edit_score": 65.34,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 29,
       "n_val_trials": 4,
       "n_test_trials": 3
@@ -136,11 +220,19 @@
       "task": "Knot_Tying",
       "test_user": "I",
       "is_active": true,
+<<<<<<< HEAD
       "best_epoch": 23,
       "accuracy": 50.0,
       "balanced_accuracy": 58.2,
       "macro_f1": 45.89,
       "edit_score": 56.15,
+=======
+      "best_epoch": 10,
+      "accuracy": 50.36,
+      "balanced_accuracy": 60.83,
+      "macro_f1": 43.94,
+      "edit_score": 59.24,
+>>>>>>> 5eafe3d1b4dec6dc571c0a1ee81483d17c638104
       "n_train_trials": 28,
       "n_val_trials": 4,
       "n_test_trials": 4
