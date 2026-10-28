@@ -27,6 +27,12 @@ from src.models.reliability_gate import (
     validate_availability_mask,
 )
 
+from src.models.surgmotion_fusion import (
+    GateTrajectoryLogger,
+    SurgMotionAdaptiveFusionModel,
+    inject_feature_noise,
+)
+
 __all__ = [
     "MajorityClassClassifier",
     "KinematicsMLP",
@@ -50,6 +56,9 @@ __all__ = [
     "compute_masked_normalized_weights",
     "fuse_logits_with_availability",
     "validate_availability_mask",
+    "SurgMotionAdaptiveFusionModel",
+    "inject_feature_noise",
+    "GateTrajectoryLogger",
 ]
 
 
