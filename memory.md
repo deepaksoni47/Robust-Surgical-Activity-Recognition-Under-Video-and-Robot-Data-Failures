@@ -145,12 +145,12 @@
 
 ## 7. Key Findings Log — SurgSync Dataset Audit & Pilot Preparation (ITER-33 & ITER-34)
 - **Archive Scale:** 714.35 GB total (11,745 files); video accounts for 714.19 GB (99.98%) due to raw lossless FFV1 at 1920×1080 stereo. Parquets are only 150 MB. Suturing video is 372.33 GB across 92 episodes.
-- **Acquisition Safeguards:** `scripts/download_surgsync_suturing.py` includes disk space preflight requiring $\ge 450.0$ GB free (tested and verified: caught 20.6 GB laptop limit and prevented disk exhaustion).
+- **Acquisition Safeguards:** `scripts/download_surgsync.py` and `scripts/download_surgsync_suturing.py` include automated disk space preflights: $\ge 450.0$ GB free for Suturing subset (~372 GB), $\ge 850.0$ GB free for Full dataset (~714 GB, all 205 episodes across 6 tasks), and $\ge 1-2$ GB for `--skip-video`. Tested and verified locally on Windows.
 - **Operator Anonymity & Split Resolution:** Public release v1.0 strips user IDs for anonymization; only 3 skill buckets (Novice, Intermediate, Expert) are provided. Formally resolved as **Episode-Level Stratified Cross-Validation (EL-SCV)** across 4 balanced folds. Explicit non-claim: EL-SCV does NOT guarantee unseen-surgeon generalization due to potential same-surgeon leakage.
 - **Gesture Ontology Distinction:** Annotations are dual-arm independent (`gesture.PSM1` and `gesture.PSM2`) using an 18-class clinical vocabulary (17 observed, G16 cut suture unobserved), NOT JIGSAWS G1–G15 single-label system gestures. Primary pilot target defined on PSM1 dominant arm (19 classes: background + 18 gestures).
 - **Time Synchronization:** Sub-millisecond on offline data (0.37 ms mean cross-modal delta, 0 dropped frames); 12.92 ms mean delta on online data with ~47 ms jaw angle latency.
-- **GPU Feature Extraction:** `scripts/extract_surgmotion_surgsync.py` built with streaming sliding window (16 frames), ImageNet normalization, FP16 autocast, and atomic `.npz` caching (~184 MB total for all 90,068 frames). All 14 tests pass.
-- **Mentor Runbook Prepared:** Preflight, resumable download, integrity verification, and sample GPU extraction commands documented. Full execution awaiting user confirmation.
+- **GPU Feature Extraction:** `scripts/extract_surgmotion_surgsync.py` built with streaming sliding window (16 frames), ImageNet normalization, FP16 autocast, and atomic `.npz` caching (~184 MB for suturing, ~410 MB for all tasks). All 17 SurgSync tests pass.
+- **Mentor Runbook Prepared:** Dual-path runbooks for both Scenario A (suturing only, $\ge 450$ GB) and Scenario B (full dataset, $\ge 850$ GB on mentor's 3 TB workstation) documented in `docs/iter34_surgsync_acquisition.md`. Preflight, resumable download, integrity verification, and sample GPU extraction commands ready for execution.
 
 
 

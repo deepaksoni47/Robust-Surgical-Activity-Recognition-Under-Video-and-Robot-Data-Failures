@@ -56,31 +56,45 @@ IMAGENET_STD = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 
 def discover_suturing_episodes(data_dir: Path, task: str = "single_interrupted_stitch") -> List[Dict[str, Any]]:
     """
-    Locate all downloaded episodes for the specified task in online_data and offline_data.
+    Locate all downloaded episodes for the specified task (or all tasks) in online_data and offline_data.
     """
     episodes = []
+    is_all = (task.lower() in ("all", "full"))
+    # Normalize 'suturing' -> 'single_interrupted_stitch'
+    target_task = "single_interrupted_stitch" if task.lower() == "suturing" else task
+
     for partition in ("online_data", "offline_data"):
-        task_dir = data_dir / partition / "episodes" / task
-        if not task_dir.is_dir():
+        episodes_root = data_dir / partition / "episodes"
+        if not episodes_root.is_dir():
             continue
-        for clip_dir in sorted(task_dir.iterdir()):
-            if not clip_dir.is_dir():
+            
+        task_dirs = [episodes_root / target_task] if not is_all else sorted([d for d in episodes_root.iterdir() if d.is_dir()])
+        for task_dir in task_dirs:
+            if not task_dir.is_dir():
                 continue
-            video_file = clip_dir / "video_raw" / "stereo_left.mkv"
-            meta_file = clip_dir / "episode_meta.json"
-            if video_file.is_file() and meta_file.is_file():
-                with open(meta_file, "r", encoding="utf-8") as f:
-                    meta = json.load(f)
-                episodes.append({
-                    "episode_id": meta.get("episode_id", f"{partition}_{clip_dir.name}"),
-                    "clip_dir": clip_dir,
-                    "video_path": video_file,
-                    "meta_path": meta_file,
-                    "partition": partition,
-                    "clip_name": clip_dir.name,
-                    "length_frames": meta.get("length_frames", 0),
-                    "operator_skill": meta.get("operator_skill_level", "Unknown"),
-                })
+            cur_task = task_dir.name
+            for clip_dir in sorted(task_dir.iterdir()):
+                if not clip_dir.is_dir():
+                    continue
+                video_file = clip_dir / "video_raw" / "stereo_left.mkv"
+                meta_file = clip_dir / "episode_meta.json"
+                if video_file.is_file() and meta_file.is_file():
+                    with open(meta_file, "r", encoding="utf-8") as f:
+                        meta = json.load(f)
+                    ep_raw_id = meta.get("episode_id", f"{partition}_{clip_dir.name}")
+                    # Prefix with task if not present to ensure absolute uniqueness across tasks
+                    ep_id = ep_raw_id if cur_task in ep_raw_id else f"{cur_task}_{ep_raw_id}"
+                    episodes.append({
+                        "episode_id": ep_id,
+                        "task": cur_task,
+                        "clip_dir": clip_dir,
+                        "video_path": video_file,
+                        "meta_path": meta_file,
+                        "partition": partition,
+                        "clip_name": clip_dir.name,
+                        "length_frames": meta.get("length_frames", 0),
+                        "operator_skill": meta.get("operator_skill_level", "Unknown"),
+                    })
     return episodes
 
 
@@ -294,6 +308,7 @@ def run_surgsync_extraction(
                 features=feats,
                 frame_indices=frame_indices,
                 episode_id=ep_id,
+                task=ep.get("task", task),
                 operator_skill=ep["operator_skill"],
             )
             tmp_npz.replace(out_npz)
@@ -331,7 +346,7 @@ def main():
     parser.add_argument("--data-dir", type=Path, default=Path("data/surgsync_v10"), help="SurgSync dataset root.")
     parser.add_argument("--output-dir", type=Path, default=Path("data/cache/features_surgsync"), help="Output cache directory.")
     parser.add_argument("--checkpoint-path", type=Path, default=DEFAULT_CHECKPOINT, help="SurgMotion checkpoint path.")
-    parser.add_argument("--task", type=str, default="single_interrupted_stitch", help="Task partition.")
+    parser.add_argument("--task", type=str, default="single_interrupted_stitch", help="Task partition ('single_interrupted_stitch', 'suturing', or 'all').")
     parser.add_argument("--clip-length", type=int, default=16, help="Window clip length.")
     parser.add_argument("--batch-size", type=int, default=4, help="Batch size of clips.")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cuda", "cpu"], help="Target device.")

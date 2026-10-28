@@ -95,3 +95,74 @@ def test_discover_suturing_episodes_empty(tmp_path: Path):
     episodes = discover_suturing_episodes(tmp_path, task="single_interrupted_stitch")
     assert isinstance(episodes, list)
     assert len(episodes) == 0
+
+
+def test_check_preflight_space_all_tasks(tmp_path: Path):
+    """Verify that 'all' tasks mode enforces ~800 GB threshold for full and 2 GB for skip-video."""
+    # Full video mode
+    is_sufficient, free_gb, req_gb = check_preflight_space(tmp_path, skip_video=False, task="all")
+    assert req_gb > 750.0  # ~800 GB
+    
+    # Skip video mode
+    is_sufficient_skip, free_gb_skip, req_gb_skip = check_preflight_space(tmp_path, skip_video=True, task="all")
+    assert req_gb_skip == 2.0
+
+
+def test_verify_download_integrity_all_tasks_filter(tmp_path: Path):
+    """Verify that task='all' checks all tasks, while task='suturing' only checks suturing + meta."""
+    meta_dir = tmp_path / "meta"
+    meta_dir.mkdir(parents=True)
+    manifest_path = meta_dir / "manifest.json"
+
+    # Manifest with 1 suturing file and 1 peg_transfer file
+    mock_manifest = {
+        "files": {
+            "online_data/episodes/single_interrupted_stitch/0/annotation.parquet": {
+                "size_bytes": 100,
+                "sha256": "sha1"
+            },
+            "online_data/episodes/peg_transfer/0/annotation.parquet": {
+                "size_bytes": 200,
+                "sha256": "sha2"
+            }
+        }
+    }
+    with open(manifest_path, "w", encoding="utf-8") as f:
+        json.dump(mock_manifest, f)
+
+    # When task="suturing", only 1 file is relevant
+    res_suturing = verify_download_integrity(tmp_path, manifest_path=manifest_path, task="suturing")
+    assert res_suturing["total_relevant_files"] == 1
+
+    # When task="all", both files are relevant
+    res_all = verify_download_integrity(tmp_path, manifest_path=manifest_path, task="all")
+    assert res_all["total_relevant_files"] == 2
+
+
+def test_discover_episodes_all_tasks(tmp_path: Path):
+    """Verify multi-task discovery across partitions when task='all'."""
+    # Create fake episode 1 (suturing)
+    ep1_dir = tmp_path / "online_data" / "episodes" / "single_interrupted_stitch" / "0"
+    (ep1_dir / "video_raw").mkdir(parents=True)
+    (ep1_dir / "video_raw" / "stereo_left.mkv").write_bytes(b"dummy_video_1")
+    with open(ep1_dir / "episode_meta.json", "w", encoding="utf-8") as f:
+        json.dump({"episode_id": "ep1", "operator_skill_level": "Expert"}, f)
+
+    # Create fake episode 2 (peg_transfer)
+    ep2_dir = tmp_path / "offline_data" / "episodes" / "peg_transfer" / "1"
+    (ep2_dir / "video_raw").mkdir(parents=True)
+    (ep2_dir / "video_raw" / "stereo_left.mkv").write_bytes(b"dummy_video_2")
+    with open(ep2_dir / "episode_meta.json", "w", encoding="utf-8") as f:
+        json.dump({"episode_id": "ep2", "operator_skill_level": "Intermediate"}, f)
+
+    # Test discovering only suturing
+    suturing_eps = discover_suturing_episodes(tmp_path, task="single_interrupted_stitch")
+    assert len(suturing_eps) == 1
+    assert suturing_eps[0]["task"] == "single_interrupted_stitch"
+
+    # Test discovering all tasks
+    all_eps = discover_suturing_episodes(tmp_path, task="all")
+    assert len(all_eps) == 2
+    tasks_found = {ep["task"] for ep in all_eps}
+    assert tasks_found == {"single_interrupted_stitch", "peg_transfer"}
+
