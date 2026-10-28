@@ -1,9 +1,13 @@
 # Dataset & large data
 dataset/
-data/raw/
-data/cache/
+data/
 *.avi
 *.mp4
+*.mkv
+*.npz
+*.parquet
+*.h5
+*.hdf5
 
 # Python virtual environments & bytecode
 .venv/

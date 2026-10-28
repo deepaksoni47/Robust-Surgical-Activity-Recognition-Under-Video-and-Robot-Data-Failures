@@ -139,15 +139,18 @@
 | **ITER-31** | M14 Ablation & Feasibility | Continuous-Noise Gate Ablation & Second-Dataset Feasibility Study | Completed |
 | **ITER-32** | M15 Ablation Audit | GPU Results Audit, Gate Weight Flatness Discovery & Paper Update | Completed |
 | **ITER-33** | M16 Second Dataset | SurgSync Dataset Verification, Schema Audit & Pilot Protocol (714GB Footprint, Operator Anonymity, Dual-Arm Taxonomy) | Completed |
+| **ITER-34** | M16 Acquisition & Pilot | Resumable Suturing Downloader with Disk Preflight, SurgMotion GPU Extractor, Acquisition Tests, and Pilot Protocol | Completed |
 
 ---
 
-## 7. Key Findings Log — SurgSync Dataset Audit (ITER-33)
+## 7. Key Findings Log — SurgSync Dataset Audit & Pilot Preparation (ITER-33 & ITER-34)
 - **Archive Scale:** 714.35 GB total (11,745 files); video accounts for 714.19 GB (99.98%) due to raw lossless FFV1 at 1920×1080 stereo. Parquets are only 150 MB. Suturing video is 372.33 GB across 92 episodes.
-- **Operator Anonymity:** Public release v1.0 strips user IDs for anonymization; only 3 skill buckets (Novice, Intermediate, Expert) are provided. Strict Leave-One-User-Out (LOUO) is unfeasible without author-provided user mappings.
-- **Gesture Ontology Distinction:** Annotations are dual-arm independent (`gesture.PSM1` and `gesture.PSM2`) using an 18-class clinical vocabulary (17 observed, G16 cut suture unobserved), NOT JIGSAWS G1–G15 single-label system gestures. Direct zero-shot transfer is mathematically impossible without re-architecting heads.
+- **Acquisition Safeguards:** `scripts/download_surgsync_suturing.py` includes disk space preflight requiring $\ge 450.0$ GB free (tested and verified: caught 20.6 GB laptop limit and prevented disk exhaustion).
+- **Operator Anonymity & Split Resolution:** Public release v1.0 strips user IDs for anonymization; only 3 skill buckets (Novice, Intermediate, Expert) are provided. Formally resolved as **Episode-Level Stratified Cross-Validation (EL-SCV)** across 4 balanced folds. Explicit non-claim: EL-SCV does NOT guarantee unseen-surgeon generalization due to potential same-surgeon leakage.
+- **Gesture Ontology Distinction:** Annotations are dual-arm independent (`gesture.PSM1` and `gesture.PSM2`) using an 18-class clinical vocabulary (17 observed, G16 cut suture unobserved), NOT JIGSAWS G1–G15 single-label system gestures. Primary pilot target defined on PSM1 dominant arm (19 classes: background + 18 gestures).
 - **Time Synchronization:** Sub-millisecond on offline data (0.37 ms mean cross-modal delta, 0 dropped frames); 12.92 ms mean delta on online data with ~47 ms jaw angle latency.
-- **Decision:** Ready for targeted within-dataset pilot protocol on `single_interrupted_stitch` using 4-fold skill-stratified cross-validation, subject to mentor machine download approval.
+- **GPU Feature Extraction:** `scripts/extract_surgmotion_surgsync.py` built with streaming sliding window (16 frames), ImageNet normalization, FP16 autocast, and atomic `.npz` caching (~184 MB total for all 90,068 frames). All 14 tests pass.
+- **Mentor Runbook Prepared:** Preflight, resumable download, integrity verification, and sample GPU extraction commands documented. Full execution awaiting user confirmation.
 
 
 
