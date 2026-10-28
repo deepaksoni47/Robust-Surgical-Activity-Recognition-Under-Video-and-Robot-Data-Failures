@@ -206,12 +206,13 @@ def get_surgmotion_dataloaders(
     batch_size: int = 32,
     camera: str = "capture1",
     include_background: bool = True,
+    normalize_kinematics: bool = True,
     num_workers: int = 0,
 ) -> Tuple[DataLoader, DataLoader, DataLoader, VideoFeatureNormalizer, Dict[str, Any]]:
     """Build leakage-safe Train, Val, and Test DataLoaders for an official LOUO fold.
 
     CRITICAL LEAKAGE PROTECTION:
-    - Normalization is fitted strictly on training trials.
+    - Feature and kinematics normalizations are fitted strictly on training trials.
     - Test trials are completely held-out.
     """
     splits_dict = get_louo_splits(task=task, create_val_split=True)
@@ -223,7 +224,7 @@ def get_surgmotion_dataloaders(
     val_trials = fold_info["val_trials"]
     test_trials = fold_info["test_trials"]
 
-    # 1. First pass: load raw training features to fit normalizer without leakage
+    # 1. First pass: load raw training features and kinematics to fit normalizers without leakage
     cache_dir = PROJECT_ROOT / "data/cache/features_surgmotion"
     raw_train_feats = []
     for tid in train_trials:
@@ -233,7 +234,19 @@ def get_surgmotion_dataloaders(
 
     feat_normalizer = VideoFeatureNormalizer().fit(raw_train_feats)
 
-    # 2. Build Datasets using fitted normalizer
+    kin_normalizer: Optional[KinematicsNormalizer] = None
+    if normalize_kinematics:
+        kin_base = PROJECT_ROOT / f"dataset/{task}/kinematics/AllGestures"
+        raw_train_kin = []
+        for tid in train_trials:
+            kp = kin_base / f"{tid}.txt"
+            if kp.is_file():
+                raw_train_kin.append(load_kinematics(kp))
+        if raw_train_kin:
+            kin_normalizer = KinematicsNormalizer().fit(raw_train_kin)
+            fold_info["kinematics_normalizer"] = kin_normalizer
+
+    # 2. Build Datasets using fitted normalizers
     train_ds = JIGSAWSSurgMotionDataset(
         task=task,
         trials=train_trials,
@@ -241,6 +254,7 @@ def get_surgmotion_dataloaders(
         sequence_stride=sequence_stride,
         camera=camera,
         feature_normalizer=feat_normalizer,
+        kinematics_normalizer=kin_normalizer,
         include_background=include_background,
     )
     val_ds = JIGSAWSSurgMotionDataset(
@@ -250,6 +264,7 @@ def get_surgmotion_dataloaders(
         sequence_stride=sequence_stride,
         camera=camera,
         feature_normalizer=feat_normalizer,
+        kinematics_normalizer=kin_normalizer,
         include_background=include_background,
     )
     test_ds = JIGSAWSSurgMotionDataset(
@@ -259,6 +274,7 @@ def get_surgmotion_dataloaders(
         sequence_stride=sequence_stride,
         camera=camera,
         feature_normalizer=feat_normalizer,
+        kinematics_normalizer=kin_normalizer,
         include_background=include_background,
     )
 
