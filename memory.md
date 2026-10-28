@@ -138,6 +138,16 @@
 | **ITER-30** | M13 Validation | Final Scientific Validation, Publication Figures, Paper Update & Handoff | Completed |
 | **ITER-31** | M14 Ablation & Feasibility | Continuous-Noise Gate Ablation & Second-Dataset Feasibility Study | Completed |
 | **ITER-32** | M15 Ablation Audit | GPU Results Audit, Gate Weight Flatness Discovery & Paper Update | Completed |
+| **ITER-33** | M16 Second Dataset | SurgSync Dataset Verification, Schema Audit & Pilot Protocol (714GB Footprint, Operator Anonymity, Dual-Arm Taxonomy) | Completed |
+
+---
+
+## 7. Key Findings Log — SurgSync Dataset Audit (ITER-33)
+- **Archive Scale:** 714.35 GB total (11,745 files); video accounts for 714.19 GB (99.98%) due to raw lossless FFV1 at 1920×1080 stereo. Parquets are only 150 MB. Suturing video is 372.33 GB across 92 episodes.
+- **Operator Anonymity:** Public release v1.0 strips user IDs for anonymization; only 3 skill buckets (Novice, Intermediate, Expert) are provided. Strict Leave-One-User-Out (LOUO) is unfeasible without author-provided user mappings.
+- **Gesture Ontology Distinction:** Annotations are dual-arm independent (`gesture.PSM1` and `gesture.PSM2`) using an 18-class clinical vocabulary (17 observed, G16 cut suture unobserved), NOT JIGSAWS G1–G15 single-label system gestures. Direct zero-shot transfer is mathematically impossible without re-architecting heads.
+- **Time Synchronization:** Sub-millisecond on offline data (0.37 ms mean cross-modal delta, 0 dropped frames); 12.92 ms mean delta on online data with ~47 ms jaw angle latency.
+- **Decision:** Ready for targeted within-dataset pilot protocol on `single_interrupted_stitch` using 4-fold skill-stratified cross-validation, subject to mentor machine download approval.
 
 
 

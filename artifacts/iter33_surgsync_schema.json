@@ -1,0 +1,224 @@
+{
+  "metadata": {
+    "title": "SurgSync Dataset Verified Schema and Inventory",
+    "date": "2026-10-28",
+    "verified_release": "v1.0.0 (Release Option B: Raw FFV1 + Parquet)",
+    "source_urls": {
+      "huggingface": "https://huggingface.co/datasets/jackzhy/surgsync",
+      "project_page": "https://surgsync.github.io/",
+      "github_toolkit": "https://github.com/jackzhy96/dvrk_multimodal_data_collection",
+      "paper_venue": "IEEE ICRA 2026 (arXiv:2603.06919)"
+    },
+    "license": "Creative Commons Attribution-NonCommercial 4.0 International (CC-BY-NC-4.0)",
+    "public_access_status": "Fully open, public download via Hugging Face; no gated institutional approval"
+  },
+  "storage_and_footprint": {
+    "total_release_bytes": 714345996416,
+    "total_release_gb": 714.35,
+    "total_files": 11745,
+    "sha256_tracked_files": 3912,
+    "breakdown_by_format": {
+      "mkv_lossless_video_gb": 714.19,
+      "parquet_tables_gb": 0.15,
+      "json_and_yaml_metadata_gb": 0.01
+    },
+    "breakdown_by_task_video_gb": {
+      "single_interrupted_stitch": 372.33,
+      "cold_cut_dissection": 271.14,
+      "peg_transfer": 37.43,
+      "tissue_manipulation": 33.45,
+      "cold_cut_dissection_intestine": 7.5,
+      "cold_cut_dissection_skin_peel": 2.5
+    },
+    "suturing_single_episode_raw_size_gb": {
+      "online_episode_sample": 1.7,
+      "offline_episode_sample": 5.82
+    },
+    "extracted_feature_cache_estimate_gb": {
+      "tubelet_dim": 1024,
+      "dtype": "float16",
+      "frames_total_suturing": 90068,
+      "surgmotion_l_npz_cache_mb": 184.46
+    }
+  },
+  "episode_inventory": {
+    "total_episodes_proposed_project_page": 214,
+    "total_episodes_actual_v10_release": 205,
+    "delta_dropped_in_v10": -9,
+    "tasks": {
+      "single_interrupted_stitch": {
+        "episodes": 92,
+        "frames": 90068,
+        "duration_hours": 3.71,
+        "recorder_split": {
+          "offline": 47,
+          "online": 45
+        },
+        "skill_split": {
+          "Intermediate": 46,
+          "Expert": 33,
+          "Novice": 13
+        },
+        "has_gestures": true,
+        "gesture_partial_episodes": 31,
+        "complete_gesture_episodes": 61
+      },
+      "cold_cut_dissection": {
+        "episodes": 61,
+        "frames": 55595,
+        "skill_split": {
+          "Expert": 40,
+          "Intermediate": 19,
+          "Novice": 2
+        },
+        "has_gestures": true
+      },
+      "tissue_manipulation": {
+        "episodes": 25,
+        "frames": 5907,
+        "skill_split": {
+          "Intermediate": 14,
+          "Novice": 11
+        },
+        "has_gestures": false
+      },
+      "peg_transfer": {
+        "episodes": 18,
+        "frames": 7267,
+        "skill_split": {
+          "Intermediate": 11,
+          "Novice": 7
+        },
+        "has_gestures": false
+      },
+      "cold_cut_dissection_intestine": {
+        "episodes": 8,
+        "frames": 7176,
+        "skill_split": {
+          "Intermediate": 4,
+          "Novice": 4
+        },
+        "has_gestures": false
+      },
+      "cold_cut_dissection_skin_peel": {
+        "episodes": 1,
+        "frames": 2119,
+        "skill_split": {
+          "Expert": 1
+        },
+        "has_gestures": false
+      }
+    }
+  },
+  "operator_demographics_and_splits": {
+    "human_operators_reported_project_page": 13,
+    "human_operators_reported_user_study": 8,
+    "per_episode_operator_id_in_v10": "UNKNOWN_WITHHELD",
+    "anonymization_disclosure": "v1.0 ships only the three-bucket skill level (Novice, Intermediate, Expert) in line with anonymization for public archive.",
+    "leave_one_user_out_feasibility": "UNFEASIBLE_WITHOUT_AUTHOR_MAPPING",
+    "viable_split_strategy": "Skill-stratified and recorder-stratified 4-fold cross-validation"
+  },
+  "data_streams_and_schema": {
+    "master_clock": {
+      "topic": "stereo_left_capture_ros_header_stamp",
+      "master_frequency_hz": 10.0,
+      "timestamp_basis": "Nanoseconds relative to episode start (int64)"
+    },
+    "video": {
+      "raw_format": "FFV1 lossless in MKV container",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "channels": "Stereo Left, Stereo Right, Optional Monocular Side",
+      "preprocessed_rectified_bundled": false,
+      "rectification_pipeline": "Requires running gen_rectify_resize.py locally"
+    },
+    "kinematics": {
+      "recorded_arms": [
+        "PSM1 (Patient Side Manipulator 1)",
+        "PSM2 (Patient Side Manipulator 2)",
+        "ECM (Endoscope Camera Manipulator)"
+      ],
+      "master_manipulators_mtm_recorded": false,
+      "native_frequency_hz": "~100 Hz",
+      "resampled_frequency_hz": 10.0,
+      "14d_cartesian_feature_vector": {
+        "psm1_indices_0_6": [
+          "measured_cp.position (x, y, z) [m]",
+          "measured_cv.linear (vx, vy, vz) [m/s]",
+          "jaw.measured_position [rad]"
+        ],
+        "psm2_indices_7_13": [
+          "measured_cp.position (x, y, z) [m]",
+          "measured_cv.linear (vx, vy, vz) [m/s]",
+          "jaw.measured_position [rad]"
+        ],
+        "total_dimensions": 14
+      },
+      "alternative_14d_joint_space": {
+        "psm1_indices_0_6": [
+          "measured_js.position (6 joint angles) [rad]",
+          "jaw.measured_position [rad]"
+        ],
+        "psm2_indices_7_13": [
+          "measured_js.position (6 joint angles) [rad]",
+          "jaw.measured_position [rad]"
+        ],
+        "total_dimensions": 14
+      }
+    },
+    "time_synchronization": {
+      "alignment_policy": "nearest_neighbor_within_tolerance",
+      "offline_recorder_performance": {
+        "episodes_count": 47,
+        "median_cross_modal_delta_ms": 0.3,
+        "mean_cross_modal_delta_ms": 0.37,
+        "max_cross_modal_delta_ms": 3.91,
+        "frames_dropped": 0,
+        "contiguity_ratio": 1.0
+      },
+      "online_recorder_performance": {
+        "episodes_count": 45,
+        "median_cross_modal_delta_ms": 6.42,
+        "mean_cross_modal_delta_ms": 12.92,
+        "max_cross_modal_delta_ms": 113.01,
+        "frames_dropped_average": 187,
+        "contiguity_ratio": 0.67,
+        "jaw_angle_latency_ms": "~47 ms (due to CAN bus sampling loop)"
+      }
+    }
+  },
+  "gesture_ontology_and_taxonomy": {
+    "structure": "Per-arm independent dual annotations (gesture.PSM1 and gesture.PSM2)",
+    "suturing_classes_count": 18,
+    "classes_observed_in_v10": 17,
+    "classes_unobserved": [
+      "16: Cut suture (protocol omitted suture cutting)"
+    ],
+    "ad_hoc_codes": {
+      "00": {
+        "description": "bilateral pause (>20 frames idle)",
+        "frame_count": 200
+      },
+      "01": {
+        "description": "move camera",
+        "frame_count": 132
+      }
+    },
+    "null_background_frames": {
+      "count": 2961,
+      "percentage": 3.29,
+      "cause": "Preparatory Phase 0 exposure prior to suturing insertion"
+    },
+    "valid_gesture_frames_suturing": {
+      "count": 87107,
+      "percentage": 96.71
+    },
+    "jigsaws_cross_compatibility": {
+      "identical_ontology": false,
+      "distinction": "JIGSAWS embeds handedness into 15 global bimanual classes (e.g. G1 right reach, G12 left reach); SurgSync uses 18-class clinical vocabulary annotated independently on PSM1 and PSM2.",
+      "zero_shot_generalization": "IMPOSSIBLE_WITHOUT_HEAD_RETRAINING"
+    }
+  }
+}
