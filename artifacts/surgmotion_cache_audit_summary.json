@@ -1,0 +1,35 @@
+{
+  "total_manifest_trials": 103,
+  "total_cache_files": 103,
+  "total_cache_size_mb": 63.66,
+  "total_clips": 17433,
+  "tasks": {
+    "Suturing": 39,
+    "Knot_Tying": 36,
+    "Needle_Passing": 28
+  },
+  "dimensions": [
+    1024
+  ],
+  "dtypes": [
+    "float32"
+  ],
+  "cameras": [
+    "capture1"
+  ],
+  "clip_lengths": [
+    64
+  ],
+  "strides": [
+    16
+  ],
+  "pooling_modes": [
+    "spatiotemporal"
+  ],
+  "nan_files": 0,
+  "inf_files": 0,
+  "errors_count": 0,
+  "errors": [],
+  "missing_trials": [],
+  "extra_trials": []
+}
