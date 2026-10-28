@@ -92,28 +92,28 @@ To enable multimodal fusion, kinematics must be indexed synchronously at clip ce
 | | ResNet-18 + VideoGRU | 45.42 | 42.64 | 33.22 | 20.01 | 8 / 8 |
 | | Kinematics + GRU | **66.64** | **57.77** | **45.09** | 34.69 | 8 / 8 |
 | | SurgMotion + VideoMLP ($W=1$) | 41.94 | 34.00 | 24.84 | 37.64 | 8 / 8 |
-| | **SurgMotion + VideoGRU** ($W=8$) | **45.78** | **36.17** | **22.65** | **40.05** | 8 / 8 |
+| | **SurgMotion + VideoGRU** ($W=8$, GPU) | 39.17 | 34.10 | 22.16 | **39.99** | 8 / 8 |
 | **Knot Tying** | Majority Class Baseline | 39.81 | 14.29 | 8.01 | 19.50 | 8 / 8 |
 | | ResNet-18 + VideoGRU | 50.74 | 50.02 | 44.34 | 24.89 | 8 / 8 |
-| | Kinematics + GRU | **61.09** | 56.53 | 51.75 | 35.48 | 8 / 8 |
+| | Kinematics + GRU | **61.09** | **56.53** | **51.75** | 35.48 | 8 / 8 |
 | | SurgMotion + VideoMLP ($W=1$) | 54.29 | 53.03 | 47.43 | 45.49 | 8 / 8 |
-| | **SurgMotion + VideoGRU** ($W=8$) | **56.68** | **57.05** | **47.50** | **57.82** | 8 / 8 |
+| | **SurgMotion + VideoGRU** ($W=8$, GPU) | **53.60** | **54.48** | **45.51** | **51.34** | 8 / 8 |
 | **Needle Passing** | Majority Class Baseline | 26.54 | 11.11 | 5.24 | 15.10 | 7 / 8 |
 | | ResNet-18 + VideoGRU | **30.22** | **32.07** | 19.62 | 22.86 | 7 / 8 |
 | | Kinematics + GRU | **48.69** | **41.70** | **29.99** | 31.34 | 7 / 8 |
 | | SurgMotion + VideoMLP ($W=1$) | 29.96 | 25.57 | 17.19 | 33.78 | 7 / 8 |
-| | **SurgMotion + VideoGRU** ($W=8$) | 28.53 | 30.92 | **19.58** | **40.79** | 7 / 8 |
+| | **SurgMotion + VideoGRU** ($W=8$, GPU) | 26.55 | 30.97 | **19.97** | **42.34** | 7 / 8 |
 
 ### Key Scientific Takeaways
 1. **Unprecedented Gain in Segmental Edit Score:**
-   - On Knot Tying, SurgMotion VideoGRU achieves an extraordinary **57.82% Edit Score**, beating ResNet-18 VideoGRU's **24.89%** by **+32.93 percentage points** (more than 2.3x higher).
-   - On Suturing, SurgMotion VideoGRU achieves **40.05% Edit Score**, doubling ResNet-18's **20.01%**.
-   - On Needle Passing, Edit Score rises from **22.86%** to **40.79%** (+17.93 percentage points).
+   - On Knot Tying, SurgMotion VideoGRU achieves **51.34% Edit Score**, beating ResNet-18 VideoGRU's **24.89%** by **+26.45 percentage points** (more than 2x higher).
+   - On Suturing, SurgMotion VideoGRU achieves **39.99% Edit Score**, doubling ResNet-18's **20.01%**.
+   - On Needle Passing, Edit Score rises from **22.86%** to **42.34%** (+19.48 percentage points).
    - *Underlying Mechanism:* SurgMotion 64-frame tubelet embeddings capture continuous motion dynamics, allowing the downstream GRU to model macro-level gesture sequences without jittery frame transitions.
 2. **Knot Tying Outperforms ResNet-18 Across All Metrics:**
-   - On Knot Tying, SurgMotion VideoGRU achieves **56.68% Accuracy** (vs. 50.74%), **57.05% Balanced Accuracy** (vs. 50.02%), and **47.50% Macro-F1** (vs. 44.34%).
-3. **Temporal Recurrence (H5 Confirmed):**
-   - Adding temporal GRU recurrence ($W=8$) improves Knot Tying Accuracy from 54.29% (MLP) to **56.68%** and Edit Score from 45.49% to **57.82%** (+12.33 percentage points).
+   - On Knot Tying, SurgMotion VideoGRU achieves **53.60% Accuracy** (vs. 50.74%), **54.48% Balanced Accuracy** (vs. 50.02%), and **45.51% Macro-F1** (vs. 44.34%).
+3. **GPU Compute Acceleration on Mentor Machine:**
+   - The Quadro RTX 5000 executed full 25-epoch LOUO cross-validation across all 23 folds in **701.4 seconds total** ($\approx 11.7$ minutes across all 3 tasks: 341.0s Suturing, 168.9s Knot Tying, 191.4s Needle Passing).
 4. **Kinematics Complements Video Features:**
    - Kinematics remains superior in raw coordinate precision on Suturing (66.64%) and Needle Passing (48.69%), while SurgMotion excels at temporal continuity and visual gesture context. This directly validates the core research hypothesis: **reliability-aware multimodal fusion of kinematics + SurgMotion will yield the strongest recognition system.**
 
