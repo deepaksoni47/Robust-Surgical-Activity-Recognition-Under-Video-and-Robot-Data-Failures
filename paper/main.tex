@@ -301,11 +301,19 @@ Table~\ref{tab:main_results} and Fig.~\ref{fig:model_comp} report the consolidat
 
 Table~\ref{tab:robustness_results} and Fig.~\ref{fig:robustness_bars} evaluate model resilience under five standardized evaluation environments:
 \begin{enumerate}
-    \item \textbf{Optical Noise Resistance:} Under visual feature corruption ($\sigma_v=1.0$), Adaptive Fusion degradation is practically negligible ($\le 0.12\%$ drop across all tasks), demonstrating that the parametric gate dynamically attenuates the corrupted visual channel.
+    \item \textbf{Optical Noise Resistance \& Gate Dynamics:} Under visual feature corruption ($\sigma_v=1.0$), Adaptive Fusion degradation is practically negligible ($\le 0.12\%$ drop across all tasks). However, detailed empirical analysis of 4,027,102 time-resolved gate weight logs (Fig.~\ref{fig:real_gate_noise}) reveals that this stability is driven by strong kinematics dominance ($\bar{\alpha}_k \approx 80\%$--$95\%$) rather than active continuous noise attenuation: the mean video gate weight $\bar{\alpha}_v$ shifts by less than $0.009$ ($<0.9\%$) even as noise increases to extreme out-of-distribution levels ($\sigma_v = 2.0$).
     \item \textbf{Flawless Video Dropout Fallback:} Under complete optical telemetry failure ($a=[0, 1]$), the availability mask mathematically routes $100\%$ prediction mass to kinematics, incurring minimal degradation ($-0.42\%$ on Suturing, $-2.28\%$ on Knot Tying, $-0.27\%$ on Needle Passing).
     \item \textbf{Kinematics Degradation Asymmetry:} When kinematics telemetry is corrupted or lost ($a=[1, 0]$), both models experience severe drops ($-26\%$ to $-41\%$). This empirical asymmetry reveals that kinematics is the primary driver of fine-grained gesture state on JIGSAWS, whereas video features act as global contextual regularizers and boundary stabilizers.
     \item \textbf{Concatenation Anomaly:} On Suturing and Needle Passing, zeroing out video features in Concat Fusion actually increased accuracy ($+17.83\%$ and $+7.78\%$). This diagnostic finding indicates that joint training over unbalanced representations ($1024$-D vs. $76$-D) allowed visual noise to interfere with kinematics representations; removing the video vector eliminated this interference.
+    \item \textbf{Continuous-Noise Training Ablation:} In our controlled 46-fold ablation study comparing continuous-noise training ($\sigma_v \sim \mathcal{U}(0, 1.5)$) against discrete binary dropout, continuous noise did not alter the gate's static weighting dynamic, but provided valuable visual representation regularization, improving standalone video accuracy under total kinematics failure by $+5.49\%$ on Suturing ($34.44\%$ vs. $28.95\%$) and $+8.96\%$ on Needle Passing ($24.58\%$ vs. $15.62\%$).
 \end{enumerate}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_iter32_real_gate_noise_response.pdf}
+\caption{Empirical video gate weight $\bar{\alpha}_v$ across continuous visual noise levels $\sigma_v \in [0.0, 2.0]$ across all three JIGSAWS tasks. Both models exhibit a virtually flat response ($\Delta \alpha_v < 0.9\%$), demonstrating that gate robustness originates from kinematics dominance and discrete availability masking rather than continuous noise sensing.}
+\label{fig:real_gate_noise}
+\end{figure}
 
 \section{Discussion \& Limitations}
 Our empirical findings demonstrate that lightweight multimodal fusion and adaptive reliability gating provide substantial advantages for robotic surgical gesture recognition. By decoupling visual perception into frozen representations and training compact temporal sequence models, the complete cross-validation pipeline operates efficiently while preventing overfitting.

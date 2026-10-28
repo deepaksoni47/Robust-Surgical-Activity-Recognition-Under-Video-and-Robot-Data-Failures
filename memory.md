@@ -137,5 +137,7 @@
 | **ITER-29** | M12 Audit & Stats | Multimodal Results Audit, Statistical Testing, and Hypothesis Evaluation | Completed |
 | **ITER-30** | M13 Validation | Final Scientific Validation, Publication Figures, Paper Update & Handoff | Completed |
 | **ITER-31** | M14 Ablation & Feasibility | Continuous-Noise Gate Ablation & Second-Dataset Feasibility Study | Completed |
+| **ITER-32** | M15 Ablation Audit | GPU Results Audit, Gate Weight Flatness Discovery & Paper Update | Completed |
+
 
 

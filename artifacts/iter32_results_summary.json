@@ -1,0 +1,1070 @@
+{
+  "file_inventory": {
+    "surgmotion_ablation_continuous_noise_Suturing_results.json": {
+      "exists": true,
+      "size_bytes": 5941
+    },
+    "gate_trajectories_continuous_noise_Suturing.json": {
+      "exists": true,
+      "size_bytes": 23637778
+    },
+    "surgmotion_ablation_continuous_noise_Knot_Tying_results.json": {
+      "exists": true,
+      "size_bytes": 5991
+    },
+    "gate_trajectories_continuous_noise_Knot_Tying.json": {
+      "exists": true,
+      "size_bytes": 11017185
+    },
+    "surgmotion_ablation_continuous_noise_Needle_Passing_results.json": {
+      "exists": true,
+      "size_bytes": 5700
+    },
+    "gate_trajectories_continuous_noise_Needle_Passing.json": {
+      "exists": true,
+      "size_bytes": 16248844
+    },
+    "surgmotion_ablation_existing_Suturing_results.json": {
+      "exists": true,
+      "size_bytes": 5946
+    },
+    "gate_trajectories_existing_Suturing.json": {
+      "exists": true,
+      "size_bytes": 23639011
+    },
+    "surgmotion_ablation_existing_Knot_Tying_results.json": {
+      "exists": true,
+      "size_bytes": 5959
+    },
+    "gate_trajectories_existing_Knot_Tying.json": {
+      "exists": true,
+      "size_bytes": 11017147
+    },
+    "surgmotion_ablation_existing_Needle_Passing_results.json": {
+      "exists": true,
+      "size_bytes": 5678
+    },
+    "gate_trajectories_existing_Needle_Passing.json": {
+      "exists": true,
+      "size_bytes": 16248889
+    }
+  },
+  "fold_coverage": {
+    "continuous_noise_Suturing": {
+      "n_active_folds": 8,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "test_users": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "clean_acc_mean": 71.6,
+      "clean_f1_mean": 45.17,
+      "clean_edit_mean": 63.19
+    },
+    "continuous_noise_Knot_Tying": {
+      "n_active_folds": 8,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "test_users": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "clean_acc_mean": 70.07,
+      "clean_f1_mean": 60.3,
+      "clean_edit_mean": 61.23
+    },
+    "continuous_noise_Needle_Passing": {
+      "n_active_folds": 7,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8
+      ],
+      "test_users": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "H",
+        "I"
+      ],
+      "clean_acc_mean": 52.55,
+      "clean_f1_mean": 30.19,
+      "clean_edit_mean": 54.75
+    },
+    "existing_Suturing": {
+      "n_active_folds": 8,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "test_users": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "clean_acc_mean": 70.82,
+      "clean_f1_mean": 41.96,
+      "clean_edit_mean": 62.41
+    },
+    "existing_Knot_Tying": {
+      "n_active_folds": 8,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "test_users": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "clean_acc_mean": 66.42,
+      "clean_f1_mean": 57.25,
+      "clean_edit_mean": 58.04
+    },
+    "existing_Needle_Passing": {
+      "n_active_folds": 7,
+      "fold_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8
+      ],
+      "test_users": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "H",
+        "I"
+      ],
+      "clean_acc_mean": 54.58,
+      "clean_f1_mean": 31.73,
+      "clean_edit_mean": 57.77
+    }
+  },
+  "clean_comparison": {
+    "Suturing": {
+      "accuracy": {
+        "mean_x": 71.6,
+        "std_x": 8.16,
+        "mean_y": 70.82,
+        "std_y": 10.91,
+        "diff_mean": 0.77,
+        "diff_ci_95": [
+          -4.84,
+          6.39
+        ],
+        "p_value_paired_t": 0.75407,
+        "wilcoxon_p": 0.84375,
+        "cohen_d_z": 0.115,
+        "n_folds": 8
+      },
+      "balanced_accuracy": {
+        "mean_x": 60.3,
+        "std_x": 8.32,
+        "mean_y": 58.8,
+        "std_y": 9.76,
+        "diff_mean": 1.49,
+        "diff_ci_95": [
+          -5.34,
+          8.32
+        ],
+        "p_value_paired_t": 0.62138,
+        "wilcoxon_p": 0.54688,
+        "cohen_d_z": 0.183,
+        "n_folds": 8
+      },
+      "macro_f1": {
+        "mean_x": 45.17,
+        "std_x": 7.97,
+        "mean_y": 41.96,
+        "std_y": 7.13,
+        "diff_mean": 3.21,
+        "diff_ci_95": [
+          -0.61,
+          7.03
+        ],
+        "p_value_paired_t": 0.08705,
+        "wilcoxon_p": 0.10938,
+        "cohen_d_z": 0.703,
+        "n_folds": 8
+      },
+      "edit_score": {
+        "mean_x": 63.19,
+        "std_x": 7.95,
+        "mean_y": 62.41,
+        "std_y": 8.21,
+        "diff_mean": 0.78,
+        "diff_ci_95": [
+          -6.34,
+          7.9
+        ],
+        "p_value_paired_t": 0.80327,
+        "wilcoxon_p": 0.74219,
+        "cohen_d_z": 0.091,
+        "n_folds": 8
+      }
+    },
+    "Knot_Tying": {
+      "accuracy": {
+        "mean_x": 70.07,
+        "std_x": 10.69,
+        "mean_y": 66.42,
+        "std_y": 8.51,
+        "diff_mean": 3.65,
+        "diff_ci_95": [
+          -2.5,
+          9.79
+        ],
+        "p_value_paired_t": 0.2032,
+        "wilcoxon_p": 0.3125,
+        "cohen_d_z": 0.496,
+        "n_folds": 8
+      },
+      "balanced_accuracy": {
+        "mean_x": 68.59,
+        "std_x": 12.11,
+        "mean_y": 65.54,
+        "std_y": 11.13,
+        "diff_mean": 3.05,
+        "diff_ci_95": [
+          -5.41,
+          11.51
+        ],
+        "p_value_paired_t": 0.4224,
+        "wilcoxon_p": 0.94531,
+        "cohen_d_z": 0.301,
+        "n_folds": 8
+      },
+      "macro_f1": {
+        "mean_x": 60.3,
+        "std_x": 12.53,
+        "mean_y": 57.25,
+        "std_y": 8.45,
+        "diff_mean": 3.05,
+        "diff_ci_95": [
+          -5.02,
+          11.12
+        ],
+        "p_value_paired_t": 0.40177,
+        "wilcoxon_p": 0.84375,
+        "cohen_d_z": 0.316,
+        "n_folds": 8
+      },
+      "edit_score": {
+        "mean_x": 61.23,
+        "std_x": 11.89,
+        "mean_y": 58.04,
+        "std_y": 8.49,
+        "diff_mean": 3.18,
+        "diff_ci_95": [
+          -3.1,
+          9.47
+        ],
+        "p_value_paired_t": 0.26998,
+        "wilcoxon_p": 0.38281,
+        "cohen_d_z": 0.423,
+        "n_folds": 8
+      }
+    },
+    "Needle_Passing": {
+      "accuracy": {
+        "mean_x": 52.55,
+        "std_x": 13.18,
+        "mean_y": 54.58,
+        "std_y": 12.9,
+        "diff_mean": -2.03,
+        "diff_ci_95": [
+          -7.03,
+          2.97
+        ],
+        "p_value_paired_t": 0.35872,
+        "wilcoxon_p": 0.375,
+        "cohen_d_z": -0.376,
+        "n_folds": 7
+      },
+      "balanced_accuracy": {
+        "mean_x": 44.16,
+        "std_x": 14.53,
+        "mean_y": 46.22,
+        "std_y": 13.63,
+        "diff_mean": -2.06,
+        "diff_ci_95": [
+          -5.5,
+          1.38
+        ],
+        "p_value_paired_t": 0.19392,
+        "wilcoxon_p": 0.21875,
+        "cohen_d_z": -0.553,
+        "n_folds": 7
+      },
+      "macro_f1": {
+        "mean_x": 30.19,
+        "std_x": 11.29,
+        "mean_y": 31.73,
+        "std_y": 10.3,
+        "diff_mean": -1.53,
+        "diff_ci_95": [
+          -5.02,
+          1.96
+        ],
+        "p_value_paired_t": 0.32362,
+        "wilcoxon_p": 0.46875,
+        "cohen_d_z": -0.406,
+        "n_folds": 7
+      },
+      "edit_score": {
+        "mean_x": 54.75,
+        "std_x": 10.59,
+        "mean_y": 57.77,
+        "std_y": 9.37,
+        "diff_mean": -3.01,
+        "diff_ci_95": [
+          -9.71,
+          3.69
+        ],
+        "p_value_paired_t": 0.31343,
+        "wilcoxon_p": 0.375,
+        "cohen_d_z": -0.416,
+        "n_folds": 7
+      }
+    }
+  },
+  "robustness_comparison": {
+    "Suturing": {
+      "clean": {
+        "continuous_acc": 71.6,
+        "existing_acc": 70.82,
+        "diff_acc": 0.78,
+        "continuous_f1": 45.17,
+        "existing_f1": 41.96,
+        "diff_f1": 3.21,
+        "continuous_edit": 63.19,
+        "existing_edit": 62.41,
+        "diff_edit": 0.78,
+        "continuous_alpha_v": 0.0973,
+        "existing_alpha_v": 0.0897
+      },
+      "video_noise_0.2": {
+        "continuous_acc": 71.58,
+        "existing_acc": 70.85,
+        "diff_acc": 0.73,
+        "continuous_f1": 45.24,
+        "existing_f1": 41.97,
+        "diff_f1": 3.27,
+        "continuous_edit": 63.24,
+        "existing_edit": 62.31,
+        "diff_edit": 0.93,
+        "continuous_alpha_v": 0.0971,
+        "existing_alpha_v": 0.0896
+      },
+      "video_noise_0.5": {
+        "continuous_acc": 71.73,
+        "existing_acc": 70.87,
+        "diff_acc": 0.86,
+        "continuous_f1": 45.29,
+        "existing_f1": 41.98,
+        "diff_f1": 3.31,
+        "continuous_edit": 62.76,
+        "existing_edit": 62.41,
+        "diff_edit": 0.35,
+        "continuous_alpha_v": 0.0966,
+        "existing_alpha_v": 0.0891
+      },
+      "video_noise_1.0": {
+        "continuous_acc": 71.67,
+        "existing_acc": 70.98,
+        "diff_acc": 0.69,
+        "continuous_f1": 45.57,
+        "existing_f1": 41.87,
+        "diff_f1": 3.7,
+        "continuous_edit": 62.41,
+        "existing_edit": 62.14,
+        "diff_edit": 0.27,
+        "continuous_alpha_v": 0.0947,
+        "existing_alpha_v": 0.0873
+      },
+      "video_noise_1.5": {
+        "continuous_acc": 71.93,
+        "existing_acc": 70.92,
+        "diff_acc": 1.01,
+        "continuous_f1": 45.15,
+        "existing_f1": 41.8,
+        "diff_f1": 3.35,
+        "continuous_edit": 62.0,
+        "existing_edit": 62.28,
+        "diff_edit": -0.28,
+        "continuous_alpha_v": 0.092,
+        "existing_alpha_v": 0.0849
+      },
+      "video_noise_2.0": {
+        "continuous_acc": 71.85,
+        "existing_acc": 70.97,
+        "diff_acc": 0.88,
+        "continuous_f1": 45.16,
+        "existing_f1": 41.75,
+        "diff_f1": 3.41,
+        "continuous_edit": 62.28,
+        "existing_edit": 62.83,
+        "diff_edit": -0.55,
+        "continuous_alpha_v": 0.0886,
+        "existing_alpha_v": 0.082
+      },
+      "kinematics_corrupted": {
+        "continuous_acc": 65.31,
+        "existing_acc": 64.37,
+        "diff_acc": 0.94,
+        "continuous_f1": 41.07,
+        "existing_f1": 36.9,
+        "diff_f1": 4.17,
+        "continuous_edit": 46.03,
+        "existing_edit": 47.35,
+        "diff_edit": -1.32,
+        "continuous_alpha_v": 0.0901,
+        "existing_alpha_v": 0.0842
+      },
+      "missing_video": {
+        "continuous_acc": 70.91,
+        "existing_acc": 70.42,
+        "diff_acc": 0.49,
+        "continuous_f1": 44.45,
+        "existing_f1": 41.23,
+        "diff_f1": 3.22,
+        "continuous_edit": 63.03,
+        "existing_edit": 61.77,
+        "diff_edit": 1.26,
+        "continuous_alpha_v": 0.0,
+        "existing_alpha_v": 0.0
+      },
+      "missing_kinematics": {
+        "continuous_acc": 34.44,
+        "existing_acc": 28.95,
+        "diff_acc": 5.49,
+        "continuous_f1": 18.68,
+        "existing_f1": 15.54,
+        "diff_f1": 3.14,
+        "continuous_edit": 36.23,
+        "existing_edit": 34.77,
+        "diff_edit": 1.46,
+        "continuous_alpha_v": 1.0,
+        "existing_alpha_v": 1.0
+      }
+    },
+    "Knot_Tying": {
+      "clean": {
+        "continuous_acc": 70.07,
+        "existing_acc": 66.42,
+        "diff_acc": 3.65,
+        "continuous_f1": 60.3,
+        "existing_f1": 57.25,
+        "diff_f1": 3.05,
+        "continuous_edit": 61.23,
+        "existing_edit": 58.04,
+        "diff_edit": 3.19,
+        "continuous_alpha_v": 0.1804,
+        "existing_alpha_v": 0.2297
+      },
+      "video_noise_0.2": {
+        "continuous_acc": 70.06,
+        "existing_acc": 66.5,
+        "diff_acc": 3.56,
+        "continuous_f1": 60.29,
+        "existing_f1": 57.3,
+        "diff_f1": 2.99,
+        "continuous_edit": 61.26,
+        "existing_edit": 58.15,
+        "diff_edit": 3.11,
+        "continuous_alpha_v": 0.1803,
+        "existing_alpha_v": 0.2296
+      },
+      "video_noise_0.5": {
+        "continuous_acc": 70.02,
+        "existing_acc": 66.4,
+        "diff_acc": 3.62,
+        "continuous_f1": 60.21,
+        "existing_f1": 57.26,
+        "diff_f1": 2.95,
+        "continuous_edit": 61.01,
+        "existing_edit": 58.47,
+        "diff_edit": 2.54,
+        "continuous_alpha_v": 0.1802,
+        "existing_alpha_v": 0.2296
+      },
+      "video_noise_1.0": {
+        "continuous_acc": 70.11,
+        "existing_acc": 66.4,
+        "diff_acc": 3.71,
+        "continuous_f1": 60.41,
+        "existing_f1": 57.02,
+        "diff_f1": 3.39,
+        "continuous_edit": 60.87,
+        "existing_edit": 57.77,
+        "diff_edit": 3.1,
+        "continuous_alpha_v": 0.1793,
+        "existing_alpha_v": 0.2285
+      },
+      "video_noise_1.5": {
+        "continuous_acc": 70.04,
+        "existing_acc": 66.52,
+        "diff_acc": 3.52,
+        "continuous_f1": 60.41,
+        "existing_f1": 57.15,
+        "diff_f1": 3.26,
+        "continuous_edit": 61.14,
+        "existing_edit": 57.38,
+        "diff_edit": 3.76,
+        "continuous_alpha_v": 0.1774,
+        "existing_alpha_v": 0.2274
+      },
+      "video_noise_2.0": {
+        "continuous_acc": 70.44,
+        "existing_acc": 66.34,
+        "diff_acc": 4.1,
+        "continuous_f1": 60.83,
+        "existing_f1": 56.98,
+        "diff_f1": 3.85,
+        "continuous_edit": 60.62,
+        "existing_edit": 57.34,
+        "diff_edit": 3.28,
+        "continuous_alpha_v": 0.1763,
+        "existing_alpha_v": 0.2272
+      },
+      "kinematics_corrupted": {
+        "continuous_acc": 65.65,
+        "existing_acc": 62.05,
+        "diff_acc": 3.6,
+        "continuous_f1": 55.5,
+        "existing_f1": 53.47,
+        "diff_f1": 2.03,
+        "continuous_edit": 52.59,
+        "existing_edit": 50.64,
+        "diff_edit": 1.95,
+        "continuous_alpha_v": 0.1598,
+        "existing_alpha_v": 0.2107
+      },
+      "missing_video": {
+        "continuous_acc": 67.92,
+        "existing_acc": 64.61,
+        "diff_acc": 3.31,
+        "continuous_f1": 55.91,
+        "existing_f1": 54.6,
+        "diff_f1": 1.31,
+        "continuous_edit": 58.77,
+        "existing_edit": 55.53,
+        "diff_edit": 3.24,
+        "continuous_alpha_v": 0.0,
+        "existing_alpha_v": 0.0
+      },
+      "missing_kinematics": {
+        "continuous_acc": 42.8,
+        "existing_acc": 43.48,
+        "diff_acc": -0.68,
+        "continuous_f1": 35.34,
+        "existing_f1": 37.48,
+        "diff_f1": -2.14,
+        "continuous_edit": 46.0,
+        "existing_edit": 49.01,
+        "diff_edit": -3.01,
+        "continuous_alpha_v": 1.0,
+        "existing_alpha_v": 1.0
+      }
+    },
+    "Needle_Passing": {
+      "clean": {
+        "continuous_acc": 52.55,
+        "existing_acc": 54.58,
+        "diff_acc": -2.03,
+        "continuous_f1": 30.19,
+        "existing_f1": 31.73,
+        "diff_f1": -1.54,
+        "continuous_edit": 54.75,
+        "existing_edit": 57.77,
+        "diff_edit": -3.02,
+        "continuous_alpha_v": 0.0528,
+        "existing_alpha_v": 0.0392
+      },
+      "video_noise_0.2": {
+        "continuous_acc": 52.55,
+        "existing_acc": 54.6,
+        "diff_acc": -2.05,
+        "continuous_f1": 30.19,
+        "existing_f1": 31.74,
+        "diff_f1": -1.55,
+        "continuous_edit": 54.66,
+        "existing_edit": 57.81,
+        "diff_edit": -3.15,
+        "continuous_alpha_v": 0.0528,
+        "existing_alpha_v": 0.0392
+      },
+      "video_noise_0.5": {
+        "continuous_acc": 52.57,
+        "existing_acc": 54.55,
+        "diff_acc": -1.98,
+        "continuous_f1": 30.19,
+        "existing_f1": 31.72,
+        "diff_f1": -1.53,
+        "continuous_edit": 54.71,
+        "existing_edit": 57.51,
+        "diff_edit": -2.8,
+        "continuous_alpha_v": 0.0526,
+        "existing_alpha_v": 0.0392
+      },
+      "video_noise_1.0": {
+        "continuous_acc": 52.55,
+        "existing_acc": 54.55,
+        "diff_acc": -2.0,
+        "continuous_f1": 30.19,
+        "existing_f1": 31.69,
+        "diff_f1": -1.5,
+        "continuous_edit": 54.6,
+        "existing_edit": 57.76,
+        "diff_edit": -3.16,
+        "continuous_alpha_v": 0.052,
+        "existing_alpha_v": 0.0391
+      },
+      "video_noise_1.5": {
+        "continuous_acc": 52.58,
+        "existing_acc": 54.58,
+        "diff_acc": -2.0,
+        "continuous_f1": 30.23,
+        "existing_f1": 31.73,
+        "diff_f1": -1.5,
+        "continuous_edit": 54.43,
+        "existing_edit": 57.44,
+        "diff_edit": -3.01,
+        "continuous_alpha_v": 0.0512,
+        "existing_alpha_v": 0.0389
+      },
+      "video_noise_2.0": {
+        "continuous_acc": 52.55,
+        "existing_acc": 54.52,
+        "diff_acc": -1.97,
+        "continuous_f1": 30.19,
+        "existing_f1": 31.6,
+        "diff_f1": -1.41,
+        "continuous_edit": 54.49,
+        "existing_edit": 57.75,
+        "diff_edit": -3.26,
+        "continuous_alpha_v": 0.0501,
+        "existing_alpha_v": 0.0386
+      },
+      "kinematics_corrupted": {
+        "continuous_acc": 50.11,
+        "existing_acc": 50.2,
+        "diff_acc": -0.09,
+        "continuous_f1": 29.37,
+        "existing_f1": 29.65,
+        "diff_f1": -0.28,
+        "continuous_edit": 44.61,
+        "existing_edit": 42.65,
+        "diff_edit": 1.96,
+        "continuous_alpha_v": 0.0511,
+        "existing_alpha_v": 0.0392
+      },
+      "missing_video": {
+        "continuous_acc": 51.86,
+        "existing_acc": 54.36,
+        "diff_acc": -2.5,
+        "continuous_f1": 29.77,
+        "existing_f1": 31.64,
+        "diff_f1": -1.87,
+        "continuous_edit": 53.78,
+        "existing_edit": 57.47,
+        "diff_edit": -3.69,
+        "continuous_alpha_v": 0.0,
+        "existing_alpha_v": 0.0
+      },
+      "missing_kinematics": {
+        "continuous_acc": 24.58,
+        "existing_acc": 15.62,
+        "diff_acc": 8.96,
+        "continuous_f1": 13.98,
+        "existing_f1": 10.95,
+        "diff_f1": 3.03,
+        "continuous_edit": 36.93,
+        "existing_edit": 29.99,
+        "diff_edit": 6.94,
+        "continuous_alpha_v": 1.0,
+        "existing_alpha_v": 1.0
+      }
+    }
+  },
+  "degradation_comparison": {
+    "Suturing": {
+      "clean": {
+        "continuous_deg_acc": 0.0,
+        "existing_deg_acc": 0.0,
+        "relative_advantage_acc": 0.0,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": 0.0,
+        "relative_advantage_f1": 0.0
+      },
+      "video_noise_0.2": {
+        "continuous_deg_acc": -0.02,
+        "existing_deg_acc": 0.03,
+        "relative_advantage_acc": -0.05,
+        "continuous_deg_f1": 0.07,
+        "existing_deg_f1": 0.01,
+        "relative_advantage_f1": 0.06
+      },
+      "video_noise_0.5": {
+        "continuous_deg_acc": 0.13,
+        "existing_deg_acc": 0.05,
+        "relative_advantage_acc": 0.08,
+        "continuous_deg_f1": 0.12,
+        "existing_deg_f1": 0.02,
+        "relative_advantage_f1": 0.1
+      },
+      "video_noise_1.0": {
+        "continuous_deg_acc": 0.07,
+        "existing_deg_acc": 0.16,
+        "relative_advantage_acc": -0.09,
+        "continuous_deg_f1": 0.4,
+        "existing_deg_f1": -0.09,
+        "relative_advantage_f1": 0.49
+      },
+      "video_noise_1.5": {
+        "continuous_deg_acc": 0.33,
+        "existing_deg_acc": 0.1,
+        "relative_advantage_acc": 0.23,
+        "continuous_deg_f1": -0.02,
+        "existing_deg_f1": -0.16,
+        "relative_advantage_f1": 0.14
+      },
+      "video_noise_2.0": {
+        "continuous_deg_acc": 0.25,
+        "existing_deg_acc": 0.15,
+        "relative_advantage_acc": 0.1,
+        "continuous_deg_f1": -0.01,
+        "existing_deg_f1": -0.21,
+        "relative_advantage_f1": 0.2
+      },
+      "kinematics_corrupted": {
+        "continuous_deg_acc": -6.29,
+        "existing_deg_acc": -6.45,
+        "relative_advantage_acc": 0.16,
+        "continuous_deg_f1": -4.1,
+        "existing_deg_f1": -5.06,
+        "relative_advantage_f1": 0.96
+      },
+      "missing_video": {
+        "continuous_deg_acc": -0.69,
+        "existing_deg_acc": -0.4,
+        "relative_advantage_acc": -0.29,
+        "continuous_deg_f1": -0.72,
+        "existing_deg_f1": -0.73,
+        "relative_advantage_f1": 0.01
+      },
+      "missing_kinematics": {
+        "continuous_deg_acc": -37.16,
+        "existing_deg_acc": -41.87,
+        "relative_advantage_acc": 4.71,
+        "continuous_deg_f1": -26.49,
+        "existing_deg_f1": -26.42,
+        "relative_advantage_f1": -0.07
+      }
+    },
+    "Knot_Tying": {
+      "clean": {
+        "continuous_deg_acc": 0.0,
+        "existing_deg_acc": 0.0,
+        "relative_advantage_acc": 0.0,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": 0.0,
+        "relative_advantage_f1": 0.0
+      },
+      "video_noise_0.2": {
+        "continuous_deg_acc": -0.01,
+        "existing_deg_acc": 0.08,
+        "relative_advantage_acc": -0.09,
+        "continuous_deg_f1": -0.01,
+        "existing_deg_f1": 0.05,
+        "relative_advantage_f1": -0.06
+      },
+      "video_noise_0.5": {
+        "continuous_deg_acc": -0.05,
+        "existing_deg_acc": -0.02,
+        "relative_advantage_acc": -0.03,
+        "continuous_deg_f1": -0.09,
+        "existing_deg_f1": 0.01,
+        "relative_advantage_f1": -0.1
+      },
+      "video_noise_1.0": {
+        "continuous_deg_acc": 0.04,
+        "existing_deg_acc": -0.02,
+        "relative_advantage_acc": 0.06,
+        "continuous_deg_f1": 0.11,
+        "existing_deg_f1": -0.23,
+        "relative_advantage_f1": 0.34
+      },
+      "video_noise_1.5": {
+        "continuous_deg_acc": -0.03,
+        "existing_deg_acc": 0.1,
+        "relative_advantage_acc": -0.13,
+        "continuous_deg_f1": 0.11,
+        "existing_deg_f1": -0.1,
+        "relative_advantage_f1": 0.21
+      },
+      "video_noise_2.0": {
+        "continuous_deg_acc": 0.37,
+        "existing_deg_acc": -0.08,
+        "relative_advantage_acc": 0.45,
+        "continuous_deg_f1": 0.53,
+        "existing_deg_f1": -0.27,
+        "relative_advantage_f1": 0.8
+      },
+      "kinematics_corrupted": {
+        "continuous_deg_acc": -4.42,
+        "existing_deg_acc": -4.37,
+        "relative_advantage_acc": -0.05,
+        "continuous_deg_f1": -4.8,
+        "existing_deg_f1": -3.78,
+        "relative_advantage_f1": -1.02
+      },
+      "missing_video": {
+        "continuous_deg_acc": -2.15,
+        "existing_deg_acc": -1.81,
+        "relative_advantage_acc": -0.34,
+        "continuous_deg_f1": -4.39,
+        "existing_deg_f1": -2.65,
+        "relative_advantage_f1": -1.74
+      },
+      "missing_kinematics": {
+        "continuous_deg_acc": -27.27,
+        "existing_deg_acc": -22.94,
+        "relative_advantage_acc": -4.33,
+        "continuous_deg_f1": -24.96,
+        "existing_deg_f1": -19.77,
+        "relative_advantage_f1": -5.19
+      }
+    },
+    "Needle_Passing": {
+      "clean": {
+        "continuous_deg_acc": 0.0,
+        "existing_deg_acc": 0.0,
+        "relative_advantage_acc": 0.0,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": 0.0,
+        "relative_advantage_f1": 0.0
+      },
+      "video_noise_0.2": {
+        "continuous_deg_acc": 0.0,
+        "existing_deg_acc": 0.02,
+        "relative_advantage_acc": -0.02,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": 0.01,
+        "relative_advantage_f1": -0.01
+      },
+      "video_noise_0.5": {
+        "continuous_deg_acc": 0.02,
+        "existing_deg_acc": -0.03,
+        "relative_advantage_acc": 0.05,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": -0.01,
+        "relative_advantage_f1": 0.01
+      },
+      "video_noise_1.0": {
+        "continuous_deg_acc": 0.0,
+        "existing_deg_acc": -0.03,
+        "relative_advantage_acc": 0.03,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": -0.04,
+        "relative_advantage_f1": 0.04
+      },
+      "video_noise_1.5": {
+        "continuous_deg_acc": 0.03,
+        "existing_deg_acc": 0.0,
+        "relative_advantage_acc": 0.03,
+        "continuous_deg_f1": 0.04,
+        "existing_deg_f1": 0.0,
+        "relative_advantage_f1": 0.04
+      },
+      "video_noise_2.0": {
+        "continuous_deg_acc": 0.0,
+        "existing_deg_acc": -0.06,
+        "relative_advantage_acc": 0.06,
+        "continuous_deg_f1": 0.0,
+        "existing_deg_f1": -0.13,
+        "relative_advantage_f1": 0.13
+      },
+      "kinematics_corrupted": {
+        "continuous_deg_acc": -2.44,
+        "existing_deg_acc": -4.38,
+        "relative_advantage_acc": 1.94,
+        "continuous_deg_f1": -0.82,
+        "existing_deg_f1": -2.08,
+        "relative_advantage_f1": 1.26
+      },
+      "missing_video": {
+        "continuous_deg_acc": -0.69,
+        "existing_deg_acc": -0.22,
+        "relative_advantage_acc": -0.47,
+        "continuous_deg_f1": -0.42,
+        "existing_deg_f1": -0.09,
+        "relative_advantage_f1": -0.33
+      },
+      "missing_kinematics": {
+        "continuous_deg_acc": -27.97,
+        "existing_deg_acc": -38.96,
+        "relative_advantage_acc": 10.99,
+        "continuous_deg_f1": -16.21,
+        "existing_deg_f1": -20.78,
+        "relative_advantage_f1": 4.57
+      }
+    }
+  },
+  "gate_trajectory_audit": {
+    "Suturing": {
+      "continuous_noise": {
+        "total_records": 72873,
+        "alpha_video_by_condition": {
+          "clean": 0.0982,
+          "video_noise_0.2": 0.098,
+          "video_noise_0.5": 0.0973,
+          "video_noise_1.0": 0.0955,
+          "video_noise_1.5": 0.0925,
+          "video_noise_2.0": 0.0894,
+          "kinematics_corrupted": 0.088,
+          "missing_video": 0.0,
+          "missing_kinematics": 1.0
+        }
+      },
+      "existing": {
+        "total_records": 72873,
+        "alpha_video_by_condition": {
+          "clean": 0.0872,
+          "video_noise_0.2": 0.087,
+          "video_noise_0.5": 0.0862,
+          "video_noise_1.0": 0.0845,
+          "video_noise_1.5": 0.0823,
+          "video_noise_2.0": 0.0797,
+          "kinematics_corrupted": 0.0812,
+          "missing_video": 0.0,
+          "missing_kinematics": 1.0
+        }
+      }
+    },
+    "Knot_Tying": {
+      "continuous_noise": {
+        "total_records": 33642,
+        "alpha_video_by_condition": {
+          "clean": 0.1593,
+          "video_noise_0.2": 0.1594,
+          "video_noise_0.5": 0.1593,
+          "video_noise_1.0": 0.1586,
+          "video_noise_1.5": 0.1574,
+          "video_noise_2.0": 0.1553,
+          "kinematics_corrupted": 0.1429,
+          "missing_video": 0.0,
+          "missing_kinematics": 1.0
+        }
+      },
+      "existing": {
+        "total_records": 33642,
+        "alpha_video_by_condition": {
+          "clean": 0.2088,
+          "video_noise_0.2": 0.2086,
+          "video_noise_0.5": 0.2082,
+          "video_noise_1.0": 0.2087,
+          "video_noise_1.5": 0.2075,
+          "video_noise_2.0": 0.205,
+          "kinematics_corrupted": 0.1905,
+          "missing_video": 0.0,
+          "missing_kinematics": 1.0
+        }
+      }
+    },
+    "Needle_Passing": {
+      "continuous_noise": {
+        "total_records": 48321,
+        "alpha_video_by_condition": {
+          "clean": 0.0535,
+          "video_noise_0.2": 0.0535,
+          "video_noise_0.5": 0.0532,
+          "video_noise_1.0": 0.0528,
+          "video_noise_1.5": 0.0517,
+          "video_noise_2.0": 0.0505,
+          "kinematics_corrupted": 0.0528,
+          "missing_video": 0.0,
+          "missing_kinematics": 1.0
+        }
+      },
+      "existing": {
+        "total_records": 48321,
+        "alpha_video_by_condition": {
+          "clean": 0.0422,
+          "video_noise_0.2": 0.0422,
+          "video_noise_0.5": 0.0423,
+          "video_noise_1.0": 0.0415,
+          "video_noise_1.5": 0.0414,
+          "video_noise_2.0": 0.041,
+          "kinematics_corrupted": 0.0413,
+          "missing_video": 0.0,
+          "missing_kinematics": 1.0
+        }
+      }
+    }
+  },
+  "all_files_present": true
+}
