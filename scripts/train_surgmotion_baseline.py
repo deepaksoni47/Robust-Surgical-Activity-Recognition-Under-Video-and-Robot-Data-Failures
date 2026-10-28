@@ -326,10 +326,10 @@ def run_full_cross_validation(
         "active_folds": len(fold_results),
         "total_elapsed_sec": round(time.time() - t0_task, 2),
         "metrics": {
-            "accuracy": {"mean": round(float(np.mean(accs)), 2), "min": round(float(np.min(accs)), 2), "max": round(float(np.max(accs)), 2)},
-            "balanced_accuracy": {"mean": round(float(np.mean(bal_accs)), 2), "min": round(float(np.min(bal_accs)), 2), "max": round(float(np.max(bal_accs)), 2)},
-            "macro_f1": {"mean": round(float(np.mean(f1s)), 2), "min": round(float(np.min(f1s)), 2), "max": round(float(np.max(f1s)), 2)},
-            "edit_score": {"mean": round(float(np.mean(edits)), 2), "min": round(float(np.min(edits)), 2), "max": round(float(np.max(edits)), 2)},
+            "accuracy": {"mean": round(float(np.mean(accs)), 2), "std": round(float(np.std(accs)), 2), "min": round(float(np.min(accs)), 2), "max": round(float(np.max(accs)), 2)},
+            "balanced_accuracy": {"mean": round(float(np.mean(bal_accs)), 2), "std": round(float(np.std(bal_accs)), 2), "min": round(float(np.min(bal_accs)), 2), "max": round(float(np.max(bal_accs)), 2)},
+            "macro_f1": {"mean": round(float(np.mean(f1s)), 2), "std": round(float(np.std(f1s)), 2), "min": round(float(np.min(f1s)), 2), "max": round(float(np.max(f1s)), 2)},
+            "edit_score": {"mean": round(float(np.mean(edits)), 2), "std": round(float(np.std(edits)), 2), "min": round(float(np.min(edits)), 2), "max": round(float(np.max(edits)), 2)},
         },
         "fold_results": fold_results,
     }

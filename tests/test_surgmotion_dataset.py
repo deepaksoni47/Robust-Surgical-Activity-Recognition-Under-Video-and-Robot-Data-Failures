@@ -71,3 +71,22 @@ def test_surgmotion_dataloaders_louo():
     assert len(train_set & test_set) == 0
     assert len(val_set & test_set) == 0
     assert len(train_set & val_set) == 0
+
+
+def test_surgmotion_downstream_smoke_train(tmp_path):
+    """Verify single-epoch downstream training and evaluation runs without error."""
+    from scripts.train_surgmotion_baseline import train_and_eval_surgmotion_fold
+
+    res = train_and_eval_surgmotion_fold(
+        task="Suturing",
+        fold=1,
+        model_name="VideoMLP",
+        sequence_length=1,
+        batch_size=32,
+        epochs=1,
+        save_dir=tmp_path,
+    )
+    assert res["is_active"]
+    assert "accuracy" in res
+    assert "edit_score" in res
+    assert (tmp_path / "surgmotion_VideoMLP_Suturing_fold1.pt").is_file()
