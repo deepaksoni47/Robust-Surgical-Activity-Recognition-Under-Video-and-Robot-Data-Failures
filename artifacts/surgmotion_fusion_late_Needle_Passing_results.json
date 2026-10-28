@@ -1,0 +1,119 @@
+{
+  "task": "Needle_Passing",
+  "fusion_type": "late",
+  "encoder": "SurgMotion-ViTL (Frozen 1024D) + Robot Kinematics (76D)",
+  "active_folds": 7,
+  "total_elapsed_sec": 30.06,
+  "metrics": {
+    "accuracy": {
+      "mean": 35.94,
+      "std": 13.85,
+      "min": 22.25,
+      "max": 59.47
+    },
+    "balanced_accuracy": {
+      "mean": 36.77,
+      "std": 12.87,
+      "min": 18.62,
+      "max": 61.02
+    },
+    "macro_f1": {
+      "mean": 23.57,
+      "std": 11.42,
+      "min": 9.01,
+      "max": 46.72
+    },
+    "edit_score": {
+      "mean": 46.16,
+      "std": 10.84,
+      "min": 30.44,
+      "max": 60.23
+    }
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "task": "Needle_Passing",
+      "test_user": "B",
+      "is_active": true,
+      "best_alpha": 0.3,
+      "accuracy": 22.25,
+      "balanced_accuracy": 18.62,
+      "macro_f1": 9.01,
+      "edit_score": 30.44,
+      "n_test_trials": 4
+    },
+    {
+      "fold": 2,
+      "task": "Needle_Passing",
+      "test_user": "C",
+      "is_active": true,
+      "best_alpha": 1.0,
+      "accuracy": 32.31,
+      "balanced_accuracy": 48.08,
+      "macro_f1": 31.14,
+      "edit_score": 51.01,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 3,
+      "task": "Needle_Passing",
+      "test_user": "D",
+      "is_active": true,
+      "best_alpha": 0.75,
+      "accuracy": 27.34,
+      "balanced_accuracy": 28.35,
+      "macro_f1": 20.08,
+      "edit_score": 50.7,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 4,
+      "task": "Needle_Passing",
+      "test_user": "E",
+      "is_active": true,
+      "best_alpha": 0.6,
+      "accuracy": 59.47,
+      "balanced_accuracy": 61.02,
+      "macro_f1": 46.72,
+      "edit_score": 60.23,
+      "n_test_trials": 4
+    },
+    {
+      "fold": 5,
+      "task": "Needle_Passing",
+      "test_user": "F",
+      "is_active": true,
+      "best_alpha": 0.95,
+      "accuracy": 23.91,
+      "balanced_accuracy": 30.94,
+      "macro_f1": 14.34,
+      "edit_score": 39.07,
+      "n_test_trials": 3
+    },
+    {
+      "fold": 7,
+      "task": "Needle_Passing",
+      "test_user": "H",
+      "is_active": true,
+      "best_alpha": 0.35,
+      "accuracy": 54.68,
+      "balanced_accuracy": 36.51,
+      "macro_f1": 23.43,
+      "edit_score": 57.74,
+      "n_test_trials": 2
+    },
+    {
+      "fold": 8,
+      "task": "Needle_Passing",
+      "test_user": "I",
+      "is_active": true,
+      "best_alpha": 0.0,
+      "accuracy": 31.62,
+      "balanced_accuracy": 33.89,
+      "macro_f1": 20.28,
+      "edit_score": 33.95,
+      "n_test_trials": 4
+    }
+  ]
+}

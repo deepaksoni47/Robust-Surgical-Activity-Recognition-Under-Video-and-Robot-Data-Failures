@@ -1,0 +1,131 @@
+{
+  "task": "Knot_Tying",
+  "fusion_type": "late",
+  "encoder": "SurgMotion-ViTL (Frozen 1024D) + Robot Kinematics (76D)",
+  "active_folds": 8,
+  "total_elapsed_sec": 27.41,
+  "metrics": {
+    "accuracy": {
+      "mean": 58.95,
+      "std": 8.4,
+      "min": 47.81,
+      "max": 70.94
+    },
+    "balanced_accuracy": {
+      "mean": 54.65,
+      "std": 8.79,
+      "min": 44.08,
+      "max": 73.23
+    },
+    "macro_f1": {
+      "mean": 47.27,
+      "std": 8.61,
+      "min": 33.12,
+      "max": 60.7
+    },
+    "edit_score": {
+      "mean": 55.75,
+      "std": 6.87,
+      "min": 45.76,
+      "max": 67.59
+    }
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "task": "Knot_Tying",
+      "test_user": "B",
+      "is_active": true,
+      "best_alpha": 0.6,
+      "accuracy": 50.67,
+      "balanced_accuracy": 44.08,
+      "macro_f1": 33.12,
+      "edit_score": 45.76,
+      "n_test_trials": 4
+    },
+    {
+      "fold": 2,
+      "task": "Knot_Tying",
+      "test_user": "C",
+      "is_active": true,
+      "best_alpha": 0.55,
+      "accuracy": 47.81,
+      "balanced_accuracy": 46.69,
+      "macro_f1": 41.04,
+      "edit_score": 49.35,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 3,
+      "task": "Knot_Tying",
+      "test_user": "D",
+      "is_active": true,
+      "best_alpha": 0.4,
+      "accuracy": 48.41,
+      "balanced_accuracy": 49.11,
+      "macro_f1": 40.93,
+      "edit_score": 51.53,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 4,
+      "task": "Knot_Tying",
+      "test_user": "E",
+      "is_active": true,
+      "best_alpha": 0.7,
+      "accuracy": 70.94,
+      "balanced_accuracy": 60.34,
+      "macro_f1": 60.7,
+      "edit_score": 67.59,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 5,
+      "task": "Knot_Tying",
+      "test_user": "F",
+      "is_active": true,
+      "best_alpha": 0.6,
+      "accuracy": 63.64,
+      "balanced_accuracy": 52.6,
+      "macro_f1": 53.76,
+      "edit_score": 58.31,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 6,
+      "task": "Knot_Tying",
+      "test_user": "G",
+      "is_active": true,
+      "best_alpha": 0.4,
+      "accuracy": 61.38,
+      "balanced_accuracy": 59.36,
+      "macro_f1": 49.36,
+      "edit_score": 53.62,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 7,
+      "task": "Knot_Tying",
+      "test_user": "H",
+      "is_active": true,
+      "best_alpha": 0.7,
+      "accuracy": 68.26,
+      "balanced_accuracy": 73.23,
+      "macro_f1": 55.8,
+      "edit_score": 55.83,
+      "n_test_trials": 3
+    },
+    {
+      "fold": 8,
+      "task": "Knot_Tying",
+      "test_user": "I",
+      "is_active": true,
+      "best_alpha": 0.1,
+      "accuracy": 60.51,
+      "balanced_accuracy": 51.79,
+      "macro_f1": 43.47,
+      "edit_score": 63.99,
+      "n_test_trials": 4
+    }
+  ]
+}
