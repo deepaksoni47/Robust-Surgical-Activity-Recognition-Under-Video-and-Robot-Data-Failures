@@ -56,6 +56,7 @@ from src.models.reliability_gate import (
     ReliabilityGate,
     validate_availability_mask,
 )
+from src.models.losses import get_loss_function
 from src.models.video_head import VideoGRU
 from src.utils.reproducibility import get_device, set_seed
 
@@ -647,6 +648,9 @@ def run_multimodal_benchmark(
     epochs: int = 25,
     batch_size: int = 32,
     lr: float = 1e-3,
+    loss_type: str = "class_weighted",
+    gamma: float = 2.0,
+    beta: float = 0.9999,
     evaluate_robustness: bool = True,
     device_name: Optional[str] = None,
     save_artifacts: bool = True,
@@ -659,11 +663,12 @@ def run_multimodal_benchmark(
     num_classes = len(vocab)
     class_names = {idx: g for g, idx in vocab.items()}
 
-    save_dir = PROJECT_ROOT / f"checkpoints/surgmotion_fusion_{fusion_type}_{task}" if save_artifacts else None
+    loss_suffix = f"_{loss_type}" if loss_type != "class_weighted" else ""
+    save_dir = PROJECT_ROOT / f"checkpoints/surgmotion_fusion_{fusion_type}_{task}{loss_suffix}" if save_artifacts else None
     t0_task = time.time()
 
     print("=" * 75)
-    print(f"SURGMOTION MULTIMODAL FUSION: Task={task} | Type={fusion_type.upper()} | Device={device}")
+    print(f"SURGMOTION MULTIMODAL FUSION: Task={task} | Type={fusion_type.upper()} | Loss={loss_type} (gamma={gamma}, beta={beta}) | Device={device}")
     print("=" * 75)
 
     fold_results = []
@@ -703,14 +708,19 @@ def run_multimodal_benchmark(
                 batch_size=batch_size,
             )
 
-            # Class weights
+            # Class frequencies computed strictly from training fold only (zero leakage)
             train_targets = []
             for b in train_loader:
                 train_targets.extend(b["target"].numpy().tolist())
             counts = np.bincount(train_targets, minlength=num_classes)
-            weights = np.where(counts > 0, len(train_targets) / (num_classes * counts), 1.0)
-            class_weights_t = torch.tensor(weights, dtype=torch.float32).to(device)
-            criterion = nn.CrossEntropyLoss(weight=class_weights_t)
+            criterion = get_loss_function(
+                loss_type=loss_type,
+                class_counts=counts,
+                num_classes=num_classes,
+                gamma=gamma,
+                beta=beta,
+                device=device,
+            )
 
             if fusion_type == "concat":
                 model = ConcatFusionGRU(
@@ -756,6 +766,19 @@ def run_multimodal_benchmark(
 
             if best_state is not None:
                 model.load_state_dict(best_state)
+                if save_dir is not None:
+                    save_dir.mkdir(parents=True, exist_ok=True)
+                    ckpt_file = save_dir / f"model_fold{fold_num}.pt"
+                    torch.save({
+                        "model_state": best_state,
+                        "fold": fold_num,
+                        "task": task,
+                        "fusion_type": fusion_type,
+                        "loss_type": loss_type,
+                        "gamma": gamma,
+                        "beta": beta,
+                    }, ckpt_file)
+
 
             # Test Evaluation
             if fusion_type == "concat":
@@ -821,6 +844,11 @@ def run_multimodal_benchmark(
         "encoder": "SurgMotion-ViTL (Frozen 1024D) + Robot Kinematics (76D)",
         "active_folds": len(fold_results),
         "total_elapsed_sec": round(time.time() - t0_task, 2),
+        "loss_config": {
+            "loss_type": loss_type,
+            "gamma": gamma,
+            "beta": beta,
+        },
         "metrics": {
             "accuracy": {"mean": round(float(np.mean(accs)), 2), "std": round(float(np.std(accs)), 2), "min": round(float(np.min(accs)), 2), "max": round(float(np.max(accs)), 2)},
             "balanced_accuracy": {"mean": round(float(np.mean(bal_accs)), 2), "std": round(float(np.std(bal_accs)), 2), "min": round(float(np.min(bal_accs)), 2), "max": round(float(np.max(bal_accs)), 2)},
@@ -842,13 +870,13 @@ def run_multimodal_benchmark(
         summary["robustness"] = rob_summary
 
     if save_artifacts:
-        summary_path = PROJECT_ROOT / f"artifacts/surgmotion_fusion_{fusion_type}_{task}_results.json"
+        summary_path = PROJECT_ROOT / f"artifacts/surgmotion_fusion_{fusion_type}_{task}{loss_suffix}_results.json"
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2)
         print(f"\nSaved multimodal fusion results to: {summary_path.resolve()}")
 
     print("\n" + "=" * 75)
-    print(f"FINAL MULTIMODAL LOUO SUMMARY: {task} ({fusion_type.upper()})")
+    print(f"FINAL MULTIMODAL LOUO SUMMARY: {task} ({fusion_type.upper()}) | Loss: {loss_type}")
     print("=" * 75)
     print(f"Accuracy:          {summary['metrics']['accuracy']['mean']:.2f}% (std: {summary['metrics']['accuracy']['std']:.2f}%)")
     print(f"Balanced Accuracy: {summary['metrics']['balanced_accuracy']['mean']:.2f}% (std: {summary['metrics']['balanced_accuracy']['std']:.2f}%)")
@@ -876,6 +904,13 @@ def main() -> None:
                         help="Batch size")
     parser.add_argument("--lr", type=float, default=1e-3,
                         help="Learning rate")
+    parser.add_argument("--loss-type", type=str, default="class_weighted",
+                        choices=["ce", "class_weighted", "focal", "cb_focal"],
+                        help="Loss function formulation for class imbalance mitigation")
+    parser.add_argument("--gamma", type=float, default=2.0,
+                        help="Focusing parameter for focal loss formulations")
+    parser.add_argument("--beta", type=float, default=0.9999,
+                        help="Class-balanced effective number beta parameter")
     parser.add_argument("--device", type=str, default=None,
                         help="Device (cuda or cpu)")
     parser.add_argument("--no-robustness", action="store_true",
@@ -894,6 +929,9 @@ def main() -> None:
                 epochs=args.epochs,
                 batch_size=args.batch_size,
                 lr=args.lr,
+                loss_type=args.loss_type,
+                gamma=args.gamma,
+                beta=args.beta,
                 evaluate_robustness=not args.no_robustness,
                 device_name=args.device,
             )
@@ -901,3 +939,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

@@ -59,7 +59,19 @@ __all__ = [
     "SurgMotionAdaptiveFusionModel",
     "inject_feature_noise",
     "GateTrajectoryLogger",
+    "compute_class_weights",
+    "FocalLoss",
+    "ClassBalancedFocalLoss",
+    "get_loss_function",
 ]
+
+from src.models.losses import (
+    compute_class_weights,
+    FocalLoss,
+    ClassBalancedFocalLoss,
+    get_loss_function,
+)
+
 
 
 
