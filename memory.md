@@ -163,6 +163,23 @@
 - **Cross-Subject Generalization Bottlenecks (Workstream C):** Novice/hesitant surgeons (User G) with prolonged durations and idiosyncratic surgeons (User B) present the largest domain shifts and lowest F1 scores across tasks.
 - **Artifacts & Figures:** `artifacts/iter34_ablation_summary.json`, `docs/iter34_ablation_analysis.md`, and 5 publication figures in `paper/figures/fig_iter34_*` generated and verified. All 26/26 tests pass.
 
+---
+
+## 9. Key Findings Log — Scientific Audit & Class-Imbalance Preparation (ITER-35)
+- **Workstream A (Static Gate Leakage Resolution):** Prior exploratory scripts calculated mean $\alpha$ using test batches (test-time adaptation). The valid leak-free static baseline calculates mean $\alpha$ exclusively from training folds and freezes it prior to test evaluation. Across all active LOUO folds, training-derived static gating performs within $\pm 0.5\%$ of dynamic gating under clean inputs ($p > 0.05$), proving dynamic gating provides no significant benefit over a fixed linear combination under clean inputs. Its true utility is availability routing under sensor loss.
+- **Workstream B (Temporal Model Claims):** Audit confirmed identical splits, normalizers, and vocabularies between MLP and GRU. The unscientific claim that GRU "completely eliminates label flickering" was retracted; GRU Edit Scores remain at 31–35% (kinematics) and 40–51% (vision), meaning boundary misalignments persist despite a genuine $+22.68$ to $+26.25$ point segmental coherence boost from temporal hysteresis.
+- **Workstream C (Focal Loss Codebase Defect & Resolution):** The proposed command `--loss-type focal --gamma 2.0` in ITER-34 was non-functional; `--loss-type` and `--gamma` CLI options were missing from `scripts/train_surgmotion_multimodal_fusion.py`. Implemented modular `src/models/losses.py` (CE, Class-Weighted CE, Focal Loss, Class-Balanced Focal Loss) with training-only weights. 16 unit tests verified in `tests/test_losses.py`.
+- **Workstream D (Class Imbalance on Suturing):** Discovered severe $30.0\times$ imbalance (G3 = 33.7%, G10 = 1.1%; 4 dominant gestures comprise 77.7% of data). Designed a 4-arm controlled experiment on Suturing (`docs/iter35_imbalance_experiment_protocol.md`) pre-registering dominant vs rare metrics and validation-only hyperparameter selection.
+- **Recommendation:** Conditional GO for Phase 1 GPU experiment on Suturing using Multi-Class Focal Loss (`--loss-type focal --gamma 2.0`).
+- **Unified GPU Execution Architecture & Standing Protocol:** Per developer instruction, multi-run GPU workloads must NEVER require manual terminal babysitting or fragmented CLI execution. Built `scripts/run_iter35_imbalance_experiment.py` and `scripts/run_iter35_imbalance_experiment.ps1` combining:
+  1. Automated preflight assertions (CUDA, VRAM, and feature cache checks).
+  2. Windows sleep & hibernation prevention via `ctypes.windll.kernel32.SetThreadExecutionState`.
+  3. Sequential execution of all 4 Phase 1 runs on Suturing (`ce`, `class_weighted`, `focal`, `cb_focal`).
+  4. Comparative summary table and JSON artifact generation (`artifacts/iter35_imbalance_comparison_Suturing_summary.json`).
+  5. Automated Git stage, commit, and push to `origin main` upon successful completion.
+  *Standing Rule:* All future mentor GPU commands must follow this all-in-one orchestrated pattern.
+
+
 
 
 
