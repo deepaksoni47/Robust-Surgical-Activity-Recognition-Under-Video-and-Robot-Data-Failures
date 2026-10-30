@@ -191,6 +191,30 @@
 - **Core Research Question Integration:** Adaptive Multimodal Fusion and temporal sequence modeling remain superior to unimodal baselines across all loss formulations. Class-reweighting provides an optimal trade-off for Balanced Accuracy and Edit Score, but cannot overcome novice kinematic execution differences (User G collapses under all losses).
 - **Deliverables & Verification:** `docs/iter36_scientific_audit.md`, `artifacts/iter36_integrated_results.json`, `scripts/analyze_iter36_results.py`, `scripts/plot_iter36_results.py`, `tests/test_iter36_analysis.py` (13/13 pass), 4 publication figures in `paper/figures/fig_iter36_*`, updated `paper/main.tex` and compiled `paper/main.pdf`.
 
+---
+
+## 11. Key Findings Log — Final Scientific Integrity Audit & Mentor Review Preparation (ITER-37)
+- **Rare-Gesture Prediction Audit Integration (Commit `77fe81a`):** Pulled 32 fold prediction JSONs from `artifacts/predictions/` and `artifacts/iter36_rare_gesture_audit.json`.
+  - *G10 Complete Collapse:* Achieved 0.00% Recall and 0.00% F1 across ALL four loss formulations (`ce`, `class_weighted`, `focal`, `cb_focal`) on 91 support frames (1.1% of Suturing). Zero true-positive frames predicted across the benchmark.
+  - *G9 Marginal Recovery:* 0.00% Recall under CE and Focal; 6.43% Recall (8.70% F1, 9/140 frames predicted with 58 false positives, precision 13.43%) under Class-Weighted CE; 4.29% Recall under CB-Focal.
+  - *Balanced Accuracy Driver:* The +2.32% balanced accuracy lift in Class-Weighted CE was driven by medium-frequency gestures: G5 (Recall rose +21.88% from 33.3% to 55.2%) and G1 (+6.25%), at the direct cost of dominant class G3 (making C-loop, 30.6% of data) dropping -6.95% recall (85.08% to 78.13%), which caused the -2.66% frame accuracy drop.
+  - *Scientific Conclusion:* Loss reweighting redistributes probability among medium classes but cannot overcome complete representation starvation on rare transition gestures.
+- **Statistical Significance Audit & Holm Correction Rectification:**
+  - `class_weighted` vs `ce`: Raw accuracy $\Delta = -2.66\%$ ($p_{\text{adj}} = 0.1419$, non-significant); Balanced accuracy $\Delta = +2.32\%$ ($p_{\text{adj}} = 1.000$, non-significant); Edit Score $\Delta = +3.58\%$ ($p_{\text{adj}} = 0.2634$, non-significant trend).
+  - All comparisons across the $m=3$ treatment arms must be reported as numerical/descriptive trends, never as statistically established improvements.
+- **Claim-Evidence Matrix (H1–H5):**
+  - *H1 (Video Baseline):* Supported (viable above chance: 39.2%–50.7% vs 27.4%–33.4% majority, but weaker than kinematics).
+  - *H2 (Kinematics Standalone):* Strongly Supported (66.6% Suturing, 61.1% Knot Tying, $p < 0.0001, d_z > 3.0$).
+  - *H3 (Multimodal Fusion):* Partially Supported (statistically established on Knot Tying $+11.25\%, p_{\text{adj}}=0.0286$; strong descriptive trend on Suturing $+5.64\%, p_{\text{adj}}=0.0820$; non-significant trend on Needle Passing $+2.52\%$).
+  - *H4 (Reliability Gating):* Supported with Documented Nuance (acts as an availability router and global modality balancer, not a continuous noise sensor; video fallback within $-0.42\%$; kinematics loss collapses accuracy to ~30%).
+  - *H5 (Temporal Sequence Modeling):* Strongly Supported for Segmental Coherence ($+22$ to $+59$ pt Edit Score boost, $p < 0.0005, d_z > 2.2$), while frame accuracy shift is negligible ($\Delta \le 1.26\%$). Recurrence imparts temporal regularizing hysteresis that filters high-frequency boundary chatter.
+- **Paper Corrections:** Updated `paper/main.tex` with cautious scientific phrasing, per-class G9/G10 empirical findings, and observational framing of User D/G domain shifts. Compiled clean 8-page `paper/main.pdf` (280.5 KB).
+- **Mentor Presentation Suite:**
+  - `presentation/slides.md`: 10-slide structured research presentation.
+  - `presentation/index.html`: Interactive, self-contained HTML slide deck with sleek dark theme, slide counter, arrow-key navigation, and 9 embedded publication figures in `presentation/figures/`.
+  - `docs/iter37_mentor_presentation_notes.md`: Slide-by-slide speaker notes, 8 anticipated mentor questions with evidence-based defensive answers, and transparent limitations.
+  - `docs/iter37_final_claim_audit.md`: Exhaustive claim verification, H1–H5 matrix, and per-class audit report.
+
 
 
 
