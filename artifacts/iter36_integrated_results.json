@@ -1,0 +1,755 @@
+{
+  "audit_version": "ITER-36",
+  "task": "Suturing",
+  "architecture": "Adaptive Reliability Fusion (SurgMotion ViT-L 1024D + Kinematics 76D)",
+  "iter34b_optional_audit": {
+    "task": "Suturing",
+    "condition": "adaptive_reliability_fusion",
+    "loss_type": "class_weighted",
+    "elapsed_sec": 778.63,
+    "active_folds": 8,
+    "metrics": {
+      "accuracy": {
+        "mean": 72.28,
+        "std": 9.57,
+        "min": 57.08,
+        "max": 84.39
+      },
+      "balanced_accuracy": {
+        "mean": 60.05,
+        "std": 11.44,
+        "min": 40.62,
+        "max": 75.91
+      },
+      "macro_f1": {
+        "mean": 44.64,
+        "std": 8.26,
+        "min": 32.59,
+        "max": 58.42
+      },
+      "edit_score": {
+        "mean": 68.95,
+        "std": 9.38,
+        "min": 55.44,
+        "max": 82.69
+      }
+    },
+    "reproducibility_assessment": {
+      "is_bit_identical_to_iter30": true,
+      "runtime_drop_sec": "From 1260.18s to 687.32s on Quadro RTX 5000",
+      "findings": "The ITER-34b optional GPU run was an exact re-execution of Adaptive Reliability Fusion on Suturing using the default class_weighted loss. It confirmed bit-identical metric reproducibility (72.28% Acc, 44.64% Macro-F1, 68.95% Edit) with a 45.4% runtime reduction (11.45 min on Quadro RTX 5000). It does not evaluate a new loss function; it serves as the verified GPU reproducibility baseline for the subsequent ITER-35 runs."
+    }
+  },
+  "iter35_class_imbalance_analysis": {
+    "users": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I"
+    ],
+    "metrics_summary": {
+      "ce": {
+        "accuracy": {
+          "mean": 74.95,
+          "std": 7.68,
+          "median": 77.52,
+          "min": 64.02,
+          "max": 83.74
+        },
+        "balanced_accuracy": {
+          "mean": 57.73,
+          "std": 12.3,
+          "median": 53.06,
+          "min": 42.05,
+          "max": 73.92
+        },
+        "macro_f1": {
+          "mean": 44.29,
+          "std": 6.38,
+          "median": 44.46,
+          "min": 36.08,
+          "max": 52.3
+        },
+        "edit_score": {
+          "mean": 65.37,
+          "std": 8.21,
+          "median": 64.13,
+          "min": 52.67,
+          "max": 76.32
+        }
+      },
+      "class_weighted": {
+        "accuracy": {
+          "mean": 72.28,
+          "std": 10.24,
+          "median": 76.46,
+          "min": 57.08,
+          "max": 84.39
+        },
+        "balanced_accuracy": {
+          "mean": 60.05,
+          "std": 12.23,
+          "median": 60.25,
+          "min": 40.62,
+          "max": 75.91
+        },
+        "macro_f1": {
+          "mean": 44.64,
+          "std": 8.83,
+          "median": 45.05,
+          "min": 32.59,
+          "max": 58.42
+        },
+        "edit_score": {
+          "mean": 68.95,
+          "std": 10.03,
+          "median": 68.13,
+          "min": 55.44,
+          "max": 82.69
+        }
+      },
+      "focal": {
+        "accuracy": {
+          "mean": 73.67,
+          "std": 9.28,
+          "median": 78.66,
+          "min": 59.68,
+          "max": 81.86
+        },
+        "balanced_accuracy": {
+          "mean": 55.32,
+          "std": 9.49,
+          "median": 55.11,
+          "min": 42.07,
+          "max": 70.78
+        },
+        "macro_f1": {
+          "mean": 42.19,
+          "std": 7.28,
+          "median": 41.39,
+          "min": 30.68,
+          "max": 53.47
+        },
+        "edit_score": {
+          "mean": 65.84,
+          "std": 7.79,
+          "median": 68.21,
+          "min": 55.5,
+          "max": 77.95
+        }
+      },
+      "cb_focal": {
+        "accuracy": {
+          "mean": 71.41,
+          "std": 13.23,
+          "median": 78.2,
+          "min": 49.28,
+          "max": 83.97
+        },
+        "balanced_accuracy": {
+          "mean": 59.16,
+          "std": 10.27,
+          "median": 57.44,
+          "min": 47.55,
+          "max": 74.34
+        },
+        "macro_f1": {
+          "mean": 42.54,
+          "std": 9.36,
+          "median": 42.88,
+          "min": 31.93,
+          "max": 58.47
+        },
+        "edit_score": {
+          "mean": 64.77,
+          "std": 10.28,
+          "median": 66.05,
+          "min": 50.61,
+          "max": 80.98
+        }
+      }
+    },
+    "paired_comparisons": {
+      "class_weighted_vs_ce": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.28,
+          "treatment_std": 10.24,
+          "baseline_mean": 74.95,
+          "baseline_std": 7.68,
+          "delta_mean": -2.66,
+          "delta_std": 3.14,
+          "ci_95": [
+            -5.29,
+            -0.04
+          ],
+          "cohens_dz": -0.849,
+          "t_stat": -2.402,
+          "p_value_t": 0.04730647829801865,
+          "w_stat": 4.0,
+          "p_value_wilcoxon": 0.0546875,
+          "p_value_t_holm": 0.14192
+        },
+        "balanced_accuracy": {
+          "n": 8,
+          "treatment_mean": 60.05,
+          "treatment_std": 12.23,
+          "baseline_mean": 57.73,
+          "baseline_std": 12.3,
+          "delta_mean": 2.32,
+          "delta_std": 8.75,
+          "ci_95": [
+            -4.99,
+            9.64
+          ],
+          "cohens_dz": 0.265,
+          "t_stat": 0.751,
+          "p_value_t": 0.47725312175129686,
+          "w_stat": 10.0,
+          "p_value_wilcoxon": 0.3125,
+          "p_value_t_holm": 1.0
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 44.64,
+          "treatment_std": 8.83,
+          "baseline_mean": 44.29,
+          "baseline_std": 6.38,
+          "delta_mean": 0.35,
+          "delta_std": 5.61,
+          "ci_95": [
+            -4.34,
+            5.03
+          ],
+          "cohens_dz": 0.062,
+          "t_stat": 0.175,
+          "p_value_t": 0.8662733626144041,
+          "w_stat": 16.0,
+          "p_value_wilcoxon": 0.84375,
+          "p_value_t_holm": 1.0
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 68.95,
+          "treatment_std": 10.03,
+          "baseline_mean": 65.37,
+          "baseline_std": 8.21,
+          "delta_mean": 3.58,
+          "delta_std": 5.11,
+          "ci_95": [
+            -0.69,
+            7.86
+          ],
+          "cohens_dz": 0.701,
+          "t_stat": 1.983,
+          "p_value_t": 0.08779587840816713,
+          "w_stat": 5.0,
+          "p_value_wilcoxon": 0.078125,
+          "p_value_t_holm": 0.26339
+        }
+      },
+      "focal_vs_ce": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 73.67,
+          "treatment_std": 9.28,
+          "baseline_mean": 74.95,
+          "baseline_std": 7.68,
+          "delta_mean": -1.27,
+          "delta_std": 3.43,
+          "ci_95": [
+            -4.14,
+            1.59
+          ],
+          "cohens_dz": -0.371,
+          "t_stat": -1.05,
+          "p_value_t": 0.3284689584433443,
+          "w_stat": 13.0,
+          "p_value_wilcoxon": 0.546875,
+          "p_value_t_holm": 0.32847
+        },
+        "balanced_accuracy": {
+          "n": 8,
+          "treatment_mean": 55.32,
+          "treatment_std": 9.49,
+          "baseline_mean": 57.73,
+          "baseline_std": 12.3,
+          "delta_mean": -2.41,
+          "delta_std": 12.27,
+          "ci_95": [
+            -12.67,
+            7.85
+          ],
+          "cohens_dz": -0.196,
+          "t_stat": -0.555,
+          "p_value_t": 0.59642816765035,
+          "w_stat": 17.0,
+          "p_value_wilcoxon": 0.9453125,
+          "p_value_t_holm": 1.0
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 42.19,
+          "treatment_std": 7.28,
+          "baseline_mean": 44.29,
+          "baseline_std": 6.38,
+          "delta_mean": -2.1,
+          "delta_std": 6.72,
+          "ci_95": [
+            -7.72,
+            3.52
+          ],
+          "cohens_dz": -0.312,
+          "t_stat": -0.883,
+          "p_value_t": 0.40662756296393643,
+          "w_stat": 15.0,
+          "p_value_wilcoxon": 0.7421875,
+          "p_value_t_holm": 1.0
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 65.84,
+          "treatment_std": 7.79,
+          "baseline_mean": 65.37,
+          "baseline_std": 8.21,
+          "delta_mean": 0.47,
+          "delta_std": 4.38,
+          "ci_95": [
+            -3.19,
+            4.13
+          ],
+          "cohens_dz": 0.108,
+          "t_stat": 0.304,
+          "p_value_t": 0.7696427875179369,
+          "w_stat": 15.0,
+          "p_value_wilcoxon": 0.7421875,
+          "p_value_t_holm": 1.0
+        }
+      },
+      "cb_focal_vs_ce": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 71.41,
+          "treatment_std": 13.23,
+          "baseline_mean": 74.95,
+          "baseline_std": 7.68,
+          "delta_mean": -3.54,
+          "delta_std": 6.44,
+          "ci_95": [
+            -8.93,
+            1.85
+          ],
+          "cohens_dz": -0.55,
+          "t_stat": -1.555,
+          "p_value_t": 0.16398253547456015,
+          "w_stat": 8.0,
+          "p_value_wilcoxon": 0.1953125,
+          "p_value_t_holm": 0.32797
+        },
+        "balanced_accuracy": {
+          "n": 8,
+          "treatment_mean": 59.16,
+          "treatment_std": 10.27,
+          "baseline_mean": 57.73,
+          "baseline_std": 12.3,
+          "delta_mean": 1.43,
+          "delta_std": 8.18,
+          "ci_95": [
+            -5.41,
+            8.27
+          ],
+          "cohens_dz": 0.175,
+          "t_stat": 0.494,
+          "p_value_t": 0.6365035333469738,
+          "w_stat": 11.0,
+          "p_value_wilcoxon": 0.3828125,
+          "p_value_t_holm": 1.0
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 42.54,
+          "treatment_std": 9.36,
+          "baseline_mean": 44.29,
+          "baseline_std": 6.38,
+          "delta_mean": -1.75,
+          "delta_std": 6.6,
+          "ci_95": [
+            -7.27,
+            3.77
+          ],
+          "cohens_dz": -0.265,
+          "t_stat": -0.751,
+          "p_value_t": 0.47725801253304234,
+          "w_stat": 13.0,
+          "p_value_wilcoxon": 0.546875,
+          "p_value_t_holm": 1.0
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 64.77,
+          "treatment_std": 10.28,
+          "baseline_mean": 65.37,
+          "baseline_std": 8.21,
+          "delta_mean": -0.6,
+          "delta_std": 6.08,
+          "ci_95": [
+            -5.68,
+            4.49
+          ],
+          "cohens_dz": -0.098,
+          "t_stat": -0.278,
+          "p_value_t": 0.7887729439230885,
+          "w_stat": 15.0,
+          "p_value_wilcoxon": 0.7421875,
+          "p_value_t_holm": 1.0
+        }
+      }
+    },
+    "fold_breakdown": [
+      {
+        "fold": 1,
+        "user": "B",
+        "ce_acc": 65.08,
+        "ce_bal_acc": 52.01,
+        "ce_f1": 37.01,
+        "ce_edit": 52.67,
+        "class_weighted_acc": 61.76,
+        "class_weighted_bal_acc": 51.74,
+        "class_weighted_f1": 35.19,
+        "class_weighted_edit": 58.7,
+        "focal_acc": 66.79,
+        "focal_bal_acc": 54.42,
+        "focal_f1": 38.09,
+        "focal_edit": 59.14,
+        "cb_focal_acc": 59.87,
+        "cb_focal_bal_acc": 49.6,
+        "cb_focal_f1": 32.56,
+        "cb_focal_edit": 57.43
+      },
+      {
+        "fold": 2,
+        "user": "C",
+        "ce_acc": 83.74,
+        "ce_bal_acc": 71.58,
+        "ce_f1": 48.15,
+        "ce_edit": 76.32,
+        "class_weighted_acc": 82.01,
+        "class_weighted_bal_acc": 72.9,
+        "class_weighted_f1": 48.71,
+        "class_weighted_edit": 82.69,
+        "focal_acc": 81.31,
+        "focal_bal_acc": 70.78,
+        "focal_f1": 47.38,
+        "focal_edit": 77.95,
+        "cb_focal_acc": 83.97,
+        "cb_focal_bal_acc": 74.34,
+        "cb_focal_f1": 49.79,
+        "cb_focal_edit": 80.98
+      },
+      {
+        "fold": 3,
+        "user": "D",
+        "ce_acc": 64.02,
+        "ce_bal_acc": 70.24,
+        "ce_f1": 49.61,
+        "ce_edit": 59.55,
+        "class_weighted_acc": 57.08,
+        "class_weighted_bal_acc": 56.84,
+        "class_weighted_f1": 39.89,
+        "class_weighted_edit": 55.44,
+        "focal_acc": 59.68,
+        "focal_bal_acc": 44.57,
+        "focal_f1": 37.02,
+        "focal_edit": 55.5,
+        "cb_focal_acc": 49.28,
+        "cb_focal_bal_acc": 54.48,
+        "cb_focal_f1": 34.22,
+        "cb_focal_edit": 50.61
+      },
+      {
+        "fold": 4,
+        "user": "E",
+        "ce_acc": 80.23,
+        "ce_bal_acc": 50.11,
+        "ce_f1": 40.77,
+        "ce_edit": 71.05,
+        "class_weighted_acc": 77.09,
+        "class_weighted_bal_acc": 63.66,
+        "class_weighted_f1": 49.05,
+        "class_weighted_edit": 66.14,
+        "focal_acc": 81.86,
+        "focal_bal_acc": 63.94,
+        "focal_f1": 48.1,
+        "focal_edit": 68.95,
+        "cb_focal_acc": 76.16,
+        "cb_focal_bal_acc": 60.39,
+        "cb_focal_f1": 42.95,
+        "cb_focal_edit": 71.68
+      },
+      {
+        "fold": 5,
+        "user": "F",
+        "ce_acc": 81.94,
+        "ce_bal_acc": 73.92,
+        "ce_f1": 49.86,
+        "ce_edit": 74.98,
+        "class_weighted_acc": 84.39,
+        "class_weighted_bal_acc": 75.91,
+        "class_weighted_f1": 51.85,
+        "class_weighted_edit": 82.62,
+        "focal_acc": 80.35,
+        "focal_bal_acc": 58.98,
+        "focal_f1": 39.8,
+        "focal_edit": 70.53,
+        "cb_focal_acc": 81.21,
+        "cb_focal_bal_acc": 72.81,
+        "cb_focal_f1": 47.58,
+        "cb_focal_edit": 69.07
+      },
+      {
+        "fold": 6,
+        "user": "G",
+        "ce_acc": 69.54,
+        "ce_bal_acc": 42.05,
+        "ce_f1": 36.08,
+        "ce_edit": 60.09,
+        "class_weighted_acc": 62.82,
+        "class_weighted_bal_acc": 40.62,
+        "class_weighted_f1": 32.59,
+        "class_weighted_edit": 64.06,
+        "focal_acc": 62.09,
+        "focal_bal_acc": 42.07,
+        "focal_f1": 30.68,
+        "focal_edit": 57.18,
+        "cb_focal_acc": 59.17,
+        "cb_focal_bal_acc": 47.55,
+        "cb_focal_f1": 31.93,
+        "cb_focal_edit": 54.17
+      },
+      {
+        "fold": 7,
+        "user": "H",
+        "ce_acc": 77.33,
+        "ce_bal_acc": 54.11,
+        "ce_f1": 52.3,
+        "ce_edit": 65.05,
+        "class_weighted_acc": 75.83,
+        "class_weighted_bal_acc": 68.29,
+        "class_weighted_f1": 58.42,
+        "class_weighted_edit": 71.81,
+        "focal_acc": 77.03,
+        "focal_bal_acc": 55.8,
+        "focal_f1": 53.47,
+        "focal_edit": 69.97,
+        "cb_focal_acc": 80.24,
+        "cb_focal_bal_acc": 62.64,
+        "cb_focal_f1": 58.47,
+        "cb_focal_edit": 63.03
+      },
+      {
+        "fold": 8,
+        "user": "I",
+        "ce_acc": 77.7,
+        "ce_bal_acc": 47.8,
+        "ce_f1": 40.54,
+        "ce_edit": 63.21,
+        "class_weighted_acc": 77.29,
+        "class_weighted_bal_acc": 50.44,
+        "class_weighted_f1": 41.39,
+        "class_weighted_edit": 70.13,
+        "focal_acc": 80.29,
+        "focal_bal_acc": 52.01,
+        "focal_f1": 42.99,
+        "focal_edit": 67.47,
+        "cb_focal_acc": 81.35,
+        "cb_focal_bal_acc": 51.44,
+        "cb_focal_f1": 42.8,
+        "cb_focal_edit": 71.16
+      }
+    ],
+    "robustness_comparison": {
+      "ce": {
+        "clean": {
+          "accuracy": 74.95,
+          "macro_f1": 44.29,
+          "edit_score": 65.37
+        },
+        "video_corrupted": {
+          "accuracy": 75.0,
+          "macro_f1": 44.54,
+          "edit_score": 65.58
+        },
+        "kinematics_corrupted": {
+          "accuracy": 63.52,
+          "macro_f1": 36.76,
+          "edit_score": 46.16
+        },
+        "video_missing": {
+          "accuracy": 74.35,
+          "macro_f1": 43.83,
+          "edit_score": 63.72
+        },
+        "kinematics_missing": {
+          "accuracy": 45.69,
+          "macro_f1": 20.25,
+          "edit_score": 41.23
+        }
+      },
+      "class_weighted": {
+        "clean": {
+          "accuracy": 72.28,
+          "macro_f1": 44.64,
+          "edit_score": 68.95
+        },
+        "video_corrupted": {
+          "accuracy": 72.22,
+          "macro_f1": 44.54,
+          "edit_score": 68.79
+        },
+        "kinematics_corrupted": {
+          "accuracy": 64.09,
+          "macro_f1": 37.63,
+          "edit_score": 51.39
+        },
+        "video_missing": {
+          "accuracy": 71.86,
+          "macro_f1": 44.13,
+          "edit_score": 68.97
+        },
+        "kinematics_missing": {
+          "accuracy": 30.58,
+          "macro_f1": 15.11,
+          "edit_score": 34.55
+        }
+      },
+      "focal": {
+        "clean": {
+          "accuracy": 73.67,
+          "macro_f1": 42.19,
+          "edit_score": 65.84
+        },
+        "video_corrupted": {
+          "accuracy": 73.6,
+          "macro_f1": 42.17,
+          "edit_score": 65.91
+        },
+        "kinematics_corrupted": {
+          "accuracy": 66.02,
+          "macro_f1": 37.27,
+          "edit_score": 49.57
+        },
+        "video_missing": {
+          "accuracy": 72.88,
+          "macro_f1": 41.94,
+          "edit_score": 63.92
+        },
+        "kinematics_missing": {
+          "accuracy": 48.64,
+          "macro_f1": 20.35,
+          "edit_score": 41.43
+        }
+      },
+      "cb_focal": {
+        "clean": {
+          "accuracy": 71.41,
+          "macro_f1": 42.54,
+          "edit_score": 64.77
+        },
+        "video_corrupted": {
+          "accuracy": 71.4,
+          "macro_f1": 42.46,
+          "edit_score": 64.94
+        },
+        "kinematics_corrupted": {
+          "accuracy": 64.61,
+          "macro_f1": 37.6,
+          "edit_score": 52.62
+        },
+        "video_missing": {
+          "accuracy": 70.45,
+          "macro_f1": 41.56,
+          "edit_score": 62.62
+        },
+        "kinematics_missing": {
+          "accuracy": 36.59,
+          "macro_f1": 18.86,
+          "edit_score": 38.3
+        }
+      }
+    },
+    "training_dynamics": {
+      "ce": {
+        "total_elapsed_sec": 672.02,
+        "best_epochs": [
+          2,
+          8,
+          22,
+          2,
+          5,
+          12,
+          2,
+          2
+        ],
+        "mean_best_epoch": 6.9,
+        "min_best_epoch": 2,
+        "max_best_epoch": 22
+      },
+      "class_weighted": {
+        "total_elapsed_sec": 778.63,
+        "best_epochs": [
+          10,
+          3,
+          8,
+          4,
+          5,
+          4,
+          2,
+          9
+        ],
+        "mean_best_epoch": 5.6,
+        "min_best_epoch": 2,
+        "max_best_epoch": 10
+      },
+      "focal": {
+        "total_elapsed_sec": 1018.02,
+        "best_epochs": [
+          9,
+          13,
+          11,
+          13,
+          3,
+          9,
+          2,
+          6
+        ],
+        "mean_best_epoch": 8.2,
+        "min_best_epoch": 2,
+        "max_best_epoch": 13
+      },
+      "cb_focal": {
+        "total_elapsed_sec": 699.38,
+        "best_epochs": [
+          14,
+          13,
+          25,
+          8,
+          7,
+          12,
+          2,
+          19
+        ],
+        "mean_best_epoch": 12.5,
+        "min_best_epoch": 2,
+        "max_best_epoch": 25
+      }
+    },
+    "missing_artifacts_audit": {
+      "per_class_predictions": "Per-class confusion matrices and individual gesture precision/recall/F1 were computed dynamically during validation/testing inside compute_classification_metrics to yield macro_f1 and balanced_accuracy, but raw prediction sequences (y_true, y_pred) were not serialized to individual trial JSONs during the adaptive fusion benchmark. Per Strict Execution Rule 5, missing values are reported as an architectural artifact constraint and not simulated or fabricated.",
+      "checkpoints_on_github": "Checkpoint files (*.pt) reside locally on the mentor GPU machine and are excluded from git tracking by .gitignore (checkpoints/, *.pt). Only the verified summary and fold-level JSON artifacts were committed and pushed to GitHub main."
+    }
+  }
+}

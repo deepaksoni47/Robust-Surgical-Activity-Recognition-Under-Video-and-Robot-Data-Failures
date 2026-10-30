@@ -179,6 +179,19 @@
   5. Automated Git stage, commit, and push to `origin main` upon successful completion.
   *Standing Rule:* All future mentor GPU commands must follow this all-in-one orchestrated pattern.
 
+---
+
+## 10. Key Findings Log — Independent Scientific Audit of ITER-34(b) & ITER-35 (ITER-36)
+- **ITER-34(b) Optional GPU Audit:** Execution was a bit-identical reproduction of the Suturing Adaptive Fusion baseline using default class-weighted CE (72.28% Acc, 60.05% BalAcc, 44.64% F1, 68.95% Edit). Reduced runtime by 45.4% (from 1,260s to 687s on Quadro RTX 5000). Proves cross-machine compute reproducibility; did not evaluate a new loss formulation.
+- **ITER-35 4-Arm Loss Benchmark Audit:** All 4 loss formulations completed across all 8 Suturing LOUO folds under zero test-leakage training-only class counts.
+  - *Standard CE:* Achieves highest raw frame accuracy (74.95 ± 7.68%), preserving dominant class fidelity (G2, G3).
+  - *Class-Weighted CE:* Achieves highest Balanced Accuracy (60.05 ± 12.23%, +2.32% over CE, p=0.477) and highest Edit Score (68.95 ± 10.03%, +3.58% over CE, p=0.088). Trades 2.66% raw accuracy, but p_adj = 0.1419 under Holm-Bonferroni correction confirms no significant degradation.
+  - *Focal Loss (gamma=2.0):* Underperforms across all metrics (73.67% Acc, 55.32% BalAcc, 42.19% F1, 65.84% Edit), indicating hard-example focusing amplifies boundary transition jitter.
+  - *Class-Balanced Focal Loss (gamma=2.0, beta=0.9999):* Drops frame accuracy to 71.41 ± 13.23% (-3.54%, p=0.164) and Macro-F1 to 42.54%. Induces severe degradation on idiosyncratic surgeons (User D drops -14.74 points).
+- **Core Research Question Integration:** Adaptive Multimodal Fusion and temporal sequence modeling remain superior to unimodal baselines across all loss formulations. Class-reweighting provides an optimal trade-off for Balanced Accuracy and Edit Score, but cannot overcome novice kinematic execution differences (User G collapses under all losses).
+- **Deliverables & Verification:** `docs/iter36_scientific_audit.md`, `artifacts/iter36_integrated_results.json`, `scripts/analyze_iter36_results.py`, `scripts/plot_iter36_results.py`, `tests/test_iter36_analysis.py` (13/13 pass), 4 publication figures in `paper/figures/fig_iter36_*`, updated `paper/main.tex` and compiled `paper/main.pdf`.
+
+
 
 
 

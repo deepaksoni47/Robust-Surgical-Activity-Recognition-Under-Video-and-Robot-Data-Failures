@@ -320,8 +320,33 @@ To dissect the architectural drivers of multimodal performance, we evaluated con
 \begin{enumerate}
     \item \textbf{Sequence Quality vs. Frame Classification:} Comparing framewise kinematic MLPs with recurrent sequence GRUs reveals that temporal sequence modeling produces negligible shifts in frame accuracy ($\Delta \le 1.26\%$, all $p > 0.40$), but drives an overwhelming, universally significant improvement in segmental Edit Score ($+22.68$ to $+26.25$ points for unimodal GRU, and $+44.69$ to $+59.17$ points for Multimodal Adaptive GRU; all $p < 0.0005, d_z > 2.2$). Temporal recurrence suppresses high-frequency frame chatter, establishing contiguous, clinically coherent gesture segments.
     \item \textbf{Static Gate vs. Temporal Variation:} Replacing the time-varying gate weight $\alpha_t$ with the static fold/trial mean $\bar{\alpha}$ shifted clean accuracy by less than $0.06\%$ across all tasks. Under clean conditions, the gate operates primarily as an availability router and global modality balancer rather than a high-frequency temporal filter.
-    \item \textbf{Rare-Gesture Collapse:} Across all tasks, auxiliary and corrective gestures comprising $<3\%$ of the dataset (e.g., G9 and G10 in Suturing; G8 and G9 in Needle Passing) suffer severe recall collapse ($F1 < 6.0\%$), explaining why Macro-F1 lags overall frame accuracy and highlighting class-balanced loss functions as a vital future direction.
+    \item \textbf{Rare-Gesture Collapse:} Across all tasks, auxiliary and corrective gestures comprising $<3\%$ of the dataset (e.g., G9 and G10 in Suturing; G8 and G9 in Needle Passing) suffer severe recall collapse ($F1 < 6.0\%$), explaining why Macro-F1 lags overall frame accuracy and highlighting class-balanced loss functions as an important direction for surgical activity recognition.
 \end{enumerate}
+
+\subsection{Class-Imbalance and Loss Formulation Benchmark}
+To investigate whether the rare-gesture performance bottleneck can be resolved without sacrificing dominant gesture accuracy, we conducted an 8-fold LOUO ablation on Suturing comparing four loss formulations: Standard Cross-Entropy (CE), Inverse-Frequency Class-Weighted CE, Multi-Class Focal Loss ($\gamma=2.0$), and Class-Balanced Focal Loss ($\gamma=2.0, \beta=0.9999$). All weights were calculated strictly from training splits to guarantee zero leakage.
+
+\begin{table}[t]
+\centering
+\caption{Class-Imbalance and Loss Formulation Ablation on Suturing (8 LOUO Folds)}
+\label{tab:loss_ablation}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Loss Formulation} & \textbf{Accuracy (\%)} & \textbf{Balanced Acc. (\%)} & \textbf{Macro-F1 (\%)} & \textbf{Edit Score (\%)} \\
+\midrule
+Standard CE & $\mathbf{74.95 \pm 7.68}$ & $57.73 \pm 12.30$ & $44.29 \pm 6.38$ & $65.37 \pm 8.21$ \\
+Class-Weighted CE & $72.28 \pm 10.24$ & $\mathbf{60.05 \pm 12.23}$ & $\mathbf{44.64 \pm 8.83}$ & $\mathbf{68.95 \pm 10.03}$ \\
+Focal ($\gamma=2.0$) & $73.67 \pm 9.28$ & $55.32 \pm 9.49$ & $42.19 \pm 7.28$ & $65.84 \pm 7.79$ \\
+CB-Focal ($\gamma=2, \beta=0.9999$) & $71.41 \pm 13.23$ & $59.16 \pm 10.27$ & $42.54 \pm 9.36$ & $64.77 \pm 10.28$ \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{2pt}
+\par\noindent\footnotesize\textit{Note:} Evaluated across all 8 active LOUO folds of JIGSAWS Suturing with Adaptive Reliability Fusion. All class weights are training-derived.\par
+\end{table}
+
+As summarized in Table~\ref{tab:loss_ablation}, Standard CE achieves the highest raw frame accuracy ($74.95 \pm 7.68\%$) by avoiding false-positive penalties on dominant gestures (G2, G3). Inverse-frequency Class-Weighted CE achieves the highest Balanced Accuracy ($60.05 \pm 12.23\%$, $+2.32\%$ over CE) and highest Segmental Edit Score ($68.95 \pm 10.03\%$, $+3.58\%$ over CE), but incurs a $2.66\%$ raw accuracy penalty ($p = 0.0473$, but $p_{\text{adj}} = 0.1419$ after step-down Holm-Bonferroni correction, indicating no statistically significant degradation). In contrast, both Focal Loss ($42.19\%$ Macro-F1) and Class-Balanced Focal Loss ($42.54\%$ Macro-F1) underperform Standard CE ($44.29\%$), indicating that hard-example focusing amplifies boundary transition noise. Furthermore, subject-level analysis demonstrates that while expert surgeons (Users C, F, H) benefit substantially from class weighting, novice performance (User G) remains constrained by kinematic execution idiosyncrasy rather than sample frequency.
 
 \section{Discussion \& Limitations}
 Our empirical findings demonstrate that lightweight multimodal fusion and adaptive reliability gating provide substantial advantages for robotic surgical gesture recognition. By decoupling visual perception into frozen representations and training compact temporal sequence models, the complete cross-validation pipeline operates efficiently while preventing overfitting.
