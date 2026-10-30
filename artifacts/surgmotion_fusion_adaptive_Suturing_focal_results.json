@@ -1,0 +1,163 @@
+{
+  "task": "Suturing",
+  "fusion_type": "adaptive",
+  "encoder": "SurgMotion-ViTL (Frozen 1024D) + Robot Kinematics (76D)",
+  "active_folds": 8,
+  "total_elapsed_sec": 1018.02,
+  "loss_config": {
+    "loss_type": "focal",
+    "gamma": 2.0,
+    "beta": 0.9999
+  },
+  "metrics": {
+    "accuracy": {
+      "mean": 73.67,
+      "std": 8.68,
+      "min": 59.68,
+      "max": 81.86
+    },
+    "balanced_accuracy": {
+      "mean": 55.32,
+      "std": 8.87,
+      "min": 42.07,
+      "max": 70.78
+    },
+    "macro_f1": {
+      "mean": 42.19,
+      "std": 6.81,
+      "min": 30.68,
+      "max": 53.47
+    },
+    "edit_score": {
+      "mean": 65.84,
+      "std": 7.29,
+      "min": 55.5,
+      "max": 77.95
+    }
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "task": "Suturing",
+      "test_user": "B",
+      "is_active": true,
+      "best_epoch": 9,
+      "accuracy": 66.79,
+      "balanced_accuracy": 54.42,
+      "macro_f1": 38.09,
+      "edit_score": 59.14,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 2,
+      "task": "Suturing",
+      "test_user": "C",
+      "is_active": true,
+      "best_epoch": 13,
+      "accuracy": 81.31,
+      "balanced_accuracy": 70.78,
+      "macro_f1": 47.38,
+      "edit_score": 77.95,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 3,
+      "task": "Suturing",
+      "test_user": "D",
+      "is_active": true,
+      "best_epoch": 11,
+      "accuracy": 59.68,
+      "balanced_accuracy": 44.57,
+      "macro_f1": 37.02,
+      "edit_score": 55.5,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 4,
+      "task": "Suturing",
+      "test_user": "E",
+      "is_active": true,
+      "best_epoch": 13,
+      "accuracy": 81.86,
+      "balanced_accuracy": 63.94,
+      "macro_f1": 48.1,
+      "edit_score": 68.95,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 5,
+      "task": "Suturing",
+      "test_user": "F",
+      "is_active": true,
+      "best_epoch": 3,
+      "accuracy": 80.35,
+      "balanced_accuracy": 58.98,
+      "macro_f1": 39.8,
+      "edit_score": 70.53,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 6,
+      "task": "Suturing",
+      "test_user": "G",
+      "is_active": true,
+      "best_epoch": 9,
+      "accuracy": 62.09,
+      "balanced_accuracy": 42.07,
+      "macro_f1": 30.68,
+      "edit_score": 57.18,
+      "n_test_trials": 5
+    },
+    {
+      "fold": 7,
+      "task": "Suturing",
+      "test_user": "H",
+      "is_active": true,
+      "best_epoch": 2,
+      "accuracy": 77.03,
+      "balanced_accuracy": 55.8,
+      "macro_f1": 53.47,
+      "edit_score": 69.97,
+      "n_test_trials": 4
+    },
+    {
+      "fold": 8,
+      "task": "Suturing",
+      "test_user": "I",
+      "is_active": true,
+      "best_epoch": 6,
+      "accuracy": 80.29,
+      "balanced_accuracy": 52.01,
+      "macro_f1": 42.99,
+      "edit_score": 67.47,
+      "n_test_trials": 5
+    }
+  ],
+  "robustness": {
+    "clean": {
+      "accuracy": 73.67,
+      "macro_f1": 42.19,
+      "edit_score": 65.84
+    },
+    "video_corrupted": {
+      "accuracy": 73.6,
+      "macro_f1": 42.17,
+      "edit_score": 65.91
+    },
+    "kinematics_corrupted": {
+      "accuracy": 66.02,
+      "macro_f1": 37.27,
+      "edit_score": 49.57
+    },
+    "video_missing": {
+      "accuracy": 72.88,
+      "macro_f1": 41.94,
+      "edit_score": 63.92
+    },
+    "kinematics_missing": {
+      "accuracy": 48.64,
+      "macro_f1": 20.35,
+      "edit_score": 41.43
+    }
+  }
+}

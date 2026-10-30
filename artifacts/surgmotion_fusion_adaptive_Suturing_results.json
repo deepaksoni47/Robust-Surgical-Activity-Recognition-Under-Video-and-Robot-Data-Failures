@@ -3,7 +3,12 @@
   "fusion_type": "adaptive",
   "encoder": "SurgMotion-ViTL (Frozen 1024D) + Robot Kinematics (76D)",
   "active_folds": 8,
-  "total_elapsed_sec": 687.32,
+  "total_elapsed_sec": 778.63,
+  "loss_config": {
+    "loss_type": "class_weighted",
+    "gamma": 2.0,
+    "beta": 0.9999
+  },
   "metrics": {
     "accuracy": {
       "mean": 72.28,

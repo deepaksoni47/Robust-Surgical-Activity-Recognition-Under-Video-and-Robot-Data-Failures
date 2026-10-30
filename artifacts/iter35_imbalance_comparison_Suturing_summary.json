@@ -1,0 +1,46 @@
+{
+  "task": "Suturing",
+  "timestamp": "2026-10-30T14:16:36.069616",
+  "conditions": {
+    "ce": {
+      "accuracy_mean": 74.95,
+      "accuracy_std": 7.19,
+      "balanced_accuracy_mean": 57.73,
+      "balanced_accuracy_std": 11.5,
+      "macro_f1_mean": 44.29,
+      "macro_f1_std": 5.97,
+      "edit_score_mean": 65.37,
+      "edit_score_std": 7.68
+    },
+    "class_weighted": {
+      "accuracy_mean": 72.28,
+      "accuracy_std": 9.57,
+      "balanced_accuracy_mean": 60.05,
+      "balanced_accuracy_std": 11.44,
+      "macro_f1_mean": 44.64,
+      "macro_f1_std": 8.26,
+      "edit_score_mean": 68.95,
+      "edit_score_std": 9.38
+    },
+    "focal": {
+      "accuracy_mean": 73.67,
+      "accuracy_std": 8.68,
+      "balanced_accuracy_mean": 55.32,
+      "balanced_accuracy_std": 8.87,
+      "macro_f1_mean": 42.19,
+      "macro_f1_std": 6.81,
+      "edit_score_mean": 65.84,
+      "edit_score_std": 7.29
+    },
+    "cb_focal": {
+      "accuracy_mean": 71.41,
+      "accuracy_std": 12.38,
+      "balanced_accuracy_mean": 59.16,
+      "balanced_accuracy_std": 9.61,
+      "macro_f1_mean": 42.54,
+      "macro_f1_std": 8.76,
+      "edit_score_mean": 64.77,
+      "edit_score_std": 9.62
+    }
+  }
+}
