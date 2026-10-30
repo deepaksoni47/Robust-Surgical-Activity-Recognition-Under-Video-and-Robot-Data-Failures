@@ -6,25 +6,51 @@
   <title>Adaptive Multimodal Surgical Gesture Recognition — Mentor Presentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0f141c;
-      --bg-card: #18202c;
-      --bg-elevated: #212c3d;
-      --border-color: #2e3d52;
-      --text-main: #f0f4f8;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --primary: #38bdf8;
-      --primary-glow: rgba(56, 189, 248, 0.15);
-      --accent: #818cf8;
-      --success: #34d399;
-      --warning: #fbbf24;
-      --danger: #f87171;
-      --tag-bg: rgba(56, 189, 248, 0.1);
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      /* HackerRank Signature Light Design System */
+      --bg-page: #f4f6f8;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-elevated: #ffffff;
+      
+      --border-light: #e2e8f0;
+      --border-card: #e5e9ee;
+      --border-focus: #00b852;
+      
+      --text-main: #0e141e;
+      --text-body: #334155;
+      --text-muted: #57687b;
+      --text-dim: #8b99a8;
+      
+      /* HackerRank Brand Accents */
+      --hr-green: #00b852;
+      --hr-green-hover: #009e45;
+      --hr-green-dark: #047857;
+      --hr-green-light: #ecfdf5;
+      --hr-green-border: #a7f3d0;
+      --hr-green-glow: rgba(0, 184, 82, 0.16);
+      
+      --accent-blue: #0284c7;
+      --accent-blue-light: #f0f9ff;
+      --accent-blue-border: #bae6fd;
+      
+      --warning-amber: #b45309;
+      --warning-amber-light: #fffbeb;
+      --warning-amber-border: #fde68a;
+      
+      --danger-red: #dc2626;
+      --danger-red-light: #fef2f2;
+      --danger-red-border: #fecaca;
+      
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-card: 0 2px 8px 0 rgba(14, 20, 30, 0.04), 0 1px 2px 0 rgba(14, 20, 30, 0.02);
+      --shadow-hover: 0 10px 25px -4px rgba(14, 20, 30, 0.08), 0 4px 8px -2px rgba(14, 20, 30, 0.03);
+      --shadow-modal: 0 20px 40px -8px rgba(14, 20, 30, 0.16), 0 8px 16px -4px rgba(14, 20, 30, 0.08);
     }
 
     * {
@@ -34,108 +60,156 @@
     }
 
     body {
-      background: var(--bg-dark);
-      color: var(--text-main);
+      background: var(--bg-page);
+      color: var(--text-body);
       font-family: var(--font-sans);
-      line-height: 1.5;
+      line-height: 1.55;
       overflow: hidden;
       height: 100vh;
       width: 100vw;
       user-select: none;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Top progress bar */
+    /* Top Progress Bar - HackerRank Green */
     #progress-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.05);
+      height: 4px;
+      background: #e2e8f0;
       z-index: 100;
     }
     #progress-bar {
       height: 100%;
       width: 10%;
-      background: linear-gradient(90deg, var(--accent), var(--primary));
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(90deg, #059669, #00b852);
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 8px var(--hr-green-glow);
     }
 
-    /* Header Nav */
+    /* HackerRank Header Navigation */
     header {
       position: fixed;
-      top: 5px;
+      top: 4px;
       left: 0;
       width: 100%;
-      padding: 12px 32px;
+      padding: 10px 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 90;
-      background: linear-gradient(180deg, rgba(15, 20, 28, 0.95), rgba(15, 20, 28, 0));
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--border-light);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 
-    .project-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .project-badge span.pill {
-      background: var(--tag-bg);
-      border: 1px solid var(--border-color);
-      padding: 3px 10px;
-      border-radius: 999px;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-    }
-
-    .nav-controls {
+    .brand-container {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .slide-counter {
+    /* HackerRank-style Logo Badge */
+    .hr-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--text-main);
+      color: var(--hr-green);
       font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      background: var(--bg-card);
-      padding: 4px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
+      font-size: 0.88rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: -0.04em;
+      border: 1px solid #1e293b;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    button.icon-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
+    .hr-logo-badge span.bracket {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-subtle);
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-light);
+    }
+
+    button.btn-nav {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
       color: var(--text-main);
       padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: var(--shadow-sm);
     }
 
-    button.icon-btn:hover {
-      background: var(--bg-elevated);
-      border-color: var(--primary);
-      color: var(--primary);
+    button.btn-nav:hover {
+      background: var(--bg-subtle);
+      border-color: #cbd5e1;
+      color: var(--text-main);
       transform: translateY(-1px);
     }
 
-    /* Main Container */
+    button.btn-nav.primary {
+      background: var(--hr-green);
+      border-color: var(--hr-green);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 184, 82, 0.28);
+    }
+
+    button.btn-nav.primary:hover {
+      background: var(--hr-green-hover);
+      border-color: var(--hr-green-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Main Deck Layout */
     #deck {
       width: 100vw;
       height: 100vh;
@@ -148,11 +222,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 80px 48px 48px;
+      padding: 76px 44px 44px;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(16px);
-      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+      transform: translateY(12px);
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -164,52 +238,57 @@
       transform: translateY(0);
     }
 
-    /* Typography inside slides */
+    /* Typography */
     .slide-header {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .slide-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 4px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      background: var(--hr-green-light);
+      color: var(--hr-green-dark);
+      border: 1px solid var(--hr-green-border);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
     }
 
     .slide-eyebrow::before {
       content: "";
       display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--primary);
+      width: 6px;
+      height: 6px;
+      background: var(--hr-green);
       border-radius: 50%;
     }
 
     h1.slide-title {
-      font-size: 2.1rem;
+      font-size: 2.05rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
       color: var(--text-main);
-      line-height: 1.2;
+      line-height: 1.22;
     }
 
     h2.slide-subtitle {
-      font-size: 1.05rem;
-      font-weight: 400;
+      font-size: 1.02rem;
+      font-weight: 450;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
-    /* Layout Grid */
+    /* Grid Layout */
     .content-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
+      gap: 18px;
       flex: 1;
     }
 
@@ -220,19 +299,27 @@
     .col-8 { grid-column: span 8; }
     .col-12 { grid-column: span 12; }
 
-    /* Cards */
+    /* HackerRank-style Cards */
     .card {
       background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      position: relative;
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: #cbd5e1;
     }
 
     .card.highlight {
-      border-color: rgba(56, 189, 248, 0.4);
-      background: linear-gradient(180deg, rgba(24, 32, 44, 0.95), rgba(33, 44, 61, 0.9));
+      border-top: 3px solid var(--hr-green);
+      background: #ffffff;
+      box-shadow: 0 4px 14px 0 rgba(0, 184, 82, 0.06), var(--shadow-card);
     }
 
     .card-title {
@@ -243,23 +330,59 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      letter-spacing: -0.01em;
     }
 
+    .card-title .icon-accent {
+      color: var(--hr-green);
+      font-weight: bold;
+    }
+
+    /* Badges */
     .badge {
-      display: inline-block;
-      padding: 2px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
       border-radius: 6px;
       font-size: 0.72rem;
       font-weight: 700;
       font-family: var(--font-mono);
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .badge-primary { background: rgba(56, 189, 248, 0.15); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-success { background: rgba(52, 211, 153, 0.15); color: var(--success); border: 1px solid rgba(52, 211, 153, 0.3); }
-    .badge-warning { background: rgba(251, 191, 36, 0.15); color: var(--warning); border: 1px solid rgba(251, 191, 36, 0.3); }
-    .badge-danger { background: rgba(248, 113, 113, 0.15); color: var(--danger); border: 1px solid rgba(248, 113, 113, 0.3); }
+    .badge-success {
+      background: var(--hr-green-light);
+      color: var(--hr-green-dark);
+      border: 1px solid var(--hr-green-border);
+    }
 
+    .badge-warning {
+      background: var(--warning-amber-light);
+      color: var(--warning-amber);
+      border: 1px solid var(--warning-amber-border);
+    }
+
+    .badge-danger {
+      background: var(--danger-red-light);
+      color: var(--danger-red);
+      border: 1px solid var(--danger-red-border);
+    }
+
+    .badge-primary {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+    }
+
+    .badge-neutral {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid var(--border-light);
+    }
+
+    /* HackerRank Clean List */
     ul.clean-list {
       list-style: none;
     }
@@ -268,73 +391,92 @@
       position: relative;
       padding-left: 20px;
       margin-bottom: 10px;
-      font-size: 0.92rem;
-      color: var(--text-muted);
+      font-size: 0.91rem;
+      color: var(--text-body);
+      line-height: 1.5;
     }
 
     ul.clean-list li strong {
       color: var(--text-main);
+      font-weight: 600;
     }
 
     ul.clean-list li::before {
       content: "▹";
       position: absolute;
       left: 0;
-      color: var(--primary);
+      color: var(--hr-green);
+      font-size: 1.05rem;
+      line-height: 1.4;
       font-weight: bold;
     }
 
-    /* Tables */
+    /* Tables - HackerRank Leaderboard / Test Suite Style */
     table.data-table {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.84rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.85rem;
       margin-top: 6px;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     table.data-table th {
-      background: var(--bg-elevated);
-      color: var(--primary);
-      font-weight: 600;
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      font-weight: 700;
       text-align: left;
-      padding: 8px 12px;
+      padding: 10px 14px;
       font-family: var(--font-mono);
-      border-bottom: 2px solid var(--border-color);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-light);
     }
 
     table.data-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid var(--border-color);
-      color: var(--text-muted);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-body);
+      background: #ffffff;
     }
 
-    table.data-table tr.highlight-row {
-      background: rgba(56, 189, 248, 0.08);
+    table.data-table tr:last-child td {
+      border-bottom: none;
     }
 
     table.data-table tr.highlight-row td {
-      color: var(--text-main);
+      background: #f0fdf4;
+      color: #065f46;
       font-weight: 600;
+    }
+
+    table.data-table tr.highlight-row td:first-child {
+      border-left: 3px solid var(--hr-green);
     }
 
     table.data-table td.numeric {
       font-family: var(--font-mono);
       text-align: right;
+      font-weight: 600;
     }
     table.data-table th.numeric {
       text-align: right;
     }
 
-    /* Image Containers */
+    /* Figure Containers - Clean White Framed */
     .fig-container {
-      background: #0b0e14;
-      border: 1px solid var(--border-color);
+      background: #ffffff;
+      border: 1px solid var(--border-card);
       border-radius: 10px;
-      padding: 12px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      box-shadow: var(--shadow-card);
       height: 100%;
     }
 
@@ -342,34 +484,40 @@
       max-width: 100%;
       max-height: 380px;
       object-fit: contain;
-      border-radius: 6px;
+      border-radius: 4px;
     }
 
     .fig-caption {
       font-size: 0.75rem;
       font-family: var(--font-mono);
-      color: var(--text-dim);
-      margin-top: 8px;
+      color: var(--text-muted);
+      margin-top: 10px;
       text-align: center;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      padding: 5px 12px;
+      border-radius: 6px;
+      width: 100%;
     }
 
-    /* Metric Callouts */
+    /* HackerRank Stat Metric Boxes */
     .stat-row {
       display: flex;
-      gap: 16px;
-      margin-top: 12px;
+      gap: 14px;
+      margin-top: 14px;
     }
 
     .stat-box {
       flex: 1;
-      background: var(--bg-elevated);
-      padding: 14px 18px;
+      background: var(--bg-subtle);
+      padding: 12px 16px;
       border-radius: 8px;
-      border-left: 3px solid var(--primary);
+      border: 1px solid var(--border-card);
+      border-left: 4px solid var(--hr-green);
     }
 
     .stat-value {
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       font-weight: 800;
       font-family: var(--font-mono);
       color: var(--text-main);
@@ -377,25 +525,27 @@
     }
 
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-top: 4px;
     }
 
-    /* Speaker Notes Modal */
+    /* Speaker Notes Modal - HackerRank Code Drawer */
     #notes-panel {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      width: 440px;
-      max-height: 320px;
-      background: rgba(15, 20, 28, 0.98);
-      border: 1px solid var(--primary);
-      border-radius: 12px;
+      width: 460px;
+      max-height: 340px;
+      background: #ffffff;
+      border: 1px solid var(--hr-green);
+      border-top: 4px solid var(--hr-green);
+      border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      box-shadow: var(--shadow-modal);
       z-index: 200;
       display: none;
       overflow-y: auto;
@@ -407,66 +557,83 @@
     }
 
     #notes-panel h4 {
-      color: var(--primary);
-      font-size: 0.9rem;
+      color: var(--hr-green-dark);
+      font-size: 0.88rem;
       font-family: var(--font-mono);
       margin-bottom: 8px;
       text-transform: uppercase;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     #notes-panel p {
-      color: var(--text-muted);
-      margin-bottom: 8px;
-      line-height: 1.45;
+      color: var(--text-body);
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
 
-    /* Footer Controls */
+    /* Footer */
     footer {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 10px 32px;
+      padding: 8px 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(0deg, rgba(15, 20, 28, 0.95), rgba(15, 20, 28, 0));
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 1px solid var(--border-light);
       z-index: 90;
     }
 
     .shortcut-hints {
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-family: var(--font-mono);
-      color: var(--text-dim);
+      color: var(--text-muted);
     }
 
     .shortcut-hints kbd {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
       border-radius: 4px;
       padding: 2px 6px;
-      color: var(--text-muted);
+      color: var(--text-main);
+      font-weight: 600;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     }
   </style>
 </head>
 <body>
 
-  <!-- Progress Bar -->
+  <!-- Top Progress Bar -->
   <div id="progress-container">
     <div id="progress-bar"></div>
   </div>
 
   <!-- Header -->
   <header>
-    <div class="project-badge">
-      <span>Mini-Project 5th Sem</span>
-      <span class="pill">JIGSAWS Multimodal Benchmark</span>
+    <div class="brand-container">
+      <div class="hr-logo-badge">
+        <span class="bracket">[</span> RMIS <span class="bracket">]</span>
+      </div>
+      <div class="brand-meta">
+        <div class="brand-title">
+          Adaptive Multimodal Surgical Gesture Recognition
+          <span class="badge badge-success">Audit Verified</span>
+        </div>
+        <div class="brand-subtitle">
+          Department of CSE · Mini-Project 5th Sem · JIGSAWS LOUO Benchmark
+        </div>
+      </div>
     </div>
     <div class="nav-controls">
       <span class="slide-counter" id="slide-num">Slide 1 / 10</span>
-      <button class="icon-btn" id="prev-btn" title="Previous Slide (Left Arrow)">◀</button>
-      <button class="icon-btn" id="next-btn" title="Next Slide (Right Arrow)">▶</button>
-      <button class="icon-btn" id="notes-btn" title="Toggle Speaker Notes (N)">Notes (N)</button>
+      <button class="btn-nav" id="prev-btn" title="Previous Slide (Left Arrow)">◀ Prev</button>
+      <button class="btn-nav" id="next-btn" title="Next Slide (Right Arrow)">Next ▶</button>
+      <button class="btn-nav primary" id="notes-btn" title="Toggle Speaker Notes (N)">Notes (N)</button>
     </div>
   </header>
 
@@ -476,19 +643,19 @@
     <!-- Slide 1: Motivation -->
     <section class="slide active" id="slide-1">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 01 · Clinical Context & Motivation</div>
+        <div class="slide-eyebrow">Slide 01 · Clinical Context & Problem Motivation</div>
         <h1 class="slide-title">Reliable Surgical Gesture Recognition in RMIS</h1>
-        <h2 class="slide-subtitle">Addressing Optical Degradation and Telemetry Vulnerabilities in Robot-Assisted Surgery</h2>
+        <h2 class="slide-subtitle">Mitigating Optical Degradation and Telemetry Vulnerabilities in da Vinci Robotics</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 card highlight">
-          <div class="card-title">The Clinical Imperative</div>
+          <div class="card-title"><span class="icon-accent">✓</span> The Clinical Imperative</div>
           <ul class="clean-list">
-            <li><strong>Autonomous Assistance:</strong> Context-aware robotic surgical systems require fine-grained gesture segmentation to anticipate surgeon actions and manage tool safety.</li>
-            <li><strong>Objective Skill Assessment:</strong> Decomposing trials into atomic surgical gestures allows quantifiable metrics for training and credentialing.</li>
-            <li><strong>The Core Dilemma:</strong> No single sensing channel is robust in real operating theaters:
-              <br>• <em>Endoscopic Video:</em> Susceptible to smoke, fog, blood splatter, and motion blur.
-              <br>• <em>Robot Kinematics:</em> Invariant to visual corruptions, but blind to tool-tissue interaction state.
+            <li><strong>Context-Aware Assistance:</strong> Intraoperative robotic surgical AI requires fine-grained gesture recognition (e.g., reaching needle, positioning, suture pulling) for real-time safety boundary enforcement.</li>
+            <li><strong>Objective Skill Credentialing:</strong> Quantitative decomposition of surgical trajectories provides objective proficiency metrics without manual faculty review.</li>
+            <li><strong>The Core Sensing Dilemma:</strong>
+              <br>• <em>Endoscopic Video:</em> Captures tissue deformation, but frequently fails under cautery smoke, lens fog, fluid splatter, and camera motion blur.
+              <br>• <em>Robot Kinematics:</em> Continuous 30 Hz physical telemetry is 100% immune to optical smoke, but blind to tool-tissue interaction state.
             </li>
           </ul>
           <div class="stat-row">
@@ -507,11 +674,11 @@
           </div>
         </div>
         <div class="col-6 card">
-          <div class="card-title">Failure Mode of Conventional Fusion</div>
+          <div class="card-title"><span class="icon-accent">⚠</span> Failure Modes of Conventional Fusion</div>
           <ul class="clean-list">
-            <li><strong>Fixed Late Fusion Pitfall:</strong> Static logit weighting allows optical noise to actively contaminate high-confidence kinematic predictions, degrading accuracy by up to <strong>-12.75%</strong>.</li>
-            <li><strong>Feature Concatenation Imbalance:</strong> Concatenating 1024-D visual embeddings with 76-D kinematics causes the high-dimensional visual stream to dominate, leading to optimization instability.</li>
-            <li><strong>Our Solution:</strong> A lightweight, reliability-aware dynamic gate with explicit binary availability flags guaranteeing <strong>exact single-modality fallback</strong>.</li>
+            <li><strong>Fixed Late Fusion Degradation:</strong> Static probability averaging forces noisy video representations to dilute confident kinematics predictions, causing a severe <strong>-6.10% accuracy drop</strong> on Suturing.</li>
+            <li><strong>Feature Concatenation Imbalance:</strong> Concatenating 1024-D visual embeddings with 76-D kinematics causes the visual stream to dominate, destabilizing training across diverse surgeons.</li>
+            <li><strong>Our Engineering Solution:</strong> A lightweight, decoupled architecture pairing frozen SurgMotion foundation representations with temporal GRU sequence models and a <strong>reliability-aware dynamic gate</strong> with exact mathematical fallback.</li>
           </ul>
         </div>
       </div>
@@ -520,7 +687,7 @@
     <!-- Slide 2: Research Question & Hypotheses -->
     <section class="slide" id="slide-2">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 02 · Formal Research Hypotheses</div>
+        <div class="slide-eyebrow">Slide 02 · Pre-Registered Hypotheses & Evidence Matrix</div>
         <h1 class="slide-title">Primary Research Question & Claim-Evidence Matrix</h1>
         <h2 class="slide-subtitle">Rigorous Empirical Evaluation of the Five Pre-Registered Project Hypotheses</h2>
       </div>
@@ -529,41 +696,41 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th style="width: 140px;">Hypothesis</th>
+                <th style="width: 150px;">Hypothesis</th>
                 <th>Claimed Principle</th>
-                <th>Empirical Evidence</th>
-                <th style="width: 120px; text-align: center;">Verdict</th>
+                <th>Audited Empirical Evidence</th>
+                <th style="width: 140px; text-align: center;">Scientific Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>H1 (Video Baseline)</strong></td>
                 <td>Frozen surgical foundation features provide viable unimodal baseline above chance.</td>
-                <td>SurgMotion VideoGRU achieves 39.2%–50.7% accuracy vs 27.4%–33.4% majority baseline. Viable, but weaker than kinematics.</td>
+                <td>SurgMotion VideoGRU achieves 39.2%–53.6% accuracy vs 27.4%–33.4% majority baseline. Viable above chance, but weaker than kinematics.</td>
                 <td style="text-align: center;"><span class="badge badge-success">Supported</span></td>
               </tr>
               <tr>
-                <td><strong>H2 (Kinematics)</strong></td>
-                <td>76-D kinematics yields strong standalone gesture discrimination.</td>
-                <td>Kinematics GRU achieves 66.6% on Suturing, 61.1% on Knot Tying. Beats majority baseline by +33.2% (p &lt; 0.0001, dz &gt; 3.0).</td>
+                <td><strong>H2 (Kinematics Standalone)</strong></td>
+                <td>76-D da Vinci kinematics yields strong standalone gesture discrimination.</td>
+                <td>Kinematics GRU achieves 66.6% on Suturing, 61.1% on Knot Tying. Outperforms majority baseline by +33.2% (p &lt; 0.0001, dz &gt; 3.0). Primary unimodal modality.</td>
                 <td style="text-align: center;"><span class="badge badge-success">Strongly Supported</span></td>
               </tr>
               <tr class="highlight-row">
                 <td><strong>H3 (Multimodal Fusion)</strong></td>
                 <td>Adaptive multimodal fusion outperforms unimodal baselines under identical splits.</td>
-                <td>Knot Tying: +11.25% gain (padj = 0.0286). Suturing: +5.64% trend (padj = 0.0820). Needle Passing: +2.52% descriptive trend.</td>
+                <td>Knot Tying: +11.25% gain (padj = 0.0286, dz = 1.25). Suturing: +5.64% trend (padj = 0.0820). Needle Passing: +2.52% descriptive trend.</td>
                 <td style="text-align: center;"><span class="badge badge-warning">Partially Supported</span></td>
               </tr>
               <tr>
                 <td><strong>H4 (Reliability Gating)</strong></td>
-                <td>Dynamic gate prevents degradation under missingness and corruptions.</td>
-                <td>Video dropout fallback sustained within -0.42% of clean. Gate acts as an effective availability router &amp; modality balancer.</td>
+                <td>Dynamic gate prevents degradation under missingness and enforces fallback.</td>
+                <td>Video telemetry failure sustained within -0.42% of clean. Gate acts as an effective availability router &amp; global balancer.</td>
                 <td style="text-align: center;"><span class="badge badge-success">Supported (Nuanced)</span></td>
               </tr>
               <tr>
-                <td><strong>H5 (Temporal Context)</strong></td>
-                <td>Temporal recurrence (GRU) suppresses high-frequency segmentation chatter.</td>
-                <td>Frame accuracy delta is negligible (&le;1.26%), but segmental Edit Score increases by +22 to +59 points (p &lt; 0.0005, dz &gt; 2.2).</td>
+                <td><strong>H5 (Temporal Sequence)</strong></td>
+                <td>Temporal sequence modeling (GRU) suppresses high-frequency segmentation chatter.</td>
+                <td>Frame accuracy shift is negligible (&le;1.26%), but segmental Edit Score increases by +22 to +59 points (p &lt; 0.0005, dz &gt; 2.2). Recurrence imparts temporal regularizing hysteresis.</td>
                 <td style="text-align: center;"><span class="badge badge-success">Strongly Supported</span></td>
               </tr>
             </tbody>
@@ -575,59 +742,59 @@
     <!-- Slide 3: Dataset & Methodology -->
     <section class="slide" id="slide-3">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 03 · Dataset & Experimental Protocol</div>
-        <h1 class="slide-title">JIGSAWS Benchmark & Zero-Leakage Evaluation</h1>
+        <div class="slide-eyebrow">Slide 03 · Benchmark Dataset & Protocol</div>
+        <h1 class="slide-title">JIGSAWS Multi-Task Benchmark & Zero-Leakage Protocol</h1>
         <h2 class="slide-subtitle">Multi-Task da Vinci Telemetry Across All 103 Standardized Trials</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 card">
-          <div class="card-title">Dataset Distribution & Scope</div>
+          <div class="card-title"><span class="icon-accent">▦</span> Task &amp; Vocabulary Breakdown</div>
           <ul class="clean-list">
             <li><strong>Suturing:</strong> 39 trials, 8 subjects (B–I), 10 gestures (G1–G6, G8–G11).</li>
             <li><strong>Knot Tying:</strong> 36 trials, 8 subjects (B–I), 6 gestures (G1, G11–G15).</li>
             <li><strong>Needle Passing:</strong> 28 trials, 8 subjects (B–I), 8 gestures (G1–G6, G8, G11).</li>
             <li><strong>Total Benchmark:</strong> 103 trials across 15 distinct atomic gestures.</li>
           </ul>
-          <div class="card-title" style="margin-top: 16px;">76-D Kinematics Extraction</div>
-          <p style="font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-mono);">
-            kt = [m_left (19D), m_right (19D), s_left (19D), s_right (19D)]
+          <div class="card-title" style="margin-top: 14px;"><span class="icon-accent">⚙</span> 76-D Kinematic State Vector</div>
+          <p style="font-size: 0.84rem; color: var(--text-muted); font-family: var(--font-mono); background: var(--bg-subtle); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-light);">
+            kt = [Master_L (19D), Master_R (19D), Slave_L (19D), Slave_R (19D)]
             <br>Each: Position [x,y,z], Rotation Matrix [9D], Lin. Vel [3D], Ang. Vel [3D], Gripper [1D]
           </p>
         </div>
         <div class="col-6 card highlight">
-          <div class="card-title">Strict Zero-Leakage Protocol</div>
+          <div class="card-title"><span class="icon-accent">🔒</span> Absolute Zero-Leakage Safeguards</div>
           <ul class="clean-list">
-            <li><strong>Leave-One-User-Out (LOUO):</strong> Models are trained on 7 surgeons and tested strictly on the 8th unseen surgeon. Prevents subject identity overfitting.</li>
-            <li><strong>Training-Only Normalization:</strong> Mean and variance statistics (&mu;train, &sigma;train) are computed exclusively on the training trials of each fold.</li>
-            <li><strong>Transparent Disclosure:</strong> Needle Passing evaluates <strong>7 active folds</strong> (N=7). Subject G contains an empty test set in the official benchmark distribution.</li>
+            <li><strong>Official Leave-One-User-Out (LOUO):</strong> Evaluation strictly isolates unseen surgeons. All trials of Subject B are tested against a model trained only on Subjects C through I.</li>
+            <li><strong>Training-Only Normalization:</strong> Mean and standard deviation parameters (&mu;train, &sigma;train) for kinematics and visual features are fitted exclusively on training trials.</li>
+            <li><strong>Transparent Split Disclosure:</strong> Needle Passing evaluates <strong>7 active folds</strong> (N=7). Subject G contains an empty test set in the official benchmark release.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Slide 4: Architecture -->
+    <!-- Slide 4: Proposed Multimodal Architecture -->
     <section class="slide" id="slide-4">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 04 · Proposed Multimodal Architecture</div>
+        <div class="slide-eyebrow">Slide 04 · Architecture Design</div>
         <h1 class="slide-title">Decoupled Foundation Perception &amp; Dynamic Gating</h1>
-        <h2 class="slide-subtitle">Efficient Feature Caching, Temporal Recurrence, and Availability Routing</h2>
+        <h2 class="slide-subtitle">Feature Caching, Modality Sequence Encoders, and Availability Routing</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 card">
-          <div class="card-title">Architecture Pipeline</div>
+          <div class="card-title"><span class="icon-accent">◈</span> Architectural Pipeline</div>
           <ul class="clean-list">
-            <li><strong>Frozen Visual Backbone:</strong> SurgMotion-ViTL (1024-D) latent motion features cached to disk, eliminating redundant GPU compute.</li>
-            <li><strong>Recurrent Encoders:</strong> Independent 2-layer GRU sequence encoders (d=128) for video and kinematics over temporal window S=8.</li>
+            <li><strong>Frozen Visual Backbone:</strong> SurgMotion-ViTL (1024-D) latent motion features cached to disk, eliminating redundant compute and preventing small-data overfitting.</li>
+            <li><strong>Modality Temporal Encoders:</strong> Compact 2-layer GRU sequence encoders (d=128) over context window S=8.</li>
             <li><strong>Reliability-Aware Gating Network:</strong>
               $$\tilde{\boldsymbol{\alpha}}_t = \text{Softplus}\left( \mathbf{W}_g [\mathbf{h}_t^{\text{vis}}; \mathbf{h}_t^{\text{kin}}; \mathbf{a}_t] + \mathbf{b}_g \right)$$
               $$\alpha_t^m = \frac{\tilde{\alpha}_t^m \, a_t^m}{\sum_{j \in \mathcal{M}} \tilde{\alpha}_t^j \, a_t^j + \epsilon}, \quad \hat{\mathbf{y}}_t = \alpha_t^{\text{vis}} \mathbf{y}_t^{\text{vis}} + \alpha_t^{\text{kin}} \mathbf{y}_t^{\text{kin}}$$
             </li>
-            <li><strong>Exact Fallback Guarantee:</strong> When a=[0,1], &alpha;vis &equiv; 0 and &alpha;kin &equiv; 1, ensuring 100% mathematical fallback to kinematics.</li>
+            <li><strong>Guaranteed Fallback:</strong> When a=[0,1], &alpha;vis &equiv; 0 and &alpha;kin &equiv; 1, ensuring 100% mathematical fallback to kinematics.</li>
           </ul>
         </div>
         <div class="col-6 fig-container">
-          <img src="figures/fig1_model_comparison.png" alt="Cross-Validated Benchmark Comparison">
-          <div class="fig-caption">Fig 1: Consolidated Cross-Validation Across All 8 Models on JIGSAWS</div>
+          <img src="figures/fig1_model_comparison.png" alt="Consolidated Cross-Validation Across All 8 Models">
+          <div class="fig-caption">Fig 1: Consolidated Benchmark Across All 8 Models on JIGSAWS</div>
         </div>
       </div>
     </section>
@@ -637,11 +804,11 @@
       <div class="slide-header">
         <div class="slide-eyebrow">Slide 05 · Empirical Benchmark Results</div>
         <h1 class="slide-title">Unimodal vs. Multimodal Performance</h1>
-        <h2 class="slide-subtitle">Adaptive Dynamic Fusion Outperforms Baselines Across All Three Tasks</h2>
+        <h2 class="slide-subtitle">Adaptive Reliability Gating Outperforms Baselines Across All Three Tasks</h2>
       </div>
       <div class="content-grid">
         <div class="col-7 card">
-          <div class="card-title">Consolidated LOUO Benchmark Table</div>
+          <div class="card-title"><span class="icon-accent">📊</span> Consolidated LOUO Benchmark Across 103 Trials</div>
           <table class="data-table">
             <thead>
               <tr>
@@ -654,7 +821,7 @@
             </thead>
             <tbody>
               <tr>
-                <td rowspan="3"><strong>Suturing</strong><br><small>(N=8)</small></td>
+                <td rowspan="3"><strong>Suturing</strong><br><small style="color: var(--text-dim);">(N=8)</small></td>
                 <td>Kinematics GRU</td>
                 <td class="numeric">66.64</td>
                 <td class="numeric">57.77</td>
@@ -673,7 +840,7 @@
                 <td class="numeric"><strong>68.95</strong> **</td>
               </tr>
               <tr>
-                <td rowspan="2"><strong>Knot Tying</strong><br><small>(N=8)</small></td>
+                <td rowspan="2"><strong>Knot Tying</strong><br><small style="color: var(--text-dim);">(N=8)</small></td>
                 <td>Kinematics GRU</td>
                 <td class="numeric">61.09</td>
                 <td class="numeric">56.53</td>
@@ -686,7 +853,7 @@
                 <td class="numeric"><strong>64.66</strong> **</td>
               </tr>
               <tr>
-                <td rowspan="2"><strong>Needle Pass</strong><br><small>(N=7)</small></td>
+                <td rowspan="2"><strong>Needle Pass</strong><br><small style="color: var(--text-dim);">(N=7)</small></td>
                 <td>Kinematics GRU</td>
                 <td class="numeric">48.69</td>
                 <td class="numeric">41.70</td>
@@ -700,7 +867,7 @@
               </tr>
             </tbody>
           </table>
-          <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px; font-family: var(--font-mono);">
+          <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; font-family: var(--font-mono);">
             * padj &lt; 0.05, ** padj &lt; 0.001 (Holm-Bonferroni corrected). &dagger; padj = 0.0820 (Marginal trend).
           </p>
         </div>
@@ -711,43 +878,43 @@
       </div>
     </section>
 
-    <!-- Slide 6: Temporal Sequence Modeling & Gate Dynamics -->
+    <!-- Slide 6: Temporal Dynamics & Gate Behavior -->
     <section class="slide" id="slide-6">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 06 · Temporal Dynamics &amp; Gating Mechanism</div>
+        <div class="slide-eyebrow">Slide 06 · Temporal Dynamics & Mechanism Audit</div>
         <h1 class="slide-title">Eliminating Oversegmentation Chatter</h1>
-        <h2 class="slide-subtitle">Recurrent Hysteresis Stabilizes Boundaries; Gate Acts as Modality Balancer</h2>
+        <h2 class="slide-subtitle">Recurrent Hysteresis Stabilizes Boundaries; Gate Operates as Modality Balancer</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 fig-container">
           <img src="figures/fig3_gesture_timelines_ribbon.png" alt="Held-Out Trial Gesture Timeline">
-          <div class="fig-caption">Fig 3: Real Held-out Trial Timeline (Trial B001). GRU Eliminates Frame Chatter.</div>
+          <div class="fig-caption">Fig 3: Held-out Trial Timeline (Trial B001). Recurrence Eliminates Boundary Chatter.</div>
         </div>
         <div class="col-6 card">
-          <div class="card-title">Key Mechanism Discoveries</div>
+          <div class="card-title"><span class="icon-accent">⚡</span> Mechanism Discoveries</div>
           <ul class="clean-list">
-            <li><strong>H5 Validated for Coherence, Not Accuracy:</strong> Framewise MLP vs Recurrent GRU shows negligible frame accuracy shift (&Delta; &le; 1.26%, p &gt; 0.40), but an enormous <strong>+22 to +59 pt Edit Score increase</strong> (p &lt; 0.0005).</li>
+            <li><strong>H5 Supported for Coherence, Not Accuracy:</strong> Framewise MLP vs Recurrent GRU shows negligible frame accuracy shift (&Delta; &le; 1.26%, p &gt; 0.40), but an enormous <strong>+22 to +59 pt Edit Score increase</strong> (p &lt; 0.0005, dz &gt; 2.2).</li>
             <li><strong>Recurrence Imparts Temporal Hysteresis:</strong> Eliminates rapid single-frame label oscillation at gesture transition boundaries.</li>
             <li><strong>Gate Behavior Audit (4.2M Timesteps):</strong>
-              <br>• The gate is <em>heavily kinematics-biased</em> (&alpha;k &approx; 80%–95%).
+              <br>• The gate is heavily kinematics-biased (&alpha;k &approx; 80%–95%).
               <br>• Replacing time-varying &alpha;t with static fold mean &alpha; shifted accuracy by &lt;0.06%.
-              <br>• The gate functions primarily as an <strong>availability router and global balancer</strong>, rather than an active continuous noise filter.
+              <br>• The gate operates primarily as an <strong>availability router and global balancer</strong>, rather than an active continuous noise filter.
             </li>
           </ul>
           <div class="fig-container" style="height: 140px; margin-top: 8px;">
             <img src="figures/fig_iter32_real_gate_noise_response.png" style="max-height: 110px;" alt="Gate Noise Response">
-            <div class="fig-caption">Gate Weight Flatness Across Visual Noise (&Delta;&alpha; &lt; 0.9%)</div>
+            <div class="fig-caption">Gate Weight Flatness Across Continuous Visual Noise (&Delta;&alpha; &lt; 0.9%)</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 7: Robustness & Stress Testing -->
+    <!-- Slide 7: Robustness & Sensor Dropouts -->
     <section class="slide" id="slide-7">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 07 · Controlled Stress Testing & Fallback</div>
+        <div class="slide-eyebrow">Slide 07 · Controlled Stress Testing & Telemetry Failure</div>
         <h1 class="slide-title">Sensor Dropouts and Telemetry Asymmetry</h1>
-        <h2 class="slide-subtitle">Evaluating Clean, Corrupted, and Single-Modality Failure Modes</h2>
+        <h2 class="slide-subtitle">Evaluating Clean, Corrupted, and Single-Modality Telemetry Collapse</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 fig-container">
@@ -755,14 +922,14 @@
           <div class="fig-caption">Fig 4: Accuracy Under Clean vs Optical/Kinematics Degradation</div>
         </div>
         <div class="col-6 card">
-          <div class="card-title">Audited Robustness Findings</div>
+          <div class="card-title"><span class="icon-accent">🛡</span> Audited Stress Testing Results</div>
           <table class="data-table">
             <thead>
               <tr>
-                <th>Stress Condition</th>
+                <th>Stress Environment</th>
                 <th>Suturing</th>
                 <th>Knot Tying</th>
-                <th>Degradation</th>
+                <th>Degradation Drop</th>
               </tr>
             </thead>
             <tbody>
@@ -782,7 +949,7 @@
                 <td>Missing Video (a=[0,1])</td>
                 <td class="numeric">71.86%</td>
                 <td class="numeric">70.06%</td>
-                <td><strong>-0.42% (Fallback)</strong></td>
+                <td><strong>-0.42% (Exact Fallback)</strong></td>
               </tr>
               <tr>
                 <td>Kinematics Corrupted (&sigma;k=1)</td>
@@ -800,22 +967,22 @@
           </table>
           <ul class="clean-list" style="margin-top: 12px;">
             <li><strong>Kinematic Telemetry Asymmetry:</strong> When kinematics fails, accuracy collapses to ~30%. Kinematics carries the primary state signal.</li>
-            <li><strong>Flawless Optical Fallback:</strong> Availability masking guarantees mathematically seamless fallback with &lt;0.5% degradation.</li>
+            <li><strong>Flawless Optical Fallback:</strong> Availability masking mathematically routes 100% weight to kinematics, sustaining performance within -0.42%.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Slide 8: Class Imbalance & Rare Gestures -->
+    <!-- Slide 8: Class Imbalance & Rare Gesture Audit -->
     <section class="slide" id="slide-8">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 08 · Class Imbalance & Rare Gesture Audit</div>
+        <div class="slide-eyebrow">Slide 08 · Loss Formulation Benchmark & Rare Gestures</div>
         <h1 class="slide-title">Empirical Loss Formulation Benchmark</h1>
-        <h2 class="slide-subtitle">Per-Class Prediction Audit Discloses Severe Feature Starvation on Tail Gestures</h2>
+        <h2 class="slide-subtitle">Frame-Level Audit Discloses Severe Feature Starvation on Extreme Tail Gestures</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 card">
-          <div class="card-title">4-Arm Suturing Loss Benchmark (8 Folds)</div>
+          <div class="card-title"><span class="icon-accent">⚖</span> 4-Arm Suturing Loss Benchmark (8 Folds)</div>
           <table class="data-table">
             <thead>
               <tr>
@@ -852,7 +1019,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="card-title" style="margin-top: 14px;">Statistical &amp; Per-Class Reality</div>
+          <div class="card-title" style="margin-top: 14px;"><span class="icon-accent">🔍</span> Statistical &amp; Per-Class Reality</div>
           <ul class="clean-list">
             <li><strong>Holm Correction Reality:</strong> Differences (+2.32% Bal Acc, +3.58% Edit) are <strong>non-significant</strong> (padj &gt; 0.14).</li>
             <li><strong>G10 Complete Collapse:</strong> 0.00% Recall and 0.00% F1 across <em>all 4 models</em> (91 frames). Zero true positive frames predicted.</li>
@@ -862,7 +1029,7 @@
         </div>
         <div class="col-6 fig-container">
           <img src="figures/fig_iter36_rare_gesture_recall.png" alt="Rare Gesture Recall Audit">
-          <div class="fig-caption">Fig 5: Rare Gesture Recall Audit Across All 4 Formulations</div>
+          <div class="fig-caption">Fig 5: Rare Gesture Recall Across All 4 Formulations (G10: 0.00% Across All Models)</div>
         </div>
       </div>
     </section>
@@ -870,7 +1037,7 @@
     <!-- Slide 9: Limitations & Threats to Validity -->
     <section class="slide" id="slide-9">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 09 · Limitations & Threats to Validity</div>
+        <div class="slide-eyebrow">Slide 09 · Scientific Self-Assessment</div>
         <h1 class="slide-title">Defensive Scientific Self-Assessment</h1>
         <h2 class="slide-subtitle">Transparent Disclosure of Clinical &amp; Statistical Constraints</h2>
       </div>
@@ -882,7 +1049,7 @@
             <li><strong>Statistical Uncertainty:</strong> While Knot Tying achieves family-wise significance, Suturing (padj = 0.082) and Needle Passing represent descriptive trends under conservative Holm correction.</li>
             <li><strong>Needle Passing Fold 6:</strong> Omitted due to empty test split in official distribution.</li>
           </ul>
-          <div class="card-title" style="margin-top: 16px;"><span class="badge badge-danger">Physical</span> Hardware Genlock Approximation</div>
+          <div class="card-title" style="margin-top: 14px;"><span class="badge badge-danger">Physical</span> Hardware Genlock Approximation</div>
           <ul class="clean-list">
             <li><strong>Software Start/Stop Lag:</strong> Video (30 FPS) and kinematics (nominal 30 Hz) lack hardware genlock. Recording tail offsets average 12.37 frames (up to 470 frames).</li>
             <li><strong>Temporal Alignment:</strong> Discrete frame-center approximation within &plusmn;5 to 15 frames (~167 to 500 ms).</li>
@@ -894,7 +1061,7 @@
             <li><strong>Synthetic Noise:</strong> Robustness experiments tested controlled Gaussian noise and binary dropout. Real clinical corruptions (blood pooling, lens condensation, electrocautery smoke) possess complex spatio-temporal dynamics.</li>
             <li><strong>No Clinical Readiness Claim:</strong> This framework is an audited algorithmic proof-of-concept on benchmark benchtop tasks, not a clinical-grade system.</li>
           </ul>
-          <div class="card-title" style="margin-top: 16px;"><span class="badge badge-success">Algorithm</span> Tail-Gesture Starvation</div>
+          <div class="card-title" style="margin-top: 14px;"><span class="badge badge-success">Algorithm</span> Tail-Gesture Starvation</div>
           <ul class="clean-list">
             <li><strong>Representation Bottleneck:</strong> Loss reweighting cannot fix feature-starved tail gestures like G10 without dedicated representation learning.</li>
           </ul>
@@ -902,16 +1069,16 @@
       </div>
     </section>
 
-    <!-- Slide 10: Conclusion & Future Work -->
+    <!-- Slide 10: Conclusions & Future Work -->
     <section class="slide" id="slide-10">
       <div class="slide-header">
-        <div class="slide-eyebrow">Slide 10 · Conclusions & Future Directions</div>
+        <div class="slide-eyebrow">Slide 10 · Summary & Roadmap</div>
         <h1 class="slide-title">Summary of Core Contributions</h1>
         <h2 class="slide-subtitle">Defensive, Empirically Audited Multimodal Surgical Activity Recognition</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 card highlight">
-          <div class="card-title">Key Research Contributions</div>
+          <div class="card-title"><span class="icon-accent">✓</span> Key Research Contributions</div>
           <ul class="clean-list">
             <li><strong>Decoupled Pipeline:</strong> Frozen SurgMotion representations paired with compact GRUs provide computational efficiency without large GPU retraining.</li>
             <li><strong>Empirical Kinematics Supremacy:</strong> Robot kinematics is the primary driver of gesture state; video provides boundary regularization and context.</li>
@@ -921,20 +1088,20 @@
           </ul>
         </div>
         <div class="col-6 card">
-          <div class="card-title">Recommended Future Directions</div>
+          <div class="card-title"><span class="icon-accent">⮑</span> Recommended Future Directions</div>
           <ul class="clean-list">
             <li><strong>Hardware Genlock Synchronization:</strong> Validate on modern dVRK platforms using hardware master clocks (e.g., SurgSync).</li>
             <li><strong>Few-Shot Tail Representation Learning:</strong> Contrastive feature augmentation specifically designed for transient classes (G9, G10).</li>
             <li><strong>Uncertainty-Calibrated Dynamic Gating:</strong> Evidential deep learning or Monte Carlo dropout for real-time sensor uncertainty estimation.</li>
             <li><strong>Semi-Supervised Domain Adaptation:</strong> Adapting from benchtop phantoms to in-vivo porcine or human surgical videos.</li>
           </ul>
-          <div class="stat-row" style="margin-top: 20px;">
-            <div class="stat-box" style="border-left-color: var(--success);">
-              <div class="stat-value" style="color: var(--success);">Ready</div>
+          <div class="stat-row" style="margin-top: 16px;">
+            <div class="stat-box" style="border-left-color: var(--hr-green);">
+              <div class="stat-value" style="color: var(--hr-green-dark);">Ready</div>
               <div class="stat-label">Mentor Review Status</div>
             </div>
-            <div class="stat-box" style="border-left-color: var(--accent);">
-              <div class="stat-value" style="color: var(--accent);">8 Pages</div>
+            <div class="stat-box" style="border-left-color: var(--accent-blue);">
+              <div class="stat-value" style="color: var(--accent-blue);">8 Pages</div>
               <div class="stat-label">IEEE Transactions Draft</div>
             </div>
           </div>
@@ -955,10 +1122,10 @@
   <!-- Footer -->
   <footer>
     <div class="shortcut-hints">
-      Navigate: <kbd>◀</kbd> <kbd>▶</kbd> / <kbd>Space</kbd> &nbsp;|&nbsp; Notes: <kbd>N</kbd> &nbsp;|&nbsp; First/Last: <kbd>Home</kbd> / <kbd>End</kbd>
+      Keyboard Navigation: <kbd>◀</kbd> <kbd>▶</kbd> or <kbd>Space</kbd> &nbsp;|&nbsp; Speaker Notes: <kbd>N</kbd> &nbsp;|&nbsp; Home/End: <kbd>Home</kbd> / <kbd>End</kbd>
     </div>
-    <div style="font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono);">
-      Department of CSE · Mini-Project 2026
+    <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+      Department of Computer Science &amp; Engineering · October 2026
     </div>
   </footer>
 
