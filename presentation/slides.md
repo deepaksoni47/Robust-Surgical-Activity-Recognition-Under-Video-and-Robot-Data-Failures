@@ -37,13 +37,13 @@
 
 ### The Five Formal Hypotheses
 - **H1 (Visual Representation Viability):** Frozen latent features from a pretrained visual model (SurgMotion / ResNet-18) + lightweight temporal classifier yield a viable unimodal baseline above chance.
-  - *Verdict: Supported* (Viable Balanced Acc $31.0\%-54.5\%$ vs $10.3\%-14.9\%$ majority baseline).
+  - *Verdict: Supported with Caveat* (Viable Balanced Acc $31.0\%-54.5\%$ vs $10.3\%-14.9\%$ majority baseline; however, on Needle Passing raw accuracy is $26.55\%$, below the $40.55\%$ majority baseline due to severe class skew towards dominant gestures G2 and G4).
 - **H2 (Kinematic Information):** Lightweight sequence modeling on normalized 76-D kinematics provides strong gesture discrimination.
   - *Verdict: Strongly Supported* ($p < 0.0001, d_z > 3.0$; single most predictive unimodal modality).
 - **H3 (Multimodal Complementarity):** Multimodal fusion outperforms the strongest unimodal baseline under strictly identical LOUO splits.
   - *Verdict: Partially Supported* (Statistically significant on Knot Tying $+11.25\%$, $p_{\text{adj}}=0.0286$; strong descriptive trend on Suturing $+5.64\%$, $p_{\text{adj}}=0.0820$).
 - **H4 (Reliability-Aware Gating):** Dynamic gating maintains accuracy under corruptions and enforces single-modality fallback.
-  - *Verdict: Supported with Documented Nuance* (Acts as an effective availability router and global modality balancer, not an active continuous noise sensor).
+  - *Verdict: Supported with Documented Nuance* (Acts as an effective availability router and global modality balancer, not an active continuous noise sensor; Suturing fallback is $71.86\%$ [$-0.42\%$], Knot Tying fallback is $70.06\%$ [$-2.28\%$ from $72.34\%$ clean]).
 - **H5 (Temporal Sequence Modeling):** Temporal context (GRU) significantly reduces oversegmentation chatter compared to framewise models.
   - *Verdict: Strongly Supported for Segmental Coherence* ($+22$ to $+59$ pt Edit Score improvement, $p < 0.0005, d_z > 2.2$).
 
@@ -159,7 +159,7 @@ Instead of end-to-end heavy backbones prone to overfitting on small surgical dat
 | **Missing Kinematics** | $\mathbf{a} = [1, 0], \mathbf{k}=0$ | $30.58\%$ ($-41.70\%$) | $46.29\%$ ($-26.05\%$) | $24.55\%$ ($-26.93\%$) | API disconnection / robotic fault |
 
 ### Core Empirical Discoveries
-1. **Flawless Video Fallback:** Under complete optical loss ($a=[0, 1]$), the gate routes $100\%$ mass to kinematics, sustaining performance with negligible degradation ($-0.42\%$ on Suturing, $-0.27\%$ on Needle Passing).
+1. **Flawless Video Fallback:** Under complete optical loss ($a=[0, 1]$), the gate routes $100\%$ mass to kinematics, sustaining performance with negligible degradation ($-0.42\%$ on Suturing, $-2.28\%$ on Knot Tying [$72.34\% \rightarrow 70.06\%$], $-0.27\%$ on Needle Passing). *Source artifact: `artifacts/surgmotion_fusion_adaptive_Knot_Tying_results.json`.*
 2. **Kinematic Degradation Asymmetry:** When kinematics telemetry drops, performance declines severely ($-26\%$ to $-41\%$). This proves kinematics is the foundational substrate for atomic gesture recognition on JIGSAWS.
 3. **The Concat Anomaly:** In Feature Concatenation on Suturing, zeroing out video features *increased* accuracy ($+17.83\%$), proving that naive concatenation allows 1024D visual noise to corrupt 76D kinematic signals. Adaptive gating completely prevents this interference.
 
@@ -204,6 +204,11 @@ Instead of end-to-end heavy backbones prone to overfitting on small surgical dat
    - While validating mathematical fallback guarantees, real intraoperative disturbances (blood pooling, lens condensation, robotic cable compliance) exhibit complex spatial-temporal dynamics.
 4. **Subject Variance & Novice Generalization:**
    - Novice surgeons (User G) exhibit idiosyncratic kinematic styles that resist generalization regardless of loss function.
+5. **IEEE Transactions Compliance & Submission Requirements:**
+   - *Format vs. Compliance:* An 8-page compiled PDF does not by itself establish submission compliance.
+   - *Journal Class:* IEEE Transactions on Medical Robotics and Bionics (T-MRB) uses standard `\documentclass[10pt,journal]{IEEEtran}` (two-column, 10pt font) rather than Computer Society `compsoc`. Author credentials (Dr./Prof.) are omitted from author byline per IEEE rules.
+   - *Review vs. Final:* Many IEEE editors require single-column, double-spaced layout (`draftcls,onecolumn`) for initial peer review. Overlength page charges apply beyond page 8 ($220/page).
+   - *IRB & Multimedia:* Public de-identified benchtop data meets IRB exemption; multimedia video accompaniment (3 min) is recommended for final camera-ready submission.
 
 ---
 

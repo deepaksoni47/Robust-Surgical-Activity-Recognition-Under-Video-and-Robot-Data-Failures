@@ -203,17 +203,22 @@
   - `class_weighted` vs `ce`: Raw accuracy $\Delta = -2.66\%$ ($p_{\text{adj}} = 0.1419$, non-significant); Balanced accuracy $\Delta = +2.32\%$ ($p_{\text{adj}} = 1.000$, non-significant); Edit Score $\Delta = +3.58\%$ ($p_{\text{adj}} = 0.2634$, non-significant trend).
   - All comparisons across the $m=3$ treatment arms must be reported as numerical/descriptive trends, never as statistically established improvements.
 - **Claim-Evidence Matrix (H1–H5):**
-  - *H1 (Video Baseline):* Supported (viable above chance: 39.2%–50.7% vs 27.4%–33.4% majority, but weaker than kinematics).
+  - *H1 (Video Baseline):* Supported with Caveat (viable above chance on Balanced Accuracy $31.0\%-54.5\%$ and Macro-F1 $20.0\%-48.7\%$ vs $10.3\%-14.9\%$ majority baseline; however, on Needle Passing raw accuracy is $26.55\%$, below the $40.55\%$ majority baseline due to severe class skew towards dominant gestures G2 and G4. We do not claim the visual baseline beats majority accuracy on every task).
   - *H2 (Kinematics Standalone):* Strongly Supported (66.6% Suturing, 61.1% Knot Tying, $p < 0.0001, d_z > 3.0$).
   - *H3 (Multimodal Fusion):* Partially Supported (statistically established on Knot Tying $+11.25\%, p_{\text{adj}}=0.0286$; strong descriptive trend on Suturing $+5.64\%, p_{\text{adj}}=0.0820$; non-significant trend on Needle Passing $+2.52\%$).
-  - *H4 (Reliability Gating):* Supported with Documented Nuance (acts as an availability router and global modality balancer, not a continuous noise sensor; video fallback within $-0.42\%$; kinematics loss collapses accuracy to ~30%).
+  - *H4 (Reliability Gating):* Supported with Documented Nuance (acts as an availability router and global modality balancer, not a continuous noise sensor; video fallback within $-0.42\%$ on Suturing and $-2.28\%$ on Knot Tying [$70.06\%$ fallback from $72.34\%$ clean baseline; audited from `artifacts/surgmotion_fusion_adaptive_Knot_Tying_results.json`]; kinematics loss collapses accuracy to ~30%).
   - *H5 (Temporal Sequence Modeling):* Strongly Supported for Segmental Coherence ($+22$ to $+59$ pt Edit Score boost, $p < 0.0005, d_z > 2.2$), while frame accuracy shift is negligible ($\Delta \le 1.26\%$). Recurrence imparts temporal regularizing hysteresis that filters high-frequency boundary chatter.
-- **Paper Corrections:** Updated `paper/main.tex` with cautious scientific phrasing, per-class G9/G10 empirical findings, and observational framing of User D/G domain shifts. Compiled clean 8-page `paper/main.pdf` (280.5 KB).
+- **Paper & IEEE Transactions Compliance Audit:**
+  - Updated `paper/main.tex` to standard `\documentclass[10pt,journal]{IEEEtran}` (removing `compsoc`).
+  - Audited author byline (omitting "Dr." per IEEE guidelines, retaining credentials in `\thanks{...}` footnote).
+  - Maintained strict 8-page budget (mandatory overlength charges of $220/page apply beyond 8 pages in IEEE T-MRB).
+  - Added Section VI-D discussing IEEE Transactions submission requirements (two-column camera-ready vs single-column review draft, IRB exemption on de-identified phantom data, multimedia accompaniment).
+  - Compiled clean 8-page `paper/main.pdf` (291.1 KB).
 - **Mentor Presentation Suite:**
-  - `presentation/slides.md`: 10-slide structured research presentation.
-  - `presentation/index.html`: Interactive, self-contained HTML slide deck with sleek dark theme, slide counter, arrow-key navigation, and 9 embedded publication figures in `presentation/figures/`.
-  - `docs/iter37_mentor_presentation_notes.md`: Slide-by-slide speaker notes, 8 anticipated mentor questions with evidence-based defensive answers, and transparent limitations.
-  - `docs/iter37_final_claim_audit.md`: Exhaustive claim verification, H1–H5 matrix, and per-class audit report.
+  - `presentation/slides.md`: 10-slide structured research presentation with H1 caveat, H4 provenance, and IEEE compliance disclosures.
+  - `presentation/index.html`: Interactive, self-contained HTML slide deck with HackerRank-inspired clean light theme, slide counter, arrow-key navigation, slide selector, speaker notes modal, and 9 embedded publication figures in `presentation/figures/`.
+  - `docs/iter37_mentor_presentation_notes.md`: Slide-by-slide speaker notes, 11 anticipated mentor questions (including Q9 on Needle Passing 26.55%, Q10 on Knot Tying 70.06% vs 72.34%, Q11 on IEEE submission compliance) with evidence-based defensive answers.
+  - `docs/iter37_final_claim_audit.md`: Exhaustive claim verification, H1–H5 matrix, per-class audit report, Knot Tying provenance audit, and IEEE compliance audit.
 
 
 

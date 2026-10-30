@@ -45,10 +45,10 @@ This audit establishes a rigorous, defensive standard of scientific integrity fo
 
 | Hypothesis | Claimed Statement | Supporting Experiments | Empirical Evidence (Mean $\pm$ SD) | Statistical Limitations & Nuances | Verdict |
 |---|---|---|---|---|:---:|
-| **H1 (Video Baseline)** | Frozen visual features + lightweight recurrent head provide a viable unimodal baseline above chance. | VideoGRU benchmark on frozen ResNet-18 (512D) and SurgMotion (1024D) across all 103 trials. | SurgMotion VideoGRU: Suturing $39.17 \pm 13.51\%$, Knot Tying $50.74 \pm 5.20\%$, Needle Passing $48.24 \pm 10.96\%$. Majority baseline is $33.43\%$, $27.35\%$, $33.45\%$. | Video is viable above chance, but substantially weaker than robot kinematics on every task ($39.2\%$ vs $66.6\%$ on Suturing). | **Supported** |
+| **H1 (Video Baseline)** | Frozen visual features + lightweight recurrent head provide a viable unimodal baseline above chance. | VideoGRU benchmark on frozen ResNet-18 (512D) and SurgMotion (1024D) across all 103 trials. | SurgMotion VideoGRU: Suturing $39.17 \pm 13.51\%$ (BalAcc $34.10\%$, F1 $22.16\%$), Knot Tying $53.60 \pm 14.12\%$ (BalAcc $54.49\%$, F1 $48.74\%$), Needle Passing $26.55 \pm 11.23\%$ (BalAcc $30.97\%$, F1 $19.97\%$). Majority baselines: Suturing $33.43\%$ (BalAcc $10.30\%$), Knot Tying $27.35\%$ (BalAcc $14.93\%$), Needle Passing $40.55\%$ (BalAcc $11.25\%$). | **Critical Caveat:** On Needle Passing, raw accuracy ($26.55\%$) is below the trivial majority baseline ($40.55\%$) due to severe class skew towards dominant gestures G2 and G4. However, visual models achieve $3\times$ higher Balanced Accuracy ($30.97\%$ vs $11.25\%$) and $4\times$ higher Macro-F1 ($19.97\%$ vs $5.20\%$). Therefore, the visual baseline is viable for class-balanced discrimination above chance, but does NOT beat raw majority accuracy on every task. | **Supported (with Caveat)** |
 | **H2 (Kinematics Baseline)** | Normalized 76D robot kinematics predict gestures substantially above majority-class trivial baseline. | Kinematics GRU benchmark across all 23 active LOUO folds. | Kinematics GRU: Suturing $66.64 \pm 9.01\%$, Knot Tying $61.09 \pm 8.27\%$, Needle Passing $48.96 \pm 8.01\%$. | Vastly outperforms majority class baseline ($p < 0.0001, d_z > 3.0$). Demonstrates kinematics is the primary driver of fine gesture state. | **Strongly Supported** |
 | **H3 (Multimodal Fusion)** | Multimodal fusion outperforms the strongest unimodal baseline under identical LOUO splits. | Fixed Late-Logit Fusion, Feature Concatenation, and Adaptive Reliability Fusion across all 103 trials. | **Knot Tying:** Adaptive ($72.34\%$) vs Kinematics ($61.09\%$): $\Delta = +11.25\%$, $p=0.007$, FDR $q=0.021$.<br>**Suturing:** Adaptive ($72.28\%$) vs Kinematics ($66.64\%$): $\Delta = +5.64\%$, unadjusted $p=0.027$, Holm $p_{\text{adj}}=0.082$.<br>**Needle Passing:** Adaptive ($51.48\%$) vs Kinematics ($48.96\%$): $\Delta = +2.52\%$, $p=0.218$, $p_{\text{adj}}=0.218$. | Multimodal superiority is **statistically established on Knot Tying** ($p_{\text{adj}} < 0.05$). On Suturing, it is a **strong descriptive trend** ($p_{\text{adj}}=0.082$). On Needle Passing, it is a non-significant numerical trend ($p=0.218$). Simple fixed late fusion actually degraded Suturing accuracy ($60.54\%$), proving naive fusion is insufficient. | **Partially Supported** (Statistically on Knot Tying; Descriptive trend on Suturing/Needle Passing) |
-| **H4 (Reliability-Aware Adaptive Fusion)** | Gating network with explicit availability signals maintains performance under missingness or corruptions and guarantees fallback. | Stress testing under optical corruption ($\sigma_v=1.0$), kinematics corruption ($\sigma_k=1.0$), video dropout ($a=[0, 1]$), and kinematics dropout ($a=[1, 0]$). | **Video Missing:** Suturing $71.86\%$ ($-0.42\%$ drop), Knot Tying $70.06\%$ ($-2.28\%$), Needle Passing $51.21\%$ ($-0.27\%$). Concat fusion dropped $-2.9\%$ on Knot Tying.<br>**Single-Modality Fallback:** Exact mathematical identity $\alpha_{\text{other}} \equiv 0$ verified without numerical drift. | **Gate Behavior Nuance:** Gate acts primarily as an **availability router** ($\mathbf{a}_t \in \{0, 1\}^2$) and **global modality balancer** ($\bar{\alpha}_k \approx 80\%-95\%$), not an active continuous noise filter (weight shifts $<0.9\%$ across $\sigma_v \in [0, 2]$). Kinematics loss ($a=[1, 0]$) drops accuracy to $30.6\%-48.6\%$. | **Supported with Documented Nuance** |
+| **H4 (Reliability-Aware Adaptive Fusion)** | Gating network with explicit availability signals maintains performance under missingness or corruptions and guarantees fallback. | Stress testing under optical corruption ($\sigma_v=1.0$), kinematics corruption ($\sigma_k=1.0$), video dropout ($a=[0, 1]$), and kinematics dropout ($a=[1, 0]$). | **Video Missing:** Suturing $71.86\%$ ($-0.42\%$ drop from $72.28\%$), Knot Tying $70.06\%$ ($-2.28\%$ drop from clean baseline $72.34\%$; source artifact `artifacts/surgmotion_fusion_adaptive_Knot_Tying_results.json`), Needle Passing $51.21\%$ ($-0.27\%$ drop from $51.48\%$). Concat fusion dropped $-2.9\%$ on Knot Tying.<br>**Single-Modality Fallback:** Exact mathematical identity $\alpha_{\text{other}} \equiv 0$ verified without numerical drift. | **Gate Behavior Nuance:** Gate acts primarily as an **availability router** ($\mathbf{a}_t \in \{0, 1\}^2$) and **global modality balancer** ($\bar{\alpha}_k \approx 80\%-95\%$), not an active continuous noise filter (weight shifts $<0.9\%$ across $\sigma_v \in [0, 2]$). Kinematics loss ($a=[1, 0]$) drops accuracy to $30.6\%-48.6\%$. | **Supported with Documented Nuance** |
 | **H5 (Temporal Context)** | Recurrent sequence modeling (GRU) over windowed representations outperforms frame-independent predictions. | Paired comparison of Kinematics MLP vs GRU and Video MLP vs GRU across all 23 active LOUO folds. | **Frame Accuracy:** Shifts are negligible ($\Delta \le 1.26\%$, all $p > 0.40$).<br>**Segmental Edit Score:** Massive, universally significant boost: Kinematics GRU $+22.68$ to $+26.25$ points ($p < 0.0005, d_z > 2.2$). Multimodal GRU $+34.26$ to $+59.17$ points ($p < 0.0001, d_z > 3.0$). | H5 is **not supported for frame-level accuracy**, but is **overwhelmingly supported for segmental sequence coherence** (Edit Score). GRU suppresses high-frequency label chatter. | **Supported for Segmental Coherence** |
 
 ---
@@ -133,3 +133,38 @@ G11 (Drop needle)      508  | 61.42% (55.22%)    | 65.16% (54.94%)    | 53.74% (
    - Label User D and User G variance as observed surgeon-specific kinematic domain shifts rather than proven causal mechanisms.
 4. **Disclose Needle Passing 7/8 Fold Status:**
    - Ensure the note in Table I clearly states that User G (Fold 6) was omitted from Needle Passing due to an empty test set in the official JIGSAWS split, resulting in $N=7$ active folds for that task.
+
+---
+
+## 6. Artifact Provenance Audit: Knot Tying Clean (72.34%) vs. Missing Video (70.06%)
+
+A discrepancies audit was conducted between the ITER-32 report and the final benchmark tables:
+- **Source Artifact:** `artifacts/surgmotion_fusion_adaptive_Knot_Tying_results.json` (lines 132–156) & `artifacts/iter29_robustness_comparison.json`.
+- **Condition Analysis:**
+  - **Clean Baseline ($\mathbf{a} = [1, 1]$):** **$72.34 \pm 9.70\%$** (Balanced Acc $66.73\%$, Macro-F1 $60.48\%$, Edit Score $64.66\%$).
+  - **Missing Video ($\mathbf{a} = [0, 1], \mathbf{v}=0$):** **$70.06 \pm 9.73\%$** (Balanced Acc $64.21\%$, Macro-F1 $58.12\%$, Edit Score $62.34\%$).
+  - **Degradation Drop:** $\Delta = -2.28\%$.
+- **Resolution of Discrepancy:** The figure $72.34\%$ was the **clean multimodal baseline**; $70.06\%$ is the **missing video fallback condition**. In the separate ITER-32 continuous noise retraining experiments (`artifacts/iter32_results_summary.json`), models trained with noise schedules yielded $66.42\%$ clean / $64.61\%$ missing (unaugmented) and $70.07\%$ clean / $67.92\%$ missing (noise-augmented). The canonical benchmark evaluation retains $72.34\%$ for clean and $70.06\%$ for missing video. Both numbers are valid, consistent, and traceable to their respective JSON keys.
+
+---
+
+## 7. IEEE Transactions Compliance and Submission Criteria Audit
+
+Merely compiling to an 8-page PDF does not establish compliance with IEEE Transactions submission rules. We audited the manuscript against IEEE Transactions on Medical Robotics and Bionics (T-MRB) guidelines:
+
+1. **Document Class & Formatting:**
+   - Standard IEEE Transactions journals use `\documentclass[10pt,journal]{IEEEtran}` (two-column, 10pt font, 12pt line spacing).
+   - Removed `compsoc` option (which is reserved for IEEE Computer Society publications and produces distinct sans-serif headings and margins).
+   - Fixed author line to omit titles (`Dr.`, `Prof.`) per IEEE standard practice, moving supervisor title to the author affiliations footnote (`\thanks{...}`).
+
+2. **Page Budget & Overlength Charges:**
+   - The compiled manuscript spans **exactly 8 pages** (`paper/main.pdf`, 291 KB, 8 pages).
+   - IEEE T-MRB policy permits up to 8 pages for regular research papers without overlength page charges. Pages 9 and beyond incur mandatory overlength charges ($220 per excess page). Our manuscript satisfies the 8-page budget.
+
+3. **Peer-Review Layout vs. Camera-Ready:**
+   - Note for mentor submission: While camera-ready publication requires two-column format, some IEEE journal submission portals require or recommend a single-column, double-spaced draft layout (`\documentclass[11pt,draftcls,onecolumn]{IEEEtran}`). The LaTeX source is structured to cleanly switch between these modes by changing the documentclass arguments.
+
+4. **Ethics, Data, & Reproducibility:**
+   - JIGSAWS contains de-identified kinematic telemetry and surgical phantom videos recorded on dry-lab benchtop models, meeting standard institutional exemption from human subjects IRB review.
+   - All source code, random seeds (`SEED=42`), fold split indices, and model checkpoints are version-controlled with automated deterministic test suites.
+

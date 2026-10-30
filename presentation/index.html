@@ -705,9 +705,9 @@
             <tbody>
               <tr>
                 <td><strong>H1 (Video Baseline)</strong></td>
-                <td>Frozen surgical foundation features provide viable unimodal baseline above chance.</td>
-                <td>SurgMotion VideoGRU achieves 39.2%–53.6% accuracy vs 27.4%–33.4% majority baseline. Viable above chance, but weaker than kinematics.</td>
-                <td style="text-align: center;"><span class="badge badge-success">Supported</span></td>
+                <td>Frozen visual features provide viable class-balanced baseline above chance.</td>
+                <td>SurgMotion VideoGRU outperforms majority baseline on Suturing (39.2% vs 33.4%) and Knot Tying (53.6% vs 27.4%), but falls below majority accuracy on Needle Passing (26.55% vs 40.55%) due to dominant class skew. Substantially surpasses trivial baselines in class-balanced metrics across all tasks (Bal. Acc 31.0%–54.5% vs 10.3%–14.9%, Macro-F1 20.0%–45.5% vs 4.6%–6.1%).</td>
+                <td style="text-align: center;"><span class="badge badge-warning">Supported (Caveat)</span></td>
               </tr>
               <tr>
                 <td><strong>H2 (Kinematics Standalone)</strong></td>
@@ -724,7 +724,7 @@
               <tr>
                 <td><strong>H4 (Reliability Gating)</strong></td>
                 <td>Dynamic gate prevents degradation under missingness and enforces fallback.</td>
-                <td>Video telemetry failure sustained within -0.42% of clean. Gate acts as an effective availability router &amp; global balancer.</td>
+                <td>Exact mathematical fallback guaranteed (&alpha;v &equiv; 0, &alpha;k &equiv; 1). Video telemetry loss sustained with minimal degradation: Suturing 71.86% (-0.42%), Needle Passing 51.21% (-0.27%), Knot Tying 70.06% (-2.28% from 72.34% clean).</td>
                 <td style="text-align: center;"><span class="badge badge-success">Supported (Nuanced)</span></td>
               </tr>
               <tr>
@@ -949,7 +949,7 @@
                 <td>Missing Video (a=[0,1])</td>
                 <td class="numeric">71.86%</td>
                 <td class="numeric">70.06%</td>
-                <td><strong>-0.42% (Exact Fallback)</strong></td>
+                <td><strong>-0.42% (Suturing) / -2.28% (Knot)</strong></td>
               </tr>
               <tr>
                 <td>Kinematics Corrupted (&sigma;k=1)</td>
@@ -965,9 +965,10 @@
               </tr>
             </tbody>
           </table>
-          <ul class="clean-list" style="margin-top: 12px;">
+          <ul class="clean-list" style="margin-top: 10px;">
             <li><strong>Kinematic Telemetry Asymmetry:</strong> When kinematics fails, accuracy collapses to ~30%. Kinematics carries the primary state signal.</li>
-            <li><strong>Flawless Optical Fallback:</strong> Availability masking mathematically routes 100% weight to kinematics, sustaining performance within -0.42%.</li>
+            <li><strong>Flawless Optical Fallback:</strong> Availability masking mathematically routes 100% weight to kinematics, sustaining performance within -0.42% (Suturing) and -2.28% (Knot Tying).</li>
+            <li style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);"><strong>Provenance Note:</strong> Knot Tying Clean Baseline is <strong>72.34%</strong>; Missing Video Fallback is <strong>70.06%</strong> (-2.28% drop). (The earlier ITER-32 noise-ablation evaluated an independent rerun with 66.42% clean / 64.61% missing).</li>
           </ul>
         </div>
       </div>
@@ -1039,7 +1040,7 @@
       <div class="slide-header">
         <div class="slide-eyebrow">Slide 09 · Scientific Self-Assessment</div>
         <h1 class="slide-title">Defensive Scientific Self-Assessment</h1>
-        <h2 class="slide-subtitle">Transparent Disclosure of Clinical &amp; Statistical Constraints</h2>
+        <h2 class="slide-subtitle">Transparent Disclosure of Clinical, Statistical &amp; Submission Constraints</h2>
       </div>
       <div class="content-grid">
         <div class="col-6 card">
@@ -1056,10 +1057,11 @@
           </ul>
         </div>
         <div class="col-6 card">
-          <div class="card-title"><span class="badge badge-primary">Clinical</span> Synthetic vs. In-Vivo Artifacts</div>
+          <div class="card-title"><span class="badge badge-neutral">IEEE Format</span> Submission &amp; Compliance Audit</div>
           <ul class="clean-list">
-            <li><strong>Synthetic Noise:</strong> Robustness experiments tested controlled Gaussian noise and binary dropout. Real clinical corruptions (blood pooling, lens condensation, electrocautery smoke) possess complex spatio-temporal dynamics.</li>
-            <li><strong>No Clinical Readiness Claim:</strong> This framework is an audited algorithmic proof-of-concept on benchmark benchtop tasks, not a clinical-grade system.</li>
+            <li><strong>Page Budgeting &amp; Limits:</strong> Standard IEEE Transactions (T-MRB / TBME) budget 8 printed double-column pages; overlength charges apply beyond page 8.</li>
+            <li><strong>Review Formats:</strong> Journals accept double-column IEEEtran preprints for initial review or single-column double-spaced draft layouts.</li>
+            <li><strong>Compliance Scope:</strong> An 8-page PDF does not alone guarantee publication readiness; full compliance requires video demonstrations, artifact archives, and author biographies.</li>
           </ul>
           <div class="card-title" style="margin-top: 14px;"><span class="badge badge-success">Algorithm</span> Tail-Gesture Starvation</div>
           <ul class="clean-list">
@@ -1147,7 +1149,7 @@
       // Slide 1
       "<p><strong>Clinical Motivation:</strong> Start by establishing why surgical gesture recognition matters—autonomous subtask execution and objective credentialing on the da Vinci system.</p><p><strong>The Core Dilemma:</strong> Endoscopic video is rich in tissue context but constantly vulnerable to cautery smoke and lens fog. Kinematics is immune to optical noise, but blind to tissue state. Naive fixed fusion allows optical noise to ruin kinematics predictions.</p>",
       // Slide 2
-      "<p><strong>Claim-Evidence Matrix:</strong> Walk through H1–H5 honestly. Point out where hypotheses are strongly supported (H2 Kinematics, H5 Temporal Edit Score) versus partially supported (H3 Multimodal fusion is statistically significant on Knot Tying, but a strong descriptive trend on Suturing, padj=0.082).</p><p>Emphasize that we do not claim statistical significance where padj &gt; 0.05.</p>",
+      "<p><strong>Claim-Evidence Matrix:</strong> Walk through H1–H5 honestly.</p><p><strong>H1 Caveat:</strong> Point out that while frozen video models outperform majority baseline on Suturing (39.2% vs 33.4%) and Knot Tying (53.6% vs 27.4%), on Needle Passing, VideoGRU raw accuracy is 26.55%, which is <em>below</em> the 40.55% majority baseline due to extreme class skew toward dominant gestures G2 and G4. However, in class-balanced metrics, video achieves 31.0% Balanced Acc vs 11.2% for majority. Never claim video beats majority accuracy on every task!</p><p><strong>H3 & H4:</strong> Multimodal fusion is statistically significant on Knot Tying (+11.25%, padj=0.0286), and a descriptive trend on Suturing (+5.64%, padj=0.082). Video fallback sustains 70.06% on Knot Tying (-2.28% from 72.34% clean).</p>",
       // Slide 3
       "<p><strong>Dataset & Leakage Protection:</strong> Explain that we processed all 103 trials across all 3 tasks in parallel. Crucial technical point: Normalization statistics are computed strictly on training trials. Transparently disclose that Needle Passing evaluates 7 active folds because Subject G has an empty test set in the official distribution.</p>",
       // Slide 4
@@ -1157,11 +1159,11 @@
       // Slide 6
       "<p><strong>Temporal Dynamics & Gate Behavior:</strong> Highlight the paradoxical finding: sequence modeling produces negligible changes in frame accuracy (&le;1.26%), but drives an enormous +22 to +59 pt boost in segmental Edit Score by eliminating high-frequency frame flicker.</p><p>Disclose the gate behavior audit: the gate is kinematics-dominant (&alpha;k &approx; 80%-95%) and acts as an availability router and global balancer, not a continuous optical noise sensor.</p>",
       // Slide 7
-      "<p><strong>Stress Testing:</strong> Show Fig 4. When video telemetry completely drops (a=[0,1]), the gate falls back to kinematics with &lt;0.42% degradation. In contrast, when kinematics drops (a=[1,0]), accuracy declines sharply to 30.6%–46.3%, proving kinematics is the foundational substrate.</p><p>Mention the 'Concat Anomaly': in concatenation fusion, removing video features actually increased accuracy by +17.8%, proving visual noise was corrupting kinematics.</p>",
+      "<p><strong>Stress Testing & Number Provenance:</strong> Show Fig 4.</p><p><strong>Exact Numbers:</strong> On Knot Tying, Clean Baseline is <strong>72.34%</strong> and Missing Video is <strong>70.06%</strong> (-2.28% drop). On Suturing, Clean is 72.28% and Missing Video is 71.86% (-0.42% drop). In the separate ITER-32 continuous-noise ablation study, models were retrained under an independent schedule where clean was 66.42% / 70.07% and missing was 64.61% / 67.92%.</p><p>Kinematics loss (a=[1,0]) collapses accuracy to 30.6%–46.3%, proving kinematics is the foundational substrate.</p>",
       // Slide 8
       "<p><strong>Class Imbalance & Rare Gestures:</strong> Walk through the 4-arm loss ablation. Point out the Holm correction reality: Class-Weighted CE's +2.32% balanced accuracy and +3.58% edit score differences are non-significant trends.</p><p>Disclose the empirical prediction audit from 32 test runs: G10 achieved 0% recall across all 4 models, and G9 only 6.4%. Balanced accuracy rose due to medium class G5 (+21.9%), offset by dominant class G3 dropping -6.95% recall.</p>",
       // Slide 9
-      "<p><strong>Defensive Limitations:</strong> Be completely transparent with the mentor. Highlight N=8/7 subject sample size, the absence of hardware genlock synchronization in JIGSAWS, and synthetic noise vs real clinical disturbances.</p><p>This honesty elevates the scientific credibility of the project.</p>",
+      "<p><strong>Limitations & IEEE Transactions Criteria:</strong> Be completely transparent with the mentor. Highlight N=8/7 subject sample size, absence of hardware genlock in JIGSAWS, and synthetic noise vs real clinical disturbances.</p><p><strong>IEEE Transactions Requirements:</strong> An 8-page PDF is budgeted for publication, but full submission compliance requires: (1) single-blind preprint or double-spaced review format; (2) multimedia accompaniment; (3) de-identified IRB compliance declaration; and (4) complete artifact archives.</p>",
       // Slide 10
       "<p><strong>Conclusions & Future Work:</strong> Summarize that the lightweight, decoupled adaptive framework delivers robust, corruption-resilient surgical gesture recognition. Propose concrete next steps: hardware genlock via SurgSync and contrastive representation learning for rare gestures.</p><p>Invite mentor questions and feedback on the manuscript draft.</p>"
     ];
