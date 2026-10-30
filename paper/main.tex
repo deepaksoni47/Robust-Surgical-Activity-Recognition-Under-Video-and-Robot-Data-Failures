@@ -315,6 +315,14 @@ Table~\ref{tab:robustness_results} and Fig.~\ref{fig:robustness_bars} evaluate m
 \label{fig:real_gate_noise}
 \end{figure*}
 
+\subsection{Controlled Ablation and Temporal Dynamics Analysis}
+To dissect the architectural drivers of multimodal performance, we evaluated controlled ablations across all 23 active LOUO folds:
+\begin{enumerate}
+    \item \textbf{Sequence Quality vs. Frame Classification:} Comparing framewise kinematic MLPs with recurrent sequence GRUs reveals that temporal sequence modeling produces negligible shifts in frame accuracy ($\Delta \le 1.26\%$, all $p > 0.40$), but drives an overwhelming, universally significant improvement in segmental Edit Score ($+22.68$ to $+26.25$ points for unimodal GRU, and $+44.69$ to $+59.17$ points for Multimodal Adaptive GRU; all $p < 0.0005, d_z > 2.2$). Temporal recurrence suppresses high-frequency frame chatter, establishing contiguous, clinically coherent gesture segments.
+    \item \textbf{Static Gate vs. Temporal Variation:} Replacing the time-varying gate weight $\alpha_t$ with the static fold/trial mean $\bar{\alpha}$ shifted clean accuracy by less than $0.06\%$ across all tasks. Under clean conditions, the gate operates primarily as an availability router and global modality balancer rather than a high-frequency temporal filter.
+    \item \textbf{Rare-Gesture Collapse:} Across all tasks, auxiliary and corrective gestures comprising $<3\%$ of the dataset (e.g., G9 and G10 in Suturing; G8 and G9 in Needle Passing) suffer severe recall collapse ($F1 < 6.0\%$), explaining why Macro-F1 lags overall frame accuracy and highlighting class-balanced loss functions as a vital future direction.
+\end{enumerate}
+
 \section{Discussion \& Limitations}
 Our empirical findings demonstrate that lightweight multimodal fusion and adaptive reliability gating provide substantial advantages for robotic surgical gesture recognition. By decoupling visual perception into frozen representations and training compact temporal sequence models, the complete cross-validation pipeline operates efficiently while preventing overfitting.
 

@@ -1,0 +1,1777 @@
+{
+  "status": "COMPLETED",
+  "workstream_a_fusion_ablations": {
+    "Suturing": {
+      "models": {
+        "unimodal_video": {
+          "accuracy": 39.17,
+          "macro_f1": 22.16,
+          "edit_score": 39.99
+        },
+        "unimodal_kinematics": {
+          "accuracy": 66.64,
+          "macro_f1": 45.09,
+          "edit_score": 34.69
+        },
+        "fixed_late_fusion": {
+          "accuracy": 60.54,
+          "macro_f1": 37.01,
+          "edit_score": 60.41
+        },
+        "feature_concat_fusion": {
+          "accuracy": 54.0,
+          "macro_f1": 32.29,
+          "edit_score": 49.19
+        },
+        "adaptive_reliability_fusion": {
+          "accuracy": 72.28,
+          "macro_f1": 44.64,
+          "edit_score": 68.95
+        }
+      },
+      "adaptive_vs_kinematics": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.28,
+          "treatment_std": 10.24,
+          "baseline_mean": 66.64,
+          "baseline_std": 9.63,
+          "delta_mean": 5.64,
+          "delta_std": 5.74,
+          "ci_95": [
+            0.84,
+            10.44
+          ],
+          "cohens_dz": 0.982,
+          "t_stat": 2.779,
+          "p_value_t": 0.027340591980122148,
+          "p_value_wilcoxon": 0.0390625
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 44.64,
+          "treatment_std": 8.83,
+          "baseline_mean": 45.09,
+          "baseline_std": 8.81,
+          "delta_mean": -0.45,
+          "delta_std": 5.07,
+          "ci_95": [
+            -4.69,
+            3.78
+          ],
+          "cohens_dz": -0.09,
+          "t_stat": -0.254,
+          "p_value_t": 0.8070891633020066,
+          "p_value_wilcoxon": 0.84375
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 68.95,
+          "treatment_std": 10.03,
+          "baseline_mean": 34.69,
+          "baseline_std": 10.08,
+          "delta_mean": 34.26,
+          "delta_std": 11.13,
+          "ci_95": [
+            24.96,
+            43.57
+          ],
+          "cohens_dz": 3.078,
+          "t_stat": 8.707,
+          "p_value_t": 5.289435582181611e-05,
+          "p_value_wilcoxon": 0.0078125
+        }
+      },
+      "adaptive_vs_late": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.28,
+          "treatment_std": 10.24,
+          "baseline_mean": 60.54,
+          "baseline_std": 8.71,
+          "delta_mean": 11.74,
+          "delta_std": 11.33,
+          "ci_95": [
+            2.28,
+            21.21
+          ],
+          "cohens_dz": 1.037,
+          "t_stat": 2.933,
+          "p_value_t": 0.02193291500267663,
+          "p_value_wilcoxon": 0.0234375
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 44.64,
+          "treatment_std": 8.83,
+          "baseline_mean": 37.01,
+          "baseline_std": 10.84,
+          "delta_mean": 7.62,
+          "delta_std": 8.78,
+          "ci_95": [
+            0.28,
+            14.96
+          ],
+          "cohens_dz": 0.868,
+          "t_stat": 2.456,
+          "p_value_t": 0.043718579304389965,
+          "p_value_wilcoxon": 0.0546875
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 68.95,
+          "treatment_std": 10.03,
+          "baseline_mean": 60.41,
+          "baseline_std": 16.11,
+          "delta_mean": 8.54,
+          "delta_std": 14.2,
+          "ci_95": [
+            -3.33,
+            20.41
+          ],
+          "cohens_dz": 0.601,
+          "t_stat": 1.7,
+          "p_value_t": 0.13283328576097547,
+          "p_value_wilcoxon": 0.1953125
+        }
+      },
+      "adaptive_vs_concat": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.28,
+          "treatment_std": 10.24,
+          "baseline_mean": 54.0,
+          "baseline_std": 16.52,
+          "delta_mean": 18.29,
+          "delta_std": 14.9,
+          "ci_95": [
+            5.83,
+            30.74
+          ],
+          "cohens_dz": 1.228,
+          "t_stat": 3.472,
+          "p_value_t": 0.01037635961173886,
+          "p_value_wilcoxon": 0.015625
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 44.64,
+          "treatment_std": 8.83,
+          "baseline_mean": 32.29,
+          "baseline_std": 11.17,
+          "delta_mean": 12.35,
+          "delta_std": 14.54,
+          "ci_95": [
+            0.19,
+            24.5
+          ],
+          "cohens_dz": 0.849,
+          "t_stat": 2.402,
+          "p_value_t": 0.04731045005734409,
+          "p_value_wilcoxon": 0.0390625
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 68.95,
+          "treatment_std": 10.03,
+          "baseline_mean": 49.19,
+          "baseline_std": 15.1,
+          "delta_mean": 19.76,
+          "delta_std": 13.11,
+          "ci_95": [
+            8.8,
+            30.72
+          ],
+          "cohens_dz": 1.507,
+          "t_stat": 4.264,
+          "p_value_t": 0.003730079301311448,
+          "p_value_wilcoxon": 0.0078125
+        }
+      }
+    },
+    "Knot_Tying": {
+      "models": {
+        "unimodal_video": {
+          "accuracy": 53.6,
+          "macro_f1": 45.51,
+          "edit_score": 51.34
+        },
+        "unimodal_kinematics": {
+          "accuracy": 61.09,
+          "macro_f1": 51.75,
+          "edit_score": 35.48
+        },
+        "fixed_late_fusion": {
+          "accuracy": 58.95,
+          "macro_f1": 47.27,
+          "edit_score": 55.75
+        },
+        "feature_concat_fusion": {
+          "accuracy": 64.09,
+          "macro_f1": 53.97,
+          "edit_score": 62.45
+        },
+        "adaptive_reliability_fusion": {
+          "accuracy": 72.34,
+          "macro_f1": 60.48,
+          "edit_score": 64.66
+        }
+      },
+      "adaptive_vs_kinematics": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.34,
+          "treatment_std": 10.37,
+          "baseline_mean": 61.09,
+          "baseline_std": 12.61,
+          "delta_mean": 11.25,
+          "delta_std": 9.0,
+          "ci_95": [
+            3.72,
+            18.78
+          ],
+          "cohens_dz": 1.25,
+          "t_stat": 3.535,
+          "p_value_t": 0.009538749850980294,
+          "p_value_wilcoxon": 0.015625
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 60.48,
+          "treatment_std": 10.9,
+          "baseline_mean": 51.75,
+          "baseline_std": 16.18,
+          "delta_mean": 8.73,
+          "delta_std": 10.18,
+          "ci_95": [
+            0.22,
+            17.24
+          ],
+          "cohens_dz": 0.858,
+          "t_stat": 2.426,
+          "p_value_t": 0.04569450070793819,
+          "p_value_wilcoxon": 0.0390625
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 64.66,
+          "treatment_std": 13.48,
+          "baseline_mean": 35.48,
+          "baseline_std": 14.81,
+          "delta_mean": 29.18,
+          "delta_std": 10.45,
+          "ci_95": [
+            20.44,
+            37.91
+          ],
+          "cohens_dz": 2.792,
+          "t_stat": 7.897,
+          "p_value_t": 9.899976216149726e-05,
+          "p_value_wilcoxon": 0.0078125
+        }
+      },
+      "adaptive_vs_late": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.34,
+          "treatment_std": 10.37,
+          "baseline_mean": 58.95,
+          "baseline_std": 8.98,
+          "delta_mean": 13.38,
+          "delta_std": 12.85,
+          "ci_95": [
+            2.64,
+            24.12
+          ],
+          "cohens_dz": 1.042,
+          "t_stat": 2.947,
+          "p_value_t": 0.0215118225603574,
+          "p_value_wilcoxon": 0.03125
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 60.48,
+          "treatment_std": 10.9,
+          "baseline_mean": 47.27,
+          "baseline_std": 9.21,
+          "delta_mean": 13.21,
+          "delta_std": 10.6,
+          "ci_95": [
+            4.34,
+            22.07
+          ],
+          "cohens_dz": 1.246,
+          "t_stat": 3.523,
+          "p_value_t": 0.009689973050849237,
+          "p_value_wilcoxon": 0.015625
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 64.66,
+          "treatment_std": 13.48,
+          "baseline_mean": 55.75,
+          "baseline_std": 7.35,
+          "delta_mean": 8.91,
+          "delta_std": 13.22,
+          "ci_95": [
+            -2.15,
+            19.96
+          ],
+          "cohens_dz": 0.674,
+          "t_stat": 1.905,
+          "p_value_t": 0.09845651297720344,
+          "p_value_wilcoxon": 0.1484375
+        }
+      },
+      "adaptive_vs_concat": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.34,
+          "treatment_std": 10.37,
+          "baseline_mean": 64.09,
+          "baseline_std": 12.07,
+          "delta_mean": 8.25,
+          "delta_std": 8.64,
+          "ci_95": [
+            1.02,
+            15.48
+          ],
+          "cohens_dz": 0.954,
+          "t_stat": 2.699,
+          "p_value_t": 0.030687590442761998,
+          "p_value_wilcoxon": 0.0234375
+        },
+        "macro_f1": {
+          "n": 8,
+          "treatment_mean": 60.48,
+          "treatment_std": 10.9,
+          "baseline_mean": 53.97,
+          "baseline_std": 10.6,
+          "delta_mean": 6.5,
+          "delta_std": 6.07,
+          "ci_95": [
+            1.43,
+            11.58
+          ],
+          "cohens_dz": 1.071,
+          "t_stat": 3.029,
+          "p_value_t": 0.019131447165240564,
+          "p_value_wilcoxon": 0.0078125
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 64.66,
+          "treatment_std": 13.48,
+          "baseline_mean": 62.45,
+          "baseline_std": 12.58,
+          "delta_mean": 2.2,
+          "delta_std": 10.23,
+          "ci_95": [
+            -6.35,
+            10.75
+          ],
+          "cohens_dz": 0.215,
+          "t_stat": 0.609,
+          "p_value_t": 0.5617480919300752,
+          "p_value_wilcoxon": 0.640625
+        }
+      }
+    },
+    "Needle_Passing": {
+      "models": {
+        "unimodal_video": {
+          "accuracy": 26.55,
+          "macro_f1": 19.97,
+          "edit_score": 42.34
+        },
+        "unimodal_kinematics": {
+          "accuracy": 48.69,
+          "macro_f1": 29.99,
+          "edit_score": 31.34
+        },
+        "fixed_late_fusion": {
+          "accuracy": 35.94,
+          "macro_f1": 23.57,
+          "edit_score": 46.16
+        },
+        "feature_concat_fusion": {
+          "accuracy": 46.21,
+          "macro_f1": 28.4,
+          "edit_score": 45.17
+        },
+        "adaptive_reliability_fusion": {
+          "accuracy": 51.48,
+          "macro_f1": 31.03,
+          "edit_score": 54.81
+        }
+      },
+      "adaptive_vs_kinematics": {
+        "accuracy": {
+          "n": 7,
+          "treatment_mean": 51.48,
+          "treatment_std": 15.06,
+          "baseline_mean": 48.69,
+          "baseline_std": 12.55,
+          "delta_mean": 2.79,
+          "delta_std": 10.54,
+          "ci_95": [
+            -6.96,
+            12.53
+          ],
+          "cohens_dz": 0.265,
+          "t_stat": 0.7,
+          "p_value_t": 0.5102099621410068,
+          "p_value_wilcoxon": 1.0
+        },
+        "macro_f1": {
+          "n": 7,
+          "treatment_mean": 31.03,
+          "treatment_std": 12.44,
+          "baseline_mean": 29.99,
+          "baseline_std": 10.1,
+          "delta_mean": 1.04,
+          "delta_std": 9.51,
+          "ci_95": [
+            -7.76,
+            9.84
+          ],
+          "cohens_dz": 0.11,
+          "t_stat": 0.29,
+          "p_value_t": 0.7813057902661058,
+          "p_value_wilcoxon": 0.8125
+        },
+        "edit_score": {
+          "n": 7,
+          "treatment_mean": 54.81,
+          "treatment_std": 10.15,
+          "baseline_mean": 31.34,
+          "baseline_std": 7.9,
+          "delta_mean": 23.46,
+          "delta_std": 7.45,
+          "ci_95": [
+            16.58,
+            30.35
+          ],
+          "cohens_dz": 3.151,
+          "t_stat": 8.338,
+          "p_value_t": 0.00016162683636581732,
+          "p_value_wilcoxon": 0.015625
+        }
+      },
+      "adaptive_vs_late": {
+        "accuracy": {
+          "n": 7,
+          "treatment_mean": 51.48,
+          "treatment_std": 15.06,
+          "baseline_mean": 35.94,
+          "baseline_std": 14.96,
+          "delta_mean": 15.54,
+          "delta_std": 19.39,
+          "ci_95": [
+            -2.39,
+            33.47
+          ],
+          "cohens_dz": 0.802,
+          "t_stat": 2.121,
+          "p_value_t": 0.07817602721065113,
+          "p_value_wilcoxon": 0.078125
+        },
+        "macro_f1": {
+          "n": 7,
+          "treatment_mean": 31.03,
+          "treatment_std": 12.44,
+          "baseline_mean": 23.57,
+          "baseline_std": 12.34,
+          "delta_mean": 7.46,
+          "delta_std": 11.99,
+          "ci_95": [
+            -3.63,
+            18.55
+          ],
+          "cohens_dz": 0.622,
+          "t_stat": 1.646,
+          "p_value_t": 0.15084671991053564,
+          "p_value_wilcoxon": 0.15625
+        },
+        "edit_score": {
+          "n": 7,
+          "treatment_mean": 54.81,
+          "treatment_std": 10.15,
+          "baseline_mean": 46.16,
+          "baseline_std": 11.71,
+          "delta_mean": 8.65,
+          "delta_std": 13.06,
+          "ci_95": [
+            -3.44,
+            20.73
+          ],
+          "cohens_dz": 0.662,
+          "t_stat": 1.751,
+          "p_value_t": 0.1305105296787934,
+          "p_value_wilcoxon": 0.078125
+        }
+      },
+      "adaptive_vs_concat": {
+        "accuracy": {
+          "n": 7,
+          "treatment_mean": 51.48,
+          "treatment_std": 15.06,
+          "baseline_mean": 46.21,
+          "baseline_std": 20.6,
+          "delta_mean": 5.28,
+          "delta_std": 16.08,
+          "ci_95": [
+            -9.6,
+            20.15
+          ],
+          "cohens_dz": 0.328,
+          "t_stat": 0.868,
+          "p_value_t": 0.4188420640264722,
+          "p_value_wilcoxon": 0.578125
+        },
+        "macro_f1": {
+          "n": 7,
+          "treatment_mean": 31.03,
+          "treatment_std": 12.44,
+          "baseline_mean": 28.4,
+          "baseline_std": 13.37,
+          "delta_mean": 2.63,
+          "delta_std": 8.66,
+          "ci_95": [
+            -5.38,
+            10.64
+          ],
+          "cohens_dz": 0.303,
+          "t_stat": 0.802,
+          "p_value_t": 0.45309224453308294,
+          "p_value_wilcoxon": 0.578125
+        },
+        "edit_score": {
+          "n": 7,
+          "treatment_mean": 54.81,
+          "treatment_std": 10.15,
+          "baseline_mean": 45.17,
+          "baseline_std": 22.29,
+          "delta_mean": 9.64,
+          "delta_std": 15.53,
+          "ci_95": [
+            -4.72,
+            24.01
+          ],
+          "cohens_dz": 0.621,
+          "t_stat": 1.643,
+          "p_value_t": 0.15151532112538385,
+          "p_value_wilcoxon": 0.078125
+        }
+      }
+    }
+  },
+  "workstream_b_temporal_modeling": {
+    "Suturing": {
+      "kinematics_gru_vs_mlp": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 66.64,
+          "treatment_std": 9.63,
+          "baseline_mean": 65.39,
+          "baseline_std": 11.82,
+          "delta_mean": 1.26,
+          "delta_std": 5.57,
+          "ci_95": [
+            -3.4,
+            5.91
+          ],
+          "cohens_dz": 0.226,
+          "t_stat": 0.639,
+          "p_value_t": 0.5433985167813253,
+          "p_value_wilcoxon": 0.7421875
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 34.69,
+          "treatment_std": 10.08,
+          "baseline_mean": 9.78,
+          "baseline_std": 2.47,
+          "delta_mean": 24.91,
+          "delta_std": 8.31,
+          "ci_95": [
+            17.96,
+            31.86
+          ],
+          "cohens_dz": 2.997,
+          "t_stat": 8.476,
+          "p_value_t": 6.288576322731185e-05,
+          "p_value_wilcoxon": 0.0078125
+        }
+      },
+      "surgmotion_gru_vs_mlp": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 39.17,
+          "treatment_std": 14.45,
+          "baseline_mean": 41.94,
+          "baseline_std": 8.91,
+          "delta_mean": -2.77,
+          "delta_std": 16.6,
+          "ci_95": [
+            -16.65,
+            11.11
+          ],
+          "cohens_dz": -0.167,
+          "t_stat": -0.472,
+          "p_value_t": 0.6512536244982848,
+          "p_value_wilcoxon": 0.9453125
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 39.99,
+          "treatment_std": 10.17,
+          "baseline_mean": 37.64,
+          "baseline_std": 5.59,
+          "delta_mean": 2.35,
+          "delta_std": 9.4,
+          "ci_95": [
+            -5.51,
+            10.21
+          ],
+          "cohens_dz": 0.25,
+          "t_stat": 0.708,
+          "p_value_t": 0.5019695907844777,
+          "p_value_wilcoxon": 0.25
+        }
+      },
+      "adaptive_fusion_vs_framewise_mlp": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.28,
+          "treatment_std": 10.24,
+          "baseline_mean": 65.39,
+          "baseline_std": 11.82,
+          "delta_mean": 6.9,
+          "delta_std": 5.02,
+          "ci_95": [
+            2.7,
+            11.09
+          ],
+          "cohens_dz": 1.375,
+          "t_stat": 3.889,
+          "p_value_t": 0.005982425102656698,
+          "p_value_wilcoxon": 0.0078125
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 68.95,
+          "treatment_std": 10.03,
+          "baseline_mean": 9.78,
+          "baseline_std": 2.47,
+          "delta_mean": 59.17,
+          "delta_std": 9.61,
+          "ci_95": [
+            51.14,
+            67.2
+          ],
+          "cohens_dz": 6.16,
+          "t_stat": 17.424,
+          "p_value_t": 5.045888832734498e-07,
+          "p_value_wilcoxon": 0.0078125
+        }
+      },
+      "summary_verdict": {
+        "frame_level_accuracy_delta": 1.26,
+        "sequence_level_edit_score_delta": 24.91,
+        "ratio_edit_to_acc_gain": 19.8
+      }
+    },
+    "Knot_Tying": {
+      "kinematics_gru_vs_mlp": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 61.09,
+          "treatment_std": 12.61,
+          "baseline_mean": 62.77,
+          "baseline_std": 11.54,
+          "delta_mean": -1.69,
+          "delta_std": 5.33,
+          "ci_95": [
+            -6.14,
+            2.77
+          ],
+          "cohens_dz": -0.317,
+          "t_stat": -0.896,
+          "p_value_t": 0.4002287383135077,
+          "p_value_wilcoxon": 0.7421875
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 35.48,
+          "treatment_std": 14.81,
+          "baseline_mean": 9.23,
+          "baseline_std": 3.63,
+          "delta_mean": 26.25,
+          "delta_std": 11.76,
+          "ci_95": [
+            16.42,
+            36.08
+          ],
+          "cohens_dz": 2.233,
+          "t_stat": 6.317,
+          "p_value_t": 0.0003977486621064223,
+          "p_value_wilcoxon": 0.0078125
+        }
+      },
+      "surgmotion_gru_vs_mlp": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 53.6,
+          "treatment_std": 11.59,
+          "baseline_mean": 54.29,
+          "baseline_std": 8.41,
+          "delta_mean": -0.69,
+          "delta_std": 11.3,
+          "ci_95": [
+            -10.14,
+            8.75
+          ],
+          "cohens_dz": -0.061,
+          "t_stat": -0.173,
+          "p_value_t": 0.867495591075072,
+          "p_value_wilcoxon": 0.9453125
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 51.34,
+          "treatment_std": 8.46,
+          "baseline_mean": 45.49,
+          "baseline_std": 7.72,
+          "delta_mean": 5.85,
+          "delta_std": 9.17,
+          "ci_95": [
+            -1.81,
+            13.52
+          ],
+          "cohens_dz": 0.638,
+          "t_stat": 1.805,
+          "p_value_t": 0.11401918945600006,
+          "p_value_wilcoxon": 0.109375
+        }
+      },
+      "adaptive_fusion_vs_framewise_mlp": {
+        "accuracy": {
+          "n": 8,
+          "treatment_mean": 72.34,
+          "treatment_std": 10.37,
+          "baseline_mean": 62.77,
+          "baseline_std": 11.54,
+          "delta_mean": 9.56,
+          "delta_std": 6.49,
+          "ci_95": [
+            4.13,
+            14.99
+          ],
+          "cohens_dz": 1.473,
+          "t_stat": 4.165,
+          "p_value_t": 0.004215586074000988,
+          "p_value_wilcoxon": 0.0078125
+        },
+        "edit_score": {
+          "n": 8,
+          "treatment_mean": 64.66,
+          "treatment_std": 13.48,
+          "baseline_mean": 9.23,
+          "baseline_std": 3.63,
+          "delta_mean": 55.43,
+          "delta_std": 11.49,
+          "ci_95": [
+            45.82,
+            65.04
+          ],
+          "cohens_dz": 4.823,
+          "t_stat": 13.642,
+          "p_value_t": 2.6778146611706875e-06,
+          "p_value_wilcoxon": 0.0078125
+        }
+      },
+      "summary_verdict": {
+        "frame_level_accuracy_delta": -1.69,
+        "sequence_level_edit_score_delta": 26.25,
+        "ratio_edit_to_acc_gain": "N/A"
+      }
+    },
+    "Needle_Passing": {
+      "kinematics_gru_vs_mlp": {
+        "accuracy": {
+          "n": 7,
+          "treatment_mean": 48.69,
+          "treatment_std": 12.55,
+          "baseline_mean": 48.66,
+          "baseline_std": 12.64,
+          "delta_mean": 0.04,
+          "delta_std": 6.37,
+          "ci_95": [
+            -5.86,
+            5.93
+          ],
+          "cohens_dz": 0.006,
+          "t_stat": 0.016,
+          "p_value_t": 0.9877917900817166,
+          "p_value_wilcoxon": 1.0
+        },
+        "edit_score": {
+          "n": 7,
+          "treatment_mean": 31.34,
+          "treatment_std": 7.9,
+          "baseline_mean": 8.66,
+          "baseline_std": 4.28,
+          "delta_mean": 22.68,
+          "delta_std": 4.56,
+          "ci_95": [
+            18.47,
+            26.9
+          ],
+          "cohens_dz": 4.977,
+          "t_stat": 13.168,
+          "p_value_t": 1.1841019041506186e-05,
+          "p_value_wilcoxon": 0.015625
+        }
+      },
+      "surgmotion_gru_vs_mlp": {
+        "accuracy": {
+          "n": 7,
+          "treatment_mean": 26.55,
+          "treatment_std": 16.32,
+          "baseline_mean": 29.96,
+          "baseline_std": 17.91,
+          "delta_mean": -3.41,
+          "delta_std": 16.7,
+          "ci_95": [
+            -18.85,
+            12.04
+          ],
+          "cohens_dz": -0.204,
+          "t_stat": -0.539,
+          "p_value_t": 0.608974961325507,
+          "p_value_wilcoxon": 0.9375
+        },
+        "edit_score": {
+          "n": 7,
+          "treatment_mean": 42.34,
+          "treatment_std": 17.96,
+          "baseline_mean": 33.78,
+          "baseline_std": 16.55,
+          "delta_mean": 8.56,
+          "delta_std": 10.62,
+          "ci_95": [
+            -1.26,
+            18.38
+          ],
+          "cohens_dz": 0.806,
+          "t_stat": 2.133,
+          "p_value_t": 0.07692378076760054,
+          "p_value_wilcoxon": 0.15625
+        }
+      },
+      "adaptive_fusion_vs_framewise_mlp": {
+        "accuracy": {
+          "n": 7,
+          "treatment_mean": 51.48,
+          "treatment_std": 15.06,
+          "baseline_mean": 48.66,
+          "baseline_std": 12.64,
+          "delta_mean": 2.83,
+          "delta_std": 9.88,
+          "ci_95": [
+            -6.31,
+            11.96
+          ],
+          "cohens_dz": 0.286,
+          "t_stat": 0.757,
+          "p_value_t": 0.4776214143595292,
+          "p_value_wilcoxon": 0.6875
+        },
+        "edit_score": {
+          "n": 7,
+          "treatment_mean": 54.81,
+          "treatment_std": 10.15,
+          "baseline_mean": 8.66,
+          "baseline_std": 4.28,
+          "delta_mean": 46.15,
+          "delta_std": 8.63,
+          "ci_95": [
+            38.17,
+            54.13
+          ],
+          "cohens_dz": 5.348,
+          "t_stat": 14.15,
+          "p_value_t": 7.783414142725628e-06,
+          "p_value_wilcoxon": 0.015625
+        }
+      },
+      "summary_verdict": {
+        "frame_level_accuracy_delta": 0.04,
+        "sequence_level_edit_score_delta": 22.68,
+        "ratio_edit_to_acc_gain": 226.8
+      }
+    }
+  },
+  "workstream_c_error_and_subject_analysis": {
+    "Suturing": {
+      "total_samples": 16365,
+      "confusion_matrix": [
+        [
+          114,
+          39,
+          0,
+          0,
+          5,
+          1,
+          16,
+          0,
+          0,
+          0,
+          74
+        ],
+        [
+          26,
+          158,
+          0,
+          0,
+          0,
+          11,
+          2,
+          8,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          1,
+          1504,
+          355,
+          66,
+          54,
+          14,
+          103,
+          14,
+          4,
+          48
+        ],
+        [
+          2,
+          1,
+          272,
+          4705,
+          25,
+          23,
+          164,
+          202,
+          9,
+          20,
+          63
+        ],
+        [
+          1,
+          0,
+          54,
+          30,
+          1395,
+          15,
+          218,
+          196,
+          41,
+          7,
+          50
+        ],
+        [
+          10,
+          13,
+          50,
+          13,
+          0,
+          249,
+          3,
+          69,
+          0,
+          1,
+          9
+        ],
+        [
+          1,
+          0,
+          30,
+          184,
+          176,
+          2,
+          2405,
+          21,
+          38,
+          7,
+          105
+        ],
+        [
+          9,
+          11,
+          46,
+          126,
+          266,
+          66,
+          57,
+          719,
+          0,
+          5,
+          16
+        ],
+        [
+          0,
+          0,
+          126,
+          33,
+          16,
+          11,
+          60,
+          3,
+          12,
+          3,
+          16
+        ],
+        [
+          0,
+          0,
+          35,
+          38,
+          16,
+          0,
+          37,
+          0,
+          11,
+          6,
+          38
+        ],
+        [
+          96,
+          3,
+          18,
+          17,
+          80,
+          2,
+          173,
+          0,
+          10,
+          4,
+          678
+        ]
+      ],
+      "per_gesture_breakdown": {
+        "G0 (Idle)": {
+          "class_id": 0,
+          "support": 249,
+          "recall": 45.78,
+          "precision": 44.02,
+          "f1_score": 44.88,
+          "is_rare": true
+        },
+        "G1 (Reaching)": {
+          "class_id": 1,
+          "support": 211,
+          "recall": 74.88,
+          "precision": 69.91,
+          "f1_score": 72.31,
+          "is_rare": true
+        },
+        "G2 (Positioning)": {
+          "class_id": 2,
+          "support": 2163,
+          "recall": 69.53,
+          "precision": 70.44,
+          "f1_score": 69.99,
+          "is_rare": false
+        },
+        "G3 (Pushing needle)": {
+          "class_id": 3,
+          "support": 5486,
+          "recall": 85.76,
+          "precision": 85.53,
+          "f1_score": 85.65,
+          "is_rare": false
+        },
+        "G4 (Transferring)": {
+          "class_id": 4,
+          "support": 2007,
+          "recall": 69.51,
+          "precision": 68.22,
+          "f1_score": 68.85,
+          "is_rare": false
+        },
+        "G5 (Moving needle)": {
+          "class_id": 5,
+          "support": 417,
+          "recall": 59.71,
+          "precision": 57.37,
+          "f1_score": 58.52,
+          "is_rare": true
+        },
+        "G6 (Pulling suture)": {
+          "class_id": 6,
+          "support": 2969,
+          "recall": 81.0,
+          "precision": 76.37,
+          "f1_score": 78.62,
+          "is_rare": false
+        },
+        "G8 (Dropping needle)": {
+          "class_id": 7,
+          "support": 1321,
+          "recall": 54.43,
+          "precision": 54.43,
+          "f1_score": 54.43,
+          "is_rare": false
+        },
+        "G9 (Using right hand)": {
+          "class_id": 8,
+          "support": 280,
+          "recall": 4.29,
+          "precision": 8.89,
+          "f1_score": 5.78,
+          "is_rare": true
+        },
+        "G10 (Loosening)": {
+          "class_id": 9,
+          "support": 181,
+          "recall": 3.31,
+          "precision": 10.53,
+          "f1_score": 5.04,
+          "is_rare": true
+        },
+        "G11 (Dropping suture)": {
+          "class_id": 10,
+          "support": 1081,
+          "recall": 62.72,
+          "precision": 61.47,
+          "f1_score": 62.09,
+          "is_rare": false
+        }
+      },
+      "subject_breakdown": {
+        "B": {
+          "accuracy": 70.96,
+          "balanced_accuracy": 57.65,
+          "macro_f1": 47.22,
+          "edit_score": 29.65
+        },
+        "C": {
+          "accuracy": 78.7,
+          "balanced_accuracy": 78.15,
+          "macro_f1": 60.56,
+          "edit_score": 41.8
+        },
+        "D": {
+          "accuracy": 59.57,
+          "balanced_accuracy": 62.82,
+          "macro_f1": 46.4,
+          "edit_score": 37.8
+        },
+        "E": {
+          "accuracy": 78.42,
+          "balanced_accuracy": 63.15,
+          "macro_f1": 56.16,
+          "edit_score": 38.05
+        },
+        "F": {
+          "accuracy": 85.59,
+          "balanced_accuracy": 72.7,
+          "macro_f1": 58.93,
+          "edit_score": 55.2
+        },
+        "G": {
+          "accuracy": 62.98,
+          "balanced_accuracy": 46.94,
+          "macro_f1": 34.56,
+          "edit_score": 27.6
+        },
+        "H": {
+          "accuracy": 76.62,
+          "balanced_accuracy": 63.22,
+          "macro_f1": 60.2,
+          "edit_score": 34.15
+        },
+        "I": {
+          "accuracy": 75.52,
+          "balanced_accuracy": 60.97,
+          "macro_f1": 56.97,
+          "edit_score": 34.48
+        }
+      },
+      "hardest_subjects": {
+        "lowest_accuracy": [
+          "D",
+          "G"
+        ],
+        "lowest_macro_f1": [
+          "G",
+          "D"
+        ]
+      },
+      "rare_gestures": [
+        "G0 (Idle)",
+        "G1 (Reaching)",
+        "G5 (Moving needle)",
+        "G9 (Using right hand)",
+        "G10 (Loosening)"
+      ],
+      "zero_or_low_recall_gestures": [
+        "G9 (Using right hand)",
+        "G10 (Loosening)"
+      ]
+    },
+    "Knot_Tying": {
+      "total_samples": 7652,
+      "confusion_matrix": [
+        [
+          372,
+          31,
+          99,
+          54,
+          4,
+          47,
+          57
+        ],
+        [
+          7,
+          112,
+          0,
+          45,
+          0,
+          31,
+          5
+        ],
+        [
+          23,
+          0,
+          278,
+          17,
+          15,
+          26,
+          47
+        ],
+        [
+          15,
+          58,
+          19,
+          858,
+          189,
+          392,
+          91
+        ],
+        [
+          8,
+          0,
+          3,
+          57,
+          699,
+          102,
+          91
+        ],
+        [
+          26,
+          17,
+          17,
+          262,
+          133,
+          973,
+          150
+        ],
+        [
+          14,
+          3,
+          78,
+          149,
+          60,
+          200,
+          1718
+        ]
+      ],
+      "per_gesture_breakdown": {
+        "G0 (Idle)": {
+          "class_id": 0,
+          "support": 664,
+          "recall": 56.02,
+          "precision": 80.0,
+          "f1_score": 65.9,
+          "is_rare": false
+        },
+        "G1 (Reaching)": {
+          "class_id": 1,
+          "support": 200,
+          "recall": 56.0,
+          "precision": 50.68,
+          "f1_score": 53.21,
+          "is_rare": true
+        },
+        "G11 (Dropping suture)": {
+          "class_id": 2,
+          "support": 406,
+          "recall": 68.47,
+          "precision": 56.28,
+          "f1_score": 61.78,
+          "is_rare": false
+        },
+        "G12 (Looping suture)": {
+          "class_id": 3,
+          "support": 1622,
+          "recall": 52.9,
+          "precision": 59.5,
+          "f1_score": 56.01,
+          "is_rare": false
+        },
+        "G13 (Securing knot)": {
+          "class_id": 4,
+          "support": 960,
+          "recall": 72.81,
+          "precision": 63.55,
+          "f1_score": 67.86,
+          "is_rare": false
+        },
+        "G14 (Pulling end)": {
+          "class_id": 5,
+          "support": 1578,
+          "recall": 61.66,
+          "precision": 54.94,
+          "f1_score": 58.11,
+          "is_rare": false
+        },
+        "G15 (Tightening)": {
+          "class_id": 6,
+          "support": 2222,
+          "recall": 77.32,
+          "precision": 79.57,
+          "f1_score": 78.43,
+          "is_rare": false
+        }
+      },
+      "subject_breakdown": {
+        "B": {
+          "accuracy": 60.0,
+          "balanced_accuracy": 56.54,
+          "macro_f1": 46.25,
+          "edit_score": 21.7
+        },
+        "C": {
+          "accuracy": 74.11,
+          "balanced_accuracy": 70.06,
+          "macro_f1": 62.15,
+          "edit_score": 40.71
+        },
+        "D": {
+          "accuracy": 59.85,
+          "balanced_accuracy": 55.45,
+          "macro_f1": 59.18,
+          "edit_score": 35.8
+        },
+        "E": {
+          "accuracy": 81.05,
+          "balanced_accuracy": 75.84,
+          "macro_f1": 76.01,
+          "edit_score": 56.21
+        },
+        "F": {
+          "accuracy": 62.7,
+          "balanced_accuracy": 54.17,
+          "macro_f1": 54.67,
+          "edit_score": 22.84
+        },
+        "G": {
+          "accuracy": 54.46,
+          "balanced_accuracy": 54.26,
+          "macro_f1": 38.95,
+          "edit_score": 20.76
+        },
+        "H": {
+          "accuracy": 79.75,
+          "balanced_accuracy": 71.8,
+          "macro_f1": 67.79,
+          "edit_score": 40.34
+        },
+        "I": {
+          "accuracy": 64.52,
+          "balanced_accuracy": 66.26,
+          "macro_f1": 65.19,
+          "edit_score": 32.93
+        }
+      },
+      "hardest_subjects": {
+        "lowest_accuracy": [
+          "G",
+          "D"
+        ],
+        "lowest_macro_f1": [
+          "G",
+          "B"
+        ]
+      },
+      "rare_gestures": [
+        "G1 (Reaching)"
+      ],
+      "zero_or_low_recall_gestures": []
+    },
+    "Needle_Passing": {
+      "total_samples": 10854,
+      "confusion_matrix": [
+        [
+          32,
+          97,
+          0,
+          0,
+          0,
+          41,
+          39,
+          0,
+          19,
+          0,
+          68
+        ],
+        [
+          59,
+          157,
+          0,
+          6,
+          1,
+          157,
+          15,
+          13,
+          4,
+          0,
+          18
+        ],
+        [
+          0,
+          14,
+          2422,
+          878,
+          139,
+          361,
+          251,
+          129,
+          0,
+          2,
+          64
+        ],
+        [
+          1,
+          1,
+          379,
+          650,
+          32,
+          42,
+          151,
+          10,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          78,
+          32,
+          435,
+          85,
+          218,
+          191,
+          0,
+          0,
+          16
+        ],
+        [
+          7,
+          34,
+          47,
+          43,
+          40,
+          278,
+          11,
+          117,
+          0,
+          0,
+          8
+        ],
+        [
+          1,
+          0,
+          152,
+          98,
+          196,
+          41,
+          1101,
+          191,
+          3,
+          0,
+          61
+        ],
+        [
+          0,
+          5,
+          33,
+          44,
+          111,
+          134,
+          85,
+          159,
+          0,
+          0,
+          12
+        ],
+        [
+          0,
+          0,
+          2,
+          15,
+          3,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          16,
+          0,
+          1,
+          0,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          12,
+          18,
+          1,
+          32,
+          19,
+          105,
+          1,
+          11,
+          0,
+          277
+        ]
+      ],
+      "per_gesture_breakdown": {
+        "G0 (Idle)": {
+          "class_id": 0,
+          "support": 296,
+          "recall": 10.81,
+          "precision": 29.09,
+          "f1_score": 15.76,
+          "is_rare": true
+        },
+        "G1 (Reaching)": {
+          "class_id": 1,
+          "support": 430,
+          "recall": 36.51,
+          "precision": 49.06,
+          "f1_score": 41.87,
+          "is_rare": false
+        },
+        "G2 (Positioning)": {
+          "class_id": 2,
+          "support": 4260,
+          "recall": 56.85,
+          "precision": 77.36,
+          "f1_score": 65.54,
+          "is_rare": false
+        },
+        "G3 (Pushing needle)": {
+          "class_id": 3,
+          "support": 1269,
+          "recall": 51.22,
+          "precision": 36.46,
+          "f1_score": 42.6,
+          "is_rare": false
+        },
+        "G4 (Transferring)": {
+          "class_id": 4,
+          "support": 1055,
+          "recall": 41.23,
+          "precision": 43.98,
+          "f1_score": 42.56,
+          "is_rare": false
+        },
+        "G5 (Moving needle)": {
+          "class_id": 5,
+          "support": 585,
+          "recall": 47.52,
+          "precision": 23.99,
+          "f1_score": 31.88,
+          "is_rare": false
+        },
+        "G6 (Pulling suture)": {
+          "class_id": 6,
+          "support": 1844,
+          "recall": 59.71,
+          "precision": 55.61,
+          "f1_score": 57.58,
+          "is_rare": false
+        },
+        "G8 (Dropping needle)": {
+          "class_id": 7,
+          "support": 583,
+          "recall": 27.27,
+          "precision": 19.49,
+          "f1_score": 22.73,
+          "is_rare": false
+        },
+        "G9 (Using right hand)": {
+          "class_id": 8,
+          "support": 24,
+          "recall": 0.0,
+          "precision": 0.0,
+          "f1_score": 0.0,
+          "is_rare": true
+        },
+        "G10 (Loosening)": {
+          "class_id": 9,
+          "support": 22,
+          "recall": 0.0,
+          "precision": 0.0,
+          "f1_score": 0.0,
+          "is_rare": true
+        },
+        "G11 (Dropping suture)": {
+          "class_id": 10,
+          "support": 486,
+          "recall": 57.0,
+          "precision": 52.56,
+          "f1_score": 54.69,
+          "is_rare": false
+        }
+      },
+      "subject_breakdown": {
+        "B": {
+          "accuracy": 40.33,
+          "balanced_accuracy": 36.21,
+          "macro_f1": 18.38,
+          "edit_score": 35.38
+        },
+        "C": {
+          "accuracy": 67.41,
+          "balanced_accuracy": 55.06,
+          "macro_f1": 45.47,
+          "edit_score": 32.28
+        },
+        "D": {
+          "accuracy": 44.36,
+          "balanced_accuracy": 33.02,
+          "macro_f1": 29.9,
+          "edit_score": 24.96
+        },
+        "E": {
+          "accuracy": 40.58,
+          "balanced_accuracy": 42.08,
+          "macro_f1": 31.57,
+          "edit_score": 23.06
+        },
+        "F": {
+          "accuracy": 60.83,
+          "balanced_accuracy": 49.88,
+          "macro_f1": 38.28,
+          "edit_score": 37.99
+        },
+        "H": {
+          "accuracy": 51.73,
+          "balanced_accuracy": 37.37,
+          "macro_f1": 23.31,
+          "edit_score": 28.88
+        },
+        "I": {
+          "accuracy": 52.78,
+          "balanced_accuracy": 47.78,
+          "macro_f1": 33.47,
+          "edit_score": 21.61
+        }
+      },
+      "hardest_subjects": {
+        "lowest_accuracy": [
+          "B",
+          "E"
+        ],
+        "lowest_macro_f1": [
+          "B",
+          "H"
+        ]
+      },
+      "rare_gestures": [
+        "G0 (Idle)",
+        "G9 (Using right hand)",
+        "G10 (Loosening)"
+      ],
+      "zero_or_low_recall_gestures": [
+        "G0 (Idle)",
+        "G9 (Using right hand)",
+        "G10 (Loosening)"
+      ]
+    }
+  },
+  "workstream_d_statistical_validation": {
+    "family_wise_evaluations": {
+      "Suturing_adaptive_vs_kin_accuracy": {
+        "raw_p": 0.02734,
+        "holm_bonferroni_p": 0.1367,
+        "benjamini_hochberg_q": 0.04921,
+        "verdict": "Descriptive Trend (p_raw < 0.05, p_adj >= 0.05)"
+      },
+      "Suturing_adaptive_vs_kin_macro_f1": {
+        "raw_p": 0.80709,
+        "holm_bonferroni_p": 1.0,
+        "benjamini_hochberg_q": 0.80709,
+        "verdict": "Not Significant (p >= 0.05)"
+      },
+      "Suturing_adaptive_vs_kin_edit_score": {
+        "raw_p": 5e-05,
+        "holm_bonferroni_p": 0.00048,
+        "benjamini_hochberg_q": 0.00045,
+        "verdict": "Confirmatory Significant (p_adj < 0.05)"
+      },
+      "Knot_Tying_adaptive_vs_kin_accuracy": {
+        "raw_p": 0.00954,
+        "holm_bonferroni_p": 0.05723,
+        "benjamini_hochberg_q": 0.02146,
+        "verdict": "Descriptive Trend (p_raw < 0.05, p_adj >= 0.05)"
+      },
+      "Knot_Tying_adaptive_vs_kin_macro_f1": {
+        "raw_p": 0.04569,
+        "holm_bonferroni_p": 0.18278,
+        "benjamini_hochberg_q": 0.06854,
+        "verdict": "Descriptive Trend (p_raw < 0.05, p_adj >= 0.05)"
+      },
+      "Knot_Tying_adaptive_vs_kin_edit_score": {
+        "raw_p": 0.0001,
+        "holm_bonferroni_p": 0.00079,
+        "benjamini_hochberg_q": 0.00045,
+        "verdict": "Confirmatory Significant (p_adj < 0.05)"
+      },
+      "Needle_Passing_adaptive_vs_kin_accuracy": {
+        "raw_p": 0.51021,
+        "holm_bonferroni_p": 1.0,
+        "benjamini_hochberg_q": 0.65598,
+        "verdict": "Not Significant (p >= 0.05)"
+      },
+      "Needle_Passing_adaptive_vs_kin_macro_f1": {
+        "raw_p": 0.78131,
+        "holm_bonferroni_p": 1.0,
+        "benjamini_hochberg_q": 0.80709,
+        "verdict": "Not Significant (p >= 0.05)"
+      },
+      "Needle_Passing_adaptive_vs_kin_edit_score": {
+        "raw_p": 0.00016,
+        "holm_bonferroni_p": 0.00113,
+        "benjamini_hochberg_q": 0.00048,
+        "verdict": "Confirmatory Significant (p_adj < 0.05)"
+      }
+    }
+  }
+}

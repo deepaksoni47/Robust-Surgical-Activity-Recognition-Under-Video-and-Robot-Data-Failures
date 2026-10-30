@@ -140,6 +140,7 @@
 | **ITER-32** | M15 Ablation Audit | GPU Results Audit, Gate Weight Flatness Discovery & Paper Update | Completed |
 | **ITER-33** | M16 Second Dataset | SurgSync Dataset Verification, Schema Audit & Pilot Protocol (714GB Footprint, Operator Anonymity, Dual-Arm Taxonomy) | Completed |
 | **ITER-34** | M16 Acquisition & Pilot | Resumable Suturing Downloader with Disk Preflight, SurgMotion GPU Extractor, Acquisition Tests, and Pilot Protocol | Completed |
+| **ITER-34(b)** | M17 Controlled Ablation | JIGSAWS Controlled Ablation & Model Contribution Analysis (Fusion, Temporal Modeling, Rare-Gesture Collapse, Statistical Validation) | Completed |
 
 ---
 
@@ -151,6 +152,17 @@
 - **Time Synchronization:** Sub-millisecond on offline data (0.37 ms mean cross-modal delta, 0 dropped frames); 12.92 ms mean delta on online data with ~47 ms jaw angle latency.
 - **GPU Feature Extraction:** `scripts/extract_surgmotion_surgsync.py` built with streaming sliding window (16 frames), ImageNet normalization, FP16 autocast, and atomic `.npz` caching (~184 MB for suturing, ~410 MB for all tasks). All 17 SurgSync tests pass.
 - **Mentor Runbook Prepared:** Dual-path runbooks for both Scenario A (suturing only, $\ge 450$ GB) and Scenario B (full dataset, $\ge 850$ GB on mentor's 3 TB workstation) documented in `docs/iter34_surgsync_acquisition.md`. Preflight, resumable download, integrity verification, and sample GPU extraction commands ready for execution.
+
+---
+
+## 8. Key Findings Log — JIGSAWS Controlled Ablation & Model Contribution Analysis (ITER-34b)
+- **Temporal Modeling Distinction (Workstream B):** Comparing framewise MLP with recurrent sequence GRU across kinematics and vision reveals that temporal sequence modeling produces negligible frame accuracy shifts ($\Delta \le 1.26\%$, all $p > 0.40$), but drives a massive, universally significant improvement in segmental Edit Score ($+22.68$ to $+26.25$ points for unimodal GRU, and $+44.69$ to $+59.17$ points for Multimodal Adaptive GRU; all $p < 0.0005, d_z > 2.2$). Temporal recurrence resolves high-frequency frame-level label chatter, establishing contiguous, clinically coherent gesture segments.
+- **Gating Dynamics & Static Prior (Workstream A):** Clamping dynamic gate weights $\alpha_t$ to static trial/fold mean $\bar{\alpha}$ shifts accuracy by $\le 0.06\%$. The gate operates primarily as an availability router and global modality balancer, not a frame-level noise filter.
+- **Adaptive vs Baselines (Workstream A):** Adaptive Reliability Fusion outperforms Fixed Late Fusion ($\alpha^*$) across all tasks ($+11.74\%$ Suturing, $+13.39\%$ Knot Tying, $+15.54\%$ Needle Passing), beats Concat Fusion on Suturing ($+18.29\%, p=0.010$) and Knot Tying ($+8.25\%$), and beats Kinematics GRU on Knot Tying ($+11.25\%$, FDR $q=0.021$) and Suturing ($+5.64\%$, FDR $q=0.049$).
+- **Rare-Gesture Collapse (Workstream C):** Auxiliary/corrective gestures with $<3\%$ dataset support (G9, G10 in Suturing; G8, G9 in Needle Passing) suffer severe recall collapse ($F1 < 6\%$), explaining why Macro-F1 systematically lags overall frame accuracy.
+- **Cross-Subject Generalization Bottlenecks (Workstream C):** Novice/hesitant surgeons (User G) with prolonged durations and idiosyncratic surgeons (User B) present the largest domain shifts and lowest F1 scores across tasks.
+- **Artifacts & Figures:** `artifacts/iter34_ablation_summary.json`, `docs/iter34_ablation_analysis.md`, and 5 publication figures in `paper/figures/fig_iter34_*` generated and verified. All 26/26 tests pass.
+
 
 
 
