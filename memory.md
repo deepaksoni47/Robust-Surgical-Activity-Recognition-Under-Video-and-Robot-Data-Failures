@@ -171,6 +171,13 @@
 - **Workstream C (Focal Loss Codebase Defect & Resolution):** The proposed command `--loss-type focal --gamma 2.0` in ITER-34 was non-functional; `--loss-type` and `--gamma` CLI options were missing from `scripts/train_surgmotion_multimodal_fusion.py`. Implemented modular `src/models/losses.py` (CE, Class-Weighted CE, Focal Loss, Class-Balanced Focal Loss) with training-only weights. 16 unit tests verified in `tests/test_losses.py`.
 - **Workstream D (Class Imbalance on Suturing):** Discovered severe $30.0\times$ imbalance (G3 = 33.7%, G10 = 1.1%; 4 dominant gestures comprise 77.7% of data). Designed a 4-arm controlled experiment on Suturing (`docs/iter35_imbalance_experiment_protocol.md`) pre-registering dominant vs rare metrics and validation-only hyperparameter selection.
 - **Recommendation:** Conditional GO for Phase 1 GPU experiment on Suturing using Multi-Class Focal Loss (`--loss-type focal --gamma 2.0`).
+- **Unified GPU Execution Architecture & Standing Protocol:** Per developer instruction, multi-run GPU workloads must NEVER require manual terminal babysitting or fragmented CLI execution. Built `scripts/run_iter35_imbalance_experiment.py` and `scripts/run_iter35_imbalance_experiment.ps1` combining:
+  1. Automated preflight assertions (CUDA, VRAM, and feature cache checks).
+  2. Windows sleep & hibernation prevention via `ctypes.windll.kernel32.SetThreadExecutionState`.
+  3. Sequential execution of all 4 Phase 1 runs on Suturing (`ce`, `class_weighted`, `focal`, `cb_focal`).
+  4. Comparative summary table and JSON artifact generation (`artifacts/iter35_imbalance_comparison_Suturing_summary.json`).
+  5. Automated Git stage, commit, and push to `origin main` upon successful completion.
+  *Standing Rule:* All future mentor GPU commands must follow this all-in-one orchestrated pattern.
 
 
 

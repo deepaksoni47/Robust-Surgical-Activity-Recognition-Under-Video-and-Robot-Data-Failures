@@ -128,11 +128,51 @@ Phase 3: Benchmark Expansion (Only if Phase 1 is Positive)
 
 Execute from the repository root `D:\miniproject-5thsem` inside `.venv`:
 
+### Single-Command All-in-One Execution (Recommended for Mentor GPU)
+
+To avoid manual terminal babysitting over multi-hour runs, all 4 Phase 1 conditions are orchestrated sequentially through a single command with automated Windows sleep prevention, preflight checks, comparative summary generation, and automated Git commit & push:
+
 ```powershell
 # ==============================================================================
-# PHASE 1: CLASS-IMBALANCE EXPERIMENT ON SUTURING (8 LOUO FOLDS)
+# SINGLE-COMMAND ALL-IN-ONE EXECUTION (PHASE 1 SUTURING + AUTO GIT PUSH)
 # ==============================================================================
 
+# Option A: Direct PowerShell Script (Windows Mentor GPU)
+.\scripts\run_iter35_imbalance_experiment.ps1
+
+# Option B: Direct Python Execution
+python scripts/run_iter35_imbalance_experiment.py
+```
+
+#### What the All-in-One Script Executes Automatically:
+1. **Preflight Assertions:** Checks CUDA availability, VRAM, and confirms all 39 Suturing SurgMotion feature caches exist.
+2. **Windows Sleep Prevention:** Uses Windows API `SetThreadExecutionState` to prevent PC sleep/hibernation while training.
+3. **Run 1.1:** Standard Cross-Entropy (`ce`) — unweighted baseline.
+4. **Run 1.2:** Class-Weighted Cross-Entropy (`class_weighted`) — inverse frequency weighting.
+5. **Run 1.3:** Multi-Class Focal Loss (`focal`, $\gamma=2.0$) — primary candidate.
+6. **Run 1.4:** Class-Balanced Focal Loss (`cb_focal`, $\gamma=2.0, \beta=0.9999$) — effective number weighting.
+7. **Collation & Summary Table:** Computes side-by-side comparison across all 4 formulations and saves `artifacts/iter35_imbalance_comparison_Suturing_summary.json`.
+8. **Automated Git Push:** Stages `artifacts/`, `checkpoints/`, `docs/`, `memory.md`, commits with a descriptive message, and runs `git push origin main`.
+
+#### Optional Diagnostic Flags:
+```powershell
+# Rapid smoke-test verification (1 fold, 1 epoch in ~1 minute without saving artifacts or pushing):
+python scripts/run_iter35_imbalance_experiment.py --smoke-test --no-push
+
+# Run full training without pushing to remote repository:
+python scripts/run_iter35_imbalance_experiment.py --no-push
+
+# Hardware & cache preflight verification only:
+python scripts/run_iter35_imbalance_experiment.py --preflight-only
+```
+
+---
+
+### Alternative: Individual Step-by-Step Commands (Manual)
+
+If you ever need to run an isolated condition independently:
+
+```powershell
 # Run 1.1: Standard Cross-Entropy Baseline (Unweighted)
 python scripts/train_surgmotion_multimodal_fusion.py `
     --task Suturing `

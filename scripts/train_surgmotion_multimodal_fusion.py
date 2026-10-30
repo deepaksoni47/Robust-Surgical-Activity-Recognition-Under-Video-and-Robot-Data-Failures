@@ -651,6 +651,7 @@ def run_multimodal_benchmark(
     loss_type: str = "class_weighted",
     gamma: float = 2.0,
     beta: float = 0.9999,
+    fold: Optional[int] = None,
     evaluate_robustness: bool = True,
     device_name: Optional[str] = None,
     save_artifacts: bool = True,
@@ -680,13 +681,15 @@ def run_multimodal_benchmark(
         "kinematics_missing": [],
     }
 
-    for fold_num in sorted(splits.keys()):
+    folds_to_run = [fold] if fold is not None else sorted(splits.keys())
+    for fold_num in folds_to_run:
         fold_info = splits[fold_num]
         if len(fold_info["test_trials"]) == 0:
             print(f"Fold {fold_num} (User {fold_info['test_user']}): Omitted (empty test set in official split)")
             continue
 
-        print(f"\n--- Training Fold {fold_num} / 8 (Test User: {fold_info['test_user']}, {len(fold_info['test_trials'])} trials) ---")
+        print(f"\n--- Training Fold {fold_num} / {len(splits)} (Test User: {fold_info['test_user']}, {len(fold_info['test_trials'])} trials) ---")
+
 
         if fusion_type == "late":
             res = run_fixed_late_fusion_fold(
@@ -911,10 +914,14 @@ def main() -> None:
                         help="Focusing parameter for focal loss formulations")
     parser.add_argument("--beta", type=float, default=0.9999,
                         help="Class-balanced effective number beta parameter")
+    parser.add_argument("--fold", type=int, default=None,
+                        help="Specific LOUO fold to run (default: all folds)")
     parser.add_argument("--device", type=str, default=None,
                         help="Device (cuda or cpu)")
     parser.add_argument("--no-robustness", action="store_true",
                         help="Skip robustness evaluation")
+    parser.add_argument("--no-save-artifacts", action="store_true",
+                        help="Do not save model checkpoints and results JSONs")
     args = parser.parse_args()
 
     tasks = ["Suturing", "Knot_Tying", "Needle_Passing"] if args.task == "all" else [args.task]
@@ -932,8 +939,10 @@ def main() -> None:
                 loss_type=args.loss_type,
                 gamma=args.gamma,
                 beta=args.beta,
+                fold=args.fold,
                 evaluate_robustness=not args.no_robustness,
                 device_name=args.device,
+                save_artifacts=not args.no_save_artifacts,
             )
 
 
