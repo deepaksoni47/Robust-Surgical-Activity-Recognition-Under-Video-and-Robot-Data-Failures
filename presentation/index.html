@@ -747,27 +747,25 @@
         <h2 class="slide-subtitle">Multi-Task da Vinci Telemetry Across All 103 Standardized Trials</h2>
       </div>
       <div class="content-grid">
-        <div class="col-6 card">
-          <div class="card-title"><span class="icon-accent">▦</span> Task &amp; Vocabulary Breakdown</div>
+        <div class="col-5 card">
+          <div class="card-title"><span class="icon-accent">▦</span> Task &amp; Telemetry Breakdown</div>
           <ul class="clean-list">
             <li><strong>Suturing:</strong> 39 trials, 8 subjects (B–I), 10 gestures (G1–G6, G8–G11).</li>
             <li><strong>Knot Tying:</strong> 36 trials, 8 subjects (B–I), 6 gestures (G1, G11–G15).</li>
             <li><strong>Needle Passing:</strong> 28 trials, 8 subjects (B–I), 8 gestures (G1–G6, G8, G11).</li>
             <li><strong>Total Benchmark:</strong> 103 trials across 15 distinct atomic gestures.</li>
+            <li><strong>76-D Kinematics:</strong> Master Left/Right + Slave Left/Right (position, rotation matrix, velocities, gripper angle).</li>
           </ul>
-          <div class="card-title" style="margin-top: 14px;"><span class="icon-accent">⚙</span> 76-D Kinematic State Vector</div>
-          <p style="font-size: 0.84rem; color: var(--text-muted); font-family: var(--font-mono); background: var(--bg-subtle); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-light);">
-            kt = [Master_L (19D), Master_R (19D), Slave_L (19D), Slave_R (19D)]
-            <br>Each: Position [x,y,z], Rotation Matrix [9D], Lin. Vel [3D], Ang. Vel [3D], Gripper [1D]
-          </p>
-        </div>
-        <div class="col-6 card highlight">
-          <div class="card-title"><span class="icon-accent">🔒</span> Absolute Zero-Leakage Safeguards</div>
+          <div class="card-title" style="margin-top: 12px;"><span class="icon-accent">🔒</span> Zero-Leakage Protocol</div>
           <ul class="clean-list">
-            <li><strong>Official Leave-One-User-Out (LOUO):</strong> Evaluation strictly isolates unseen surgeons. All trials of Subject B are tested against a model trained only on Subjects C through I.</li>
-            <li><strong>Training-Only Normalization:</strong> Mean and standard deviation parameters (&mu;train, &sigma;train) for kinematics and visual features are fitted exclusively on training trials.</li>
-            <li><strong>Transparent Split Disclosure:</strong> Needle Passing evaluates <strong>7 active folds</strong> (N=7). Subject G contains an empty test set in the official benchmark release.</li>
+            <li><strong>Official LOUO:</strong> Strict Leave-One-User-Out evaluation isolates unseen surgeons.</li>
+            <li><strong>Training-Only Normalization:</strong> Mean/std statistics (&mu;, &sigma;) fit exclusively on training trials.</li>
+            <li><strong>Active Folds:</strong> 8 folds for Suturing &amp; Knot Tying; 7 active folds for Needle Passing (Subject G empty).</li>
           </ul>
+        </div>
+        <div class="col-7 fig-container">
+          <img src="figures/fig_jigsaws_snapshots.png" alt="Actual JIGSAWS Endoscopic Video Snapshots">
+          <div class="fig-caption">Fig: Real JIGSAWS Endoscopic Video Snapshots across Multi-Task Environments (Top) and 4-Stage Intra-Trial Progression in Suturing Trial B001 (Bottom)</div>
         </div>
       </div>
     </section>
@@ -793,8 +791,8 @@
           </ul>
         </div>
         <div class="col-6 fig-container">
-          <img src="figures/fig1_model_comparison.png" alt="Consolidated Cross-Validation Across All 8 Models">
-          <div class="fig-caption">Fig 1: Consolidated Benchmark Across All 8 Models on JIGSAWS</div>
+          <img src="figures/fig_multimodal_architecture.png" alt="Decoupled Multimodal Perception & Reliability Gating Architecture">
+          <div class="fig-caption">Fig: Decoupled Multimodal Perception with Frozen SurgMotion (1024D), 76-D Kinematics, Parallel GRUs, and Reliability Gate</div>
         </div>
       </div>
     </section>
@@ -887,8 +885,8 @@
       </div>
       <div class="content-grid">
         <div class="col-6 fig-container">
-          <img src="figures/fig3_gesture_timelines_ribbon.png" alt="Held-Out Trial Gesture Timeline">
-          <div class="fig-caption">Fig 3: Held-out Trial Timeline (Trial B001). Recurrence Eliminates Boundary Chatter.</div>
+          <img src="figures/fig_qualitative_timeline.png" alt="Qualitative Gesture Recognition Timeline on Suturing Trial B001">
+          <div class="fig-caption">Fig: Real Trial Timeline (Suturing B001) with Real Video Snapshots, Model Prediction Ribbons, and Dynamic Gate Weights</div>
         </div>
         <div class="col-6 card">
           <div class="card-title"><span class="icon-accent">⚡</span> Mechanism Discoveries</div>
@@ -1151,13 +1149,13 @@
       // Slide 2
       "<p><strong>Claim-Evidence Matrix:</strong> Walk through H1–H5 honestly.</p><p><strong>H1 Caveat:</strong> Point out that while frozen video models outperform majority baseline on Suturing (39.2% vs 33.4%) and Knot Tying (53.6% vs 27.4%), on Needle Passing, VideoGRU raw accuracy is 26.55%, which is <em>below</em> the 40.55% majority baseline due to extreme class skew toward dominant gestures G2 and G4. However, in class-balanced metrics, video achieves 31.0% Balanced Acc vs 11.2% for majority. Never claim video beats majority accuracy on every task!</p><p><strong>H3 & H4:</strong> Multimodal fusion is statistically significant on Knot Tying (+11.25%, padj=0.0286), and a descriptive trend on Suturing (+5.64%, padj=0.082). Video fallback sustains 70.06% on Knot Tying (-2.28% from 72.34% clean).</p>",
       // Slide 3
-      "<p><strong>Dataset & Leakage Protection:</strong> Explain that we processed all 103 trials across all 3 tasks in parallel. Crucial technical point: Normalization statistics are computed strictly on training trials. Transparently disclose that Needle Passing evaluates 7 active folds because Subject G has an empty test set in the official distribution.</p>",
+      "<p><strong>Dataset & Leakage Protection:</strong> Explain that we processed all 103 trials across all 3 tasks in parallel. Point out the embedded visual snapshots from actual JIGSAWS videos: the top row shows the multi-task surgical phantom environments—Suturing (Frame 800, tissue penetration G3), Knot Tying (Frame 220, C-loop G13), and Needle Passing (Frame 1020, needle handover G4). The bottom row displays the continuous intra-trial progression in Suturing trial B001: Stage 1 reaching (G1), Stage 2 orienting (G8), Stage 3 penetrating tissue (G3), and Stage 4 suture pulling (G6). Emphasize strict zero-leakage safeguards: normalization statistics are fitted exclusively on training trials, and Needle Passing transparently evaluates 7 active folds (Subject G empty).</p>",
       // Slide 4
-      "<p><strong>Architecture Philosophy:</strong> Explain why we chose a decoupled design over end-to-end training: end-to-end models overfit rapidly on small surgical datasets and require massive GPU clusters. By caching frozen SurgMotion-ViTL (1024D) embeddings, our temporal sequence models and dynamic gates train quickly, stably, and reproducibly.</p><p>Point out the exact mathematical fallback guarantee in Eq. (8)-(9).</p>",
+      "<p><strong>Architecture Philosophy:</strong> Direct the mentor to the architecture diagram: Endoscopic video frames are processed by the frozen SurgMotion ViT-Large foundation model (1024D) projected to d=128, while 76-D da Vinci kinematics telemetry across 4 arms is normalized with training-only statistics and mapped to d=128. Both enter parallel 2-layer GRU temporal sequence encoders (H=128, S=8). The reliability gate takes concatenated hidden states and an explicit binary sensor availability vector a, dynamically blending logits while mathematically guaranteeing 100% fallback to kinematics if video is lost (a=[0,1]). By freezing SurgMotion, the pipeline trains locally in minutes without overfitting.</p>",
       // Slide 5
       "<p><strong>Benchmark Results:</strong> Highlight Table 2. Three key points: (1) Kinematics is the dominant unimodal predictor (66.6% on Suturing vs 39.2% for video); (2) Naive fixed late fusion degrades accuracy (-6.1% on Suturing) because static weights dilute confident kinematics; (3) Adaptive fusion achieves the top score across all 3 tasks, with +11.25% on Knot Tying being statistically significant after Holm correction.</p>",
       // Slide 6
-      "<p><strong>Temporal Dynamics & Gate Behavior:</strong> Highlight the paradoxical finding: sequence modeling produces negligible changes in frame accuracy (&le;1.26%), but drives an enormous +22 to +59 pt boost in segmental Edit Score by eliminating high-frequency frame flicker.</p><p>Disclose the gate behavior audit: the gate is kinematics-dominant (&alpha;k &approx; 80%-95%) and acts as an availability router and global balancer, not a continuous optical noise sensor.</p>",
+      "<p><strong>Temporal Dynamics & Mechanism Audit:</strong> Walk the mentor through the real test trial qualitative timeline (Suturing B001). Direct attention to the 5 video snapshots corresponding to key gesture transitions (G1 reaching, G3 pushing needle, G6 pulling suture, G4 transferring needle, G11 dropping needle). Compare the ribbons: Kinematics GRU suffers high-frequency boundary chatter, VideoGRU suffers visual noise, while Adaptive Fusion eliminates chatter, nearly doubling Edit Score (+23 to +34 pt boost). Point out the bottom gate weight curves: kinematics dominates (~90.2%) while video provides subtle modulation (~9.8%).</p>",
       // Slide 7
       "<p><strong>Stress Testing & Number Provenance:</strong> Show Fig 4.</p><p><strong>Exact Numbers:</strong> On Knot Tying, Clean Baseline is <strong>72.34%</strong> and Missing Video is <strong>70.06%</strong> (-2.28% drop). On Suturing, Clean is 72.28% and Missing Video is 71.86% (-0.42% drop). In the separate ITER-32 continuous-noise ablation study, models were retrained under an independent schedule where clean was 66.42% / 70.07% and missing was 64.61% / 67.92%.</p><p>Kinematics loss (a=[1,0]) collapses accuracy to 30.6%–46.3%, proving kinematics is the foundational substrate.</p>",
       // Slide 8

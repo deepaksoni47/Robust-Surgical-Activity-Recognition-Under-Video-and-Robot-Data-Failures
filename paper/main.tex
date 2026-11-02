@@ -105,6 +105,15 @@ Needle Passing & 28 & 8 (B--I) & 8 & G1--G6, G8, G11 \\
 }
 \end{table}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/fig_jigsaws_snapshots.pdf}
+\caption{Endoscopic video snapshots from the JIGSAWS benchmark across multi-task surgical environments (top row) and a 4-stage intra-trial temporal gesture progression from Suturing trial B001 (bottom row). Top row displays: (a) Suturing (Frame 800, $t=26.7$\,s, $G_3$ pushing needle through artificial phantom tissue); (b) Knot Tying (Frame 220, $t=7.3$\,s, $G_{13}$ forming C-loop around gripper); (c) Needle Passing (Frame 1020, $t=34.0$\,s, $G_4$ transferring needle between robotic manipulators); and (d) technical sensing specifications. Bottom row illustrates the intra-trial visual transformation during consecutive atomic gestures: Stage 1 reaching ($G_1$, Frame 150), Stage 2 orientation ($G_8$, Frame 450), Stage 3 tissue penetration ($G_3$, Frame 800), and Stage 4 suture pulling ($G_6$, Frame 2400).}
+\label{fig:jigsaws_snapshots}
+\end{figure*}
+
+As illustrated in Fig.~\ref{fig:jigsaws_snapshots}, the benchmark encompasses three distinct surgical procedures recorded via stereo endoscopic cameras at 30\,Hz on inanimate phantom models.
+
 \subsection{76-D Kinematic Feature Representation}
 For every sampled timestamp $t$ (sampled at 30\,Hz), the kinematic vector $\mathbf{k}_t \in \mathbb{R}^{76}$ encompasses four robotic manipulators:
 \begin{equation}
@@ -127,6 +136,14 @@ To strictly protect against data leakage across training and testing splits:
 where normalization statistics $\boldsymbol{\mu}_{\text{train}}$ and $\boldsymbol{\sigma}_{\text{train}}$ are computed \textit{exclusively} over the training trials of each fold. Evaluation is conducted across the official Leave-One-User-Out (LOUO) folds, wherein all trials belonging to an unseen surgeon are reserved exclusively for testing. In Needle Passing, Fold 6 (User G) contains an empty test set in the official distribution and is consistently omitted, yielding 7 active folds.
 
 \section{Proposed Methodology}
+Fig.~\ref{fig:multimodal_architecture} illustrates our complete decoupled multimodal perception architecture.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/fig_multimodal_architecture.pdf}
+\caption{Decoupled multimodal surgical gesture recognition architecture. Optical endoscopic video frames ($640\times 480$ @ 30\,Hz) are encoded via the frozen SurgMotion ViT-Large foundation model into $1024$-D spatiotemporal representations $\mathbf{z}_t^{\text{vis}}$, projected to dimension $d=128$, and processed by a 2-layer GRU sequence encoder ($H=128$, context window $S=8$). Simultaneously, 76-D da Vinci kinematics telemetry across four manipulators is normalized via training-only statistics and modeled by a parallel 2-layer GRU sequence encoder. The reliability-aware gating network receives concatenated representations $[\mathbf{h}_t^{\text{vis}}; \mathbf{h}_t^{\text{kin}}]$ alongside an explicit binary sensor availability vector $\mathbf{a}_t \in \{0, 1\}^2$, generating dynamic confidence weights $\alpha_t^{\text{vis}}, \alpha_t^{\text{kin}}$ that blend logits while enforcing exact single-modality fallback ($\mathbf{a}_t = [0, 1]^\top \implies \alpha_t^{\text{vis}} \equiv 0, \alpha_t^{\text{kin}} \equiv 1$) under sensor failure.}
+\label{fig:multimodal_architecture}
+\end{figure*}
 
 \subsection{Visual Representation via Frozen Embeddings}
 We evaluate visual features from both ImageNet-pretrained ResNet-18 ($D_v=512$)~\cite{he2016deep} and the self-supervised surgical foundation model SurgMotion-ViTL ($D_v=1024$)~\cite{wu2026surgmotion}. For SurgMotion, video clips of 64 frames with stride 16 are processed through the frozen motion-guided transformer encoder:
@@ -221,14 +238,7 @@ When $a_t^{\text{vis}} = 0$ and $a_t^{\text{kin}} = 1$, the gate enforces $\alph
 \end{table*}
 
 \subsection{Benchmark Analysis \& Statistical Testing}
-Table~\ref{tab:main_results} and Fig.~\ref{fig:model_comp} report the consolidated empirical cross-validation across all 103 trials:
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig1_model_comparison.pdf}
-\caption{Cross-validated comparison across all 8 models on Suturing, Knot Tying, and Needle Passing. Bars denote mean $\pm$ standard deviation across official active LOUO folds ($N=8$ Suturing, $N=8$ Knot Tying, $N=7$ Needle Passing). Asterisks denote top-performing model per metric.}
-\label{fig:model_comp}
-\end{figure*}
+Table~\ref{tab:main_results} reports the consolidated empirical cross-validation across all 103 trials:
 
 \begin{enumerate}
     \item \textbf{H1 (Visual Representation Viability):} Supported with task-dependent caveats. Pretrained visual representations (SurgMotion VideoGRU and ResNet-18 VideoGRU) provide viable gesture discrimination well above chance in class-balanced metrics, outperforming trivial majority baselines in Balanced Accuracy ($31.0\%$--$54.5\%$ vs. $10.3\%$--$14.9\%$) and Macro-F1 ($20.0\%$--$45.5\%$ vs. $4.6\%$--$6.1\%$) across all three tasks. In raw frame accuracy, visual representations outperform the majority baseline on Suturing ($39.17\%$ vs. $33.43\%$) and Knot Tying ($53.60\%$ vs. $27.35\%$), but fall below the majority baseline on Needle Passing ($26.55\%$ vs. $40.55\%$), where extreme class skew favors trivially predicting the dominant class. Thus, while visual foundation features carry genuine discriminative context, video alone is not a universally reliable standalone predictor across imbalanced tasks.
@@ -247,8 +257,8 @@ Table~\ref{tab:main_results} and Fig.~\ref{fig:model_comp} report the consolidat
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig3_gesture_timelines_ribbon.pdf}
-\caption{Real held-out test trial gesture timelines for Suturing Trial B001 (unseen Subject B). While Kinematics GRU suffers from high-frequency oversegmentation chatter, Adaptive Reliability Fusion produces contiguous, temporally smooth predictions closely tracking ground-truth transitions.}
+\includegraphics[width=0.96\textwidth]{figures/fig_qualitative_timeline.pdf}
+\caption{Qualitative surgical gesture recognition timeline on held-out test trial Suturing B001 (User B, Fold 1). Top row displays real endoscopic video frame snapshots at key gesture transitions: Frame 150 ($G_1$, reaching for needle), Frame 800 ($G_3$, pushing needle through tissue), Frame 2400 ($G_6$, pulling suture), Frame 2600 ($G_4$, transferring needle), and Frame 5550 ($G_{11}$, dropping needle at completion). Middle tracks depict gesture segmentation ribbons for: (i) Ground Truth annotations; (ii) Unimodal Kinematics GRU, illustrating high-frequency boundary chatter; (iii) Unimodal SurgMotion VideoGRU, showing visual boundary noise; and (iv) Multimodal Adaptive Fusion, which eliminates oversegmentation chatter. Bottom track plots the time-resolved dynamic gate weights $\alpha_t^{\text{kin}}$ (mean 90.2\%) and $\alpha_t^{\text{vis}}$ (mean 9.8\%), demonstrating kinematics dominance with subtle visual modulation.}
 \label{fig:timelines}
 \end{figure*}
 
@@ -292,28 +302,14 @@ Table~\ref{tab:main_results} and Fig.~\ref{fig:model_comp} report the consolidat
 \par\noindent\footnotesize\textit{Note:} Evaluated on official active LOUO folds ($N=8$ Suturing, $N=8$ Knot Tying, $N=7$ Needle Passing). Corrupted conditions inject zero-mean Gaussian noise ($\sigma=1.0$). $^*$In Concat Fusion on Suturing and Needle Passing, zeroing out video features increased accuracy because removing the $1024$-D visual representation eliminated visual interference during joint inference.\par
 \end{table*}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig2_robustness_degradation.pdf}
-\caption{Clean versus degraded accuracy across the five standardized conditions. Adaptive Reliability Fusion preserves higher performance than Feature Concatenation under optical noise and executes seamless fallback under optical sensor dropout.}
-\label{fig:robustness_bars}
-\end{figure*}
-
-Table~\ref{tab:robustness_results} and Fig.~\ref{fig:robustness_bars} evaluate model resilience under five standardized evaluation environments:
+Table~\ref{tab:robustness_results} evaluates model resilience under five standardized evaluation environments:
 \begin{enumerate}
-    \item \textbf{Optical Noise Resistance \& Gate Dynamics:} Under visual feature corruption ($\sigma_v=1.0$), Adaptive Fusion degradation is practically negligible ($\le 0.12\%$ drop across all tasks). However, detailed empirical analysis of over 4~million time-resolved gate weight logs (Fig.~\ref{fig:real_gate_noise}) reveals that this stability is driven by strong kinematics dominance ($\bar{\alpha}_k \approx 80\%$--$95\%$) rather than active continuous noise attenuation: the mean video gate weight $\bar{\alpha}_v$ shifts by less than $0.009$ ($<0.9\%$) even as noise increases to extreme out-of-distribution levels ($\sigma_v = 2.0$).
+    \item \textbf{Optical Noise Resistance \& Gate Dynamics:} Under visual feature corruption ($\sigma_v=1.0$), Adaptive Fusion degradation is practically negligible ($\le 0.12\%$ drop across all tasks). Detailed empirical analysis of over 4~million time-resolved gate weight logs reveals that this stability is driven by strong kinematics dominance ($\bar{\alpha}_k \approx 80\%$--$95\%$) rather than active continuous noise attenuation: the mean video gate weight $\bar{\alpha}_v$ shifts by less than $0.009$ ($<0.9\%$) across continuous noise levels up to $\sigma_v = 2.0$.
     \item \textbf{Flawless Video Dropout Fallback:} Under complete optical telemetry failure ($a=[0, 1]$), the availability mask mathematically routes $100\%$ prediction mass to kinematics, incurring minimal degradation ($-0.42\%$ on Suturing, $-2.28\%$ on Knot Tying, $-0.27\%$ on Needle Passing).
     \item \textbf{Kinematics Degradation Asymmetry:} When kinematics telemetry is corrupted or lost ($a=[1, 0]$), both models experience severe drops ($-26\%$ to $-41\%$). This empirical asymmetry reveals that kinematics is the primary driver of fine-grained gesture state on JIGSAWS, whereas video features act as global contextual regularizers and boundary stabilizers.
     \item \textbf{Concatenation Anomaly:} On Suturing and Needle Passing, zeroing out video features in Concat Fusion actually increased accuracy ($+17.83\%$ and $+7.78\%$). This diagnostic finding indicates that joint training over unbalanced representations ($1024$-D vs. $76$-D) allowed visual noise to interfere with kinematics representations; removing the video vector eliminated this interference.
     \item \textbf{Continuous-Noise Training Ablation:} In our controlled 46-fold ablation study comparing continuous-noise training ($\sigma_v \sim \mathcal{U}(0, 1.5)$) against discrete binary dropout, continuous noise did not alter the gate's static weighting dynamic, but provided valuable visual representation regularization, improving standalone video accuracy under total kinematics failure by $+5.49\%$ on Suturing ($34.44\%$ vs. $28.95\%$) and $+8.96\%$ on Needle Passing ($24.58\%$ vs. $15.62\%$).
 \end{enumerate}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig_iter32_real_gate_noise_response.pdf}
-\caption{Empirical video gate weight $\bar{\alpha}_v$ across continuous visual noise levels $\sigma_v \in [0.0, 2.0]$ across all three JIGSAWS tasks. Both models exhibit a virtually flat response ($\Delta \alpha_v < 0.9\%$), demonstrating that gate robustness originates from kinematics dominance and discrete availability masking rather than continuous noise sensing.}
-\label{fig:real_gate_noise}
-\end{figure*}
 
 \subsection{Controlled Ablation and Temporal Dynamics Analysis}
 To dissect the architectural drivers of multimodal performance, we evaluated controlled ablations across all 23 active LOUO folds:
@@ -346,20 +342,20 @@ CB-Focal ($\gamma=2, \beta=0.9999$) & $71.41 \pm 13.23$ & $59.16 \pm 10.27$ & $4
 \par\noindent\footnotesize\textit{Note:} Evaluated across all 8 active LOUO folds of JIGSAWS Suturing with Adaptive Reliability Fusion. All class weights are training-derived.\par
 \end{table}
 
-As summarized in Table~\ref{tab:loss_ablation}, Standard CE achieves the highest raw frame accuracy ($74.95 \pm 7.68\%$) by avoiding false-positive penalties on dominant gestures (G2, G3). Inverse-frequency Class-Weighted CE trended numerically higher in Balanced Accuracy ($60.05 \pm 12.23\%$, $+2.32\%$ over CE) and Segmental Edit Score ($68.95 \pm 10.03\%$, $+3.58\%$ over CE); however, neither difference reaches statistical significance after family-wise Holm-Bonferroni correction ($p_{\text{adj}} = 1.000$ and $p_{\text{adj}} = 0.2634$ respectively, $m=3$ comparisons against the Standard CE control). Similarly, the raw accuracy difference of $-2.66\%$ ($72.28\%$ vs. $74.95\%$, unadjusted $p=0.0473$) is not statistically significant after correction ($p_{\text{adj}} = 0.1419$). In contrast, both Focal Loss ($42.19\%$ Macro-F1) and Class-Balanced Focal Loss ($42.54\%$ Macro-F1) underperform Standard CE ($44.29\%$), indicating that hard-example focusing amplifies boundary transition noise.
+As summarized in Table~\ref{tab:loss_ablation}, Standard CE achieves the highest raw frame accuracy ($74.95 \pm 7.68\%$) by avoiding false-positive penalties on dominant gestures (G2, G3). Class-Weighted CE trended numerically higher in Balanced Accuracy ($60.05 \pm 12.23\%$, $+2.32\%$ over CE) and Segmental Edit Score ($68.95 \pm 10.03\%$, $+3.58\%$ over CE); however, neither difference reaches statistical significance after family-wise Holm-Bonferroni correction ($p_{\text{adj}} = 1.000$ and $p_{\text{adj}} = 0.2634$ respectively, $m=3$). The raw accuracy difference of $-2.66\%$ ($72.28\%$ vs. $74.95\%$) is likewise non-significant after correction ($p_{\text{adj}} = 0.1419$). Focal Loss ($42.19\%$ Macro-F1) and Class-Balanced Focal Loss ($42.54\%$ Macro-F1) underperform CE ($44.29\%$), indicating that hard-example focusing amplifies boundary transition noise.
 
-To assess whether the Balanced Accuracy difference reflects true recovery of rare gestures, we conducted an empirical frame-level prediction audit across all 32 cross-validation test runs. This analysis demonstrates severe feature starvation on extreme tail gestures: for G10 (loosening suture, 91 frames, 1.1\% of Suturing), recall was strictly $0.00\%$ ($F_1 = 0.00\%$) across all four loss formulations, with zero true positive frames predicted. For G9 (dropping suture, 140 frames, 2.5\%), Standard CE and Focal Loss also collapsed to $0.00\%$ recall, while Class-Weighted CE yielded only $6.43\%$ recall (9 true positive frames out of 140, 58 false positives, precision $13.43\%$, $F_1 = 8.70\%$) and CB-Focal attained $4.29\%$ recall ($F_1 = 7.27\%$). The $+2.32\%$ Balanced Accuracy lift was primarily driven by moderate-frequency gestures—notably G5 (moving to center), whose recall increased by $+21.88\%$ (from $33.33\%$ to $55.21\%$), and G1 (reaching needle, $+6.25\%$). This rebalancing came at the direct expense of the dominant gesture G3 (making C-loop, $30.6\%$ of data), whose recall decreased by $-6.95\%$ (from $85.08\%$ to $78.13\%$), accounting for the overall raw accuracy drop. Furthermore, subject-level analysis suggests that while experienced surgeons (e.g., Users C, F, H) show numerical improvements under class weighting, outlier cases such as User G reflect surgeon-specific kinematic variation and domain shift rather than sample frequency alone.
+An empirical frame-level prediction audit across all 32 runs demonstrates severe feature starvation on extreme tail gestures: for G10 (loosening suture, 91 frames, 1.1\% of Suturing), recall was strictly $0.00\%$ ($F_1 = 0.00\%$) across all four losses. For G9 (dropping suture, 140 frames, 2.5\%), CE and Focal Loss collapsed to $0.00\%$ recall, while Class-Weighted CE achieved only $6.43\%$ recall (9 TP frames out of 140, 58 FP, precision $13.43\%$, $F_1 = 8.70\%$) and CB-Focal attained $4.29\%$ recall ($F_1 = 7.27\%$). The $+2.32\%$ Balanced Accuracy lift was driven primarily by moderate-frequency gestures—notably G5 ($+21.88\%$ recall) and G1 ($+6.25\%$)—at the direct cost of dominant gesture G3 ($-6.95\%$ recall), accounting for the overall accuracy drop. Subject-level analysis indicates that outlier cases (e.g., User G) reflect kinematic variation and domain shift rather than sample frequency alone.
 
 \section{Discussion \& Limitations}
-Our empirical findings demonstrate that lightweight multimodal fusion and adaptive reliability gating provide substantial advantages for robotic surgical gesture recognition. By decoupling visual perception into frozen representations and training compact temporal sequence models, the complete cross-validation pipeline operates efficiently while preventing overfitting.
+Lightweight multimodal fusion and adaptive reliability gating provide substantial advantages for robotic surgical gesture recognition. Decoupling visual perception into frozen foundation representations and training compact temporal sequence models enables efficient, leakage-safe cross-validation.
 
-\textbf{Dataset Size \& Statistical Uncertainty:} JIGSAWS contains 103 trials across 8 subjects. In Leave-One-User-Out cross-validation, the effective sample size for hypothesis testing is $N=8$ (and $N=7$ for Needle Passing). While Knot Tying achieves statistical significance across all metrics ($p_{\text{adj}} \le 0.0457$), Suturing ($p_{\text{adj}}=0.0820$) and Needle Passing represent descriptive trends under conservative family-wise error rate control. Small sample sizes also reduce the power of non-parametric rank tests.
+\textbf{Dataset Size \& Statistical Uncertainty:} In LOUO cross-validation across 103 JIGSAWS trials, effective sample sizes are $N=8$ ($N=7$ for Needle Passing). While Knot Tying achieves statistical significance across all metrics ($p_{\text{adj}} \le 0.0457$), Suturing ($p_{\text{adj}}=0.0820$) and Needle Passing exhibit descriptive trends under conservative family-wise error control.
 
-\textbf{Hardware Synchronization Approximation:} In JIGSAWS, video capture (30\,FPS) and robot kinematics (nominal 30\,Hz) were initiated via independent software commands without hardware genlock synchronization. While our audit confirmed a median length difference of $5.0$ frames ($\sim 0.17$\,s), recording tail offsets average $12.37$ frames (and up to $470$ frames tail shutoff lag). Temporal alignment is a discrete frame-center approximation within $\pm 5$ to $15$ frames ($\sim 167$ to $500$\,ms). Hardware master-clock synchronization (e.g., SurgSync~\cite{zhou2026surgsync}) is required for microsecond alignment.
+\textbf{Hardware Synchronization Approximation:} Recording video (30\,FPS) and robot kinematics (30\,Hz) without hardware genlock produces a median length difference of $5.0$ frames ($\sim 0.17$\,s) and tail lags averaging $12.37$ frames. Temporal alignment is an empirical frame-center approximation within $\pm 5$--$15$ frames; hardware master-clock synchronization (e.g., SurgSync~\cite{zhou2026surgsync}) is required for microsecond alignment.
 
-\textbf{Synthetic vs. Real-World Corruptions:} The robustness experiments evaluate controlled Gaussian perturbations and discrete missingness masks. While informative for testing gate fallback guarantees, they remain synthetic approximations of complex clinical disturbances such as blood splatter, lens condensation, or robotic cable hysteresis.
+\textbf{Synthetic vs. Real-World Corruptions:} Evaluated Gaussian perturbations and missingness masks serve as controlled proxies for clinical disturbances (lens fogging, blood splatter, cable hysteresis).
 
-\textbf{IEEE Transactions Compliance \& Submission Considerations:} While this manuscript is prepared using the standard IEEEtran template, submission to journals such as the IEEE Transactions on Medical Robotics and Bionics (T-MRB) or IEEE Transactions on Biomedical Engineering (TBME) imposes specific structural criteria: (i) Regular papers are budgeted for 8 published double-column pages, with mandatory overlength page charges assessed beyond page 8; (ii) Official peer review accepts double-column preprints for rapid evaluation or single-column double-spaced review drafts; (iii) JIGSAWS evaluations use de-identified publicly accessible benchtop data, satisfying institutional human-subjects research exemptions; (iv) Final journal submission requires multimedia accompaniment (e.g., gesture timeline video demonstrations) and full artifact archives for algorithmic reproducibility.
+\textbf{IEEE Transactions Compliance:} Preparing for IEEE Transactions (e.g., T-MRB) requires strictly adhering to the 8-page budget, verified de-identified benchtop data, and comprehensive reproducibility archives with accompanying gesture videos.
  
 \section{Conclusion}
 We presented a rigorous empirical audit and benchmark for multimodal surgical gesture recognition evaluated across all 103 trials of the JIGSAWS benchmark under official Leave-One-User-Out cross-validation. We validated the viability of frozen visual representations (H1), confirmed the primary predictive utility of normalized robot kinematics (H2), demonstrated that adaptive reliability gating outperforms unimodal baselines while simple late fusion degrades accuracy (H3), demonstrated that availability-masked dynamic gating provides seamless single-modality fallback under sensor failure (H4), and established that recurrent temporal modeling dramatically reduces oversegmentation chatter (H5). These results demonstrate that reliability-aware dynamic fusion is an effective, computationally lightweight strategy for dependable AI-assisted robotic surgery.

@@ -66,6 +66,17 @@
   - 3D Rotational Angular Velocity $\boldsymbol{\omega} \in \mathbb{R}^3$
   - 1D Gripper Jaw Angle $\theta \in \mathbb{R}^1$
 
+### Visual Evidence: Actual JIGSAWS Endoscopic Snapshots
+- **Multi-Task Environment Snapshots (`figures/fig_jigsaws_snapshots.png`):**
+  - **Suturing:** Trial B001, Frame 800 ($t=26.7$\,s, $G_3$ pushing needle through artificial phantom tissue).
+  - **Knot Tying:** Trial B001, Frame 220 ($t=7.3$\,s, $G_{13}$ forming C-loop around gripper).
+  - **Needle Passing:** Trial B001, Frame 1020 ($t=34.0$\,s, $G_4$ transferring needle between robotic manipulators).
+- **Intra-Trial Temporal Progression (Suturing Trial B001):**
+  - Stage 1: $G_1$ Reaching for needle (Frame 150, $t=5.0$\,s)
+  - Stage 2: $G_8$ Orienting needle (Frame 450, $t=15.0$\,s)
+  - Stage 3: $G_3$ Tissue penetration (Frame 800, $t=26.7$\,s)
+  - Stage 4: $G_6$ Pulling suture through tissue (Frame 2400, $t=80.0$\,s)
+
 ### Absolute Leakage Protection Protocol
 - **Cross-Validation:** Official Leave-One-User-Out (LOUO). All trials of an unseen surgeon are reserved exclusively for testing.
   - Suturing: 8 folds ($N=8$)
@@ -76,6 +87,12 @@
 ---
 
 ## Slide 4: Proposed Multimodal Architecture
+
+### Visual Diagram: Decoupled Dual-Stream Gating (`figures/fig_multimodal_architecture.png`)
+- Embedded video snapshot ($640 \times 480$ @ 30\,Hz) encoded via frozen SurgMotion ViT-Large (1024D).
+- 76-D da Vinci kinematics telemetry card across 4 arms with training-only z-score normalizer.
+- Modality-specific 2-layer GRU temporal sequence encoders ($H=128$, context window $S=8$).
+- Reliability-aware gating network with availability vector $\mathbf{a}_t = [a_t^{\text{vis}}, a_t^{\text{kin}}]^\top$ guaranteeing single-modality fallback.
 
 ### Design Philosophy: Decoupled & Computationally Lightweight
 Instead of end-to-end heavy backbones prone to overfitting on small surgical datasets, we decouple visual representation from temporal sequence modeling:
@@ -128,6 +145,21 @@ Instead of end-to-end heavy backbones prone to overfitting on small surgical dat
 ---
 
 ## Slide 6: Temporal Modeling & Gate Dynamics Findings
+
+### Visual Evidence: Qualitative Gesture Timeline on Real Trial (`figures/fig_qualitative_timeline.png`)
+- **Held-Out Test Trial:** Suturing Trial B001 (User B, Fold 1).
+- **5 Verified Endoscopic Video Snapshots at Key Transitions:**
+  - Frame 150 ($t=5.0$\,s): $G_1$ Reaching for needle
+  - Frame 800 ($t=26.7$\,s): $G_3$ Pushing needle through tissue
+  - Frame 2400 ($t=80.0$\,s): $G_6$ Pulling suture
+  - Frame 2600 ($t=86.7$\,s): $G_4$ Transferring needle
+  - Frame 5550 ($t=185.0$\,s): $G_{11}$ Dropping needle at procedure completion
+- **Segmentation Ribbon Comparison:**
+  - **Ground Truth:** True clinical annotation sequence.
+  - **Kinematics GRU:** Exhibits high-frequency boundary chatter.
+  - **SurgMotion VideoGRU:** Displays visual boundary noise.
+  - **Multimodal Adaptive Fusion:** Eliminates oversegmentation chatter, producing contiguous segments matching ground truth.
+- **Dynamic Gate Trajectories:** Confirms kinematics dominance ($\alpha_k \sim 90.2\%$) with subtle visual modulation ($\alpha_v \sim 9.8\%$).
 
 ### Finding 1: Sequence Modeling Resolves Segmental Fragmentation (H5)
 - **Frame Accuracy vs. Edit Score Paradox:**
